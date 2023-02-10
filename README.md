@@ -1,4 +1,4 @@
-<h1 align="center">WineWorld</h1>
+# WineWorld
 
 ## Group information
 
@@ -15,29 +15,30 @@ WineWorld is a website that allows you to find wine that satisfies your taste. W
 wine bottles, vineyards, and regions, you will be able to explore all kinds of wine from all parts of the world!
 
 ## APIs
-Wines: https://sampleapis.com/api-list/wines
-Vineyards: https://fusion.yelp.com/
-Regions: https://en.wikipedia.org/wiki/List_of_wine-producing_regions
+
+- Wines: https://sampleapis.com/api-list/wines
+- Vineyards: https://fusion.yelp.com/  
+- Regions: https://en.wikipedia.org/wiki/List_of_wine-producing_regions
 
 ## Models
 
-#### Wines
-Instances: ~5,000
-Attributes: price, type (red vs white), occasions, original region, ratings
-Media: bottle image, rating
-Relations: wine availability at vineyards, region of wine
+**Wines**
+- Instances: ~5,000
+- Attributes: price, type (red vs white), occasions, original region, ratings
+- Media: bottle image, rating
+- Relations: wine availability at vineyards, region of wine
 
-#### Vineyards:
-Instances: ~3,000
-Attributes: location, availability of regional wines, vineyard hours
-Media: cover photo, popular wines
-Relations: avaliable wines, popularity in region
+**Vineyards**
+- Instances: ~3,000
+- Attributes: location, availability of regional wines, vineyard hours
+- Media: cover photo, popular wines
+- Relations: avaliable wines, popularity in region
 
-##### Regions:
-Instances: ~50
-Attributes: culture, wine-making technique, wine history
-Media: cover photo, map
-Relations: famous cultural vineyards, regional wines
+**Regions**
+- Instances: ~50
+- Attributes: culture, wine-making technique, wine history
+- Media: cover photo, map
+- Relations: famous cultural vineyards, regional wines
 
 ## Organizational technique
 
