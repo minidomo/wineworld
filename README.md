@@ -11,12 +11,14 @@ IDB 12 Members
 
 ## Project proposal
 
-WineWorld is a website that allows you to find wine that satisfies your taste. With information on 
-wine bottles, vineyards, and regions, you will be able to explore all kinds of wine from all parts of the world!
+WineWorld is a website that allows you to find wines that satisfy your taste. With information on 
+wine bottles, vineyards, and regions, you will be able to explore different wines from all parts of the world!
 
 ## APIs
 Wines: https://sampleapis.com/api-list/wines
+
 Vineyards: https://fusion.yelp.com/
+
 Regions: https://en.wikipedia.org/wiki/List_of_wine-producing_regions
 
 ## Models
