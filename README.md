@@ -17,11 +17,17 @@ easily so that you can go out and have fun!
 
 ## APIs
 
-TODO
+Wines:
+Vinyards:
+Regions:
 
 ## Models
 
-TODO
+#### Wines
+
+#### Vinyards
+
+#### Regions
 
 ## Organizational technique
 
