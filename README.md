@@ -1,4 +1,4 @@
-<h1 align="center">Traveler's Companion</h1>
+<h1 align="center">WineWorld</h1>
 
 ## Group information
 
@@ -11,23 +11,19 @@ IDB 12 Members
 
 ## Project proposal
 
-Traveler's Companion is a website that allows you to plan out your next vacation. With information on 
-destinations, attractions, and accomodations, you will be able to plan out your vacation quickly and 
-easily so that you can go out and have fun!
+WineWorld is a website that allows you to find wine that satisfies your taste. With information on 
+wine bottles, vineyards, and regions, you will be able to explore all kinds of wine from all parts of the world!
 
 ## APIs
-
-Wines:
-Vinyards:
-Regions:
+Wines: https://sampleapis.com/api-list/wines
+Vineyards: https://fusion.yelp.com/
+Regions: https://en.wikipedia.org/wiki/List_of_wine-producing_regions
 
 ## Models
 
-#### Wines
-
-#### Vinyards
-
-#### Regions
+## Wines
+## Vineyards
+## Regions
 
 ## Organizational technique
 
