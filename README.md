@@ -18,7 +18,9 @@ wine bottles, vineyards, and regions, you will be able to explore all kinds of w
 
 - Wines: https://sampleapis.com/api-list/wines
 - Vineyards: https://fusion.yelp.com/  
-- Regions: https://en.wikipedia.org/wiki/List_of_wine-producing_regions
+- Regions: https://en.wikipedia.org/w/api.php
+  - https://en.wikipedia.org/wiki/List_of_wine-producing_regions
+<!-- https://stackoverflow.com/a/59511898 -->
 
 ## Models
 
@@ -44,7 +46,7 @@ wine bottles, vineyards, and regions, you will be able to explore all kinds of w
 
 Similar format of previous semesters with one page per model with grid view of each model’s instances.
 
-## Questions answered
+## Questions
 
 1. How can I learn more about a wine's regional history?
 2. What wines do vineyards near me offer? How can I visit them?
