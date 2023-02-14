@@ -11,21 +11,9 @@ cache:
   paths:
     - frontend/node_modules/
 
-build-test:
+build-frontend:
   stage: build
   script:
     - cd frontend
     - npm install
-    - ls -al
-
-another-build-test:
-  stage: build
-  script:
-    - cd frontend
-    - ls -al
-
-test:
-  stage: test
-  script:
-    - cd frontend
-    - ls -al
+    - npm run build
