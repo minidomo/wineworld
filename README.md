@@ -4,7 +4,7 @@
 
 | Name            | Username     | EID     |
 | --------------- | ------------ | ------- |
-| Austin Barret   | @acbarret    |         |
+| Austin Barret   | @acbarret    | acb5342 |
 | JB Ladera       | @minidomo    | jbl2563 |
 | Ryan Parappuram | @rparappuram |         |
 | Saniya Shaju    | @saniyashaju |         |
@@ -38,7 +38,7 @@
 
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
-| Austin Barret   |                            |                            |
+| Austin Barret   |             14             |                            |
 | JB Ladera       |             12             |                            |
 | Ryan Parappuram |                            |                            |
 | Saniya Shaju    |                            |                            |
