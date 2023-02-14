@@ -1,11 +1,13 @@
-
+import React from 'react';
 import './App.css';
-import Navbar from '../components/navBar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Navbar from './components/NavBar';
 import About from '../containers/About';
 import Home from '../containers/Home';
 import Vineyards from '../containers/Vineyards';
 import Regions from '../containers/Regions';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Wines from './containers/Wines';
 
 
 const App = () => {
@@ -16,9 +18,10 @@ const App = () => {
         <div className="Content">
           <Routes>
             <Route exact path="/" element={<Home/>}></Route>
-            <Route exact path="/About" element={<About/>}></Route>
+            <Route exact path="/Wines" element={<Wines/>}></Route>
             <Route exact path="/Vineyards" element={<Vineyards/>}></Route>
             <Route exact path="/Regions" element={<Regions/>}></Route>
+            <Route exact path="/About" element={<About/>}></Route>
           </Routes>
         </div>
 
