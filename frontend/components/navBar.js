@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const navBar = () => {
     return (
         <nav class="navbar bg-dark" data-bs-theme="dark">
