@@ -6,23 +6,23 @@ const NavBar = () => {
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="https://www.youtube.com/results?search_query=bootstrap+vs+react">WineWorld</a>
+                        <Link class="navbar-brand" to="/">WineWorld</Link>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarText">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://www.youtube.com/results?search_query=bootstrap+vs+react">About</a>
+                                    <Link class="nav-link" to="/About">About</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://www.youtube.com/results?search_query=bootstrap+vs+react">Wines</a>
+                                    <Link class="nav-link" to="/Wines">Wines</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://www.youtube.com/results?search_query=bootstrap+vs+react">Vineyards</a>
+                                    <Link class="nav-link" to="/Vineyards">Vineyards</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="https://www.youtube.com/results?search_query=bootstrap+vs+react">Regions</a>
+                                    <Link class="nav-link" to="/Regions">Regions</Link>
                                 </li>
                             </ul>
                         </div>
