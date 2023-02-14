@@ -1,0 +1,19 @@
+image: node:19.6
+
+variables:
+  GIT_DEPTH: 1
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - frontend/node_modules/
+
+build-frontend:
+  stage: build
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
