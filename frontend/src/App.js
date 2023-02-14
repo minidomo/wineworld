@@ -3,11 +3,11 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/NavBar';
-import About from '../containers/About';
-import Home from '../containers/Home';
-import Vineyards from '../containers/Vineyards';
-import Regions from '../containers/Regions';
+import Home from './containers/Home';
 import Wines from './containers/Wines';
+import Vineyards from './containers/Vineyards';
+import Regions from './containers/Regions';
+import About from './containers/About';
 
 
 const App = () => {
