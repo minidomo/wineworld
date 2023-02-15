@@ -5,6 +5,7 @@ import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
+import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container";
 import {teamData} from "../components/TeamData.js"
 
@@ -102,6 +103,7 @@ const About = () => {
             WineWorld is the place to learn about new and interesting wines and discover destinations where you can undertake a wine journey.
           </p>
         </Container>
+
         <Container className="p-4">
         <h1 className="d-flex justify-content-center p-4 ">Meet the WineWorld Team!</h1>
         <Row
@@ -114,7 +116,7 @@ const About = () => {
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/rayPic.jpg"} />
                 <Card.Body>
                     <Card.Title>{devName}</Card.Title>
                     <Card.Text>
@@ -156,6 +158,158 @@ const About = () => {
             </Col> 
             </Row>
         </Container>
+
+        <Container className="p-4">
+        <h1 className="d-flex justify-content-center p-4 ">Tools</h1>
+        <Row xs={1} sm={2} md={3} xl={5} className="g-4 p-4 justify-content-center">
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>React</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>GitLab</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>Microsoft Teams</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>React Bootstrap</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>Postman</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            </Row>
+
+            <Row xs={1} sm={2} md={3} xl={5} className="g-4 p-4 justify-content-center">
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>AWS</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>GitLab</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>Microsoft Teams</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>React Bootstrap</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Body>
+                    <Card.Title>Postman</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            </Row>
+        </Container>
+
     </Stack>    
     )
 }
