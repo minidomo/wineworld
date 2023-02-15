@@ -6,7 +6,7 @@
 | --------------- | ------------ | ------- |
 | Austin Barret   | @acbarret    | acb5342 |
 | JB Ladera       | @minidomo    | jbl2563 |
-| Ryan Parappuram | @rparappuram |         |
+| Ryan Parappuram | @rparappuram | rmp3327 |
 | Saniya Shaju    | @saniyashaju |         |
 | Joshua Yin      | @jrayyin     |         |
 
@@ -23,7 +23,7 @@
 
 | Phase | Project Leader |
 | :---: | -------------- |
-|   1   |                |
+|   1   | JB Ladera      |
 |   2   |                |
 |   3   |                |
 |   4   |                |
@@ -40,7 +40,7 @@
 | --------------- | :------------------------: | :------------------------: |
 | Austin Barret   |             14             |                            |
 | JB Ladera       |             12             |                            |
-| Ryan Parappuram |                            |                            |
+| Ryan Parappuram |             12             |             18             |
 | Saniya Shaju    |                            |                            |
 | Joshua Yin      |                            |                            |
 
