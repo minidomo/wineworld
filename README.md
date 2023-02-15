@@ -7,7 +7,7 @@
 | Austin Barret   | @acbarret    | acb5342 |
 | JB Ladera       | @minidomo    | jbl2563 |
 | Ryan Parappuram | @rparappuram | rmp3327 |
-| Saniya Shaju    | @saniyashaju |         |
+| Saniya Shaju    | @saniyashaju | ss97799 |
 | Joshua Yin      | @jrayyin     |         |
 
 ## Git SHA
@@ -41,7 +41,7 @@
 | Austin Barret   |             14             |                            |
 | JB Ladera       |             12             |                            |
 | Ryan Parappuram |             12             |             18             |
-| Saniya Shaju    |                            |                            |
+| Saniya Shaju    |             13             |                            |
 | Joshua Yin      |                            |                            |
 
 **Phase 2**
