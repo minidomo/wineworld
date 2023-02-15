@@ -37,7 +37,7 @@ const Vineyards = () => {
                                 <Button
                                     className="btn btn-primary stretched-link"
                                     variant="secondary"
-                                    href={"/Vineyard/Vineyard1"}                
+                                    href={"/Vineyards/Vineyard1"}                
                                     >
                                         See More
                                 </Button>
@@ -68,7 +68,7 @@ const Vineyards = () => {
                                 <Button
                                     className="btn btn-primary stretched-link"
                                     variant="secondary"
-                                    href={"/Vineyard/Vineyard2"}                
+                                    href={"/Vineyards/Vineyard2"}                
                                     >
                                         See More
                                 </Button>
@@ -99,7 +99,7 @@ const Vineyards = () => {
                                 <Button
                                     className="btn btn-primary stretched-link"
                                     variant="secondary"
-                                    href={"/Vineyard/Vineyard3"}                
+                                    href={"/Vineyards/Vineyard3"}                
                                     >
                                         See More
                                 </Button>

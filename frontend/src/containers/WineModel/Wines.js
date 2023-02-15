@@ -36,7 +36,7 @@ const Wines = () => {
               <Button
               className="btn btn-primary stretched-link"
               variant="secondary"
-              href={"/Wine/Wine1"}
+              href={"/Wines/Wine1"}
               >
                 See More
               </Button>
@@ -66,7 +66,7 @@ const Wines = () => {
               <Button
               className="btn btn-primary stretched-link"
               variant="secondary"
-              href={"/Wine/Wine1"}
+              href={"/Wines/Wine2"}
               >
                 See More
               </Button>
@@ -96,7 +96,7 @@ const Wines = () => {
               <Button
               className="btn btn-primary stretched-link"
               variant="secondary"
-              href={"/Wine/Wine1"}
+              href={"/Wines/Wine3"}
               >
                 See More
               </Button>
