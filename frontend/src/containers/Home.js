@@ -1,4 +1,4 @@
-import AusHCards from '../components/AusHCards'
+import HomeCard from '../components/HomeCard'
 import wineimage from '../assets/winehome.jpg'
 import vineyardsimage from '../assets/vineyardshome.jpg'
 import regionsimage from '../assets/regionshome.avif'
@@ -11,7 +11,7 @@ const Home = () => {
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
-                        <AusHCards
+                        <HomeCard
                             title="Wines"
                             text="Find wines that satisfy your taste"
                             link="/Wines"
@@ -19,7 +19,7 @@ const Home = () => {
                         />
                     </div>
                     <div class="col">
-                        <AusHCards
+                        <HomeCard
                             title="Vineyards"
                             text="Discover amazing vineyards"
                             link="/Vineyards"
@@ -27,7 +27,7 @@ const Home = () => {
                         />
                     </div>
                     <div class="col">
-                        <AusHCards
+                        <HomeCard
                             title="Regions"
                             text="Explore new regions"
                             link="/Vineyards"
