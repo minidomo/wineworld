@@ -1,8 +1,9 @@
 import AusHCards from '../components/AusHCards'
-import wineimage from '../Images/winehome.jpg'
-import vineyardsimage from '../Images/vineyardshome.jpg'
-import regionsimage from '../Images/regionshome.avif'
-import homeimage from '../Images/home.avif'
+import wineimage from '../assets/winehome.jpg'
+import vineyardsimage from '../assets/vineyardshome.jpg'
+import regionsimage from '../assets/regionshome.avif'
+import homeimage from '../assets/home.avif'
+
 const Home = () => {
     return (
         <div>
