@@ -1,0 +1,730 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "WineWorld API",
+        "description": "Find information about wines, vineyards, and wine regions"
+    },
+    "paths": {
+        "/wines": {
+            "parameters": [
+                {
+                    "name": "name",
+                    "description": "The name of the wine to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "nameSort",
+                    "description": "true = sort alphabetically; false = sort reverse alphabetically",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "boolean"
+                    }
+                },
+                {
+                    "name": "country",
+                    "description": "The countries to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": "winery",
+                    "description": "The wineries to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": "startRating",
+                    "description": "The start (inclusive) value for the range of ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "endRating",
+                    "description": "The end (inclusive) value for the range of ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "startReviews",
+                    "description": "The start (inclusive) value for the range of # ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "endReviews",
+                    "description": "The end (inclusive) value for the range of # ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "type",
+                    "description": "The types of wine to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Red",
+                                "White",
+                                "Sparkling",
+                                "Dessert",
+                                "Port"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read list of all wines",
+                "responses": {
+                    "200": {
+                        "description": "The list of wines corresponding to the provided query parameters. Returns complete list of wines if no parameters specified.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Wine"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No wines found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/wines/{wineId}": {
+            "parameters": [
+                {
+                    "name": "wineId",
+                    "description": "The unique identifier of the wine",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read a wine",
+                "responses": {
+                    "200": {
+                        "description": "The wine corresponding to the provided `wineId`",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Wine"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No wine found for the provided `wineId`",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vineyards": {
+            "parameters": [
+                {
+                    "name": "name",
+                    "description": "The name of the vineyard to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "nameSort",
+                    "description": "true = sort alphabetically; false = sort reverse alphabetically",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "boolean"
+                    }
+                },
+                {
+                    "name": "country",
+                    "description": "The countries to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": "startPrice",
+                    "description": "The start (inclusive) value for the range of price levels to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "endPrice",
+                    "description": "The end (inclusive) value for the range of price levels to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "startRating",
+                    "description": "The start (inclusive) value for the range of ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "endRating",
+                    "description": "The end (inclusive) value for the range of ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "startReviews",
+                    "description": "The start (inclusive) value for the range of # ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "endReviews",
+                    "description": "The end (inclusive) value for the range of # ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read list of all vineyards",
+                "responses": {
+                    "200": {
+                        "description": "The list of vineyards corresponding to the provided query parameters. Returns complete list of vineyards if no parameters specified.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Vineyard"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No vineyards found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vineyards/{vineyardId}": {
+            "parameters": [
+                {
+                    "name": "vineyardId",
+                    "description": "The unique identifier of the vineyard",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read a vineyard",
+                "responses": {
+                    "200": {
+                        "description": "The wine corresponding to the provided `vineyardId`",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Vineyard"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No vineyard found for the provided `vineyardId`",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/regions": {
+            "parameters": [
+                {
+                    "name": "name",
+                    "description": "The name of the region to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "nameSortAlpha",
+                    "description": "true = sort alphabetically; false = sort reverse alphabetically",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "boolean"
+                    }
+                },
+                {
+                    "name": "country",
+                    "description": "The countries to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": "startRating",
+                    "description": "The start (inclusive) value for the range of ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "endRating",
+                    "description": "The end (inclusive) value for the range of ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "number"
+                    }
+                },
+                {
+                    "name": "startReviews",
+                    "description": "The start (inclusive) value for the range of # ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "endReviews",
+                    "description": "The end (inclusive) value for the range of # ratings to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "tags",
+                    "description": "The tags (stuff the region has - e.g. Signts & Landmarks, Food & Drink) of regions to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": "tripTypes",
+                    "description": "The trip types (what kinds of trips this region would be good for - e.g. Business, Couples) of regions to search by",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read list of all regions",
+                "responses": {
+                    "200": {
+                        "description": "The list of regions corresponding to the provided query parameters. Returns complete list of regions if no parameters specified.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Region"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No region found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/regions/{regionId}": {
+            "parameters": [
+                {
+                    "name": "regionId",
+                    "description": "The unique identifier of the region",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "get": {
+                "summary": "Read a region",
+                "responses": {
+                    "200": {
+                        "description": "The region corresponding to the provided `regionId`",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Region"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No region found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Wine": {
+                "description": "A bottle of wine",
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "country",
+                    "region",
+                    "winery",
+                    "rating",
+                    "reviews",
+                    "type",
+                    "image",
+                    "regionGridCard"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "region": {
+                        "type": "string"
+                    },
+                    "winery": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number"
+                    },
+                    "reviews": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "regionGridCard": {
+                        "type": "object"
+                    }
+                }
+            },
+            "Vineyard": {
+                "description": "A vineyard",
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "country",
+                    "price",
+                    "rating",
+                    "reviews",
+                    "image",
+                    "wines",
+                    "regions"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "integer"
+                    },
+                    "rating": {
+                        "type": "number"
+                    },
+                    "reviews": {
+                        "type": "integer"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "wines": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "regions": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "Region": {
+                "description": "A region",
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "country",
+                    "rating",
+                    "reviews",
+                    "tags",
+                    "tripTypes",
+                    "webUrl",
+                    "wines",
+                    "vineyards"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number"
+                    },
+                    "reviews": {
+                        "type": "integer"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "tripTypes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "webUrl": {
+                        "type": "string"
+                    },
+                    "wines": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "vineyards": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "description": "A human readable error message",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "ApiKey": []
+        }
+    ]
+}
