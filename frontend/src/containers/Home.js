@@ -6,6 +6,7 @@ import homeimage from '../assets/home.avif'
 
 const Home = () => {
     return (
+        // <div style={{backgroundImage: "url(/home.avif)" }}>
         <div>
             <img src={homeimage} class="img-fluid" alt="..."></img>
             <div class="container text-center">
