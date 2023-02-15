@@ -3,8 +3,6 @@ import temp from "../Images/temp.png"
 const teamData = [
     {
       name: "Ray Yin",
-      gitlab_username: "jrayyin",
-      email: "j.rayyin@gmail.com",
       image: temp,
       role: "Front-End",
       bio: "Placeholder",
@@ -14,8 +12,6 @@ const teamData = [
     },
     {
       name: "Saniya Shaju",
-      gitlab_username: "saniyashaju",
-      email: "",
       image: temp,
       role: "Front-End",
       bio: "",
@@ -25,8 +21,6 @@ const teamData = [
     },
     {
       name: "",
-      gitlab_username: "",
-      email: "",
       image: temp,
       role: "",
       bio: "",
@@ -36,8 +30,6 @@ const teamData = [
     },
     {
       name: "",
-      gitlab_username: "",
-      email: "",
       image: temp,
       role: "",
       bio: "",
@@ -47,8 +39,6 @@ const teamData = [
     },
     {
       name: "",
-      gitlab_username: "",
-      email: "",
       image: temp,
       role: "",
       bio: "",
