@@ -24,8 +24,6 @@ import Region2 from './containers/RegionModel/Region2';
 import Region3 from './containers/RegionModel/Region3';
 
 
-
-
 const App = () => {
   return (
     <Router>
@@ -48,7 +46,7 @@ const App = () => {
             <Route path="/Vineyards/Vineyard3" element={<Vineyard3 />}></Route>
 
 
-            <Route path="/Regions" element={<Regions />}></Route>
+            <Route exact path="/Regions" element={<Regions />}></Route>
             <Route path="/Regions/Region1" element={<Region1 />}></Route>
             <Route path="/Regions/Region2" element={<Region2 />}></Route>
             <Route path="/Regions/Region3" element={<Region3 />}></Route>
