@@ -1,8 +1,10 @@
+import wine_image from '../assets/wine-bottle-and-glass-vector-clipart.png'
+
 const Cards = () => {
     return (
         <div class="container">
             <div class="card" style={{ width: '18rem' }}>
-                <img src="Wine-bottle-and-glass-vector-clipart.png" class="card-img-top" alt="" />
+                <img src={wine_image} class="card-img-top" alt="" />
                 <div class="card-body">
                     <h5 class="card-title">Wines</h5>
                     <p class="card-text">Find wines that fits your taste</p>
