@@ -1,11 +1,9 @@
 import React from 'react';
 import Stack from "react-bootstrap/Stack"
-import WineCard from '../../components/WineCard';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Link} from 'react-router-dom';
 import wineImage from '../../assets/wineImage.jpg'
 
 
