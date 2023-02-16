@@ -6,8 +6,8 @@
 | --------------- | ------------ | ------- |
 | Austin Barret   | @acbarret    | acb5342 |
 | JB Ladera       | @minidomo    | jbl2563 |
-| Ryan Parappuram | @rparappuram |         |
-| Saniya Shaju    | @saniyashaju |         |
+| Ryan Parappuram | @rparappuram | rmp3327 |
+| Saniya Shaju    | @saniyashaju | ss97799 |
 | Joshua Yin      | @jrayyin     |         |
 
 ## Git SHA
@@ -23,7 +23,7 @@
 
 | Phase | Project Leader |
 | :---: | -------------- |
-|   1   |                |
+|   1   | JB Ladera      |
 |   2   |                |
 |   3   |                |
 |   4   |                |
@@ -39,9 +39,9 @@
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
 | Austin Barret   |             14             |                            |
-| JB Ladera       |             12             |                            |
-| Ryan Parappuram |                            |                            |
-| Saniya Shaju    |                            |                            |
+| JB Ladera       |             12             |             13             |
+| Ryan Parappuram |             12             |             18             |
+| Saniya Shaju    |             13             |             18             |
 | Joshua Yin      |                            |                            |
 
 **Phase 2**
