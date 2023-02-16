@@ -9,7 +9,6 @@ import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container";
 import {teamData} from "../components/TeamData.js"
 import ListGroup from 'react-bootstrap/ListGroup';
-import Spinner from "react-bootstrap/Spinner";
 
 const client = axios.create({
     baseURL: "https://gitlab.com/api/v4/",
@@ -93,8 +92,6 @@ const About = () => {
     const [teamList, setTeamList] = useState([]);
     const [totalCommits, setTotalCommits] = useState(0);
     const [totalIssues, setTotalIssues] = useState(0);
-    const [totalTests, setTotalTests] = useState(0);
-    const [loaded, setLoaded] = useState(false);
 
 
     useEffect(() => {
@@ -103,9 +100,7 @@ const About = () => {
             const gitLabData = await fetchGitLabData();
             setTotalCommits(gitLabData.totalCommits);
             setTotalIssues(gitLabData.totalIssues);
-            setTotalTests(gitLabData.totalTests);
             setTeamList(gitLabData.teamInfo);
-            setLoaded(true);
           }
         };
         fetchData();
@@ -123,7 +118,7 @@ const About = () => {
           WineWorld is an innovative platform that provides a comprehensive guide to the world of wine, vineyards, and wine regions.
         Our goal is to empower wine enthusiasts, from beginners to experts, to explore and deepen their understanding of this fascinating industry. 
           </p>
-          <h1 className="d-flex justify-content-center p-4 "></h1>
+         
           <h1 className="d-flex justify-content-center p-3 ">Repository Statistics</h1>
           <Row className="p-4">
           <Col className="d-flex justify-content-center">
@@ -136,7 +131,7 @@ const About = () => {
             <h2>Total Tests: 0</h2>
           </Col>
             </Row>
-            <h1 className="d-flex justify-content-center p-4"></h1>
+
             <a
                 href={"https://documenter.getpostman.com/view/21507814/2s93CEvGRv"}
              >
@@ -439,7 +434,7 @@ const About = () => {
                     <Card.Text>
                     Wines API was used to find general information about wines such as price, name, and country
                     </Card.Text>
-                    <a href="">
+                    <a href="https://sampleapis.com/api-list/wines">
                         <Button variant="primary">Learn More</Button>
                     </a>
                 </Card.Body>
