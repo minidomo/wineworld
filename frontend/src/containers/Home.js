@@ -31,7 +31,7 @@ const Home = () => {
                         <HomeCard
                             title="Regions"
                             text="Explore new regions"
-                            link="/Vineyards"
+                            link="/Regions"
                             image={regionsimage}
                         />
                     </div>
