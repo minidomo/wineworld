@@ -1,11 +1,9 @@
 import React from 'react';
 import Stack from "react-bootstrap/Stack"
-import RegionCard from '../../components/RegionCard';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Link} from 'react-router-dom';
 import regionImage from '../../assets/regionImage.jpg'
 
 const Regions = () => {

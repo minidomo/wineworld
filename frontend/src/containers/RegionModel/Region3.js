@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import regionImage from '../../assets/regionImage.jpg'
