@@ -9,18 +9,18 @@ const Wine1 = () => {
   return (
     <div>
       <img src={wineImage} class="img-fluid" alt="..."></img>
-        <h3>Wine Name</h3>
-        <h6>Winery</h6>
+        <h3>Pêra-Manca Tinto 1990</h3>
+        <h6>Cartuxa</h6>
         <Row>
         <div className='p-5'>
           <p align ="left">
-            Description
+            Description: A delicious wine known for its pleasasnt aroma. Made with original wine-making techniques, this is the perfect gift for friends and family who enjoy a rich blend of the perfect ingredients. 
           </p>
           <p align="left">
-            Rating:
+            Rating: 4.7
           </p>
           <p align="left" >
-            Reviews:
+            Reviews: 79
           </p>
         </div>
         </Row>

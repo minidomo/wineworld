@@ -17,20 +17,20 @@ const Regions = () => {
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={regionImage} />
                             <Card.Body>
-                                <Card.Title > Region Name</Card.Title>
-                                <Card.Subtitle> Country</Card.Subtitle>
+                                <Card.Title > Altenjo </Card.Title>
+                                <Card.Subtitle> Portugal </Card.Subtitle>
                                 <Card.Text>
                                     <p>
-                                        Rating:
+                                        Rating: 4.2
                                     </p>
                                     <p>
-                                        Review Count:
+                                        Review Count: 123
                                     </p>
                                     <p>
-                                        Trip Type:
+                                        Trip Type: Business, Couples
                                     </p>
                                     <p>
-                                        Tags:
+                                        Tags: Sights & Landmarks, Food & Drink
                                     </p>
                                 </Card.Text>
                             </Card.Body>
@@ -50,20 +50,20 @@ const Regions = () => {
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={regionImage} />
                             <Card.Body>
-                                <Card.Title> Region Name</Card.Title>
-                                <Card.Subtitle> Country</Card.Subtitle>
+                                <Card.Title> Alsace </Card.Title>
+                                <Card.Subtitle> France </Card.Subtitle>
                                 <Card.Text>
                                     <p>
-                                        Rating:
+                                        Rating: 4.1
                                     </p>
                                     <p>
-                                        Review Count:
+                                        Review Count: 88
                                     </p>
                                     <p>
-                                        Trip Type:
+                                        Trip Type: Business, Couples, Family
                                     </p>
                                     <p>
-                                        Tags:
+                                        Tags: Sights & Landmarks, Food & Drink
                                     </p>
                                 </Card.Text>
                             </Card.Body>
@@ -83,20 +83,20 @@ const Regions = () => {
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={regionImage} />
                             <Card.Body>
-                                <Card.Title> Region Name</Card.Title>
-                                <Card.Subtitle> Country</Card.Subtitle>
+                                <Card.Title> Piedmont</Card.Title>
+                                <Card.Subtitle> Italy </Card.Subtitle>
                                 <Card.Text>
                                     <p>
-                                        Rating:
+                                        Rating: 4.5
                                     </p>
                                     <p>
-                                        Review Count:
+                                        Review Count: 120
                                     </p>
                                     <p>
-                                        Trip Type:
+                                        Trip Type: Couples, Family
                                     </p>
                                     <p>
-                                        Tags:
+                                        Tags: Sights & Landmarks, Food & Drink
                                     </p>
                                 </Card.Text>
                             </Card.Body>

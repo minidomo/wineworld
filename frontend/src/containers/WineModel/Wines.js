@@ -16,19 +16,19 @@ const Wines = () => {
         <Col>
           <Card border = 'dark'>
             <Card.Img variant ="top" src={wineImage} />
-            <Card.Header className='text-muted '> Recommended </Card.Header>
+            {/* <Card.Header className='text-muted '> Recommended </Card.Header> */}
             <Card.Body>
-              <Card.Title> Wine Name</Card.Title>
-              <Card.Subtitle> Wine Type</Card.Subtitle>
+              <Card.Title> Pêra-Manca Tinto 1990 </Card.Title>
+              <Card.Subtitle> WineType: Red</Card.Subtitle>
               <Card.Text>
                 <p>
-                  Winery:
+                  Winery: Cartuxa
                 </p>
                 <p>
-                  Rating:
+                  Rating: 4.7
                 </p>
                 <p>
-                  Reviews:
+                  Reviews: 79
                 </p>
               </Card.Text>
             </Card.Body>
@@ -48,17 +48,17 @@ const Wines = () => {
           <Card border = 'dark'>            
           <Card.Img variant ="top" src={wineImage} />
             <Card.Body>
-              <Card.Title> Wine Name</Card.Title>
-              <Card.Subtitle> Wine Type</Card.Subtitle>
+              <Card.Title> Wraith Cabernet Sauvignon 2013 </Card.Title>
+              <Card.Subtitle> Wine Type: White</Card.Subtitle>
               <Card.Text>
                 <p>
-                  Winery:
+                  Winery: Hundred Acre
                 </p>
                 <p>
-                  Rating:
+                  Rating: 4.9
                 </p>
                 <p>
-                  Reviews:
+                  Reviews: 89
                 </p>
               </Card.Text>
             </Card.Body>
@@ -78,17 +78,17 @@ const Wines = () => {
           <Card border = 'dark'>            
           <Card.Img variant ="top" src={wineImage} />
             <Card.Body>
-              <Card.Title> Wine Name</Card.Title>
-              <Card.Subtitle> Wine Type</Card.Subtitle>
+              <Card.Title> Olema Cabernet Sauvignon 2019 </Card.Title>
+              <Card.Subtitle> Wine Type: Red</Card.Subtitle>
               <Card.Text>
                 <p>
-                  Winery:
+                  Winery: Sonoma County
                 </p>
                 <p>
-                  Rating:
+                  Rating: 4.0
                 </p>
                 <p>
-                  Reviews:
+                  Reviews: 82
                 </p>
               </Card.Text>
             </Card.Body>

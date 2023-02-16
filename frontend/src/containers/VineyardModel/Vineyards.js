@@ -16,19 +16,19 @@ const Vineyards = () => {
                     <Col>
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={vineyardImage} />
-                            <Card.Header className='text-muted '> Top Choice </Card.Header>
+                            {/* <Card.Header className='text-muted '> Top Choice </Card.Header> */}
                             <Card.Body>
-                                <Card.Title> Vineyard Name</Card.Title>
-                                <Card.Subtitle> Country </Card.Subtitle>
+                                <Card.Title> The Austin Winery </Card.Title>
+                                <Card.Subtitle> United States </Card.Subtitle>
                                 <Card.Text>
                                     <p>
-                                        Price:
+                                        Price: 2
                                     </p>
                                     <p>
-                                        Rating:
+                                        Rating: 4
                                     </p>
                                     <p>
-                                        Review Count:
+                                        Review Count: 127
                                     </p>
                                 </Card.Text>
 
@@ -49,17 +49,17 @@ const Vineyards = () => {
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={vineyardImage} />
                             <Card.Body>
-                                <Card.Title> Vineyard Name</Card.Title>
-                                <Card.Subtitle> Country </Card.Subtitle>
+                                <Card.Title>Hamilton Pool Vineyards</Card.Title>
+                                <Card.Subtitle> United States </Card.Subtitle>
                                 <Card.Text>
                                     <p>
-                                        Price:
+                                        Price: 2
                                     </p>
                                     <p>
-                                        Rating:
+                                        Rating: 4
                                     </p>
                                     <p>
-                                        Review Count:
+                                        Review Count: 13
                                     </p>
                                 </Card.Text>
 
@@ -80,17 +80,17 @@ const Vineyards = () => {
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={vineyardImage} />
                             <Card.Body>
-                                <Card.Title> Vineyard Name</Card.Title>
-                                <Card.Subtitle> Country </Card.Subtitle>
+                                <Card.Title> Solis Winery</Card.Title>
+                                <Card.Subtitle> United States </Card.Subtitle>
                                 <Card.Text>
                                     <p>
-                                        Price:
+                                        Price: 1
                                     </p>
                                     <p>
-                                        Rating:
+                                        Rating: 3
                                     </p>
                                     <p>
-                                        Review Count:
+                                        Review Count: 30
                                     </p>
                                 </Card.Text>
 

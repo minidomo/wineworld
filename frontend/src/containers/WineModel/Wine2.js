@@ -8,18 +8,18 @@ const Wine2 = () => {
   return (
     <div>
       <img src={wineImage} class="img-fluid" alt="..."></img>
-        <h3>Wine Name</h3>
-        <h6>Winery</h6>
+        <h3>Wraith Cabernet Sauvignon 2013</h3>
+        <h6>Hundred Acre</h6>
         <Row>
         <div className='p-5'>
           <p align ="left">
-            Description
+            Description: A delicious wine known for its pleasasnt aroma. Made with original wine-making techniques, this is the perfect gift for friends and family who enjoy a rich blend of the perfect ingredients. 
           </p>
           <p align="left">
-            Rating:
+            Rating: 4.9
           </p>
           <p align="left" >
-            Reviews:
+            Reviews: 89
           </p>
         </div>
         </Row>

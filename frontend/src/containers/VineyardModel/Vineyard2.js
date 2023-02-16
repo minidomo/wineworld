@@ -8,21 +8,21 @@ const Vineyard2 = () => {
   return (
     <div>
       <img src={vineyardImage} class="img-fluid" alt="..."></img>
-        <h3>Vineyard Name</h3>
-        <h6>Country</h6>
+        <h3>Hamilton Pool Vineyards</h3>
+        <h6>United States</h6>
         <Row>
         <div className='p-5'>
           <p align ="left">
-            Description:
+            Description: Visit this vineyard if you're interested in it's famous selection of white wines. The taste and scent of these premium bottles are incomparable to any other.
           </p>
           <p align ="left">
-            Price:
+            Price: 2
           </p>
           <p align="left">
-            Rating:
+            Rating: 4
           </p>
           <p align="left" >
-            Reviews:
+            Reviews: 13
           </p>
         </div>
         </Row>

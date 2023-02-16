@@ -10,24 +10,25 @@ const Region3 = () => {
   return (
     <div>
       <img src={regionImage} class="img-fluid" alt="..."></img>
-        <h3>Region Name</h3>
-        <h6>Country</h6>
+        <h3>Piedmont</h3>
+        <h6>Italy</h6>
         <Row>
         <div className='p-5'>
           <p align ="left">
-            Description:
+            Description: A beautiful location to vist and experience wine-making in its truest form. Come see the rich history of wine
+            and explore the famous vineyards this region has to offer.
           </p>
           <p align="left">
-            Rating:
+            Rating: 4.5
           </p>
           <p align="left" >
-            Reviews:
+            Reviews: 120
           </p>
           <p align="left" >
-            Trip Type:
+            Trip Type: Couples, Family
           </p>
           <p align="left" >
-            Tags:
+            Tags: Sights & Landmarks, Food & Drink
           </p>
         </div>
         </Row>
