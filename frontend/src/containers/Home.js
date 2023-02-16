@@ -1,12 +1,11 @@
 import HomeCard from '../components/HomeCard'
 import wineimage from '../assets/winehome.jpg'
 import vineyardsimage from '../assets/vineyardshome.jpg'
-import regionsimage from '../assets/regionshome.avif'
-import homeimage from '../assets/home.avif'
+import regionsimage from '../assets/regionshome.jpg'
+import homeimage from '../assets/home.jpg'
 
 const Home = () => {
     return (
-        // <div style={{backgroundImage: "url(/home.avif)" }}>
         <div>
             <img src={homeimage} class="img-fluid" alt="..."></img>
             <div class="container text-center">
