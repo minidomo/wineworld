@@ -1,9 +1,8 @@
-import temp from "../Images/temp.png"
 
 const teamData = [
     {
       name: "Ray Yin",
-      image: temp,
+      gitlab_id: "jrayyin",
       role: "Front-End",
       bio: "Placeholder",
       commits: 0,
@@ -12,7 +11,7 @@ const teamData = [
     },
     {
       name: "Saniya Shaju",
-      image: temp,
+      gitlab_id: "saniyashaju-admin",
       role: "Front-End",
       bio: "",
       commits: 0,
@@ -20,8 +19,8 @@ const teamData = [
       unit_tests: 0,
     },
     {
-      name: "",
-      image: temp,
+      name: "JB Ladera",
+      gitlab_id: "minidomo",
       role: "",
       bio: "",
       commits: 0,
@@ -29,8 +28,8 @@ const teamData = [
       unit_tests: 0,
     },
     {
-      name: "",
-      image: temp,
+      name: "Ryan Parappuram",
+      gitlab_id: "rparappuram",
       role: "",
       bio: "",
       commits: 0,
@@ -38,8 +37,8 @@ const teamData = [
       unit_tests: 0,
     },
     {
-      name: "",
-      image: temp,
+      name: "Austin Barret",
+      gitlab_id: "austin25coding",
       role: "",
       bio: "",
       commits: 0,

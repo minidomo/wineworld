@@ -8,12 +8,12 @@ import Stack from "react-bootstrap/Stack";
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container";
 import {teamData} from "../components/TeamData.js"
-
-
 import ListGroup from 'react-bootstrap/ListGroup';
+import Spinner from "react-bootstrap/Spinner";
 
 const client = axios.create({
     baseURL: "https://gitlab.com/api/v4/",
+    headers: { "PRIVATE-TOKEN" : "glpat-8b25mfH7tj6qdzrFRfv1" },
   });
   
 
@@ -21,44 +21,63 @@ const fetchGitLabData = async () => {
     let totalCommits = 0,
       totalIssues = 0,
       totalUnitTests = 0;
-  
+
+      
+    
+      console.log("run");
+    
     await client
-      .get("projects/43416454/repository/contributors")
+      .get("projects/43416454/repository/commits?per_page=9999")
       .then((response) => {
-        response.data.forEach((element) => {
-          const { name, email, commits } = element;
-  
-          teamData.forEach((member) => {
-            if (
-              member.name === name ||
-              member.gitlab_username === name ||
-              member.email === email
-            ) {
-              console.log(commits);
-              member.commits = commits;
-            }
+        console.log(response.data);
+        teamData.forEach((member) => {
+            member.commits = 0;
+            member.issues = 0;
+            totalUnitTests += member.unit_tests;
           });
-          totalCommits += commits;
+        response.data.forEach((element) => {
+          const {author_name} = element;
+          teamData.forEach((member) => {
+            if (member.name === author_name || member.gitlab_id === author_name) {
+              member.commits ++;
+            }
+            
+          });
+          
         });
+        totalCommits = response.data.length;
       });
 
-      await client.get("projects/39707042/issues").then((response) => {
-        response.data.forEach((element) => {
-          const { assignees } = element;
-          assignees.forEach((assignee) => {
-            const { name, email } = assignee;
-            teamData.forEach((member) => {
-              if (
-                member.name === name ||
-                member.gitlab_username === name ||
-                member.email === email
-              )
-                member.issues += 1;
-            });
-          });
-          totalIssues += 1;
-        });
+      await client.get("projects/43416454/issues_statistics?author_username=jrayyin").then((response) => {
+       
+        teamData[0].issues = response.data.statistics.counts.all;
+        totalIssues += response.data.statistics.counts.all;
       });
+
+      await client.get("projects/43416454/issues_statistics?author_username=saniyashaju").then((response) => {
+        
+        teamData[1].issues = response.data.statistics.counts.all;
+        totalIssues += response.data.statistics.counts.all;
+      });
+
+      await client.get("projects/43416454/issues_statistics?author_username=minidomo").then((response) => {
+        
+        teamData[2].issues = response.data.statistics.counts.all;
+        totalIssues += response.data.statistics.counts.all;
+      });
+
+      await client.get("projects/43416454/issues_statistics?author_username=rparappuram").then((response) => {
+        teamData[3].issues = response.data.statistics.counts.all;
+        totalIssues += response.data.statistics.counts.all;
+      });
+
+      await client.get("projects/43416454/issues_statistics?author_username=acbarret").then((response) => {
+        
+        teamData[4].issues = response.data.statistics.counts.all;
+        totalIssues += response.data.statistics.counts.all;
+      });
+
+
     
   
     return {
@@ -75,7 +94,6 @@ const About = () => {
     const [totalCommits, setTotalCommits] = useState(0);
     const [totalIssues, setTotalIssues] = useState(0);
     const [totalTests, setTotalTests] = useState(0);
-    const [devName, setDevName] = useState(0);
     const [loaded, setLoaded] = useState(false);
 
 
@@ -87,7 +105,6 @@ const About = () => {
             setTotalIssues(gitLabData.totalIssues);
             setTotalTests(gitLabData.totalTests);
             setTeamList(gitLabData.teamInfo);
-            setDevName(teamList[1].name);
             setLoaded(true);
           }
         };
@@ -100,15 +117,37 @@ const About = () => {
         <Container className="p-4">
         </Container>
 
-        <Container className="p-4" style= {{backgroundColor: '#ff9194'}}>
+        <Container className="p-4" style= {{backgroundColor: '#ffb5b7'}}>
           <h1 className="d-flex justify-content-center p-4 ">Welcome to WineWorld!</h1>
           <p className="mx-auto">
-            WineWorld is the place to learn about new and interesting wines and discover destinations where you can undertake a wine journey.
+          WineWorld is an innovative platform that provides a comprehensive guide to the world of wine, vineyards, and wine regions.
+        Our goal is to empower wine enthusiasts, from beginners to experts, to explore and deepen their understanding of this fascinating industry. 
           </p>
+          <h1 className="d-flex justify-content-center p-4 "></h1>
+          <h1 className="d-flex justify-content-center p-3 ">Repository Statistics</h1>
+          <Row className="p-4">
+          <Col className="d-flex justify-content-center">
+            <h2>Total Commits: {totalCommits}</h2>
+          </Col>
+          <Col className="d-flex justify-content-center">
+            <h2>Total Issues: {totalIssues}</h2>
+          </Col>
+          <Col className="d-flex justify-content-center">
+            <h2>Total Tests: 0</h2>
+          </Col>
+            </Row>
+            <h1 className="d-flex justify-content-center p-4"></h1>
+            <a
+                href={"https://documenter.getpostman.com/view/21507814/2s93CEvGRv"}
+             >
+            <h2>API Documentation</h2>
+          </a>
+
         </Container>
 
         <Container className="p-4">
         <h1 className="d-flex justify-content-center p-4 ">Meet the WineWorld Team!</h1>
+       
         <Row
             xs={1}
             sm={2}
@@ -121,40 +160,95 @@ const About = () => {
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={process.env.PUBLIC_URL + "/rayPic.jpg"} />
                 <Card.Body>
-                    <Card.Title>{devName}</Card.Title>
+                    <Card.Title>Ray Yin</Card.Title>
                     <Card.Text>
-                    abc
+                    I'm a junior studying Computer Science at UT Austin. In my free time I enjoy playing volleyball and trying new restaurants.
                     </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Total Commits: {totalCommits}</ListGroup.Item>
-                    <ListGroup.Item>Total Issues: {totalIssues}</ListGroup.Item>
-                    <ListGroup.Item>Total Unit Tests: </ListGroup.Item>
+                    <ListGroup.Item>Front-end</ListGroup.Item>
+                    <ListGroup.Item> Commits: {teamData[0].commits}</ListGroup.Item>
+                    <ListGroup.Item> Issues: {teamData[0].issues}</ListGroup.Item>
+                    <ListGroup.Item> Unit Tests: 0</ListGroup.Item>
                 </ListGroup>
             </Card>
             </Col> 
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/ryan.jpg"} />
                 <Card.Body>
-                    <Card.Title>{devName}</Card.Title>
+                    <Card.Title>Ryan Parappuram</Card.Title>
                     <Card.Text>
-                    abc
+                    I'm a sophomore learning full-stack software engineering. I love to play basketball, eat tasty food, and drive cars!
                     </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Total Commits: {totalCommits}</ListGroup.Item>
-                    <ListGroup.Item>Total Issues: {totalIssues}</ListGroup.Item>
-                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                    <ListGroup.Item>Full-stack</ListGroup.Item>
+                    <ListGroup.Item>Commits: {teamData[3].commits}</ListGroup.Item>
+                    <ListGroup.Item>Issues: {teamData[3].issues}</ListGroup.Item>
+                    <ListGroup.Item>Unit Tests: 0</ListGroup.Item>
                 </ListGroup>
-                <Card.Body>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body>
             </Card>
             </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/jbladera.jpg"} />
+                <Card.Body>
+                    <Card.Title>JB Ladera</Card.Title>
+                    <Card.Text>
+                    I'm a third year CS student studying at UT Austin. I enjoy watching anime and playing video games in my spare time.
+                    </Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>Back-end</ListGroup.Item>
+                    <ListGroup.Item>Commits: {teamData[2].commits}</ListGroup.Item>
+                    <ListGroup.Item>Issues: {teamData[2].issues}</ListGroup.Item>
+                    <ListGroup.Item>Unit Tests: 0</ListGroup.Item>
+                </ListGroup>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/saniya.jpg"} />
+                <Card.Body>
+                    <Card.Title>Saniya Shaju</Card.Title>
+                    <Card.Text>
+                    I'm a sophomore computer science major at UT Austin. My hobbies include crocheting, reading fiction novels, and writing short stories and poetry.
+                    </Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>Front-End</ListGroup.Item>
+                    <ListGroup.Item>Commits: {teamData[1].commits}</ListGroup.Item>
+                    <ListGroup.Item>Issues: {teamData[1].issues}</ListGroup.Item>
+                    <ListGroup.Item>Unit Tests: 0</ListGroup.Item>
+                </ListGroup>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/austin.jpg"} />
+                <Card.Body>
+                    <Card.Title>Austin Barret</Card.Title>
+                    <Card.Text>
+                    I'm a sophomore computer science major at UT Austin. My hobbies include cooking, windsurfing, and reading books.
+                    </Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>Front-end</ListGroup.Item>
+                    <ListGroup.Item>Commits: {teamData[4].commits}</ListGroup.Item>
+                    <ListGroup.Item>Issues: {teamData[4].issues}</ListGroup.Item>
+                    <ListGroup.Item>Unit Tests: 0</ListGroup.Item>
+                </ListGroup>
+            </Card>
+            </Col> 
+            
             </Row>
+
+
         </Container>
 
         <Container className="p-4">
@@ -324,11 +418,26 @@ const About = () => {
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/gitlab.png"} />
                 <Card.Body>
-                    <Card.Title></Card.Title>
+                    <Card.Title>GitLab API</Card.Title>
                     <Card.Text>
-                    
+                    GitLab API was used to find repository statistics
+                    </Card.Text>
+                    <a href="https://docs.gitlab.com/ee/api/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
+                </Card.Body>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/wine.jpg"} />
+                <Card.Body>
+                    <Card.Title>Wines API</Card.Title>
+                    <Card.Text>
+                    Wines API was used to find general information about wines such as price, name, and country
                     </Card.Text>
                     <a href="">
                         <Button variant="primary">Learn More</Button>
@@ -339,13 +448,13 @@ const About = () => {
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/yelp.jpg"} />
                 <Card.Body>
-                    <Card.Title></Card.Title>
+                    <Card.Title>Yelp Fusion API</Card.Title>
                     <Card.Text>
-                    
+                    Yelp Fusion API was used to find information about vineyards like ratings based on reviews and price level
                     </Card.Text>
-                    <a href="">
+                    <a href="https://fusion.yelp.com/">
                         <Button variant="primary">Learn More</Button>
                     </a>
                 </Card.Body>
@@ -354,28 +463,13 @@ const About = () => {
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/tripadvisor.png"} />
                 <Card.Body>
-                    <Card.Title></Card.Title>
+                    <Card.Title>Tripadvisor API</Card.Title>
                     <Card.Text>
-                    
+                    Tripadvisor API was used to find information about regions including country, ratings, and relevant tags
                     </Card.Text>
-                    <a href="">
-                        <Button variant="primary">Learn More</Button>
-                    </a>
-                </Card.Body>
-            </Card>
-            </Col> 
-
-            <Col className="d-flex align-self-stretch">
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
-                <Card.Body>
-                    <Card.Title></Card.Title>
-                    <Card.Text>
-                    
-                    </Card.Text>
-                    <a href="">
+                    <a href="https://www.tripadvisor.com/developers">
                         <Button variant="primary">Learn More</Button>
                     </a>
                 </Card.Body>
