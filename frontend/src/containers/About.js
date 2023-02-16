@@ -98,6 +98,9 @@ const About = () => {
     return (
     <Stack>
         <Container className="p-4">
+        </Container>
+
+        <Container className="p-4" style= {{backgroundColor: '#ff9194'}}>
           <h1 className="d-flex justify-content-center p-4 ">Welcome to WineWorld!</h1>
           <p className="mx-auto">
             WineWorld is the place to learn about new and interesting wines and discover destinations where you can undertake a wine journey.
@@ -120,29 +123,24 @@ const About = () => {
                 <Card.Body>
                     <Card.Title>{devName}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    abc
                     </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                     <ListGroup.Item>Total Commits: {totalCommits}</ListGroup.Item>
                     <ListGroup.Item>Total Issues: {totalIssues}</ListGroup.Item>
-                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                    <ListGroup.Item>Total Unit Tests: </ListGroup.Item>
                 </ListGroup>
-                <Card.Body>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body>
             </Card>
             </Col> 
+
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
                 <Card.Body>
                     <Card.Title>{devName}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    abc
                     </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
@@ -169,66 +167,71 @@ const About = () => {
                 <Card.Body>
                     <Card.Title>React</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    A Javascript library for front-end development
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="https://reactjs.org/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
             </Col> 
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/gitlab.png"} />
                 <Card.Body>
                     <Card.Title>GitLab</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Collaborative software development platform
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="https://about.gitlab.com/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
             </Col>
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/mteams.png"} />
                 <Card.Body>
                     <Card.Title>Microsoft Teams</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Designated communication platform
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
             </Col>
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/bootstrap.png"} />
                 <Card.Body>
                     <Card.Title>React Bootstrap</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Bootstrap framework for React
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="https://react-bootstrap.github.io/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
             </Col>
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/postman.png"} />
                 <Card.Body>
                     <Card.Title>Postman</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Platform for API development and testing
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="https://www.postman.com/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
             </Col>
@@ -239,14 +242,97 @@ const About = () => {
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/aws.png"} />
+                <Card.Body>
+                    <Card.Title>AWS Amplify</Card.Title>
+                    <Card.Text>
+                    Hosting platform for WineWorld
+                    </Card.Text>
+                    <a href="https://aws.amazon.com/amplify/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
+                </Card.Body>
+            </Card>
+            </Col>
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/namecheap.png"} />
+                <Card.Body>
+                    <Card.Title>Namecheap</Card.Title>
+                    <Card.Text>
+                    Domain name registration for
+                    </Card.Text>
+                    <a href="https://www.namecheap.com/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
+                </Card.Body>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/vscode.png"} />
+                <Card.Body>
+                    <Card.Title>Visual Studio Code</Card.Title>
+                    <Card.Text>
+                    Popular code editing software
+                    </Card.Text>
+                    <a href="https://code.visualstudio.com/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
+                </Card.Body>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/npm.png"} />
+                <Card.Body>
+                    <Card.Title>Node Package Manager</Card.Title>
+                    <Card.Text>
+                    Javascript package manager
+                    </Card.Text>
+                    <a href="https://www.npmjs.com/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
+                </Card.Body>
+            </Card>
+            </Col> 
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/route53.png"} />
+                <Card.Body>
+                    <Card.Title>Route 53 AWS</Card.Title>
+                    <Card.Text>
+                    Routing from amplify to domain
+                    </Card.Text>
+                    <a href="https://aws.amazon.com/route53/">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
+                </Card.Body>
+            </Card>
+            </Col>   
+
+            </Row>
+        </Container>
+
+        <Container className="p-4">
+        <h1 className="d-flex justify-content-center p-4 ">APIs</h1>
+        <Row xs={1} sm={2} md={3} xl={5} className="g-4 p-4 justify-content-center">
+
+            <Col className="d-flex align-self-stretch">
+            <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
                 <Card.Body>
-                    <Card.Title>AWS</Card.Title>
+                    <Card.Title></Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
             </Col> 
@@ -255,57 +341,46 @@ const About = () => {
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
                 <Card.Body>
-                    <Card.Title>GitLab</Card.Title>
+                    <Card.Title></Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
-            </Col>
+            </Col> 
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
                 <Card.Body>
-                    <Card.Title>Microsoft Teams</Card.Title>
+                    <Card.Title></Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
-            </Col>
+            </Col> 
 
             <Col className="d-flex align-self-stretch">
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
                 <Card.Body>
-                    <Card.Title>React Bootstrap</Card.Title>
+                    <Card.Title></Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <a href="">
+                        <Button variant="primary">Learn More</Button>
+                    </a>
                 </Card.Body>
             </Card>
-            </Col>
-
-            <Col className="d-flex align-self-stretch">
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL + "/logo512.png"} />
-                <Card.Body>
-                    <Card.Title>Postman</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-            </Card>
-            </Col>
+            </Col> 
 
             </Row>
         </Container>
