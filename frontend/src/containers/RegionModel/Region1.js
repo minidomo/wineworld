@@ -4,6 +4,10 @@ import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import regionImage from '../../assets/regionImage.jpg'
 import { Link } from 'react-router-dom'
+import r1 from '../../assets/r1.jpg'
+import r2 from '../../assets/r2.jpg'
+import r3 from '../../assets/r3.jfif'
+
 
 
 const Region1 = () => {
@@ -31,6 +35,18 @@ const Region1 = () => {
             Tags: Sights & Landmarks, Food & Drink
           </p>
         </div>
+        </Row>
+
+        <Row>
+          <Col>
+          <img src={r1} class="img-fluid" alt="..."></img>
+          </Col>
+          <Col>
+          <img src={r2} class="img-fluid" alt="..."></img>
+          </Col>
+          <Col>
+          <img src={r3} class="img-fluid" alt="..."></img>
+          </Col>
         </Row>
 
         <Row md ={10} className="p-4 g-4 justify-content-center">

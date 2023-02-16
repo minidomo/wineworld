@@ -3,6 +3,10 @@ import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import vineyardImage from '../../assets/vineyardImage.jpg'
+import v1 from '../../assets/v1.jfif'
+import v2 from '../../assets/v2.jfif'
+import v3 from '../../assets/v3.jfif'
+
 
 const Vineyard2 = () => {
   return (
@@ -25,6 +29,18 @@ const Vineyard2 = () => {
             Reviews: 13
           </p>
         </div>
+        </Row>
+
+        <Row>
+          <Col>
+          <img src={v1} class="img-fluid" alt="..."></img>
+          </Col>
+          <Col>
+          <img src={v2} class="img-fluid" alt="..."></img>
+          </Col>
+          <Col>
+          <img src={v3} class="img-fluid" alt="..."></img>
+          </Col>
         </Row>
 
         <Row md ={10} className="p-4 g-4 justify-content-center">

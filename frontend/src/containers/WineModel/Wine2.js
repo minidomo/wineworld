@@ -3,6 +3,10 @@ import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import wineImage from '../../assets/wineImage.jpg'
+import w1 from '../../assets/w1.jpg'
+import w2 from '../../assets/w2.jpg'
+import w3 from '../../assets/w3.jpg'
+
 
 const Wine2 = () => {
   return (
@@ -22,6 +26,18 @@ const Wine2 = () => {
             Reviews: 89
           </p>
         </div>
+        </Row>
+
+        <Row>
+          <Col>
+          <img src={w1} class="img-fluid" alt="..."></img>
+          </Col>
+          <Col>
+          <img src={w2} class="img-fluid" alt="..."></img>
+          </Col>
+          <Col>
+          <img src={w3} class="img-fluid" alt="..."></img>
+          </Col>
         </Row>
 
         <Row md ={10} className="p-4 g-4 justify-content-center">
