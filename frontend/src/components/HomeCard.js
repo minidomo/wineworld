@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const HomeCard = ({ title, text, link, image }) => {
     return (
-        <div class="card" style={{ width: '18rem'}}>
+        <div class="card text-bg-light mb-3" style={{ width: '18rem'}}>
             <img src={image} class="image-thumbnail" alt=""/>
             <div class="card-body">
                 <h5 class="card-title">{title}</h5>

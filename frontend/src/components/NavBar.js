@@ -16,7 +16,7 @@ const NavBar = () => {
     }, [theme]);
     return (
         
-        <nav class="navbar bg-dark" data-bs-theme="dark">
+        <nav class={"navbar bg-" + theme} data-bs-theme={theme}>
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
