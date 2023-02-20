@@ -1,13 +1,17 @@
 import HomeCard from '../components/HomeCard'
-import wineimage from '../assets/winehome.jpg'
-import vineyardsimage from '../assets/vineyardshome.jpg'
-import regionsimage from '../assets/regionshome.jpg'
+import wineimage from '../assets/w_home.jpg'
+import vineyardsimage from '../assets/v_home.jpg'
+import regionsimage from '../assets/r_home.jpg'
 import homeimage from '../assets/home.jpg'
 
 const Home = () => {
     return (
         <div>
-            <img src={homeimage} class="img-fluid" alt="..."></img>
+            <img src={homeimage} class="img-fluid w-100" alt="..."></img>
+            <h1 class="display-1">
+                <p class="carousel-caption">WineWorld</p>
+            </h1>
+
             <div class="container text-center">
                 <div class="row">
                     <div class="col">

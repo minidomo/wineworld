@@ -1,7 +1,21 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import '../Dark.css';
 
 const NavBar = () => {
+    const [theme, setTheme] = useState("light")
+    const ModeSwitch = () => {
+        if (theme === "light") {
+            setTheme("dark")
+        } else {
+            setTheme("light")
+        }
+    };
+    useEffect(() => {
+        document.body.className = theme
+    }, [theme]);
     return (
+        
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -24,6 +38,11 @@ const NavBar = () => {
                                 <li class="nav-item">
                                     <Link class="nav-link" to="/Regions">Regions</Link>
                                 </li>
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-dark" onClick={ModeSwitch}> 
+                                        Light/Dark
+                                    </button>
+                                </li>
                             </ul>
                         </div>
                         <form class="d-flex" role="search">
@@ -34,6 +53,7 @@ const NavBar = () => {
                 </nav>
             </div>
         </nav>
+     
     )
 }
 

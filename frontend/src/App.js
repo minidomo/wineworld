@@ -1,5 +1,5 @@
-import React from 'react';
 import './App.css';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/NavBar';
@@ -25,6 +25,7 @@ import Region3 from './containers/RegionModel/Region3';
 
 
 const App = () => {
+
   return (
     <Router>
       <div className="App">
@@ -55,7 +56,6 @@ const App = () => {
             <Route path="/About" element={<About />}></Route>
           </Routes>
         </div>
-        
       </div>
     </Router>
   );
