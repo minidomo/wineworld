@@ -23,15 +23,14 @@ import Region1 from './containers/RegionModel/Region1';
 import Region2 from './containers/RegionModel/Region2';
 import Region3 from './containers/RegionModel/Region3';
 
-
 const App = () => {
-
   return (
     <Router>
       <div className="App">
         <Navbar />
         <div className="Content">
-          <Routes>
+          <Routes> 
+
             <Route path="/" element={<Home />}></Route>
 
 
@@ -62,6 +61,11 @@ const App = () => {
 }
 
 export default App;
+
+export function ColorTheme() {
+  let my_theme;
+  return my_theme;
+}
 
 
 

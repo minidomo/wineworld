@@ -1,8 +1,20 @@
 .dark {
     background-color: #000;
-    color: #222;
+    color: #fff;
+    
     }
-    .light {
+.light {
+    
     background-color: #fff;
     color: #000;
 }
+
+.light .card {
+    background-color: #fff;
+}
+
+.dark .card {
+    background-color: #111;
+}
+
+

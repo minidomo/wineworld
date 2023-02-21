@@ -11,7 +11,6 @@ const Home = () => {
             <h1 class="display-1">
                 <p class="carousel-caption">WineWorld</p>
             </h1>
-
             <div class="container text-center">
                 <div class="row">
                     <div class="col">

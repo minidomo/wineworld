@@ -1,22 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import '../Dark.css';
+import DarkMode from './DarkMode'
+
 
 const NavBar = () => {
-    const [theme, setTheme] = useState("light")
-    const ModeSwitch = () => {
-        if (theme === "light") {
-            setTheme("dark")
-        } else {
-            setTheme("light")
-        }
-    };
-    useEffect(() => {
-        document.body.className = theme
-    }, [theme]);
     return (
-        
-        <nav class={"navbar bg-" + theme} data-bs-theme={theme}>
+        <nav class={"navbar bg-" + DarkMode('')} data-bs-theme={DarkMode('')}>
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
@@ -39,9 +27,7 @@ const NavBar = () => {
                                     <Link class="nav-link" to="/Regions">Regions</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="btn btn-dark" onClick={ModeSwitch}> 
-                                        Light/Dark
-                                    </button>
+                                    {DarkMode('toggle')}
                                 </li>
                             </ul>
                         </div>
@@ -53,7 +39,7 @@ const NavBar = () => {
                 </nav>
             </div>
         </nav>
-     
+
     )
 }
 
