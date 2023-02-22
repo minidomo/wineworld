@@ -17,4 +17,13 @@
     background-color: #111;
 }
 
+.light .list-group-item {
+    background-color: #fff;
+}
+
+.dark .list-group-item {
+    background: #111;
+    color: #ddd;
+}
+
 
