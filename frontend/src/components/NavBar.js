@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
+import DarkMode from './DarkMode'
+
 
 const NavBar = () => {
     return (
-        <nav class="navbar bg-dark" data-bs-theme="dark">
+        <nav class={"navbar bg-" + DarkMode('')} data-bs-theme={DarkMode('')}>
             <div class="container">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
@@ -24,6 +26,9 @@ const NavBar = () => {
                                 <li class="nav-item">
                                     <Link class="nav-link" to="/Regions">Regions</Link>
                                 </li>
+                                <li class="nav-item">
+                                    {DarkMode('toggle')}
+                                </li>
                             </ul>
                         </div>
                         <form class="d-flex" role="search">
@@ -34,6 +39,7 @@ const NavBar = () => {
                 </nav>
             </div>
         </nav>
+
     )
 }
 

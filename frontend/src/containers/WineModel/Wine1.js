@@ -7,8 +7,6 @@ import w1 from '../../assets/w1.jpg'
 import w2 from '../../assets/w2.jpg'
 import w3 from '../../assets/w3.jpg'
 
-
-
 const Wine1 = () => {
   return (
     <div>

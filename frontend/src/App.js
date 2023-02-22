@@ -1,5 +1,5 @@
-import React from 'react';
 import './App.css';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/NavBar';
@@ -23,14 +23,14 @@ import Region1 from './containers/RegionModel/Region1';
 import Region2 from './containers/RegionModel/Region2';
 import Region3 from './containers/RegionModel/Region3';
 
-
 const App = () => {
   return (
     <Router>
       <div className="App">
         <Navbar />
         <div className="Content">
-          <Routes>
+          <Routes> 
+
             <Route path="/" element={<Home />}></Route>
 
 
@@ -55,13 +55,17 @@ const App = () => {
             <Route path="/About" element={<About />}></Route>
           </Routes>
         </div>
-        
       </div>
     </Router>
   );
 }
 
 export default App;
+
+export function ColorTheme() {
+  let my_theme;
+  return my_theme;
+}
 
 
 

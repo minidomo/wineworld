@@ -1,0 +1,29 @@
+.dark {
+    background-color: #000;
+    color: #fff;
+    
+    }
+.light {
+    
+    background-color: #fff;
+    color: #000;
+}
+
+.light .card {
+    background-color: #fff;
+}
+
+.dark .card {
+    background-color: #111;
+}
+
+.light .list-group-item {
+    background-color: #fff;
+}
+
+.dark .list-group-item {
+    background: #111;
+    color: #ddd;
+}
+
+
