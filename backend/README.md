@@ -1,7 +1,15 @@
 # WineWorld Backend
 ### Launching a backend development server
 Run:<br />
-`docker build -t wineworld-backend-dev`<br />
-`docker run --rm -it -p 5000:5000 geojobs-backend-dev`<br /><br />
+`cd backend`<br />
+`docker build . -t wineworld-backend-dev`<br />
+`docker run --rm -it -p 4000:4000 wineworld-backend-dev`<br /><br />
 
 Navigate to [localhost:4000/api](localhost:4000/api)<br />
+
+### Deploy to backend production server
+`scp -r {local path to /backend} root@192.241.139.111:/usr/src/backend`<br />
+`ssh root@192.241.139.111`<br />
+`cd /usr/src/backend`<br />
+`docker build . -t wineworld-backend-dev`<br />
+`docker run --rm -it -p 4000:4000 wineworld-backend-dev`<br /><br />
