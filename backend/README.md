@@ -8,7 +8,8 @@ Run:<br />
 Navigate to [localhost:4000/api](localhost:4000/api)<br />
 
 ### Deploy to backend production server
-`scp -r {local path to /backend} root@192.241.139.111:/usr/src/backend`<br />
+`cd backend`<br />
+`scp -r . root@192.241.139.111:/usr/src/backend`<br />
 `ssh root@192.241.139.111`<br />
 `cd /usr/src/backend`<br />
 `docker build . -t wineworld-backend-dev`<br />
