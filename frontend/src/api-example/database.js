@@ -61,9 +61,11 @@ export function queryAllWines(filter = {}) {
         res = res.filter(e => e.type === filter.type);
     }
 
-    if (typeof filter.nameSort !== 'undefined' && filter.nameSort) {
+    if (typeof filter.nameSort !== 'undefined') {
+        const direction = filter.nameSort ? 1 : -1;
         res.sort((a, b) => {
-            return a.name < b.name ? -1 : 1;
+            const ret = a.name < b.name ? -1 : 1;
+            return ret * direction;
         });
     }
 
@@ -108,9 +110,11 @@ export function queryAllVineyards(filter = {}) {
         res = res.filter(e => e.reviews <= filter.endReviews);
     }
 
-    if (typeof filter.nameSort !== 'undefined' && filter.nameSort) {
+    if (typeof filter.nameSort !== 'undefined') {
+        const direction = filter.nameSort ? 1 : -1;
         res.sort((a, b) => {
-            return a.name < b.name ? -1 : 1;
+            const ret = a.name < b.name ? -1 : 1;
+            return ret * direction;
         });
     }
 
@@ -160,9 +164,11 @@ export function queryAllRegions(filter = {}) {
         });
     }
 
-    if (typeof filter.nameSortAlpha !== 'undefined' && filter.nameSortAlpha) {
+    if (typeof filter.nameSort !== 'undefined') {
+        const direction = filter.nameSort ? 1 : -1;
         res.sort((a, b) => {
-            return a.name < b.name ? -1 : 1;
+            const ret = a.name < b.name ? -1 : 1;
+            return ret * direction;
         });
     }
 

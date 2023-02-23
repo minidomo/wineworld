@@ -76,9 +76,9 @@ declare global {
                 },
             }
 
-            type QueryWineFunction = (id: number) => WineSchema?;
-            type QueryVineyardFunction = (id: number) => VineyardSchema?;
-            type QueryRegionFunction = (id: number) => RegionSchema?;
+            type QueryWineFunction = (id: number) => WineSchema | null;
+            type QueryVineyardFunction = (id: number) => VineyardSchema | null;
+            type QueryRegionFunction = (id: number) => RegionSchema | null;
 
             type QueryAllWinesFunction = (filter: WineFilter) => MiniWineSchema[];
             type QueryAllVineyardsFunction = (filter: VineyardFilter) => MiniVineyardSchema[];
@@ -110,8 +110,8 @@ declare global {
 
             interface RegionFilter {
                 name?: string,
-                nameSortAlpha?: boolean,
-                country?: string,
+                nameSort?: boolean,
+                country?: string[],
                 startRating?: number,
                 endRating?: number,
                 startReviews?: number,
