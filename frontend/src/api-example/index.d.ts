@@ -17,9 +17,7 @@ declare global {
             response: Response,
         }
 
-        interface SiteApi {
-            get(url: string, config: Config): Promise<Response>,
-        }
+        type GetRequestFunction = (url: string, config: Config) => Promise<Response>;
     }
 }
 
