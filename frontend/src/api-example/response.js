@@ -1,6 +1,6 @@
 /**
  * 
- * @param {ApiExample.Response} data 
+ * @param {ApiExample.SiteApi.Response} data 
  */
 export function makeResponse(data) {
     return data;
@@ -8,7 +8,7 @@ export function makeResponse(data) {
 
 /**
  * 
- * @param {ApiExample.ErrorResponse} data 
+ * @param {ApiExample.SiteApi.ErrorResponse} data 
  */
 export function makeErrorResponse(data) {
     return data;
@@ -16,7 +16,7 @@ export function makeErrorResponse(data) {
 
 export const ERROR_RESPONSE = {
     /**
-     * @type {ApiExample.ErrorResponse}
+     * @type {ApiExample.SiteApi.ErrorResponse}
      */
     NOT_FOUND: {
         message: 'Request failed with status code 404',
@@ -35,7 +35,7 @@ export const ERROR_RESPONSE = {
     },
 
     /**
-     * @type {ApiExample.ErrorResponse}
+     * @type {ApiExample.SiteApi.ErrorResponse}
      */
     INTERNAL_SERVER: {
         message: 'Request failed with status code 500',
