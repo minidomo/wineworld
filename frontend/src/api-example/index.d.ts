@@ -4,6 +4,7 @@ declare global {
         namespace SiteApi {
             interface Config {
                 params: Record<string | number, any>,
+                failOnPurpose: boolean,
             }
 
             interface Response {
@@ -19,7 +20,7 @@ declare global {
                 response: Response,
             }
 
-            type GetRequestFunction = (url: string, config: Config) => Promise<Response>;
+            type GetRequestFunction = (url: string, config?: Config) => Promise<Response>;
         }
 
         namespace Database {
@@ -75,9 +76,49 @@ declare global {
                 },
             }
 
-            type GetWineFunction = (id: number) => WineSchema?;
-            type GetVineyardFunction = (id: number) => VineyardSchema?;
-            type GetRegionFunction = (id: number) => RegionSchema?;
+            type QueryWineFunction = (id: number) => WineSchema?;
+            type QueryVineyardFunction = (id: number) => VineyardSchema?;
+            type QueryRegionFunction = (id: number) => RegionSchema?;
+
+            type QueryAllWinesFunction = (filter: WineFilter) => MiniWineSchema[];
+            type QueryAllVineyardsFunction = (filter: VineyardFilter) => MiniVineyardSchema[];
+            type QueryAllRegionsFunction = (filter: RegionFilter) => MiniRegionSchema[];
+
+            interface WineFilter {
+                name?: string,
+                nameSort?: boolean,
+                country?: string[],
+                winery?: string,
+                startRating?: number,
+                endRating?: number,
+                startReviews?: number,
+                endReviews?: number,
+                type?: WineType,
+            }
+
+            interface VineyardFilter {
+                name?: string,
+                nameSort?: boolean,
+                country?: string[],
+                startPrice?: number,
+                endPrice?: number,
+                startRating?: number,
+                endRating?: number,
+                startReviews?: number,
+                endReviews?: number,
+            }
+
+            interface RegionFilter {
+                name?: string,
+                nameSortAlpha?: boolean,
+                country?: string,
+                startRating?: number,
+                endRating?: number,
+                startReviews?: number,
+                endReviews?: number,
+                tags?: string[],
+                tripTypes?: TripType[],
+            }
         }
     }
 }

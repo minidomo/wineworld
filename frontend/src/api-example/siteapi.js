@@ -1,4 +1,4 @@
-import { makeErrorResponse, makeResponse, ERROR_RESPONSE } from './response';
+import { makeResponse, ERROR_RESPONSE } from './response';
 import * as database from './database';
 
 const baseUrl = 'https://api.wineworld.me';
@@ -15,92 +15,107 @@ export async function get(url, config) {
 
     return new Promise((resolve, reject) => {
 
-        if (url === `${baseUrl}/wines`) {
-            resolve(makeResponse({
-                data: {
-                    message: 'this is test',
-                },
-                status: 200,
-                statusText: 'OK',
-            }));
+        if (config.failOnPurpose) {
+            reject(ERROR_RESPONSE.INTERNAL_SERVER);
             return;
         }
 
-        if (url === `${baseUrl}/vineyards`) {
-            resolve(makeResponse({
-                data: {
-                    message: 'this is test',
-                },
-                status: 200,
-                statusText: 'OK',
-            }));
-            return;
-        }
-
-        if (url === `${baseUrl}/regions`) {
-            resolve(makeResponse({
-                data: {
-                    message: 'this is test',
-                },
-                status: 200,
-                statusText: 'OK',
-            }));
-            return;
-        }
-
-        if (wineUrlRegex.test(url)) {
-            const [, id] = url.match(wineUrlRegex);
-            const numId = parseInt(id);
-            const data = database.getWine(numId);
-
-            if (data) {
+        try {
+            if (url === `${baseUrl}/wines`) {
+                const list = database.queryAllWines(config.params);
                 resolve(makeResponse({
-                    data,
+                    data: {
+                        list,
+                    },
                     status: 200,
                     statusText: 'OK',
-                }))
-            } else {
-                reject(ERROR_RESPONSE.NOT_FOUND);
+                }));
+                return;
             }
-            return;
-        }
 
-        if (vineyardUrlRegex.test(url)) {
-            const [, id] = url.match(vineyardUrlRegex);
-            const numId = parseInt(id);
-            const data = database.getVineyard(numId);
-
-            if (data) {
+            if (url === `${baseUrl}/vineyards`) {
+                const list = database.queryAllVineyards(config.params);
                 resolve(makeResponse({
-                    data,
+                    data: {
+                        list,
+                    },
                     status: 200,
                     statusText: 'OK',
-                }))
-            } else {
-                reject(ERROR_RESPONSE.NOT_FOUND);
+                }));
+                return;
             }
-            return;
-        }
 
-        if (regionUrlRegex.test(url)) {
-            const [, id] = url.match(regionUrlRegex);
-            const numId = parseInt(id);
-            const data = database.getRegion(numId);
-
-            if (data) {
+            if (url === `${baseUrl}/regions`) {
+                const list = database.queryAllRegions(config.params);
                 resolve(makeResponse({
-                    data,
+                    data: {
+                        list,
+                    },
                     status: 200,
                     statusText: 'OK',
-                }))
-            } else {
-                reject(ERROR_RESPONSE.NOT_FOUND);
+                }));
+                return;
             }
-            return;
-        }
 
-        // default
-        reject(ERROR_RESPONSE.NOT_FOUND);
+            if (wineUrlRegex.test(url)) {
+                const [, id] = url.match(wineUrlRegex);
+                const numId = parseInt(id);
+                const data = database.queryWine(numId);
+
+                if (data) {
+                    resolve(makeResponse({
+                        data,
+                        status: 200,
+                        statusText: 'OK',
+                    }))
+                } else {
+                    reject(ERROR_RESPONSE.NOT_FOUND);
+                }
+                return;
+            }
+
+            if (vineyardUrlRegex.test(url)) {
+                const [, id] = url.match(vineyardUrlRegex);
+                const numId = parseInt(id);
+                const data = database.queryVineyard(numId);
+
+                if (data) {
+                    resolve(makeResponse({
+                        data,
+                        status: 200,
+                        statusText: 'OK',
+                    }))
+                } else {
+                    reject(ERROR_RESPONSE.NOT_FOUND);
+                }
+                return;
+            }
+
+            if (regionUrlRegex.test(url)) {
+                const [, id] = url.match(regionUrlRegex);
+                const numId = parseInt(id);
+                const data = database.queryRegion(numId);
+
+                if (data) {
+                    resolve(makeResponse({
+                        data,
+                        status: 200,
+                        statusText: 'OK',
+                    }))
+                } else {
+                    reject(ERROR_RESPONSE.NOT_FOUND);
+                }
+                return;
+            }
+
+            // default
+            reject(ERROR_RESPONSE.NOT_FOUND);
+        } catch (err) {
+            const res = Object.assign({}, ERROR_RESPONSE.INTERNAL_SERVER);
+            res.message = '500 error occurred during api call';
+            res.response.data = err;
+            reject(res);
+        }
     });
 };
 
