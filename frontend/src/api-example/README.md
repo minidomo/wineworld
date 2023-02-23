@@ -6,7 +6,7 @@ If you're unsure about my type definitions, feel free to take a look at `index.d
 
 ## Usage
 
-```js
+```jsx
 import * as siteapi from './api-example/siteapi'; // make sure the relative path is correct
 
 siteapi
@@ -35,7 +35,7 @@ async function func() {
 
 ### Getting all results
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/regions')
     .then(response => {
@@ -47,7 +47,7 @@ siteapi
 
 Not all endpoints, `/wines`, `/vineyards`, and `/regions`, have the same filters, so refer to the file `index.d.ts` or VS Code's intellisense.
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/regions', {
         params: {
@@ -63,7 +63,7 @@ siteapi
 
 ### Sorting results 1
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/regions', {
         params: {
@@ -77,7 +77,7 @@ siteapi
 
 ### Sorting results 2
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/regions', {
         params: {
@@ -91,7 +91,7 @@ siteapi
 
 ### Filtering and sorting results
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/regions', {
         params: {
@@ -106,7 +106,7 @@ siteapi
 
 ### Getting a single item
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/wine/2')
     .then(response => {
@@ -124,7 +124,7 @@ It's possible that an API call results in an error, so they should be handled ap
 
 The structure of `errRes` is defined in `index.d.ts`.
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/something') // the /something endpoint does not exist
     .then(response => { // never reaches this function
@@ -137,7 +137,7 @@ siteapi
 
 ### 404 Not Found 2
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/vineyard/7') // there is no vineyard with id=7
     .then(response => { // never reaches this function
@@ -150,7 +150,7 @@ siteapi
 
 ### General error
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/wines') // hypothetically could fail any time (maybe the backend server is down, or an error occurs on the backend, etc.)
     .then(response => { // never reaches this function
@@ -165,7 +165,7 @@ siteapi
 
 I included this to make it easier to get an error that is not 404 as the frontend may handle those two errors differently. This is **not** something in axios and was merely implemented for testing purposes.
 
-```js
+```jsx
 siteapi
     .get('https://api.wineworld.me/wines', {
         failOnPurpose: true, // will guarantee a 500 Internal Server Error
@@ -186,7 +186,7 @@ Use this in combination with React functions `useState` and `useEffect` to updat
 
 ### Instance pages
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react';
 import * as siteapi from './api-example/siteapi';
 
@@ -216,7 +216,7 @@ const Wine = (id) => {
 
 ### Model pages
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react';
 import * as siteapi from './api-example/siteapi';
 
