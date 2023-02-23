@@ -38,7 +38,7 @@ export function queryAllWines(filter = {}) {
     }
 
     if (typeof filter.winery !== 'undefined') {
-        res = res.filter(e => e.winery.includes(filter.winery));
+        res = res.filter(e => filter.winery.includes(e.winery));
     }
 
     if (typeof filter.startRating !== 'undefined') {

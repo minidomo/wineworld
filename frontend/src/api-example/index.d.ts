@@ -88,7 +88,7 @@ declare global {
                 name?: string,
                 nameSort?: boolean,
                 country?: string[],
-                winery?: string,
+                winery?: string[],
                 startRating?: number,
                 endRating?: number,
                 startReviews?: number,
