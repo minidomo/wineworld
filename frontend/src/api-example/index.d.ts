@@ -20,7 +20,7 @@ declare global {
                 response: Response,
             }
 
-            type GetRequestFunction = (url: string, config?: Config) => Promise<Response>;
+            type GetRequestFunction = (url: string, config: Config = {}) => Promise<Response>;
         }
 
         namespace Database {

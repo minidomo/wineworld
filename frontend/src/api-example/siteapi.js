@@ -9,7 +9,7 @@ const regionUrlRegex = /^https:\/\/api\.wineworld\.me\/region\/(\d+)/;
 /**
  * @type {ApiExample.SiteApi.GetRequestFunction}
  */
-export async function get(url, config) {
+export async function get(url, config = {}) {
     // artificial latency to simulate slow api calls
     await wait(2000);
 
