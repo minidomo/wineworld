@@ -12,7 +12,7 @@ python3 app.py
 
 ## Server
 
-The commands in this section are only relevant for production servers. For servers on the dev environment, a separate image does not need to be built. To run a server on the dev environment, see [here](README.md#developing-on-vs-code).
+The commands in this section are only relevant for production servers. For servers on the dev environment, a separate image does not need to be built. To run a server on the dev environment, see [here](#developing-on-vs-code).
 
 ### Building the server image
 
@@ -24,7 +24,7 @@ make build-server
 
 Running the following commands will have the server run on [localhost:4000](localhost:4000).
 
-```console
+```bash
 # two ways to run a server
 make server # runs the server and can see console output
 make server-background # runs the server in the background
@@ -118,3 +118,10 @@ python3 scripts/stop_server.py
 ```console
 systemctl restart wineworld
 ```
+
+## Resources
+
+- [Setting up a Flask web server](https://www.youtube.com/watch?v=z5XiVh6v4uI)
+- [Getting a free SSL certificate from Let's Encrypt](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04#step-6-securing-the-application)
+- [Running gunicorn on Docker](https://stackoverflow.com/a/49287903)
+
