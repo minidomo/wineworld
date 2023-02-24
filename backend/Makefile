@@ -1,3 +1,5 @@
+all: format lint type-check
+
 type-check:
 	mypy app.py
 
