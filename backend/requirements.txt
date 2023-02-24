@@ -10,3 +10,5 @@ jsonschema==4.17.3
 requests==2.28.2
 python-dotenv==0.21.1
 black==23.1.0
+mypy==1.0.1
+ruff==0.0.252
