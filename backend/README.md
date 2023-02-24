@@ -1,20 +1,49 @@
 # WineWorld Backend
 
-## Launching a backend development server
+## Developing on VS Code
 
-```console
-docker build -t wineworld-backend-dev -f Dockerfile.server .
+To develop on on VS Code, install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension. Afterwards, you can open this `backend/` directory in the development container. Press `F1` to bring up the Command Palette and type in `Dev Containers` for a full list of commands.
+
+To start the server while on this container, run the following:
+
+```bash
+python3 app.py
+```
+
+## Launching a local server
+
+```bash
+docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
 docker run --rm -it -p 4000:4000 wineworld-backend-dev
 ```
 
 Available at [localhost:4000](localhost:4000).
 
-## Deploy to backend production server
+## Deploying to production
 
-```console
+Update files on the virtual machine where our server is hosted on:
+
+```bash
 scp -r . root@192.241.139.111:/usr/src/backend
+```
+
+ssh into the machine and go to the directory:
+
+```bash
 ssh root@192.241.139.111
 cd /usr/src/backend
-docker build -t wineworld-backend-dev -f Dockerfile.server .
-docker run --rm -it -p 4000:4000 wineworld-backend-dev
+```
+
+Identify and stop the ongoing docker container:
+
+```bash
+docker ps # show current running containers and their IDs
+docker stop <container_id>
+```
+
+Launch a local server:
+
+```bash
+docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
+docker run --rm -d -p 4000:4000 wineworld-backend-dev
 ```
