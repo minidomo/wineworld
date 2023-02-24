@@ -6,46 +6,115 @@ To develop on on VS Code, install the [Dev Containers](https://marketplace.visua
 
 To start the development server while on this container, run the following:
 
-```bash
+```console
 python3 app.py
 ```
 
-## Launching a local server
+## Server
 
-The following commands will run production servers. If you want to run a development server, you must be on the development container. See [here](README.md#developing-on-vs-code)
+The commands in this section are only relevant for production servers. For servers on the dev environment, a separate image does not need to be built. To run a server on the dev environment, see [here](README.md#developing-on-vs-code).
 
-```bash
+### Building the server image
+
+```console
+make build-server
+```
+
+### Launching a local server
+
+Running the following commands will have the server run on [localhost:4000](localhost:4000).
+
+```console
 # two ways to run a server
-make server-interactive # runs the server and can see console output
+make server # runs the server and can see console output
 make server-background # runs the server in the background
 ```
 
-Available at [localhost:4000](localhost:4000).
+## Production
 
-## Deploying to production
+### Updating files via git
 
-Update files on the virtual machine where our server is hosted on:
+1. Push changes to the repository.
+   
+   ```console
+   git push
+   ```
 
-```bash
-scp -r . root@192.241.139.111:/usr/src/backend
+2. SSH into virtual machine.
+   
+   ```console
+   ssh root@192.241.139.111
+   ```
+
+3. Pull changes in the repository.
+   
+   ```console
+   cd main/cs373-idb-12
+   git pull
+   ```
+
+4. Starting the server with the new changes.
+   
+   **If the server is currently running**
+
+   ```console
+   python3 scripts/stop_server.py
+   ```
+
+   **If the server is not running**
+
+   ```console
+   systemctl restart wineworld
+   ```
+
+### Updating via SSH
+
+1. Copy files/directories to the repository.
+
+   ```console
+   scp -r <sources> ... root@192.241.139.111:~/main/cs373-idb-12
+   ```
+
+2. SSH into the machine.
+   
+   ```console
+   ssh root@192.241.139.111
+   ```
+
+3. Starting the server with the new changes.
+   
+   **If the server is currently running**
+
+   ```console
+   python3 scripts/stop_server.py
+   ```
+
+   **If the server is not running**
+
+   ```console
+   systemctl restart wineworld
+   ```
+
+### `wineworld` service
+
+This service will execute `make wineworld-service`. In addition, the service will run automatically if the VM shuts down and powers on or if the current running server stops. If the execution script for the service needs to be updated, consider editing `make wineworld-service`. 
+
+If the service file needs to be updated, the file is located at `/etc/systemd/system/wineworld.service`. After editing the file, run the following to update the service:
+
+```console
+systemctl daemon-reload
 ```
 
-ssh into the machine and go to the directory:
+Start the server with the new changes.
 
-```bash
-ssh root@192.241.139.111
-cd /usr/src/backend
+**If the server is currently running**
+
+```console
+python3 scripts/stop_server.py
 ```
 
-Identify and stop the ongoing docker container:
+**If the server is not running**
 
-```bash
-docker ps # show current running containers and their IDs
-docker stop <container_id>
-```
-
-Launch a local server:
-
-```bash
-make server-background
+```console
+systemctl restart wineworld
 ```

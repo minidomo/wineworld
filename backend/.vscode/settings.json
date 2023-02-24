@@ -2,7 +2,8 @@
     "python.formatting.provider": "black",
     "editor.formatOnSave": true,
     "python.formatting.blackArgs": [
-        "--line-length 120"
+        "--line-length",
+        "120"
     ],
     "python.linting.mypyEnabled": true
 }

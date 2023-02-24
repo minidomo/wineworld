@@ -1,19 +1,22 @@
-all: format lint type-check
+all: lint format type-check
 
 type-check:
-	mypy app.py wsgi.py
+	mypy .
 
 lint:
-	ruff app.py wsgi.py
+	ruff check . --fix
 
 format:
-	black --line-length 120 app.py wsgi.py
+	black --line-length 120 .
 
 build-server:
 	docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
 
-server-interactive: build-server
-	docker run --rm -it -p 4000:4000 wineworld-backend-dev
+server:
+	docker run --rm -p 4000:4000 wineworld-backend-dev
 
-server-background: build-server
+server-background:
 	docker run --rm -d -p 4000:4000 wineworld-backend-dev
+
+wineworld-service:
+	make server
