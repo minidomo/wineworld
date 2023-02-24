@@ -1,2 +1,7 @@
 .git
 .gitignore
+__pycache__
+.mypy_cache
+.ruff_cache
+.vscode
+.devcontainer
