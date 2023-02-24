@@ -13,8 +13,9 @@ python3 app.py
 ## Launching a local server
 
 ```bash
-docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
-docker run --rm -it -p 4000:4000 wineworld-backend-dev
+# two ways to run a server
+make server-interactive # runs the server and can see console output
+make server-background # runs the server in the background
 ```
 
 Available at [localhost:4000](localhost:4000).
@@ -44,6 +45,5 @@ docker stop <container_id>
 Launch a local server:
 
 ```bash
-docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
-docker run --rm -d -p 4000:4000 wineworld-backend-dev
+make server-background
 ```
