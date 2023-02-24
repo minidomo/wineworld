@@ -1,13 +1,13 @@
 all: format lint type-check
 
 type-check:
-	mypy app.py
+	mypy app.py wsgi.py
 
 lint:
-	ruff app.py
+	ruff app.py wsgi.py
 
 format:
-	black --line-length 120 app.py
+	black --line-length 120 app.py wsgi.py
 
 # generate a Self-Signed SSL Certificate for https
 sslgen:
