@@ -4,13 +4,15 @@
 
 To develop on on VS Code, install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension. Afterwards, you can open this `backend/` directory in the development container. Press `F1` to bring up the Command Palette and type in `Dev Containers` for a full list of commands.
 
-To start the server while on this container, run the following:
+To start the development server while on this container, run the following:
 
 ```bash
 python3 app.py
 ```
 
 ## Launching a local server
+
+The following commands will run production servers. If you want to run a development server, you must be on the development container. See [here](README.md#developing-on-vs-code)
 
 ```bash
 # two ways to run a server
