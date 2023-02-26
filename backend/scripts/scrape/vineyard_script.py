@@ -1,3 +1,4 @@
+import itertools
 import json
 import os
 import sys
@@ -60,10 +61,10 @@ class VineyardScript(AbstractScrapeScript):
             if country not in search_endpoint_data:
                 search_endpoint_data[country] = country_data
 
-            search_params: dict[str, str] = {
+            search_params: JsonObject = {
                 "location": f"{region}, {country}",
                 "term": "winery",
-                "categories": categories,
+                "categories": [categories],
                 "limit": "20",
             }
 
@@ -83,7 +84,7 @@ class VineyardScript(AbstractScrapeScript):
         return data
 
     def apply_changes(self, data: JsonObject) -> JsonObject:
-        ret: list[JsonObject] = []
+        business_dict: dict[str, JsonObject] = {}
 
         error_count = 0
         region_error = 0
@@ -106,44 +107,54 @@ class VineyardScript(AbstractScrapeScript):
                     continue
 
                 try:
+                    region_info = {
+                        "name": region,
+                        "longitude": region_data["region"]["center"]["longitude"],
+                        "latitude": region_data["region"]["center"]["latitude"],
+                    }
+
                     business_list: list[JsonObject] = region_data["businesses"]
 
                     for business in business_list:
-                        model: JsonObject = {
-                            "id": 1,  # modified later
-                            "name": "asd",
-                            "price": 2,
-                            "rating": 4.5,
-                            "reviews": 123,
-                            "image": "difhjido",
-                            "country": country,
-                            "region": {
-                                "name": region,
-                                "longitude": region_data["region"]["center"]["longitude"],
-                                "latitude": region_data["region"]["center"]["latitude"],
-                            },
-                            "raw": business,  # the original business info
-                        }
+                        key: str = business["id"]
 
-                        model["name"] = business["name"]
-                        model["price"] = len(business["price"])
-                        model["rating"] = business["rating"]
-                        model["reviews"] = business["review_count"]
-                        model["image"] = business["image_url"]
+                        if key in business_dict:
+                            region_list: list[JsonObject] = business_dict[key]["region"]
+                            region_list.append(region_info)
+                        else:
+                            model: JsonObject = {
+                                "id": 1,  # modified later
+                                "name": "asd",
+                                "price": 2,
+                                "rating": 4.5,
+                                "reviews": 123,
+                                "image": "difhjido",
+                                "country": country,
+                                "region": [region_info],
+                                "raw": business,  # the original business info
+                            }
 
-                        assert isinstance(model["name"], str) and len(model["name"]) > 0
-                        assert isinstance(model["price"], int) and model["price"] > 0
-                        assert isinstance(model["rating"], float) and model["rating"] > 0
-                        assert isinstance(model["reviews"], int) and model["reviews"] > 0
-                        assert isinstance(model["image"], str) and len(model["image"]) > 0
+                            model["name"] = business["name"]
+                            model["price"] = len(business["price"])
+                            model["rating"] = business["rating"]
+                            model["reviews"] = business["review_count"]
+                            model["image"] = business["image_url"]
 
-                        ret.append(model)
+                            assert isinstance(model["name"], str) and len(model["name"]) > 0
+                            assert isinstance(model["price"], int) and model["price"] > 0
+                            assert isinstance(model["rating"], float) and model["rating"] > 0
+                            assert isinstance(model["reviews"], int) and model["reviews"] > 0
+                            assert isinstance(model["image"], str) and len(model["image"]) > 0
 
+                            business_dict[key] = model
                 except Exception:
                     error_count += 1
 
-        for i in range(len(ret)):
-            ret[i]["id"] = i
+        ret: list[JsonObject] = []
+
+        for business, i in zip(business_dict.values(), itertools.count()):
+            business["id"] = i
+            ret.append(business)
 
         print(f"final vineyard count: {len(ret)}")
         print(f"errored vineyard count: {error_count}")

@@ -60,6 +60,15 @@ class WineScript(AbstractScrapeScript):
                     wine["name"] = wine.pop("wine")
                     wine["type"] = wine_types[endpoint]
 
+                    assert isinstance(wine["winery"], str) and len(wine["winery"]) > 0
+                    assert isinstance(wine["image"], str) and len(wine["image"]) > 0
+                    assert isinstance(wine["rating"], float) and wine["rating"] > 0
+                    assert isinstance(wine["reviews"], int) and wine["reviews"] > 0
+                    assert isinstance(wine["country"], str) and len(wine["country"]) > 0
+                    assert isinstance(wine["region"], str) and len(wine["region"]) > 0
+                    assert isinstance(wine["name"], str) and len(wine["name"]) > 0
+                    assert isinstance(wine["type"], str) and len(wine["type"]) > 0
+
                     ret.append(wine)
                 except Exception:
                     error_count += 1
