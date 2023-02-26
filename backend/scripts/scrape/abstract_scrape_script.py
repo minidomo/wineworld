@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
-from typing import Any
 import json
-from pathlib import Path
+from abc import ABC, abstractmethod
 from enum import Enum
+from pathlib import Path
+from typing import Any
 
 JsonObject = dict[str, Any]
 

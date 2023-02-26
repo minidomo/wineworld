@@ -1,8 +1,9 @@
-from .abstract_scrape_script import JsonObject, ScriptType, AbstractScrapeScript
-import sys
-import requests
-import json
 import re
+import sys
+
+import requests
+
+from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
 
 
 class WineScript(AbstractScrapeScript):

@@ -7,6 +7,7 @@ lint:
 	ruff check . --fix
 
 format:
+	isort .
 	black --line-length 120 .
 
 build-server:

@@ -1,9 +1,11 @@
-from .abstract_scrape_script import JsonObject, ScriptType, AbstractScrapeScript
-import sys
-import requests
 import json
 import os
+import sys
+
+import requests
 from dotenv import load_dotenv
+
+from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
 
 load_dotenv()
 
