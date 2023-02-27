@@ -5,15 +5,21 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import wineImage from '../../assets/wineImage.jpg'
-
+import WinesSearch from './WinesSearch';
+import WineContent from './WineContent';
 
 const Wines = () => {
+
   return (
     <Stack>
-      <Row md ={10} className="p-4 g-4 justify-content-center">
+
+      <Row md={10} className="p-4 g-4 justify-content-center">
+        <WinesSearch />
+        <WineContent />
         <Col>
-          <Card border = 'dark'>
-            <Card.Img variant ="top" src={wineImage} />
+
+          <Card border='dark'>
+            <Card.Img variant="top" src={wineImage} />
             {/* <Card.Header className='text-muted '> Recommended </Card.Header> */}
             <Card.Body>
               <Card.Title> Pêra-Manca Tinto 1990 </Card.Title>
@@ -32,9 +38,9 @@ const Wines = () => {
             </Card.Body>
             <Card.Footer className="">
               <Button
-              className="btn btn-primary stretched-link"
-              variant="secondary"
-              href={"/Wines/Wine1"}
+                className="btn btn-primary stretched-link"
+                variant="secondary"
+                href={"/Wines/Wine1"}
               >
                 See More
               </Button>
@@ -43,8 +49,8 @@ const Wines = () => {
         </Col>
 
         <Col>
-          <Card border = 'dark'>            
-          <Card.Img variant ="top" src={wineImage} />
+          <Card border='dark'>
+            <Card.Img variant="top" src={wineImage} />
             <Card.Body>
               <Card.Title> Wraith Cabernet Sauvignon 2013 </Card.Title>
               <Card.Subtitle> Wine Type: White</Card.Subtitle>
@@ -62,9 +68,9 @@ const Wines = () => {
             </Card.Body>
             <Card.Footer className="text-muted">
               <Button
-              className="btn btn-primary stretched-link"
-              variant="secondary"
-              href={"/Wines/Wine2"}
+                className="btn btn-primary stretched-link"
+                variant="secondary"
+                href={"/Wines/Wine2"}
               >
                 See More
               </Button>
@@ -73,8 +79,8 @@ const Wines = () => {
         </Col>
 
         <Col>
-          <Card border = 'dark'>            
-          <Card.Img variant ="top" src={wineImage} />
+          <Card border='dark'>
+            <Card.Img variant="top" src={wineImage} />
             <Card.Body>
               <Card.Title> Olema Cabernet Sauvignon 2019 </Card.Title>
               <Card.Subtitle> Wine Type: Red</Card.Subtitle>
@@ -92,9 +98,9 @@ const Wines = () => {
             </Card.Body>
             <Card.Footer className="text-muted">
               <Button
-              className="btn btn-primary stretched-link"
-              variant="secondary"
-              href={"/Wines/Wine3"}
+                className="btn btn-primary stretched-link"
+                variant="secondary"
+                href={"/Wines/Wine3"}
               >
                 See More
               </Button>
@@ -104,6 +110,6 @@ const Wines = () => {
       </Row>
     </Stack>
   );
-} 
+}
 
 export default Wines

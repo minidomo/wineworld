@@ -5,8 +5,7 @@ import DarkMode from './DarkMode'
 const NavBar = () => {
     return (
         <nav class={"navbar bg-" + DarkMode('')} data-bs-theme={DarkMode('')}>
-            <div class="container">
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
                         <Link class="navbar-brand" to="/">WineWorld</Link>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +36,7 @@ const NavBar = () => {
                         </form>
                     </div>
                 </nav>
-            </div>
+
         </nav>
 
     )
