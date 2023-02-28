@@ -44,32 +44,39 @@ class WineScript(AbstractScrapeScript):
 
             for wine in wines:
                 try:
-                    original_rating: JsonObject = wine.pop("rating")
+                    model: JsonObject = {
+                        "id": 0,  # modified later
+                        "winery": wine["winery"],
+                        "image": wine["image"],
+                        "rating": float(wine["rating"]["average"]),
+                        "reviews": 0,
+                        "country": "",
+                        "region": "",
+                        "name": wine["wine"],
+                        "type": wine_types[endpoint],
+                    }
 
-                    wine["rating"] = float(original_rating["average"])
-
-                    m = re.search(r"\d+", original_rating["reviews"])
+                    m = re.search(r"\d+", wine["rating"]["reviews"])
                     assert m is not None
-                    wine["reviews"] = int(m.group(0))
+                    model["reviews"] = int(m.group(0))
 
-                    original_location: str = wine.pop("location")
+                    original_location: str = wine["location"]
                     location_parts = original_location.split("\n·\n")
-                    wine["country"] = location_parts[0]
-                    wine["region"] = location_parts[1]
+                    model["country"] = location_parts[0]
+                    model["region"] = location_parts[1]
 
-                    wine["name"] = wine.pop("wine")
-                    wine["type"] = wine_types[endpoint]
+                    model["type"] = wine_types[endpoint]
 
-                    assert isinstance(wine["winery"], str) and len(wine["winery"]) > 0
-                    assert isinstance(wine["image"], str) and len(wine["image"]) > 0
-                    assert isinstance(wine["rating"], float) and wine["rating"] > 0
-                    assert isinstance(wine["reviews"], int) and wine["reviews"] > 0
-                    assert isinstance(wine["country"], str) and len(wine["country"]) > 0
-                    assert isinstance(wine["region"], str) and len(wine["region"]) > 0
-                    assert isinstance(wine["name"], str) and len(wine["name"]) > 0
-                    assert isinstance(wine["type"], str) and len(wine["type"]) > 0
+                    assert isinstance(model["winery"], str) and len(model["winery"]) > 0
+                    assert isinstance(model["image"], str) and len(model["image"]) > 0
+                    assert isinstance(model["rating"], float) and model["rating"] > 0
+                    assert isinstance(model["reviews"], int) and model["reviews"] > 0
+                    assert isinstance(model["country"], str) and len(model["country"]) > 0
+                    assert isinstance(model["region"], str) and len(model["region"]) > 0
+                    assert isinstance(model["name"], str) and len(model["name"]) > 0
+                    assert isinstance(model["type"], str) and len(model["type"]) > 0
 
-                    ret.append(wine)
+                    ret.append(model)
                 except Exception:
                     error_count += 1
 

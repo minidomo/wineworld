@@ -1,5 +1,4 @@
 import itertools
-import json
 import os
 import sys
 
@@ -16,11 +15,7 @@ class VineyardScript(AbstractScrapeScript):
         super().__init__(file_name, script_type)
 
     def get_unique_locations(self) -> set[tuple[str, str]]:
-        file_path = (self.root_dir / "data/modify/wines.json").resolve()
-
-        print(f"reading wine data from: {file_path}")
-        json_data = file_path.read_text(encoding="utf-8")
-        data: JsonObject = json.loads(json_data)
+        data = self.read_json_file(self.root_dir / "data/modify/wines.json")
         wines: list[JsonObject] = data["data"]
 
         ret: set[tuple[str, str]] = set()
@@ -54,9 +49,7 @@ class VineyardScript(AbstractScrapeScript):
 
         search_endpoint_data: JsonObject = {}
 
-        for location in self.get_unique_locations():
-            country, region = location
-
+        for country, region in self.get_unique_locations():
             country_data = search_endpoint_data.setdefault(country, {})
             if country not in search_endpoint_data:
                 search_endpoint_data[country] = country_data
@@ -113,32 +106,29 @@ class VineyardScript(AbstractScrapeScript):
                         "latitude": region_data["region"]["center"]["latitude"],
                     }
 
+                    assert isinstance(region_info["latitude"], float)
+                    assert isinstance(region_info["longitude"], float)
+
                     business_list: list[JsonObject] = region_data["businesses"]
 
                     for business in business_list:
                         key: str = business["id"]
 
                         if key in business_dict:
-                            region_list: list[JsonObject] = business_dict[key]["region"]
+                            region_list: list[JsonObject] = business_dict[key]["regions"]
                             region_list.append(region_info)
                         else:
                             model: JsonObject = {
-                                "id": 1,  # modified later
-                                "name": "asd",
-                                "price": 2,
-                                "rating": 4.5,
-                                "reviews": 123,
-                                "image": "difhjido",
+                                "id": 0,  # modified later
+                                "name": business["name"],
+                                "price": len(business["price"]),
+                                "rating": business["rating"],
+                                "reviews": business["review_count"],
+                                "image": business["image_url"],
                                 "country": country,
-                                "region": [region_info],
+                                "regions": [region_info],
                                 "raw": business,  # the original business info
                             }
-
-                            model["name"] = business["name"]
-                            model["price"] = len(business["price"])
-                            model["rating"] = business["rating"]
-                            model["reviews"] = business["review_count"]
-                            model["image"] = business["image_url"]
 
                             assert isinstance(model["name"], str) and len(model["name"]) > 0
                             assert isinstance(model["price"], int) and model["price"] > 0

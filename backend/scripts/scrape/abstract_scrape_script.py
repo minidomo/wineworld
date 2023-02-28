@@ -32,6 +32,15 @@ class AbstractScrapeScript(ABC):
             print(f"writing to: {self.target_file}")
             file.write(content)
 
+    def read_json_file(self, path: Path) -> JsonObject:
+        file_path = path.resolve()
+
+        print(f"reading data from: {file_path}")
+        json_data = file_path.read_text(encoding="utf-8")
+        data: JsonObject = json.loads(json_data)
+
+        return data
+
     def run(self):
         if self.script_type == ScriptType.RAW:
             self.run_raw()
@@ -50,13 +59,7 @@ class AbstractScrapeScript(ABC):
         self.write_data(modified_data)
 
     def load_original_data(self) -> JsonObject:
-        file_path = (self.root_dir / "data/raw" / self.file_name).resolve()
-
-        print(f"retrieving data from: {file_path}")
-        json_data = file_path.read_text(encoding="utf-8")
-        data: JsonObject = json.loads(json_data)
-
-        return data
+        return self.read_json_file(self.root_dir / "data/raw" / self.file_name)
 
     @abstractmethod
     def scrape_api(self) -> JsonObject:
