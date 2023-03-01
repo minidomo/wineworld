@@ -7,19 +7,38 @@ from typing import Any
 JsonObject = dict[str, Any]
 
 
-class ScriptType(Enum):
+class ScriptMode(Enum):
     RAW: str = "raw"  # use api to get data, output to a file
-    MODIFY: str = "modify"  # reads a data file, make changes, output to a file
+    MODIFY: str = "modify"  # reads the raw data file, make changes, output to a file
+    FINAL: str = "final"  # reads the modify data file, make changes, output to a file
+
+
+class SimpleRegion:
+    def __init__(self, name: str, country: str) -> None:
+        self.name = name
+        self.country = country
+
+    def __eq__(self, __o: object) -> bool:
+        if isinstance(__o, SimpleRegion):
+            other: SimpleRegion = __o
+            return self.name == other.name and self.country == other.country
+        return False
+
+    def __hash__(self) -> int:
+        return hash((self.name, self.country))
+
+    def __str__(self) -> str:
+        return f"({self.name}, {self.country})"
 
 
 class AbstractScrapeScript(ABC):
-    def __init__(self, filename: str, script_type: ScriptType) -> None:
+    def __init__(self, filename: str, script_mode: ScriptMode) -> None:
         super().__init__()
 
-        self.script_type = script_type
+        self.script_mode = script_mode
         self.filename = filename
         self.root_dir = (Path(__file__).resolve().parent / "../..").resolve()  # go to backend dir
-        self.target_dir = self.root_dir / "data" / self.script_type.value
+        self.target_dir = self.root_dir / "data" / self.script_mode.value
         self.target_file = self.target_dir / self.filename
 
     def create_dir(self):
@@ -41,11 +60,24 @@ class AbstractScrapeScript(ABC):
 
         return data
 
+    def get_final_regions(self) -> set[SimpleRegion]:
+        ret: set[SimpleRegion] = set()
+
+        data = self.read_json_file(self.root_dir / "data/final/regions.json")
+        regions: list[JsonObject] = data["data"]
+
+        for region in regions:
+            ret.add(SimpleRegion(region["name"], region["country"]))
+
+        return ret
+
     def run(self):
-        if self.script_type == ScriptType.RAW:
+        if self.script_mode == ScriptMode.RAW:
             self._run_raw()
-        elif self.script_type == ScriptType.MODIFY:
+        elif self.script_mode == ScriptMode.MODIFY:
             self._run_modify()
+        elif self.script_mode == ScriptMode.FINAL:
+            self._run_final()
 
     def _run_raw(self):
         self.create_dir()
@@ -54,9 +86,13 @@ class AbstractScrapeScript(ABC):
 
     def _run_modify(self):
         self.create_dir()
-        original_data = self.load_original_data()
-        modified_data = self.apply_changes(original_data)
-        self.write_data(modified_data)
+        data = self.apply_changes()
+        self.write_data(data)
+
+    def _run_final(self):
+        self.create_dir()
+        data = self.final_changes()
+        self.write_data(data)
 
     @staticmethod
     def determine_output_filename(filename: str) -> str:
@@ -64,13 +100,14 @@ class AbstractScrapeScript(ABC):
         name = name.rstrip(".py") + ".json"
         return name
 
-    def load_original_data(self) -> JsonObject:
-        return self.read_json_file(self.root_dir / "data/raw" / self.filename)
-
     @abstractmethod
     def scrape_api(self) -> JsonObject:
         pass
 
     @abstractmethod
-    def apply_changes(self, data: JsonObject) -> JsonObject:
+    def apply_changes(self) -> JsonObject:
+        pass
+
+    @abstractmethod
+    def final_changes(self) -> JsonObject:
         pass

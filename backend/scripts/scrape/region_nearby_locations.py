@@ -4,7 +4,7 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
+from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode
 
 load_dotenv()
 
@@ -30,7 +30,7 @@ class RegionMetadata:
 
 
 class RegionNearbyLocationsScript(AbstractScrapeScript):
-    def __init__(self, filename: str, script_type: ScriptType) -> None:
+    def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
 
     def get_unique_regions(self) -> set[RegionMetadata]:
@@ -80,7 +80,8 @@ class RegionNearbyLocationsScript(AbstractScrapeScript):
 
         return data
 
-    def apply_changes(self, data: JsonObject) -> JsonObject:
+    def apply_changes(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/raw" / self.filename)
         nearby_search_data: JsonObject = data["nearby_search"]
 
         locations_dict: dict[str, JsonObject] = {}
@@ -124,8 +125,11 @@ class RegionNearbyLocationsScript(AbstractScrapeScript):
 
         return {"data": list(locations_dict.values())}
 
+    def final_changes(self) -> JsonObject:
+        return {}
+
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = RegionNearbyLocationsScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
+    script = RegionNearbyLocationsScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptMode[enum_key])
     script.run()

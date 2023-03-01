@@ -58,7 +58,7 @@ make server-background # runs the server in the background
    **If the server is currently running**
 
    ```console
-   python3 scripts/stop_server.py
+   make stop-server
    ```
 
    **If the server is not running**
@@ -86,7 +86,7 @@ make server-background # runs the server in the background
    **If the server is currently running**
 
    ```console
-   python3 scripts/stop_server.py
+   make stop-server
    ```
 
    **If the server is not running**
@@ -110,13 +110,47 @@ Start the server with the new changes.
 **If the server is currently running**
 
 ```console
-python3 scripts/stop_server.py
+make stop-server
 ```
 
 **If the server is not running**
 
 ```console
 systemctl restart wineworld
+```
+
+## Scraping
+
+Scraping is done sequentially with the goal of using region names as the common relation between all models. The process can be described generally as such:
+
+1. Scrape the [Wines API](https://sampleapis.com/api-list/wines). 
+
+   The Wines API contains thousands of wines, and we can obtain all of them without having to specify params.
+
+2. Scrape the [Yelp API](https://docs.developer.yelp.com/).
+
+   To use the Yelp API, we use the country and region information of wines we retrieved from the Wines API to use as location and limit results to places related to wine. 
+
+3. Scrape the [Tripadvisor API](https://tripadvisor-content-api.readme.io/reference/overview).
+
+   To use the Tripadvisor API, we use longitude and latitude coordinates of regions obtained from the Yelp API and obtain information on nearby locations. We use this information and create a generalization for each region.
+
+4. Finalizing Wines and Vineyards
+
+   At this point we have all the regions we need and need to limit our wines and vineyards to those that contain are located/from these regions.
+
+Running an individual script found in `./scripts/scrape/`:
+
+```console
+make scrape name=<name_of_script> mode=<raw|modify|final>
+```
+
+Running all scripts necessary to produce final json files for all models:
+
+> Requires having Yelp and Tripadvisor API keys and setting them in a `.env` file. Refer to `.env.example`. 
+
+```console
+make scrape-all
 ```
 
 ## Resources

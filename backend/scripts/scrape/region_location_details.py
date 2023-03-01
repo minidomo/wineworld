@@ -4,15 +4,18 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
+from .abstract_scrape_script import (
+    AbstractScrapeScript,
+    JsonObject,
+    ScriptMode,
+    SimpleRegion,
+)
 
 load_dotenv()
 
-RegionMetadataTuple = tuple[str, str]  # country, region
-
 
 class RegionLocationDetailsScript(AbstractScrapeScript):
-    def __init__(self, filename: str, script_type: ScriptType) -> None:
+    def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
 
     def get_locations(self) -> list[JsonObject]:
@@ -55,7 +58,8 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
 
         return data
 
-    def apply_changes(self, data: JsonObject) -> JsonObject:
+    def apply_changes(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/raw" / self.filename)
         location_details_data: list[JsonObject] = data["location_details"]
         region_locations = self.get_region_location_dict(location_details_data)
 
@@ -64,8 +68,6 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
 
         for location_metadata in region_locations:
             try:
-                country, region = location_metadata
-
                 location_list = region_locations[location_metadata]
                 rating, review_count = self.determine_rating_info(location_list)
                 tags = self.determine_tags(location_list)
@@ -73,8 +75,8 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
 
                 model: JsonObject = {
                     "id": 0,  # modified later
-                    "name": region,
-                    "country": country,
+                    "name": location_metadata.name,
+                    "country": location_metadata.country,
                     "rating": rating,
                     "reviews": review_count,
                     "tags": tags,
@@ -160,14 +162,14 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
 
         return (round(final_rating, 1), reviews)
 
-    def get_region_location_dict(self, data: list[JsonObject]) -> dict[RegionMetadataTuple, list[JsonObject]]:
-        ret: dict[RegionMetadataTuple, list[JsonObject]] = {}
+    def get_region_location_dict(self, data: list[JsonObject]) -> dict[SimpleRegion, list[JsonObject]]:
+        ret: dict[SimpleRegion, list[JsonObject]] = {}
 
         for location in data:
             regions: list[JsonObject] = location["regions"]
 
             for region in regions:
-                region_metadata: RegionMetadataTuple = (region["country"], region["region"])
+                region_metadata = SimpleRegion(region["region"], region["country"])
 
                 if region_metadata not in ret:
                     ret[region_metadata] = []
@@ -176,8 +178,11 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
 
         return ret
 
+    def final_changes(self) -> JsonObject:
+        return {}
+
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = RegionLocationDetailsScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
+    script = RegionLocationDetailsScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptMode[enum_key])
     script.run()

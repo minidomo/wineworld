@@ -5,23 +5,28 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
+from .abstract_scrape_script import (
+    AbstractScrapeScript,
+    JsonObject,
+    ScriptMode,
+    SimpleRegion,
+)
 
 load_dotenv()
 
 
 class VineyardScript(AbstractScrapeScript):
-    def __init__(self, filename: str, script_type: ScriptType) -> None:
+    def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
 
-    def get_unique_locations(self) -> set[tuple[str, str]]:
+    def get_unique_locations(self) -> set[SimpleRegion]:
         data = self.read_json_file(self.root_dir / "data/modify/wines.json")
         wines: list[JsonObject] = data["data"]
 
-        ret: set[tuple[str, str]] = set()
+        ret: set[SimpleRegion] = set()
 
         for wine in wines:
-            ret.add((wine["country"], wine["region"]))
+            ret.add(SimpleRegion(wine["region"], wine["country"]))
 
         print(f"found unique locations: {len(ret)}")
 
@@ -49,13 +54,13 @@ class VineyardScript(AbstractScrapeScript):
 
         search_endpoint_data: JsonObject = {}
 
-        for country, region in self.get_unique_locations():
-            country_data = search_endpoint_data.setdefault(country, {})
-            if country not in search_endpoint_data:
-                search_endpoint_data[country] = country_data
+        for simple_region in self.get_unique_locations():
+            country_data = search_endpoint_data.setdefault(simple_region.country, {})
+            if simple_region.country not in search_endpoint_data:
+                search_endpoint_data[simple_region.country] = country_data
 
             search_params: JsonObject = {
-                "location": f"{region}, {country}",
+                "location": f"{simple_region.name}, {simple_region.country}",
                 "term": "winery",
                 "categories": [categories],
                 "limit": "20",
@@ -68,7 +73,7 @@ class VineyardScript(AbstractScrapeScript):
                 headers=headers,
             ).json()
 
-            country_data[region] = response
+            country_data[simple_region.name] = response
 
         data: JsonObject = {
             "search": search_endpoint_data,
@@ -76,7 +81,8 @@ class VineyardScript(AbstractScrapeScript):
 
         return data
 
-    def apply_changes(self, data: JsonObject) -> JsonObject:
+    def apply_changes(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/raw" / self.filename)
         business_dict: dict[str, JsonObject] = {}
 
         error_count = 0
@@ -159,8 +165,35 @@ class VineyardScript(AbstractScrapeScript):
         index = url.find("?")
         return url if index == -1 else url[0:index]
 
+    def final_changes(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/modify" / self.filename)
+        vineyards: list[JsonObject] = data["data"]
+
+        regions = self.get_final_regions()
+        ret: list[JsonObject] = []
+
+        for vineyard in vineyards:
+            vineyard_country = vineyard["country"]
+            vineyard_regions: list[JsonObject] = vineyard["regions"]
+
+            filtered_regions = filter(lambda e: SimpleRegion(e["name"], vineyard_country) in regions, vineyard_regions)
+            region_names: list[str] = list(map(lambda e: e["name"], filtered_regions))
+
+            if len(region_names) > 0:
+                vineyard["regions"] = region_names
+                vineyard.pop("raw", None)
+                ret.append(vineyard)
+
+        for i in range(len(ret)):
+            ret[i]["id"] = i
+
+        print(f"final vineyard count: {len(ret)}")
+        print(f"remove count: {len(vineyards) - len(ret)}")
+
+        return {"data": ret}
+
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = VineyardScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
+    script = VineyardScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptMode[enum_key])
     script.run()

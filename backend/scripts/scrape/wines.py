@@ -3,11 +3,16 @@ import sys
 
 import requests
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
+from .abstract_scrape_script import (
+    AbstractScrapeScript,
+    JsonObject,
+    ScriptMode,
+    SimpleRegion,
+)
 
 
 class WineScript(AbstractScrapeScript):
-    def __init__(self, filename: str, script_type: ScriptType) -> None:
+    def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
 
     def scrape_api(self) -> JsonObject:
@@ -26,7 +31,8 @@ class WineScript(AbstractScrapeScript):
 
         return data
 
-    def apply_changes(self, data: JsonObject) -> JsonObject:
+    def apply_changes(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/raw" / self.filename)
         ret: list[JsonObject] = []
 
         error_count = 0
@@ -88,8 +94,27 @@ class WineScript(AbstractScrapeScript):
 
         return {"data": ret}
 
+    def final_changes(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/modify" / self.filename)
+        wines: list[JsonObject] = data["data"]
+
+        regions = self.get_final_regions()
+        ret: list[JsonObject] = []
+
+        for wine in wines:
+            if SimpleRegion(wine["region"], wine["country"]) in regions:
+                ret.append(wine)
+
+        for i in range(len(ret)):
+            ret[i]["id"] = i
+
+        print(f"final wine count: {len(ret)}")
+        print(f"remove count: {len(wines)- len(ret)}")
+
+        return {"data": ret}
+
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = WineScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
+    script = WineScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptMode[enum_key])
     script.run()
