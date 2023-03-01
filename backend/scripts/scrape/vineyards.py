@@ -127,6 +127,7 @@ class VineyardScript(AbstractScrapeScript):
                                 "image": business["image_url"],
                                 "country": country,
                                 "regions": [region_info],
+                                "url": self.remove_url_params(business["url"]),
                                 "raw": business,  # the original business info
                             }
 
@@ -135,6 +136,7 @@ class VineyardScript(AbstractScrapeScript):
                             assert isinstance(model["rating"], float) and model["rating"] > 0
                             assert isinstance(model["reviews"], int) and model["reviews"] > 0
                             assert isinstance(model["image"], str) and len(model["image"]) > 0
+                            assert isinstance(model["url"], str) and len(model["url"]) > 0
 
                             business_dict[key] = model
                 except Exception:
@@ -152,6 +154,10 @@ class VineyardScript(AbstractScrapeScript):
         print(f"zero businesses count: {zero_found}")
 
         return {"data": ret}
+
+    def remove_url_params(self, url: str) -> str:
+        index = url.find("?")
+        return url if index == -1 else url[0:index]
 
 
 if __name__ == "__main__":

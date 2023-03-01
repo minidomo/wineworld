@@ -81,7 +81,48 @@ class RegionNearbyLocationsScript(AbstractScrapeScript):
         return data
 
     def apply_changes(self, data: JsonObject) -> JsonObject:
-        return {}
+        nearby_search_data: JsonObject = data["nearby_search"]
+
+        locations_dict: dict[str, JsonObject] = {}
+        region_count = 0
+        zero_location_count = 0
+
+        for country in nearby_search_data:
+            country_data: JsonObject = nearby_search_data[country]
+
+            for region in country_data:
+                region_data: JsonObject = country_data[region]
+                locations: list[JsonObject] = region_data["data"]
+
+                if len(locations) == 0:
+                    zero_location_count += 1
+                    continue
+
+                region_count += 1
+                region_info = {
+                    "region": region,
+                    "country": country,
+                }
+
+                for location in locations:
+                    key: str = location["location_id"]
+
+                    if key in locations_dict:
+                        region_list: list[JsonObject] = locations_dict[key]["regions"]
+                        region_list.append(region_info)
+                    else:
+                        model: JsonObject = {
+                            "regions": [region_info],
+                            "raw": location,
+                        }
+
+                        locations_dict[key] = model
+
+        print(f"final region count: {region_count}")
+        print(f"unique locations found count: {len(locations_dict)}")
+        print(f"regions with zero locations found count: {zero_location_count}")
+
+        return {"data": list(locations_dict.values())}
 
 
 if __name__ == "__main__":
