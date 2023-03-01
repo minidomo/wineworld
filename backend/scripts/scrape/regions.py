@@ -24,6 +24,8 @@ class RegionScript(AbstractScrapeScript):
         for region in regions:
             region.pop("raw", None)
 
+        print(f"final region count: {len(regions)}")
+
         return {"data": regions}
 
 
