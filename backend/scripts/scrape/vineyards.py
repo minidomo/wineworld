@@ -11,8 +11,8 @@ load_dotenv()
 
 
 class VineyardScript(AbstractScrapeScript):
-    def __init__(self, file_name: str, script_type: ScriptType) -> None:
-        super().__init__(file_name, script_type)
+    def __init__(self, filename: str, script_type: ScriptType) -> None:
+        super().__init__(filename, script_type)
 
     def get_unique_locations(self) -> set[tuple[str, str]]:
         data = self.read_json_file(self.root_dir / "data/modify/wines.json")
@@ -156,5 +156,5 @@ class VineyardScript(AbstractScrapeScript):
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = VineyardScript("vineyards.json", ScriptType[enum_key])
+    script = VineyardScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
     script.run()

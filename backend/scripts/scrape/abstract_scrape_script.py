@@ -13,14 +13,14 @@ class ScriptType(Enum):
 
 
 class AbstractScrapeScript(ABC):
-    def __init__(self, file_name: str, script_type: ScriptType) -> None:
+    def __init__(self, filename: str, script_type: ScriptType) -> None:
         super().__init__()
 
         self.script_type = script_type
-        self.file_name = file_name
+        self.filename = filename
         self.root_dir = (Path(__file__).resolve().parent / "../..").resolve()  # go to backend dir
         self.target_dir = self.root_dir / "data" / self.script_type.value
-        self.target_file = self.target_dir / self.file_name
+        self.target_file = self.target_dir / self.filename
 
     def create_dir(self):
         print(f"creating directory (if needed): {self.target_dir}")
@@ -43,23 +43,29 @@ class AbstractScrapeScript(ABC):
 
     def run(self):
         if self.script_type == ScriptType.RAW:
-            self.run_raw()
+            self._run_raw()
         elif self.script_type == ScriptType.MODIFY:
-            self.run_modify()
+            self._run_modify()
 
-    def run_raw(self):
+    def _run_raw(self):
         self.create_dir()
         data = self.scrape_api()
         self.write_data(data)
 
-    def run_modify(self):
+    def _run_modify(self):
         self.create_dir()
         original_data = self.load_original_data()
         modified_data = self.apply_changes(original_data)
         self.write_data(modified_data)
 
+    @staticmethod
+    def determine_output_filename(filename: str) -> str:
+        name = Path(filename).name
+        name = name.rstrip(".py") + ".json"
+        return name
+
     def load_original_data(self) -> JsonObject:
-        return self.read_json_file(self.root_dir / "data/raw" / self.file_name)
+        return self.read_json_file(self.root_dir / "data/raw" / self.filename)
 
     @abstractmethod
     def scrape_api(self) -> JsonObject:

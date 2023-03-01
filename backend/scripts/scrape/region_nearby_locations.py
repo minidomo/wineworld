@@ -30,8 +30,8 @@ class RegionMetadata:
 
 
 class RegionNearbyLocationsScript(AbstractScrapeScript):
-    def __init__(self, file_name: str, script_type: ScriptType) -> None:
-        super().__init__(file_name, script_type)
+    def __init__(self, filename: str, script_type: ScriptType) -> None:
+        super().__init__(filename, script_type)
 
     def get_unique_regions(self) -> set[RegionMetadata]:
         data = self.read_json_file(self.root_dir / "data/modify/vineyards.json")
@@ -86,5 +86,5 @@ class RegionNearbyLocationsScript(AbstractScrapeScript):
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = RegionNearbyLocationsScript("region_nearby_locations.json", ScriptType[enum_key])
+    script = RegionNearbyLocationsScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
     script.run()

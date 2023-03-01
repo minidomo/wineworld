@@ -7,8 +7,8 @@ from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptType
 
 
 class WineScript(AbstractScrapeScript):
-    def __init__(self, file_name: str, script_type: ScriptType) -> None:
-        super().__init__(file_name, script_type)
+    def __init__(self, filename: str, script_type: ScriptType) -> None:
+        super().__init__(filename, script_type)
 
     def scrape_api(self) -> JsonObject:
         data: JsonObject = {}
@@ -91,5 +91,5 @@ class WineScript(AbstractScrapeScript):
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = WineScript("wines.json", ScriptType[enum_key])
+    script = WineScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptType[enum_key])
     script.run()
