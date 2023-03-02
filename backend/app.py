@@ -1,9 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://doadmin:AVNS_8jlXLzIcnV636IAs9-r@wineworld-db-mysql-do-user-13620893-0.b.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED'
-
+from models import app, db, Wine, Vineyard, Region
 
 @app.route("/")
 def hello_world():
