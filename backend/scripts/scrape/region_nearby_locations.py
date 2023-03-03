@@ -4,7 +4,12 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode, SimpleRegion
+from .abstract_scrape_script import (
+    AbstractScrapeScript,
+    JsonObject,
+    ScriptMode,
+    SimpleRegion,
+)
 
 load_dotenv()
 

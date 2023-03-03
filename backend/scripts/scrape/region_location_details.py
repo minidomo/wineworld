@@ -128,19 +128,17 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
         for location_metadata in region_locations:
             try:
                 location_list = region_locations[location_metadata]
-                rating, review_count = self.determine_rating_info(location_list)
-                tags = self.determine_tags(location_list)
-                trip_types = self.determine_trip_types(location_list)
+
+                self.assert_reviews(location_list)
+                self.assert_tag_format(location_list)
+                self.assert_trip_types(location_list)
+
                 ancestor = self.determine_best_ancestor(location_list)
 
                 model: JsonObject = {
                     "name": location_metadata.name,
                     "country": location_metadata.country,
-                    "rating": rating,
-                    "reviews": review_count,
-                    "tags": tags,
-                    "tripTypes": trip_types,
-                    "ancestor": ancestor,
+                    "best_trip_advisor_ancestor": ancestor,
                     "raw": location_list,
                 }
 
@@ -152,6 +150,39 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
         print(f"error count: {error_count}")
 
         return {"data": region_data}
+
+    def assert_reviews(self, location_list: list[JsonObject]):
+        total_reviews = 0
+
+        for location in location_list:
+            if "review_rating_count" in location:
+                counts: JsonObject = location["review_rating_count"]
+                for num in counts:
+                    total_reviews += int(counts[num])
+
+        assert total_reviews > 0
+
+    def assert_tag_format(self, location_list: list[JsonObject]):
+        for location in location_list:
+            assert "subcategory" in location
+            assert "groups" in location
+
+            groups: list[JsonObject] = location["groups"]
+            for group in groups:
+                assert "categories" in group
+
+    def assert_trip_types(self, location_list: list[JsonObject]):
+        total_score = 0
+
+        for location in location_list:
+            assert "trip_types" in location
+
+            trip_types: list[JsonObject] = location["trip_types"]
+            for trip_type in trip_types:
+                assert "value" in trip_type
+                total_score += int(trip_type["value"])
+
+        assert total_score > 0
 
     def determine_best_ancestor(self, location_list: list[JsonObject]) -> JsonObject:
         location_id_stats: dict[str, LocationInfo] = {}
@@ -172,72 +203,6 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
         best = max(location_id_stats.values())
 
         return {"level": best.level, "name": best.name, "location_id": best.location_id}
-
-    def determine_tags(self, location_list: list[JsonObject]) -> list[str]:
-        tag_set: set[str] = set()
-
-        for location in location_list:
-            tag: str = ""
-
-            subcategories: list[JsonObject] = location["subcategory"]
-            for subcategory in subcategories:
-                tag = subcategory["localized_name"]
-                tag_set.add(tag.strip())
-
-            groups: list[JsonObject] = location["groups"]
-            for group in groups:
-                tag = group["localized_name"]
-                tag_set.add(tag.strip())
-
-                categories: list[JsonObject] = group["categories"]
-                for category in categories:
-                    tag = category["localized_name"]
-                    tag_set.add(tag.strip())
-
-        stripped: map[str] = map(lambda e: e.strip(), tag_set)
-        nonempty = filter(lambda e: len(e) > 0, stripped)
-        ret = list(nonempty)
-
-        return ret
-
-    def determine_trip_types(self, location_list: list[JsonObject]) -> list[str]:
-        trip_type_dict: dict[str, int] = {
-            "Business": 0,
-            "Couples": 0,
-            "Solo travel": 0,
-            "Family": 0,
-            "Friends getaway": 0,
-        }
-
-        for location in location_list:
-            trip_types: list[JsonObject] = location["trip_types"]
-
-            for trip_type in trip_types:
-                trip_type_dict[trip_type["localized_name"]] += int(trip_type["value"])
-
-        average_score = sum(trip_type_dict.values()) // 5
-        ret = list(filter(lambda e: trip_type_dict[e] >= average_score, trip_type_dict.keys()))
-
-        return ret
-
-    def determine_rating_info(self, location_list: list[JsonObject]) -> tuple[float, int]:
-        ratings = [0, 0, 0, 0, 0, 0]
-
-        for location in location_list:
-            if "review_rating_count" in location:
-                counts: JsonObject = location["review_rating_count"]
-                for num in counts:
-                    count = int(counts[num])
-                    ratings[int(num)] += count
-
-        sum_rating = 0
-        for i in range(len(ratings)):
-            sum_rating += i * ratings[i]
-
-        reviews = sum(ratings)
-        final_rating = sum_rating / reviews
-
-        return (round(final_rating, 1), reviews)
 
     def get_region_location_dict(self, data: list[JsonObject]) -> dict[SimpleRegion, list[JsonObject]]:
         ret: dict[SimpleRegion, list[JsonObject]] = {}

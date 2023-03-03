@@ -9,7 +9,7 @@ from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode
 load_dotenv()
 
 
-class RegionInfoScript(AbstractScrapeScript):
+class RegionPhotosScript(AbstractScrapeScript):
     def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
 
@@ -25,16 +25,16 @@ class RegionInfoScript(AbstractScrapeScript):
         return ret
 
     def scrape_api(self) -> JsonObject:
-        def location_details_url(id):
-            return f"https://api.content.tripadvisor.com/api/v1/location/{id}/details"
+        def location_photos_url(id):
+            return f"https://api.content.tripadvisor.com/api/v1/location/{id}/photos"
 
         headers = {"accept": "application/json"}
 
-        location_details_endpoint_data: JsonObject = {}
+        location_photos_endpoint_data: JsonObject = {}
         region_ids = self.get_unique_region_ids()
 
         for id in region_ids:
-            url = location_details_url(id)
+            url = location_photos_url(id)
 
             print(f"performing GET {url}")
             response: JsonObject = requests.get(
@@ -43,16 +43,15 @@ class RegionInfoScript(AbstractScrapeScript):
                 params={
                     "key": os.environ["TRIP_ADVISOR_API_KEY"],
                     "language": "en",
-                    "currency": "USD",
                 },
             ).json()
 
-            location_details_endpoint_data[id] = response
+            location_photos_endpoint_data[id] = response
 
         print(f"total GET requests: {len(region_ids)}")
 
         return {
-            "location_details": location_details_endpoint_data,
+            "location_photos": location_photos_endpoint_data,
         }
 
     def apply_changes(self) -> JsonObject:
@@ -64,5 +63,5 @@ class RegionInfoScript(AbstractScrapeScript):
 
 if __name__ == "__main__":
     enum_key = sys.argv[1].upper()
-    script = RegionInfoScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptMode[enum_key])
+    script = RegionPhotosScript(AbstractScrapeScript.determine_output_filename(__file__), ScriptMode[enum_key])
     script.run()

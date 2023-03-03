@@ -43,6 +43,8 @@ scrape-all:
 	make scrape name=region_nearby_locations mode=modify
 	make scrape name=region_location_details mode=raw
 	make scrape name=region_location_details mode=modify
+	make scrape name=region_info mode=raw
+	make scrape name=region_photos mode=raw
 	make scrape name=regions mode=final
 	make scrape name=vineyards mode=final
 	make scrape name=wines mode=final
