@@ -37,6 +37,7 @@ scrape:
 scrape-all:
 	make scrape name=wines mode=raw
 	make scrape name=wines mode=modify
+	make scrape name=wine_reddit mode=raw
 	make scrape name=vineyards mode=raw
 	make scrape name=vineyards mode=modify
 	make scrape name=region_nearby_locations mode=raw
