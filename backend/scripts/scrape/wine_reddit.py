@@ -1,18 +1,11 @@
-import re
-import sys
 import os
-
-from dotenv import load_dotenv
-import praw
-import requests
+import sys
 from typing import Iterator
 
-from .abstract_scrape_script import (
-    AbstractScrapeScript,
-    JsonObject,
-    ScriptMode,
-    SimpleRegion,
-)
+import praw
+from dotenv import load_dotenv
+
+from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode
 
 load_dotenv()
 

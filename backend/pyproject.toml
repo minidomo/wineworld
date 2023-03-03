@@ -4,5 +4,12 @@ line-length = 120
 [tool.mypy]
 check_untyped_defs = true
 
+[[tool.mypy.overrides]]
+module = ['praw']
+ignore_missing_imports = true
+
 [tool.isort]
 profile = "black"
+
+[tool.black]
+line-length = 120

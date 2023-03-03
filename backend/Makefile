@@ -8,7 +8,13 @@ lint:
 
 format:
 	isort .
-	black --line-length 120 .
+	black .
+
+test-style:
+	ruff check .
+	isort --check .
+	black --check .
+	mypy .
 
 build-server:
 	docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
