@@ -160,10 +160,6 @@ class VineyardScript(AbstractScrapeScript):
 
         return {"data": ret}
 
-    def remove_url_params(self, url: str) -> str:
-        index = url.find("?")
-        return url if index == -1 else url[0:index]
-
     def final_changes(self) -> JsonObject:
         data = self.read_json_file(self.root_dir / "data/modify" / self.filename)
         vineyards: list[JsonObject] = data["data"]

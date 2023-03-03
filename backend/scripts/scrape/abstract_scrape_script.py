@@ -73,6 +73,10 @@ class AbstractScrapeScript(ABC):
 
         return ret
 
+    def remove_url_params(self, url: str) -> str:
+        index = url.find("?")
+        return url if index == -1 else url[0:index]
+
     def run(self):
         if self.script_mode == ScriptMode.RAW:
             self._run_raw()
