@@ -4,45 +4,25 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode
+from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode, SimpleRegion
 
 load_dotenv()
-
-
-class RegionMetadata:
-    def __init__(self, name: str, country: str, longitude: float, latitude: float) -> None:
-        self.name = name
-        self.country = country
-        self.longitude = longitude
-        self.latitude = latitude
-
-    def __eq__(self, __o: object) -> bool:
-        if isinstance(__o, RegionMetadata):
-            other: RegionMetadata = __o
-            return self.name == other.name and self.country == other.country
-        return False
-
-    def __hash__(self) -> int:
-        return hash((self.name, self.country))
-
-    def __str__(self) -> str:
-        return f"({self.name}, {self.country}, ({self.longitude}, {self.latitude}))"
 
 
 class RegionNearbyLocationsScript(AbstractScrapeScript):
     def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
 
-    def get_unique_regions(self) -> set[RegionMetadata]:
+    def get_unique_regions(self) -> set[SimpleRegion]:
         data = self.read_json_file(self.root_dir / "data/modify/vineyards.json")
         vineyards: list[JsonObject] = data["data"]
 
-        ret: set[RegionMetadata] = set()
+        ret: set[SimpleRegion] = set()
 
         for vineyard in vineyards:
             regions: list[JsonObject] = vineyard["regions"]
             for region in regions:
-                ret.add(RegionMetadata(region["name"], vineyard["country"], region["longitude"], region["latitude"]))
+                ret.add(SimpleRegion(region["name"], region["country"], region["latitude"], region["longitude"]))
 
         print(f"found unique regions: {len(ret)}")
 

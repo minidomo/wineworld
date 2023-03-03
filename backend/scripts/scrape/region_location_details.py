@@ -14,6 +14,65 @@ from .abstract_scrape_script import (
 load_dotenv()
 
 
+class LocationInfo:
+    def __init__(self, location_id: str, name: str, level: str) -> None:
+        self.location_id = location_id
+        self.name = name
+        self.level = level
+        self.frequency: int = 0
+        self.levels: list[int] = []
+
+    def score(self) -> float:
+        return self.frequency * 0.5 + sum(self.levels) * 0.5
+
+    def average_level(self) -> float:
+        return sum(self.levels) / self.frequency
+
+    def __lt__(self, __o) -> bool:
+        assert isinstance(__o, LocationInfo)
+        other: LocationInfo = __o
+
+        if self.score() == other.score():
+            return self.average_level() < other.average_level()
+        return self.score() < other.score()
+
+    def __le__(self, __o) -> bool:
+        assert isinstance(__o, LocationInfo)
+        other: LocationInfo = __o
+
+        if self.score() == other.score():
+            return self.average_level() <= other.average_level()
+        return self.score() <= other.score()
+
+    def __eq__(self, __o) -> bool:
+        if isinstance(__o, LocationInfo):
+            other: LocationInfo = __o
+            return self.score() == other.score() and self.average_level() == other.average_level()
+
+        return False
+
+    def __ne__(self, __o) -> bool:
+        if isinstance(__o, LocationInfo):
+            return not self.__eq__(__o)
+        return False
+
+    def __gt__(self, __o) -> bool:
+        assert isinstance(__o, LocationInfo)
+        other: LocationInfo = __o
+
+        if self.score() == other.score():
+            return self.average_level() > other.average_level()
+        return self.score() > other.score()
+
+    def __ge__(self, __o) -> bool:
+        assert isinstance(__o, LocationInfo)
+        other: LocationInfo = __o
+
+        if self.score() == other.score():
+            return self.average_level() >= other.average_level()
+        return self.score() >= other.score()
+
+
 class RegionLocationDetailsScript(AbstractScrapeScript):
     def __init__(self, filename: str, script_type: ScriptMode) -> None:
         super().__init__(filename, script_type)
@@ -72,15 +131,16 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
                 rating, review_count = self.determine_rating_info(location_list)
                 tags = self.determine_tags(location_list)
                 trip_types = self.determine_trip_types(location_list)
+                ancestor = self.determine_best_ancestor(location_list)
 
                 model: JsonObject = {
-                    "id": 0,  # modified later
                     "name": location_metadata.name,
                     "country": location_metadata.country,
                     "rating": rating,
                     "reviews": review_count,
                     "tags": tags,
                     "tripTypes": trip_types,
+                    "ancestor": ancestor,
                     "raw": location_list,
                 }
 
@@ -88,13 +148,30 @@ class RegionLocationDetailsScript(AbstractScrapeScript):
             except Exception:
                 error_count += 1
 
-        for i in range(len(region_data)):
-            region_data[i]["id"] = i
-
         print(f"final region count: {len(region_data)}")
         print(f"error count: {error_count}")
 
         return {"data": region_data}
+
+    def determine_best_ancestor(self, location_list: list[JsonObject]) -> JsonObject:
+        location_id_stats: dict[str, LocationInfo] = {}
+
+        for location in location_list:
+            ancestors: list[JsonObject] = location["ancestors"]
+
+            for i in range(len(ancestors)):
+                ancestor = ancestors[i]
+                location_id: str = ancestor["location_id"]
+
+                if location_id not in location_id_stats:
+                    location_id_stats[location_id] = LocationInfo(location_id, ancestor["name"], ancestor["level"])
+
+                location_id_stats[location_id].frequency += 1
+                location_id_stats[location_id].levels.append(len(ancestors) - i)
+
+        best = max(location_id_stats.values())
+
+        return {"level": best.level, "name": best.name, "location_id": best.location_id}
 
     def determine_tags(self, location_list: list[JsonObject]) -> list[str]:
         tag_set: set[str] = set()

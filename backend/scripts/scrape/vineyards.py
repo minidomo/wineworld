@@ -125,15 +125,16 @@ class VineyardScript(AbstractScrapeScript):
                             region_list.append(region_info)
                         else:
                             model: JsonObject = {
-                                "id": 0,  # modified later
                                 "name": business["name"],
                                 "price": len(business["price"]),
                                 "rating": business["rating"],
                                 "reviews": business["review_count"],
                                 "image": business["image_url"],
                                 "country": country,
-                                "regions": [region_info],
                                 "url": self.remove_url_params(business["url"]),
+                                "longitude": business["coordinates"]["longitude"],
+                                "latitude": business["coordinates"]["latitude"],
+                                "regions": [region_info],
                                 "raw": business,  # the original business info
                             }
 
@@ -143,16 +144,14 @@ class VineyardScript(AbstractScrapeScript):
                             assert isinstance(model["reviews"], int) and model["reviews"] > 0
                             assert isinstance(model["image"], str) and len(model["image"]) > 0
                             assert isinstance(model["url"], str) and len(model["url"]) > 0
+                            assert isinstance(model["longitude"], float)
+                            assert isinstance(model["latitude"], float)
 
                             business_dict[key] = model
                 except Exception:
                     error_count += 1
 
-        ret: list[JsonObject] = []
-
-        for business, i in zip(business_dict.values(), itertools.count()):
-            business["id"] = i
-            ret.append(business)
+        ret: list[JsonObject] = list(business_dict.values())
 
         print(f"final vineyard count: {len(ret)}")
         print(f"errored vineyard count: {error_count}")
@@ -183,9 +182,6 @@ class VineyardScript(AbstractScrapeScript):
                 vineyard["regions"] = region_names
                 vineyard.pop("raw", None)
                 ret.append(vineyard)
-
-        for i in range(len(ret)):
-            ret[i]["id"] = i
 
         print(f"final vineyard count: {len(ret)}")
         print(f"remove count: {len(vineyards) - len(ret)}")

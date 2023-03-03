@@ -51,7 +51,6 @@ class WineScript(AbstractScrapeScript):
             for wine in wines:
                 try:
                     model: JsonObject = {
-                        "id": 0,  # modified later
                         "winery": wine["winery"],
                         "image": wine["image"],
                         "rating": float(wine["rating"]["average"]),
@@ -86,9 +85,6 @@ class WineScript(AbstractScrapeScript):
                 except Exception:
                     error_count += 1
 
-        for i in range(len(ret)):
-            ret[i]["id"] = i
-
         print(f"final wine count: {len(ret)}")
         print(f"errored wine count: {error_count}")
 
@@ -104,9 +100,6 @@ class WineScript(AbstractScrapeScript):
         for wine in wines:
             if SimpleRegion(wine["region"], wine["country"]) in regions:
                 ret.append(wine)
-
-        for i in range(len(ret)):
-            ret[i]["id"] = i
 
         print(f"final wine count: {len(ret)}")
         print(f"remove count: {len(wines)- len(ret)}")

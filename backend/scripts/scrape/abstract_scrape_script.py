@@ -14,9 +14,11 @@ class ScriptMode(Enum):
 
 
 class SimpleRegion:
-    def __init__(self, name: str, country: str) -> None:
+    def __init__(self, name: str, country: str, latitude: int | None = None, longitude: int | None = None) -> None:
         self.name = name
         self.country = country
+        self.latitude = latitude
+        self.longitude = longitude
 
     def __eq__(self, __o: object) -> bool:
         if isinstance(__o, SimpleRegion):
