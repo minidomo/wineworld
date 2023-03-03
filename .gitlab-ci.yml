@@ -17,3 +17,11 @@ build-frontend:
     - cd frontend
     - npm install
     - npm run build
+
+test-backend-style:
+  stage: test
+  image: python:3.10.6
+  script:
+    - cd backend
+    - pip3 install -r requirements.txt
+    - make test-style
