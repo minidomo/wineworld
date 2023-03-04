@@ -8,6 +8,19 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://doadmin:AVNS_8jlXLzIcnV636IAs9-
 db = SQLAlchemy(app)
 app.app_context().push()
 
+region_tag = db.Table('region_tags',
+                    db.Column('region_id', db.Integer, db.ForeignKey('Regions.id'), primary_key = True),
+                    db.Column('tag_id', db.Integer, db.ForeignKey('Tags.id'), primary_key = True)
+                    )
+region_tripType = db.Table('region_tripTypes',
+                    db.Column('region_id', db.Integer, db.ForeignKey('Regions.id'), primary_key = True),
+                    db.Column('tripType_id', db.Integer, db.ForeignKey('TripTypes.id'), primary_key = True)
+                    )
+wine_redditPost = db.Table('wine_redditPosts',
+                    db.Column('wine_id', db.Integer, db.ForeignKey('Wines.id'), primary_key = True),
+                    db.Column('redditPost_id', db.Integer, db.ForeignKey('RedditPosts.id'), primary_key = True)
+                    )
+
 class Wine(db.Model):
     __tablename__ = "Wines"
     id = db.Column(db.Integer, primary_key=True)
@@ -19,6 +32,7 @@ class Wine(db.Model):
     reviews = db.Column(db.Integer)
     type = db.Column(db.String(100))
     image = db.Column(db.String(100))
+    redditPosts = db.relationship('RedditPost', secondary=wine_redditPost, backref='wines')
 
 class Vineyard(db.Model):
     __tablename__ = "Vineyards"
@@ -30,7 +44,7 @@ class Vineyard(db.Model):
     reviews = db.Column(db.Integer)
     image = db.Column(db.String(100))
     url = db.Column(db.String(100))
-    longitdue = db.Column(db.Float)
+    longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
 
 class Region(db.Model):
@@ -40,9 +54,11 @@ class Region(db.Model):
     country = db.Column(db.String(100))
     rating = db.Column(db.Float)
     reviews = db.Column(db.Integer)
-    longitdue = db.Column(db.Float)
+    tags = db.relationship('Tag', secondary=region_tag, backref='regions')
+    tripTypes = db.relationship('TripType', secondary=region_tripType, backref='regions')
+    longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
-    url = db.Column(db.String(100))
+    url = db.Column(db.String(150))
     image = db.Column(db.String(100))
     imageWidth = db.Column(db.Integer)
     imageHeight = db.Column(db.Integer)
@@ -51,19 +67,13 @@ class Tag(db.Model):
     __tablename__ = "Tags"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    region_id = db.Column(db.Integer, db.ForeignKey('Regions.id'))
-    regions = db.relationship('Region', backref = 'tags')
 
 class TripType(db.Model):
     __tablename__ = "TripTypes"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    region_id = db.Column(db.Integer, db.ForeignKey('Regions.id'))
-    regions = db.relationship('Region', backref = 'tripTypes')
 
 class RedditPost(db.Model):
     __tablename__ = "RedditPosts"
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(100))
-    wine_id = db.Column(db.Integer, db.ForeignKey('Wines.id'))
-    types = db.relationship('Wine', backref = 'redditPosts')
