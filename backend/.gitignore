@@ -1,3 +1,5 @@
 *.cert
 *.key
-data/
+data/final
+data/modify
+data/raw

@@ -3,14 +3,14 @@ from models import app, db, Wine, Vineyard, Region, RedditPost
 
 
 def populate_db():
-    populate_redditPosts()
+    populate_reddit_posts()
     populate_wines()
     populate_vineyards()
     populate_regions()
 
 
-def populate_redditPosts():
-    with open("data/raw/wine_reddit.json") as jsn:
+def populate_reddit_posts():
+    with open("data/wine_reddit.json") as jsn:
         data = json.load(jsn)["data"]
         for wine_type in data:
             db_row = {
@@ -22,7 +22,7 @@ def populate_redditPosts():
 
 
 def populate_wines():
-    with open("data/final/wines.json") as jsn:
+    with open("data/wines.json") as jsn:
         data = json.load(jsn)["data"]
         for wine in data:
             db_row = {
@@ -40,7 +40,7 @@ def populate_wines():
 
 
 def populate_vineyards():
-    with open("data/final/vineyards.json") as jsn:
+    with open("data/vineyards.json") as jsn:
         data = json.load(jsn)
         for vineyard in data["data"]:
             db_row = {
@@ -59,7 +59,7 @@ def populate_vineyards():
 
 
 def populate_regions():
-    with open("data/final/regions.json") as jsn:
+    with open("data/regions.json") as jsn:
         data = json.load(jsn)
         for region in data["data"]:
             db_row = {
