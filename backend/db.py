@@ -67,7 +67,7 @@ def connect_wines_vineyards(wines: list[Wine], vineyards: list[Vineyard]):
     print(f"wine - vineyard associations: {total_associations}")
 
 
-def populate_db():
+def create_instances() -> list[list]:
     reddit_posts = create_reddit_posts()
     wines = create_wines()
     regions = create_regions()
@@ -78,11 +78,18 @@ def populate_db():
     connect_vineyards_regions(vineyards, regions)
     connect_wines_vineyards(wines, vineyards)
 
-    db.session.add_all(reddit_posts)
-    db.session.add_all(wines)
-    db.session.add_all(regions)
-    db.session.add_all(vineyards)
+    return [reddit_posts, wines, regions, vineyards]
+
+
+def populate_db(lists: list[list]):
+    for data_list in lists:
+        db.session.add_all(data_list)
     db.session.commit()
+
+
+# https://stackoverflow.com/a/1778993
+def get_string_length(var):
+    return var.property.columns[0].type.length
 
 
 def create_reddit_posts() -> list[RedditPost]:
@@ -95,6 +102,9 @@ def create_reddit_posts() -> list[RedditPost]:
                 "wine_type": wine_type,
                 "urls": wine_types[wine_type],
             }
+
+            assert len(args["wine_type"]) <= get_string_length(RedditPost.wine_type)
+
             ret.append(RedditPost(**args))
 
         return ret
@@ -118,6 +128,14 @@ def create_wines() -> list[Wine]:
                 "type": wine["type"],
                 "image": wine["image"],
             }
+
+            assert len(args["name"]) <= get_string_length(Wine.name)
+            assert len(args["country"]) <= get_string_length(Wine.country)
+            assert len(args["region"]) <= get_string_length(Wine.region)
+            assert len(args["winery"]) <= get_string_length(Wine.winery)
+            assert len(args["type"]) <= get_string_length(Wine.type)
+            assert len(args["image"]) <= get_string_length(Wine.image)
+
             ret.append(Wine(**args))
 
         return ret
@@ -143,6 +161,12 @@ def create_vineyards() -> list[Vineyard]:
                 "latitude": vineyard["latitude"],
                 "region_names": vineyard["regions"],
             }
+
+            assert len(args["name"]) <= get_string_length(Vineyard.name)
+            assert len(args["country"]) <= get_string_length(Vineyard.country)
+            assert len(args["image"]) <= get_string_length(Vineyard.image)
+            assert len(args["url"]) <= get_string_length(Vineyard.url)
+
             ret.append(Vineyard(**args))
 
         return ret
@@ -169,6 +193,12 @@ def create_regions() -> list[Region]:
                 "tags": region["tags"],
                 "trip_types": region["tripTypes"],
             }
+
+            assert len(args["name"]) <= get_string_length(Region.name)
+            assert len(args["country"]) <= get_string_length(Region.country)
+            assert len(args["url"]) <= get_string_length(Region.url)
+            assert len(args["image"]) <= get_string_length(Region.image)
+
             ret.append(Region(**args))
 
         return ret
@@ -176,6 +206,7 @@ def create_regions() -> list[Region]:
 
 if __name__ == "__main__":
     with app.app_context():
+        lists = create_instances()
         db.drop_all()
         db.create_all()
-        populate_db()
+        populate_db(lists)
