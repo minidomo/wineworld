@@ -13,5 +13,7 @@ black==23.1.0
 mypy==1.0.1
 ruff==0.0.252
 gunicorn==20.1.0
-mysql-connector-python
-mysqlclient
+mysql-connector-python==8.0.32
+mysqlclient==2.1.1
+types-Flask-Cors==3.0.10.3
+types-colorama==0.4.15.8
