@@ -5,7 +5,7 @@ line-length = 120
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ['praw', 'sqlalchemy', 'flask_marshmallow']
+module = ['praw', 'sqlalchemy', 'sqlalchemy.orm', 'flask_marshmallow']
 ignore_missing_imports = true
 
 [tool.isort]
