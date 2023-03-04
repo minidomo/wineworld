@@ -1,6 +1,5 @@
-from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from models import app, db, Wine, Vineyard, Region
+from models import app
+
 
 @app.route("/")
 def hello_world():
