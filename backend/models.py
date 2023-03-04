@@ -1,10 +1,9 @@
 # mypy: disable-error-code="name-defined"
 
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from sqlalchemy import JSON, Column, String, Integer, Float
-
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import JSON, Column, Float, Integer, String
 
 app = Flask(__name__)
 CORS(app)

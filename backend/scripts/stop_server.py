@@ -1,5 +1,5 @@
-import subprocess
 import re
+import subprocess
 
 regex = r"[^\s]+(?=\s+wineworld-backend-dev)"
 

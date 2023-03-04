@@ -1,6 +1,7 @@
 from flask_marshmallow import Marshmallow
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from models import Wine, Vineyard, Region
+
+from models import Region, Vineyard, Wine
 
 mm = Marshmallow()
 

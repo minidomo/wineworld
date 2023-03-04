@@ -1,5 +1,6 @@
 import json
-from models import app, db, Wine, Vineyard, Region, RedditPost
+
+from models import RedditPost, Region, Vineyard, Wine, app, db
 
 
 def populate_db():
