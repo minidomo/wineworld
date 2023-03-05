@@ -38,7 +38,7 @@ def determine_total_pages(elements: int, page_size: int) -> int:
 class WineParams:
     def __init__(self, request: Request) -> None:
         self.page: int
-        self.name = request.args.get("name", type = str)
+        self.name = request.args.get("name", type=str)
         self.name_sort: bool | None = None
         self.country = request.args.getlist("country")
         self.winery = request.args.getlist("winery")
@@ -58,10 +58,11 @@ class WineParams:
         if tmp_name_sort is not None:
             self.name_sort = tmp_name_sort == "true"
 
+
 class VineyardParams:
     def __init__(self, request: Request) -> None:
         self.page: int
-        self.name = request.args.get("name", type = str)
+        self.name = request.args.get("name", type=str)
         self.name_sort: bool | None = None
         self.country = request.args.getlist("country")
         self.start_price = request.args.get("startPrice", type=int)
@@ -80,7 +81,7 @@ class VineyardParams:
         tmp_name_sort = request.args.get("nameSort", type=str)
         if tmp_name_sort is not None:
             self.name_sort = tmp_name_sort == "true"
-        
+
 
 class RegionParams:
     def __init__(self, request: Request) -> None:

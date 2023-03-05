@@ -1,4 +1,4 @@
-from typing import Callable, Iterator
+from typing import Iterator
 
 from flask import request
 from sqlalchemy.sql.expression import Select
@@ -15,11 +15,12 @@ from models import (
 )
 from util import (
     PAGE_SIZE,
-    WineParams,
-    VineyardParams,
     RegionParams,
     RegionUtil,
+    UnaryPredicate,
+    VineyardParams,
     VineyardUtil,
+    WineParams,
     WineUtil,
     clamp,
     determine_total_pages,
@@ -76,20 +77,29 @@ def get_all_wines():
             if e.country == country:
                 return True
         return False
-    
+
     def is_valid_type(e: Wine) -> bool:
         for type in params.type:
             if e.type == type:
                 return True
         return False
 
-    filters: list[Callable[[Wine], bool]] = []
+    def is_valid_winery(e: Wine) -> bool:
+        for winery in params.winery:
+            if e.winery == winery:
+                return True
+        return False
+
+    filters: list[UnaryPredicate[Wine]] = []
 
     if len(params.country) > 0:
         filters.append(is_valid_country)
 
     if len(params.type) > 0:
         filters.append(is_valid_type)
+
+    if len(params.winery) > 0:
+        filters.append(is_valid_winery)
 
     wines = list(filter(lambda e: every(e, filters), wines))
 
@@ -121,9 +131,7 @@ def get_wine(id: int):
     vineyard_wine_pairs: Iterator[WineVineyardAssociation] = db.session.execute(vineyard_query).scalars()
     vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_wine_pairs]
 
-    region_query: Select = db.select(WineRegionAssociation).where(
-        WineRegionAssociation.wine_id == wine.id
-    )
+    region_query: Select = db.select(WineRegionAssociation).where(WineRegionAssociation.wine_id == wine.id)
     region_wine_pairs: Iterator[WineRegionAssociation] = db.session.execute(region_query).scalars()
     regions: list[Region] = [db.session.get(Region, e.region_id) for e in region_wine_pairs]
 
@@ -172,7 +180,7 @@ def get_all_vineyards():
                 return True
         return False
 
-    filters: list[Callable[[Vineyard], bool]] = []
+    filters: list[UnaryPredicate[Vineyard]] = []
 
     if len(params.country) > 0:
         filters.append(is_valid_country)
@@ -187,7 +195,7 @@ def get_all_vineyards():
     params.page = clamp(1, total_pages, params.page)
 
     indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    vineyard_list = [RegionUtil.to_json(e) for e in vineyards[indices]]
+    vineyard_list = [VineyardUtil.to_json(e) for e in vineyards[indices]]
 
     data = {
         "page": params.page,
@@ -266,7 +274,7 @@ def get_all_regions():
                 return False
         return True
 
-    filters: list[Callable[[Region], bool]] = []
+    filters: list[UnaryPredicate[Region]] = []
 
     if len(params.country) > 0:
         filters.append(is_valid_country)
