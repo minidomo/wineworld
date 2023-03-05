@@ -1,4 +1,3 @@
-import math
 from typing import Callable, Iterator
 
 from flask import request
@@ -14,7 +13,16 @@ from models import (
     app,
     db,
 )
-from util import PAGE_SIZE, RegionParams, RegionUtil, VineyardUtil, WineUtil, every
+from util import (
+    PAGE_SIZE,
+    RegionParams,
+    RegionUtil,
+    VineyardUtil,
+    WineUtil,
+    clamp,
+    determine_total_pages,
+    every,
+)
 
 """
 useful info/documentation
@@ -148,8 +156,8 @@ def get_all_regions():
         reverse = not params.name_sort
         regions.sort(key=lambda e: e.name.lower(), reverse=reverse)
 
-    total_pages = max(math.ceil(len(regions) / PAGE_SIZE), 1)
-    params.page = min(max(params.page, 1), total_pages)
+    total_pages = determine_total_pages(len(regions), PAGE_SIZE)
+    params.page = clamp(1, total_pages, params.page)
 
     indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
     region_list = [RegionUtil.to_json(e) for e in regions[indices]]

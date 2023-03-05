@@ -1,3 +1,4 @@
+import math
 import re
 from typing import Any, Callable, TypeVar
 
@@ -11,6 +12,27 @@ UnaryPredicate = Callable[[T], bool]
 JsonObject = dict[str, Any]
 
 PAGE_SIZE = 20
+
+
+def every(element: Any, predicates: list[UnaryPredicate[T]]) -> bool:
+    for predicate in predicates:
+        if not predicate(element):
+            return False
+    return True
+
+
+def clamp(min_val: int, max_val: int, val: int) -> int:
+    if val < min_val:
+        return min_val
+    if val > max_val:
+        return max_val
+    return val
+
+
+def determine_total_pages(elements: int, page_size: int) -> int:
+    if elements <= 0:
+        return 1
+    return math.ceil(elements / page_size)
 
 
 class RegionParams:
@@ -37,13 +59,6 @@ class RegionParams:
             self.name_sort = tmp_name_sort == "true"
 
 
-def every(element: Any, predicates: list[UnaryPredicate[T]]) -> bool:
-    for predicate in predicates:
-        if not predicate(element):
-            return False
-    return True
-
-
 class RegionUtil:
     @staticmethod
     def to_json(data: Region, small: bool = False) -> JsonObject:
@@ -54,7 +69,7 @@ class RegionUtil:
             "rating": data.rating,
             "reviews": data.reviews,
             "tags": data.tags,
-            "trip_types": data.trip_types,
+            "tripTypes": data.trip_types,
             "coordinates": {
                 "longitude": data.longitude,
                 "latitude": data.latitude,

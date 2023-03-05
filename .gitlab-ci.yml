@@ -25,3 +25,12 @@ test-backend-style:
     - cd backend
     - pip3 install -r requirements.txt
     - make test-style
+
+test-backend-api:
+  stage: test
+  image: python:3.10.6
+  script:
+    - cd backend
+    - pip3 install -r requirements.txt
+    - cp $BACKEND_ENV_FILE .env
+    - make test-api
