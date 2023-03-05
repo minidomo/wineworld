@@ -71,6 +71,7 @@ def get_all_regions():
     data = {
         "name": params.name,
         "country": params.country,
+        "tags": params.tags,
     }
     return make_response(data, 200)
 
@@ -85,8 +86,8 @@ class RegionParams:
         self.end_rating = request.args.get("endRating", type=float)
         self.start_reviews = request.args.get("startReviews", type=int)
         self.end_reviews = request.args.get("endReviews", type=int)
-        self.tags = request.args.getlist("tags")
-        self.trip_types = request.args.getlist("tripTypes")
+        self.tags = request.args.getlist("tags[]")
+        self.trip_types = request.args.getlist("tripTypes[]")
 
 
 def to_full_dict_region(element: Region) -> dict[str, Any]:
