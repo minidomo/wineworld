@@ -10,19 +10,21 @@ T = TypeVar("T")
 UnaryPredicate = Callable[[T], bool]
 JsonObject = dict[str, Any]
 
+PAGE_SIZE = 20
+
 
 class RegionParams:
     def __init__(self, request: Request) -> None:
         self.page: int
         self.name = request.args.get("name", type=str)
         self.name_sort: bool | None = None
-        self.country = request.args.getlist("country[]")
+        self.country = request.args.getlist("country")
         self.start_rating = request.args.get("startRating", type=float)
         self.end_rating = request.args.get("endRating", type=float)
         self.start_reviews = request.args.get("startReviews", type=int)
         self.end_reviews = request.args.get("endReviews", type=int)
-        self.tags = request.args.getlist("tags[]")
-        self.trip_types = request.args.getlist("tripTypes[]")
+        self.tags = request.args.getlist("tags")
+        self.trip_types = request.args.getlist("tripTypes")
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:

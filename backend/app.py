@@ -1,7 +1,7 @@
 import math
-from typing import Any, Callable, Iterator
+from typing import Callable, Iterator
 
-from flask import make_response, request
+from flask import request
 from sqlalchemy.sql.expression import Select
 
 from models import (
@@ -10,12 +10,11 @@ from models import (
     VineyardRegionAssociation,
     Wine,
     WineRegionAssociation,
+    WineVineyardAssociation,
     app,
     db,
 )
-from util import RegionParams, RegionUtil, VineyardUtil, WineUtil, every
-
-PAGE_SIZE = 20
+from util import PAGE_SIZE, RegionParams, RegionUtil, VineyardUtil, WineUtil, every
 
 """
 useful info/documentation
@@ -40,6 +39,31 @@ def hello_world():
     """
 
 
+@app.route("/vineyards/<int:id>", methods=["GET"])
+def get_vineyard(id: int):
+    vineyard: Vineyard = db.get_or_404(Vineyard, id)
+
+    wine_query: Select = db.select(WineVineyardAssociation).where(WineVineyardAssociation.vineyard_id == vineyard.id)
+    wine_vineyard_pairs: Iterator[WineVineyardAssociation] = db.session.execute(wine_query).scalars()
+    wines: list[Wine] = [db.session.get(Wine, e.wine_id) for e in wine_vineyard_pairs]
+
+    region_query: Select = db.select(VineyardRegionAssociation).where(
+        VineyardRegionAssociation.vineyard_id == vineyard.id
+    )
+    region_vineyard_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(region_query).scalars()
+    regions: list[Region] = [db.session.get(Region, e.region_id) for e in region_vineyard_pairs]
+
+    data = {
+        **VineyardUtil.to_json(vineyard),
+        "related": {
+            "wines": [WineUtil.to_json(e, small=True) for e in wines],
+            "regions": [RegionUtil.to_json(e, small=True) for e in regions],
+        },
+    }
+
+    return data
+
+
 @app.route("/regions/<int:id>", methods=["GET"])
 def get_region(id: int):
     region: Region = db.get_or_404(Region, id)
@@ -54,7 +78,7 @@ def get_region(id: int):
     vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(vineyard_query).scalars()
     vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
 
-    data: dict[str, Any] = {
+    data = {
         **RegionUtil.to_json(region),
         "related": {
             "wines": [WineUtil.to_json(e, small=True) for e in wines],
@@ -62,7 +86,7 @@ def get_region(id: int):
         },
     }
 
-    return make_response(data, 200)
+    return data
 
 
 @app.route("/regions", methods=["GET"])
@@ -137,7 +161,7 @@ def get_all_regions():
         "list": region_list,
     }
 
-    return make_response(data, 200)
+    return data
 
 
 if __name__ == "__main__":
