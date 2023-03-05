@@ -1,12 +1,10 @@
 import math
-import re
 from typing import Any, Callable, Iterator
 
-from flask import Request, make_response, request
+from flask import make_response, request
 from sqlalchemy.sql.expression import Select
 
 from models import (
-    RedditPost,
     Region,
     Vineyard,
     VineyardRegionAssociation,
@@ -15,6 +13,7 @@ from models import (
     app,
     db,
 )
+from util import RegionParams, RegionUtil, VineyardUtil, WineUtil, every
 
 PAGE_SIZE = 20
 
@@ -56,10 +55,10 @@ def get_region(id: int):
     vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
 
     data: dict[str, Any] = {
-        **to_full_dict_region(region),
+        **RegionUtil.to_json(region),
         "related": {
-            "wines": [to_mini_dict_wine(e) for e in wines],
-            "vineyards": [to_mini_dict_vineyard(e) for e in vineyards],
+            "wines": [WineUtil.to_json(e, small=True) for e in wines],
+            "vineyards": [VineyardUtil.to_json(e, small=True) for e in vineyards],
         },
     }
 
@@ -129,7 +128,7 @@ def get_all_regions():
     params.page = min(max(params.page, 1), total_pages)
 
     indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    region_list = [to_full_dict_region(e) for e in regions[indices]]
+    region_list = [RegionUtil.to_json(e) for e in regions[indices]]
 
     data = {
         "page": params.page,
@@ -139,131 +138,6 @@ def get_all_regions():
     }
 
     return make_response(data, 200)
-
-
-class RegionParams:
-    def __init__(self, request: Request) -> None:
-        self.page: int
-        self.name = request.args.get("name", type=str)
-        self.name_sort: bool | None = None
-        self.country = request.args.getlist("country[]")
-        self.start_rating = request.args.get("startRating", type=float)
-        self.end_rating = request.args.get("endRating", type=float)
-        self.start_reviews = request.args.get("startReviews", type=int)
-        self.end_reviews = request.args.get("endReviews", type=int)
-        self.tags = request.args.getlist("tags[]")
-        self.trip_types = request.args.getlist("tripTypes[]")
-
-        tmp_page = request.args.get("page", type=int)
-        if tmp_page is None:
-            self.page = 1
-        else:
-            self.page = tmp_page
-
-        tmp_name_sort = request.args.get("nameSort", type=str)
-        if tmp_name_sort is not None:
-            self.name_sort = tmp_name_sort == "true"
-
-
-def every(element: Any, predicates: list[Callable[[Any], bool]]) -> bool:
-    for predicate in predicates:
-        if not predicate(element):
-            return False
-    return True
-
-
-def to_full_dict_region(element: Region) -> dict[str, Any]:
-    return {
-        "id": element.id,
-        "name": element.name,
-        "country": element.country,
-        "rating": element.rating,
-        "reviews": element.reviews,
-        "tags": element.tags,
-        "trip_types": element.trip_types,
-        "coordinates": {
-            "longitude": element.longitude,
-            "latitude": element.latitude,
-        },
-        "url": element.url,
-        "image": {
-            "url": element.image,
-            "width": element.image_width,
-            "height": element.image_height,
-        },
-    }
-
-
-def to_mini_dict_region(element: Region) -> dict[str, Any]:
-    ret = to_full_dict_region(element)
-    ret.pop("coordinates", None)
-    return ret
-
-
-def to_full_dict_wine(element: Wine, include_reddit_posts: bool = True) -> dict[str, Any]:
-    ret = {
-        "id": element.id,
-        "name": element.name,
-        "winery": element.winery,
-        "image": element.image,
-        "rating": element.rating,
-        "reviews": element.reviews,
-        "country": element.country,
-        "region": element.region,
-        "type": element.type,
-    }
-
-    if include_reddit_posts:
-        reddit_post_model: RedditPost = db.session.execute(
-            db.select(RedditPost).where(RedditPost.id == element.reddit_post_id)
-        ).scalar_one()
-
-        def get_stub(url: str) -> str | None:
-            regex = r"(/r/.*)"
-            m = re.search(regex, url)
-            return None if m is None else m.group(0)
-
-        REDDIT_POSTS = 20
-        REDDIT_MEDIA_URL = "https://www.redditmedia.com"
-
-        posts: list[str] = []
-
-        for url in reddit_post_model.urls[0:REDDIT_POSTS]:
-            stub = get_stub(url)
-            if stub is not None:
-                posts.append(f"{REDDIT_MEDIA_URL}{stub}")
-
-        ret["reddit_posts"] = posts
-
-    return ret
-
-
-def to_mini_dict_wine(element: Wine) -> dict[str, Any]:
-    ret = to_full_dict_wine(element, False)
-    return ret
-
-
-def to_full_dict_vineyard(element: Vineyard) -> dict[str, Any]:
-    return {
-        "id": element.id,
-        "name": element.name,
-        "price": element.price,
-        "rating": element.rating,
-        "reviews": element.reviews,
-        "image": element.image,
-        "country": element.country,
-        "url": element.url,
-        "coordinates": {
-            "longitude": element.longitude,
-            "latitude": element.latitude,
-        },
-    }
-
-
-def to_mini_dict_vineyard(element: Vineyard) -> dict[str, Any]:
-    ret = to_full_dict_vineyard(element)
-    ret.pop("coordinates", None)
-    return ret
 
 
 if __name__ == "__main__":
