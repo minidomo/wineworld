@@ -15,6 +15,8 @@ from models import (
 )
 from util import (
     PAGE_SIZE,
+    WineParams,
+    VineyardParams,
     RegionParams,
     RegionUtil,
     VineyardUtil,
@@ -47,6 +49,156 @@ def hello_world():
     """
 
 
+@app.route("/wines", methods=["GET"])
+def get_all_wines():
+    params = WineParams(request)
+    query: Select = db.select(Wine)
+
+    if params.name is not None:
+        query = query.filter(Wine.name.contains(params.name))
+
+    if params.start_rating is not None:
+        query = query.filter(Wine.rating >= params.start_rating)
+
+    if params.end_rating is not None:
+        query = query.filter(Wine.rating <= params.end_rating)
+
+    if params.start_reviews is not None:
+        query = query.filter(Wine.reviews >= params.start_reviews)
+
+    if params.end_reviews is not None:
+        query = query.filter(Wine.reviews <= params.end_reviews)
+
+    wines: list[Wine] = db.session.execute(query).scalars().all()
+
+    def is_valid_country(e: Wine) -> bool:
+        for country in params.country:
+            if e.country == country:
+                return True
+        return False
+    
+    def is_valid_type(e: Wine) -> bool:
+        for type in params.type:
+            if e.type == type:
+                return True
+        return False
+
+    filters: list[Callable[[Wine], bool]] = []
+
+    if len(params.country) > 0:
+        filters.append(is_valid_country)
+
+    if len(params.type) > 0:
+        filters.append(is_valid_type)
+
+    wines = list(filter(lambda e: every(e, filters), wines))
+
+    if params.name_sort is not None:
+        reverse = not params.name_sort
+        wines.sort(key=lambda e: e.name.lower(), reverse=reverse)
+
+    total_pages = determine_total_pages(len(wines), PAGE_SIZE)
+    params.page = clamp(1, total_pages, params.page)
+
+    indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
+    wine_list = [WineUtil.to_json(e) for e in wines[indices]]
+
+    data = {
+        "page": params.page,
+        "totalPages": total_pages,
+        "length": len(wine_list),
+        "list": wine_list,
+    }
+
+    return data
+
+
+@app.route("/wines/<int:id>", methods=["GET"])
+def get_wine(id: int):
+    wine: Wine = db.get_or_404(Wine, id)
+
+    vineyard_query: Select = db.select(WineVineyardAssociation).where(WineVineyardAssociation.wine_id == wine.id)
+    vineyard_wine_pairs: Iterator[WineVineyardAssociation] = db.session.execute(vineyard_query).scalars()
+    vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_wine_pairs]
+
+    region_query: Select = db.select(WineRegionAssociation).where(
+        WineRegionAssociation.wine_id == wine.id
+    )
+    region_wine_pairs: Iterator[WineRegionAssociation] = db.session.execute(region_query).scalars()
+    regions: list[Region] = [db.session.get(Region, e.region_id) for e in region_wine_pairs]
+
+    data = {
+        **WineUtil.to_json(wine),
+        "related": {
+            "vineyards": [VineyardUtil.to_json(e, small=True) for e in vineyards],
+            "regions": [RegionUtil.to_json(e, small=True) for e in regions],
+        },
+    }
+
+    return data
+
+
+@app.route("/vineyards", methods=["GET"])
+def get_all_vineyards():
+    params = VineyardParams(request)
+    query: Select = db.select(Vineyard)
+
+    if params.name is not None:
+        query = query.filter(Vineyard.name.contains(params.name))
+
+    if params.start_price is not None:
+        query = query.filter(Vineyard.price >= params.start_price)
+
+    if params.end_price is not None:
+        query = query.filter(Vineyard.price <= params.end_price)
+
+    if params.start_rating is not None:
+        query = query.filter(Vineyard.rating >= params.start_rating)
+
+    if params.end_rating is not None:
+        query = query.filter(Vineyard.rating <= params.end_rating)
+
+    if params.start_reviews is not None:
+        query = query.filter(Vineyard.reviews >= params.start_reviews)
+
+    if params.end_reviews is not None:
+        query = query.filter(Vineyard.reviews <= params.end_reviews)
+
+    vineyards: list[Vineyard] = db.session.execute(query).scalars().all()
+
+    def is_valid_country(e: Vineyard) -> bool:
+        for country in params.country:
+            if e.country == country:
+                return True
+        return False
+
+    filters: list[Callable[[Vineyard], bool]] = []
+
+    if len(params.country) > 0:
+        filters.append(is_valid_country)
+
+    vineyards = list(filter(lambda e: every(e, filters), vineyards))
+
+    if params.name_sort is not None:
+        reverse = not params.name_sort
+        vineyards.sort(key=lambda e: e.name.lower(), reverse=reverse)
+
+    total_pages = determine_total_pages(len(vineyards), PAGE_SIZE)
+    params.page = clamp(1, total_pages, params.page)
+
+    indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
+    vineyard_list = [RegionUtil.to_json(e) for e in vineyards[indices]]
+
+    data = {
+        "page": params.page,
+        "totalPages": total_pages,
+        "length": len(vineyard_list),
+        "list": vineyard_list,
+    }
+
+    return data
+
+
 @app.route("/vineyards/<int:id>", methods=["GET"])
 def get_vineyard(id: int):
     vineyard: Vineyard = db.get_or_404(Vineyard, id)
@@ -66,31 +218,6 @@ def get_vineyard(id: int):
         "related": {
             "wines": [WineUtil.to_json(e, small=True) for e in wines],
             "regions": [RegionUtil.to_json(e, small=True) for e in regions],
-        },
-    }
-
-    return data
-
-
-@app.route("/regions/<int:id>", methods=["GET"])
-def get_region(id: int):
-    region: Region = db.get_or_404(Region, id)
-
-    wine_query: Select = db.select(WineRegionAssociation).where(WineRegionAssociation.region_id == region.id)
-    wine_region_pairs: Iterator[WineRegionAssociation] = db.session.execute(wine_query).scalars()
-    wines: list[Wine] = [db.session.get(Wine, e.wine_id) for e in wine_region_pairs]
-
-    vineyard_query: Select = db.select(VineyardRegionAssociation).where(
-        VineyardRegionAssociation.region_id == region.id
-    )
-    vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(vineyard_query).scalars()
-    vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
-
-    data = {
-        **RegionUtil.to_json(region),
-        "related": {
-            "wines": [WineUtil.to_json(e, small=True) for e in wines],
-            "vineyards": [VineyardUtil.to_json(e, small=True) for e in vineyards],
         },
     }
 
@@ -167,6 +294,31 @@ def get_all_regions():
         "totalPages": total_pages,
         "length": len(region_list),
         "list": region_list,
+    }
+
+    return data
+
+
+@app.route("/regions/<int:id>", methods=["GET"])
+def get_region(id: int):
+    region: Region = db.get_or_404(Region, id)
+
+    wine_query: Select = db.select(WineRegionAssociation).where(WineRegionAssociation.region_id == region.id)
+    wine_region_pairs: Iterator[WineRegionAssociation] = db.session.execute(wine_query).scalars()
+    wines: list[Wine] = [db.session.get(Wine, e.wine_id) for e in wine_region_pairs]
+
+    vineyard_query: Select = db.select(VineyardRegionAssociation).where(
+        VineyardRegionAssociation.region_id == region.id
+    )
+    vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(vineyard_query).scalars()
+    vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
+
+    data = {
+        **RegionUtil.to_json(region),
+        "related": {
+            "wines": [WineUtil.to_json(e, small=True) for e in wines],
+            "vineyards": [VineyardUtil.to_json(e, small=True) for e in vineyards],
+        },
     }
 
     return data
