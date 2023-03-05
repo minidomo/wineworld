@@ -1,7 +1,9 @@
+import math
 import re
-from typing import Any, Iterator
+from typing import Any, Callable, Iterator
 
 from flask import Request, make_response, request
+from sqlalchemy.sql.expression import Select
 
 from models import (
     RedditPost,
@@ -43,14 +45,14 @@ def hello_world():
 def get_region(id: int):
     region: Region = db.get_or_404(Region, id)
 
-    wine_region_pairs: Iterator[WineRegionAssociation] = db.session.execute(
-        db.select(WineRegionAssociation).where(WineRegionAssociation.region_id == region.id)
-    ).scalars()
+    wine_query: Select = db.select(WineRegionAssociation).where(WineRegionAssociation.region_id == region.id)
+    wine_region_pairs: Iterator[WineRegionAssociation] = db.session.execute(wine_query).scalars()
     wines: list[Wine] = [db.session.get(Wine, e.wine_id) for e in wine_region_pairs]
 
-    vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(
-        db.select(VineyardRegionAssociation).where(VineyardRegionAssociation.region_id == region.id)
-    ).scalars()
+    vineyard_query: Select = db.select(VineyardRegionAssociation).where(
+        VineyardRegionAssociation.region_id == region.id
+    )
+    vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(vineyard_query).scalars()
     vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
 
     data: dict[str, Any] = {
@@ -67,20 +69,83 @@ def get_region(id: int):
 @app.route("/regions", methods=["GET"])
 def get_all_regions():
     params = RegionParams(request)
-    # TODO
+    query: Select = db.select(Region)
+
+    if params.name is not None:
+        query = query.filter(Region.name.contains(params.name))
+
+    if params.start_rating is not None:
+        query = query.filter(Region.rating >= params.start_rating)
+
+    if params.end_rating is not None:
+        query = query.filter(Region.rating <= params.end_rating)
+
+    if params.start_reviews is not None:
+        query = query.filter(Region.reviews >= params.start_reviews)
+
+    if params.end_reviews is not None:
+        query = query.filter(Region.reviews <= params.end_reviews)
+
+    regions: list[Region] = db.session.execute(query).scalars().all()
+
+    def is_valid_country(e: Region) -> bool:
+        for country in params.country:
+            if e.country == country:
+                return True
+        return False
+
+    def has_all_tags(e: Region) -> bool:
+        tags: set[str] = set(e.tags)
+        for tag in params.tags:
+            if tag not in tags:
+                return False
+        return True
+
+    def has_all_trip_types(e: Region) -> bool:
+        trip_types: set[str] = set(e.trip_types)
+        for trip_type in params.trip_types:
+            if trip_type not in trip_types:
+                return False
+        return True
+
+    filters: list[Callable[[Region], bool]] = []
+
+    if len(params.country) > 0:
+        filters.append(is_valid_country)
+
+    if len(params.tags) > 0:
+        filters.append(has_all_tags)
+
+    if len(params.trip_types) > 0:
+        filters.append(has_all_trip_types)
+
+    regions = list(filter(lambda e: every(e, filters), regions))
+
+    if params.name_sort is not None:
+        reverse = not params.name_sort
+        regions.sort(key=lambda e: e.name.lower(), reverse=reverse)
+
+    total_pages = max(math.ceil(len(regions) / PAGE_SIZE), 1)
+    params.page = min(max(params.page, 1), total_pages)
+
+    indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
+    region_list = [to_full_dict_region(e) for e in regions[indices]]
+
     data = {
-        "name": params.name,
-        "country": params.country,
-        "tags": params.tags,
+        "page": params.page,
+        "totalPages": total_pages,
+        "length": len(region_list),
+        "list": region_list,
     }
+
     return make_response(data, 200)
 
 
 class RegionParams:
     def __init__(self, request: Request) -> None:
-        self.page = request.args.get("page", type=int)
+        self.page: int
         self.name = request.args.get("name", type=str)
-        self.name_sort = request.args.get("nameSort", type=bool)
+        self.name_sort: bool | None = None
         self.country = request.args.getlist("country[]")
         self.start_rating = request.args.get("startRating", type=float)
         self.end_rating = request.args.get("endRating", type=float)
@@ -88,6 +153,23 @@ class RegionParams:
         self.end_reviews = request.args.get("endReviews", type=int)
         self.tags = request.args.getlist("tags[]")
         self.trip_types = request.args.getlist("tripTypes[]")
+
+        tmp_page = request.args.get("page", type=int)
+        if tmp_page is None:
+            self.page = 1
+        else:
+            self.page = tmp_page
+
+        tmp_name_sort = request.args.get("nameSort", type=str)
+        if tmp_name_sort is not None:
+            self.name_sort = tmp_name_sort == "true"
+
+
+def every(element: Any, predicates: list[Callable[[Any], bool]]) -> bool:
+    for predicate in predicates:
+        if not predicate(element):
+            return False
+    return True
 
 
 def to_full_dict_region(element: Region) -> dict[str, Any]:

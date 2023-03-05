@@ -16,7 +16,7 @@ from models import (
 def connect_wines_reddit_post(reddit_posts: list[RedditPost], wines: list[Wine]):
     for reddit_post in reddit_posts:
 
-        def predicate(e):
+        def predicate(e: Wine):
             return e.type == reddit_post.wine_type
 
         reddit_post.wines = [wine for wine in filter(predicate, wines)]
@@ -27,7 +27,7 @@ def connect_wines_regions(wines: list[Wine], regions: list[Region]):
 
     for wine in wines:
 
-        def predicate(e):
+        def predicate(e: Region):
             return e.country == wine.country and e.name == wine.region
 
         region = next(filter(predicate, regions))
@@ -42,7 +42,7 @@ def connect_vineyards_regions(vineyards: list[Vineyard], regions: list[Region]):
 
     for vineyard in vineyards:
 
-        def predicate(e):
+        def predicate(e: Vineyard):
             return e.name in vineyard.region_names
 
         for region in filter(predicate, regions):
@@ -57,7 +57,7 @@ def connect_wines_vineyards(wines: list[Wine], vineyards: list[Vineyard]):
 
     for wine in wines:
 
-        def predicate(e):
+        def predicate(e: Vineyard):
             return wine.region in e.region_names
 
         for vineyard in filter(predicate, vineyards):
