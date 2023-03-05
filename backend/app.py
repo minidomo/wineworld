@@ -1,4 +1,4 @@
-from typing import Callable, Iterator
+from typing import Iterator
 
 from flask import request
 from sqlalchemy.sql.expression import Select
@@ -17,6 +17,7 @@ from util import (
     PAGE_SIZE,
     RegionParams,
     RegionUtil,
+    UnaryPredicate,
     VineyardUtil,
     WineUtil,
     clamp,
@@ -139,7 +140,7 @@ def get_all_regions():
                 return False
         return True
 
-    filters: list[Callable[[Region], bool]] = []
+    filters: list[UnaryPredicate[Region]] = []
 
     if len(params.country) > 0:
         filters.append(is_valid_country)
