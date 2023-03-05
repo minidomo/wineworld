@@ -1,7 +1,7 @@
 import re
 from typing import Any, Iterator
 
-from flask import make_response
+from flask import Request, make_response, request
 
 from models import (
     RedditPost,
@@ -15,6 +15,20 @@ from models import (
 )
 
 PAGE_SIZE = 20
+
+"""
+useful info/documentation
+
+db.session.execute()
+- https://docs.sqlalchemy.org/en/14/orm/session_api.html#sqlalchemy.orm.Session.execute
+- https://docs.sqlalchemy.org/en/14/core/connections.html#sqlalchemy.engine.Result
+
+db.select()
+- https://docs.sqlalchemy.org/en/14/core/selectable.html#sqlalchemy.sql.expression.Select
+
+flask sqlalchemy
+- https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/
+"""
 
 
 @app.route("/")
@@ -32,12 +46,12 @@ def get_region(id: int):
     wine_region_pairs: Iterator[WineRegionAssociation] = db.session.execute(
         db.select(WineRegionAssociation).where(WineRegionAssociation.region_id == region.id)
     ).scalars()
-    wines = [db.session.get(Wine, e.wine_id) for e in wine_region_pairs]
+    wines: list[Wine] = [db.session.get(Wine, e.wine_id) for e in wine_region_pairs]
 
     vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(
         db.select(VineyardRegionAssociation).where(VineyardRegionAssociation.region_id == region.id)
     ).scalars()
-    vineyards = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
+    vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
 
     data: dict[str, Any] = {
         **to_full_dict_region(region),
@@ -48,6 +62,31 @@ def get_region(id: int):
     }
 
     return make_response(data, 200)
+
+
+@app.route("/regions", methods=["GET"])
+def get_all_regions():
+    params = RegionParams(request)
+    # TODO
+    data = {
+        "name": params.name,
+        "country": params.country,
+    }
+    return make_response(data, 200)
+
+
+class RegionParams:
+    def __init__(self, request: Request) -> None:
+        self.page = request.args.get("page", type=int)
+        self.name = request.args.get("name", type=str)
+        self.name_sort = request.args.get("nameSort", type=bool)
+        self.country = request.args.getlist("country[]")
+        self.start_rating = request.args.get("startRating", type=float)
+        self.end_rating = request.args.get("endRating", type=float)
+        self.start_reviews = request.args.get("startReviews", type=int)
+        self.end_reviews = request.args.get("endReviews", type=int)
+        self.tags = request.args.getlist("tags")
+        self.trip_types = request.args.getlist("tripTypes")
 
 
 def to_full_dict_region(element: Region) -> dict[str, Any]:
