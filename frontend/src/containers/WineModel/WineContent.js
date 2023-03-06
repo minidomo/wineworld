@@ -2,13 +2,14 @@ import WineData from '../../api-example/data/wines.json'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import '../image.css';
 
 const WineContent = () => {
     return (
         WineData.data.map(wd => (<Col>
             {
-                <Card border='dark'>
-                    <Card.Img variant="top" src={wd.image} />
+                <Card border='dark' style={{width: 200}}>
+                    <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 50}} src={wd.image} />
                     {/* <Card.Header className='text-muted '> Recommended </Card.Header> */}
                     <Card.Body>
                         <Card.Title> <p>{wd.name}</p> </Card.Title>

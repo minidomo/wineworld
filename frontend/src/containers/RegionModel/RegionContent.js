@@ -2,13 +2,14 @@ import RegionData from '../../api-example/data/regions.json'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import regionImage from '../../assets/regionImage.jpg'
 
 const RegionContent = () => {
     return (
         RegionData.data.map(rd => (<Col>
             {
-                <Card border='dark'>
-                    <Card.Img variant="top" src={rd.image} />
+                <Card border='dark' style={{width: 200}}>
+                    <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 198, height: 150}} src={regionImage} />
                     {/* <Card.Header className='text-muted '> Recommended </Card.Header> */}
                     <Card.Body>
                         <Card.Title> <p>{rd.name}</p> </Card.Title>
