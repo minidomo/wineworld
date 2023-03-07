@@ -170,7 +170,7 @@ class WineUtil:
                 if stub is not None:
                     posts.append(f"{WineUtil.REDDIT_MEDIA_URL}{stub}")
 
-            ret["reddit_posts"] = posts
+            ret["redditPosts"] = posts
 
         return ret
 
