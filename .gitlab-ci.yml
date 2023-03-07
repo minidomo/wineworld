@@ -33,3 +33,13 @@ test-backend-api:
     - pip3 install -r requirements.txt
     - cp $BACKEND_ENV_FILE .env
     - make test-api
+
+postman_tests:
+  stage: test
+  image: 
+    name: postman/newman:alpine
+    entrypoint: [""]
+  script:
+    - cd backend
+    - newman --version
+    - newman run Postman.json
