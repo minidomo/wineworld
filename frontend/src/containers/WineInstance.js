@@ -1,12 +1,14 @@
 import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import {get} from '../api-example/siteapi';
 import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
+import VineyardCard from '../components/VineyardCard';
+import RegionCard from '../components/RegionCard';
+import imagePlaceholder from "../assets"
 
 
 const WineInstance = () => {
@@ -25,8 +27,7 @@ const WineInstance = () => {
    
     useEffect(() => {
         let mounted = true;
-        // axios.get(`https://api.wineworld.me/wine/${id}`)
-        get(`https://api.wineworld.me/wine/${id}`)
+        axios.get(`https://api.wineworld.me/wines/${id}`)
             .then(response => {
                 if(mounted) {
                     setName(response.data['name']);
@@ -38,8 +39,8 @@ const WineInstance = () => {
                     setReviews(response.data['reviews']);
                     setImage(response.data['image']);
                     setReddit(response.data['reddit_posts']);
-                    setVineyards(response.data.related['vineayards']); // check
-                    setRegions(response.data.related['regions']);//check
+                    setVineyards(response.data.related['vineyards']);
+                    setRegions(response.data.related['regions']);
                 }
             })
             .catch(errRes => {
@@ -93,25 +94,34 @@ const WineInstance = () => {
                 </p>
             </div>
         </Row>
-        <Row md = {10} className = "p-4 g-4 justify-content-center">
+        <Row md = {10} className = "p-4 g-4">
+            <h5 align="left">Related Vineyards</h5>
+            {
+                vineyards.map((vineyard) => {
+                    return (
+                        <Col>
+                            <VineyardCard vineyard = {vineyard} />
+                        </Col>
+                        
+                    )
+                })
+            }
+        </Row>
+        <Row md = {10} className = "p-4 g-4">
             <Col>
-                {/* fix link */}
-                <Button
-                className="btn btn-primary stretched-link"
-                variant="secondary"
-                href={"/Vineyards"}>
-                    Explore Vineyard
-                </Button>
+                <h5 align="left">Related Regions</h5>
+                {
+                    regions.map((region) => {
+                        return (
+                            <Col>
+                                <RegionCard region = {region} />
+                            </Col>
+                            
+                        )
+                    })
+                }
             </Col>
-            <Col>
-                {/* fix link */}
-                <Button
-                className="btn btn-primary stretched-link"
-                variant="secondary"
-                href={"/Regions"}>
-                    Explore Region
-                </Button>
-            </Col>
+
         </Row>
     </div>
   )

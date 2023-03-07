@@ -53,7 +53,7 @@ const RegionModel = () => {
                 </Col>
             </Row>
 
-            <Row md={5} className="d-flex g-4 p-4 justify-content-left">
+            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                 {
                     regions.map((region) => {
                         return (

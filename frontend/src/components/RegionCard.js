@@ -2,7 +2,6 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 import Button from "react-bootstrap/esm/Button";
 
-
 const RegionCard = (props) => {
     const {
         id,
@@ -15,20 +14,16 @@ const RegionCard = (props) => {
         image,
         // imageHeight,
         // imageWidth,
-        // latitude,
-        // longitude,
-        // wines,
-        // vineyards,
         url,
     } = props.region
 
 
     return (
-        <Card border= 'dark' style={{ width: "80%", height: "50%" }}>
-            <Card.Img variant ="top" src={image} style={{height:"50%", width:"100%", objectFit:"contain",}}/>
+        <Card border= 'dark' style={{height:"30rem", width:"18rem"}}>
+            <Card.Img variant ="top" src={image.url} style={{height:"50%", width:"100%", objectFit:"cover",}}/>
             <Card.Body>
-                <Card.Title> <small> {name} </small>  </Card.Title>
-                <Card.Subtitle> <small> {country} </small> </Card.Subtitle>
+                <Card.Title> {name} </Card.Title>
+                <Card.Subtitle> {country} </Card.Subtitle>
                 <Card.Text>
                     <small>
                         Rating: {rating}
@@ -36,8 +31,8 @@ const RegionCard = (props) => {
                         Review Count: {reviews}
                         <br />
                         Trip Type: {tripTypes.join(", ")}
-                        <br />
-                        Tags: {tags.join(", ")}
+                        {/* <br />
+                        Tags: {tags.join(", ")} */}
                     </small>
                 </Card.Text>
             </Card.Body>
@@ -45,9 +40,9 @@ const RegionCard = (props) => {
                 <Button
                 className="btn btn-primary stretched-link"
                 variant="secondary"
-                href={`regions/${id}`}                
+                href={`Regions/${id}`}                
                 >
-                    See More
+                    Explore Region
                 </Button>
             </Card.Footer>
         </Card>
