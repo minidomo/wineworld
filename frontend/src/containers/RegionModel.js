@@ -10,24 +10,39 @@ import Container from "react-bootstrap/Container";
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 
+function clamp(minVal, maxVal, val) {
+    if (val < minVal)
+        return minVal;
+    if (val > maxVal)
+        return maxVal;
+    return val;
+}
+
 const RegionModel = () => {
     const [regions, setRegions] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [totalInstances, setTotalInstances] = useState(1);
 
     useEffect(() => {
-      const getRegions = async () => {
-        if (regions === undefined || regions.length === 0) {
-            // axios.get('https://api.wineworld.me/regions')
-            get('https://api.wineworld.me/regions')
-                .then((response) => {
-                    setRegions(response.data.list)
-                })
-                .catch(errRes => {
-                    console.error(errRes);
-                })
+        async function callApi() {
+            const response = await axios.get('https://api.wineworld.me/regions', {
+                params: {
+                    page: page,
+                }
+            });
+
+            setRegions(response.data.list);
+            setTotalPages(response.data.totalPages);
+            setTotalInstances(response.data.totalInstances);
         }
-      }
-      getRegions();
-    }, [regions])
+
+        if (1 <= page && page <= totalPages) {
+            callApi();
+        } else {
+            setPage(clamp(1, totalPages, page));
+        }
+    }, [page]);
     
     return (
         <Container>
@@ -53,8 +68,23 @@ const RegionModel = () => {
                     </form>
                 </Col>
             </Row>
-
-
+            <br></br>
+            <Row>
+                <Col>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled = {page == 1}>
+                        Previous
+                    </button>
+                </Col>
+                <Col>
+                <Row> <h6>Page {page} of {totalPages}</h6></Row>
+                <Row> <h6>Out Collection of {totalInstances} Wines</h6></Row>
+                </Col>
+                <Col>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled = {page == totalPages}>
+                        Next
+                    </button>
+                </Col>
+            </Row>
             <Row md={5} className="d-flex g-4 p-4 justify-content-left">
                 {
                     regions.map((region) => {

@@ -24,20 +24,19 @@ const WineModel = () => {
     const [wines, setWines] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [totalInstances, setTotalInstances] = useState(1);
 
     useEffect(() => {
-        console.log('useEffect called');
-
         async function callApi() {
             const response = await axios.get('https://api.wineworld.me/wines', {
                 params: {
                     page: page,
                 }
             });
-            console.log('called api');
 
             setWines(response.data.list);
             setTotalPages(response.data.totalPages);
+            setTotalInstances(response.data.totalInstances);
         }
 
         if (1 <= page && page <= totalPages) {
@@ -73,15 +72,19 @@ const WineModel = () => {
                     </form>
                 </Col>
             </Row>
-
+            <br></br>
             <Row>
                 <Col>
-                    <button onClick={() => setPage(page - 1)}>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled = {page == 1}>
                         Previous
                     </button>
                 </Col>
                 <Col>
-                    <button onClick={() => setPage(page + 1)}>
+                <Row> <h6>Page {page} of {totalPages}</h6></Row>
+                <Row> <h6>Out Collection of {totalInstances} Wines</h6></Row>
+                </Col>
+                <Col>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled = {page == totalPages}>
                         Next
                     </button>
                 </Col>
