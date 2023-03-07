@@ -5,12 +5,16 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import vineyardImage from '../../assets/vineyardImage.jpg'
+import VineyardSearch from './VineyardSearch';
+import VineyardContent from './VineyardContent';
 
 const Vineyards = () => {
     return (
         <Stack>
             <div>
                 <Row md ={10} className="p-4 g-4 justify-content-center">
+                    <VineyardSearch/>
+                    <VineyardContent/>
                     <Col>
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={vineyardImage} />

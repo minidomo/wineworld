@@ -5,12 +5,16 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import regionImage from '../../assets/regionImage.jpg'
+import RegionSearch from './RegionSearch';
+import RegionContent from './RegionContent';
 
 const Regions = () => {
     return (
         <Stack>
             <div>
                 <Row md ={10} className="p-4 g-4 justify-content-center">
+                    <RegionSearch/>
+                    <RegionContent/>
                     <Col>
                         <Card border = 'dark'>
                             <Card.Img variant ="top" src={regionImage} />

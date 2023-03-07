@@ -28,6 +28,7 @@ const App = () => {
     <Router>
       <div className="App">
         <Navbar />
+        
         <div className="Content">
           <Routes> 
 
