@@ -38,8 +38,8 @@ const WineInstance = () => {
                     setReviews(response.data['reviews']);
                     setImage(response.data['image']);
                     setReddit(response.data['reddit_posts']);
-                    setVineyards(response.data.related['vineayards']); //how do i get related
-                    setRegions(response.data.related['regions']);//how do i get related
+                    setVineyards(response.data.related['vineayards']); // check
+                    setRegions(response.data.related['regions']);//check
                 }
             })
             .catch(errRes => {
@@ -113,10 +113,6 @@ const WineInstance = () => {
                 </Button>
             </Col>
         </Row>
-
-
-
-
     </div>
   )
 }

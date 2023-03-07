@@ -38,13 +38,13 @@ const RegionInstance = () => {
             setReviews(response.data['reviews']);
             setTags(response.data['tags']);
             setTripTypes(response.data['tripTypes']);
-            setImage(response.data.image['url']); //fix?
-            setImageHeight(response.data.image['height']); //fix?
-            setImageWidth(response.data.image['width']); //fix?
-            setLatitude(response.data.coordinates['latitude']); //fix?
-            setLongitude(response.data.coordinates['longitude']); //fix?
-            setWines(response.data.related['wines']); //fix?
-            setVineyards(response.data.related['vineayards']); //how do i get related
+            setImage(response.data.image['url']); //check
+            setImageHeight(response.data.image['height']); //check
+            setImageWidth(response.data.image['width']); //check
+            setLatitude(response.data.coordinates['latitude']); //check
+            setLongitude(response.data.coordinates['longitude']); //check
+            setWines(response.data.related['wines']); //check
+            setVineyards(response.data.related['vineayards']); //check
             setUrl(response.data['url']);
         }
         })
@@ -72,18 +72,6 @@ const RegionInstance = () => {
             </p>
         </div>
         </Row>
-        <Row>
-        {/* add diff image sources below */}
-        <Col>
-            <img src={image} class="img-fluid" alt="..."></img>
-        </Col>
-        <Col>
-            <img src={image} class="img-fluid" alt="..."></img>
-        </Col>
-        <Col>
-            <img src={image} class="img-fluid" alt="..."></img>
-        </Col>
-        </Row>
         <Row md ={10} className="p-4 g-4 justify-content-center">
         <Col>
             {/* fix link */}
@@ -104,8 +92,6 @@ const RegionInstance = () => {
             </Button>
         </Col>
         </Row>
-
-
     </div>
     )
 }

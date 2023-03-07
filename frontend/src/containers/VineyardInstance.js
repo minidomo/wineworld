@@ -35,11 +35,11 @@ const VineyardInstance = () => {
             setRating(response.data['rating']);
             setReviews(response.data['reviews']);
             setImage(response.data['image']);
-            setLatitude(response.data.coordinates['latitude']); //fix?
-            setLongitude(response.data.coordinates['longitude']); //fix?
+            setLatitude(response.data.coordinates['latitude']); //check
+            setLongitude(response.data.coordinates['longitude']); //check
             setUrl(response.data['url']);
-            setWines(response.data.related['wines']); //fix?
-            setRegions(response.data.related['regions']); //fix?
+            setWines(response.data.related['wines']); //check
+            setRegions(response.data.related['regions']); //check
         }
         })
         .catch(errRes => {
