@@ -10,53 +10,200 @@ load_dotenv()
 JsonObject = dict[str, Any]
 base_url = os.environ["TEST_API_URL"]
 
+class WineAllTests(unittest.TestCase):
+    url = f"{base_url}/wines"
+    
+    def test_status_code_200(self):
+        res = requests.get(WineAllTests.url)
+        self.assertEqual(res.status_code, 200)
 
-class RegionIdTests(unittest.TestCase):
-    url = f"{base_url}/regions"
+    def test_unspecified_param(self):
+        res = requests.get(WineAllTests.url, params={"this_is_not_defined": 0})
+        self.assertEqual(res.status_code, 200)
+
+    def test_invalid_formatted_param(self):
+        res = requests.get(
+            WineAllTests.url,
+            params={
+                "page": "this should be a number",
+                "startRating": "this should also be a number",
+            },
+        )
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_format(self):
+        res = requests.get(WineAllTests.url).json()
+
+        self.assertEqual(type(res["length"]), int)
+        self.assertEqual(type(res["list"]), list)
+        self.assertEqual(type(res["page"]), int)
+        self.assertEqual(type(res["totalPages"]), int)
+
+        regions: list = res["list"]
+        self.assertGreater(len(regions), 0)
+
+    def test_min_clamp_page(self):
+        page_num = -1
+        res = requests.get(WineAllTests.url, params={"page": page_num}).json()
+        self.assertNotEqual(res["page"], page_num)
+        self.assertEqual(res["page"], 1)
+
+    def test_max_clamp_page(self):
+        page_num = 39485
+        res = requests.get(WineAllTests.url, params={"page": page_num}).json()
+        self.assertNotEqual(res["page"], page_num)
+        self.assertEqual(res["page"], res["totalPages"])
+
+    def test_length(self):
+        res = requests.get(WineAllTests.url).json()
+        self.assertEqual(res["length"], len(res["list"]))
+
+    def test_page(self):
+        page_num = 2
+        res_1 = requests.get(WineAllTests.url).json()
+        res_2 = requests.get(WineAllTests.url, params={"page": page_num}).json()
+
+        self.assertEqual(res_2["page"], page_num)
+        self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
+
+    def test_name(self):
+        name_query = "os"
+        res = requests.get(WineAllTests.url, params={"name": name_query}).json()
+
+        wines: list[JsonObject] = res["list"]
+        self.assertGreater(len(wines), 0)
+
+        for wine in wines:
+            name: str = wine["name"].lower()
+            self.assertTrue(name_query in name)
+
+    def test_country(self):
+        country_query = ["United States", "Portugal"]
+        res = requests.get(WineAllTests.url, params={"country": country_query}).json()
+
+        wines: list[JsonObject] = res["list"]
+        self.assertGreater(len(wines), 0)
+
+        country_set = set(country_query)
+        for wine in wines:
+            country: str = wine["country"]
+            self.assertTrue(country in country_set)
+
+
+class WineIdTests(unittest.TestCase):
+    url = f"{base_url}/wines"
 
     def test_status_code_200(self):
-        res = requests.get(f"{RegionIdTests.url}/1")
+        res = requests.get(f"{WineIdTests.url}/1")
         self.assertEqual(res.status_code, 200)
 
     def test_status_code_404(self):
-        res = requests.get(f"{RegionIdTests.url}/0")
+        res = requests.get(f"{WineIdTests.url}/0")
         self.assertEqual(res.status_code, 404)
 
     def test_format(self):
-        res = requests.get(f"{RegionIdTests.url}/1").json()
+        res = requests.get(f"{WineIdTests.url}/1").json()
 
-        self.assertEqual(type(res["coordinates"]), dict)
         self.assertEqual(type(res["country"]), str)
         self.assertEqual(type(res["id"]), int)
-        self.assertEqual(type(res["image"]), dict)
+        self.assertEqual(type(res["image"]), str)
         self.assertEqual(type(res["name"]), str)
         self.assertEqual(type(res["rating"]), float)
+        self.assertEqual(type(res["redditPosts"]), list)
         self.assertEqual(type(res["related"]), dict)
         self.assertEqual(type(res["reviews"]), int)
-        self.assertEqual(type(res["tags"]), list)
-        self.assertEqual(type(res["tripTypes"]), list)
-        self.assertEqual(type(res["url"]), str)
+        self.assertEqual(type(res["type"]), str)
+        self.assertEqual(type(res["winery"]), str)
 
-        coordinates: dict = res["coordinates"]
-        self.assertEqual(type(coordinates["latitude"]), float)
-        self.assertEqual(type(coordinates["longitude"]), float)
-
-        image: dict = res["image"]
-        self.assertEqual(type(image["height"]), int)
-        self.assertEqual(type(image["width"]), int)
-        self.assertEqual(type(image["url"]), str)
+        redditPosts: list = res["redditPosts"]
+        for post in redditPosts:
+            self.assertEqual(type(post), str)
 
         related: dict = res["related"]
+        self.assertEqual(type(related["regions"]), list)
         self.assertEqual(type(related["vineyards"]), list)
-        self.assertEqual(type(related["wines"]), list)
 
-        tags: list = res["tags"]
-        self.assertGreater(len(tags), 0)
-        self.assertEqual(type(tags[0]), str)
 
-        trip_types: list = res["tripTypes"]
-        self.assertGreater(len(trip_types), 0)
-        self.assertEqual(type(trip_types[0]), str)
+class VineyardAllTests(unittest.TestCase):
+    url = f"{base_url}/vineyards"
+
+    def test_status_code_200(self):
+        res = requests.get(VineyardAllTests.url)
+        self.assertEqual(res.status_code, 200)
+
+    def test_unspecified_param(self):
+        res = requests.get(VineyardAllTests.url, params={"this_is_not_defined": 0})
+        self.assertEqual(res.status_code, 200)
+
+    def test_invalid_formatted_param(self):
+        res = requests.get(
+            VineyardAllTests.url,
+            params={
+                "page": "this should be a number",
+                "startRating": "this should also be a number",
+            },
+        )
+
+        self.assertEqual(res.status_code, 200)
+
+    def test_format(self):
+        res = requests.get(VineyardAllTests.url).json()
+
+        self.assertEqual(type(res["length"]), int)
+        self.assertEqual(type(res["list"]), list)
+        self.assertEqual(type(res["page"]), int)
+        self.assertEqual(type(res["totalPages"]), int)
+
+        regions: list = res["list"]
+        self.assertGreater(len(regions), 0)
+
+    def test_min_clamp_page(self):
+        page_num = -1
+        res = requests.get(VineyardAllTests.url, params={"page": page_num}).json()
+        self.assertNotEqual(res["page"], page_num)
+        self.assertEqual(res["page"], 1)
+
+    def test_max_clamp_page(self):
+        page_num = 39485
+        res = requests.get(VineyardAllTests.url, params={"page": page_num}).json()
+        self.assertNotEqual(res["page"], page_num)
+        self.assertEqual(res["page"], res["totalPages"])
+
+    def test_length(self):
+        res = requests.get(VineyardAllTests.url).json()
+        self.assertEqual(res["length"], len(res["list"]))
+
+    def test_page(self):
+        page_num = 2
+        res_1 = requests.get(VineyardAllTests.url).json()
+        res_2 = requests.get(VineyardAllTests.url, params={"page": page_num}).json()
+
+        self.assertEqual(res_2["page"], page_num)
+        self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
+
+    def test_name(self):
+        name_query = "os"
+        res = requests.get(VineyardAllTests.url, params={"name": name_query}).json()
+
+        vineyards: list[JsonObject] = res["list"]
+        self.assertGreater(len(vineyards), 0)
+
+        for vineyard in vineyards:
+            name: str = vineyard["name"].lower()
+            self.assertTrue(name_query in name)
+
+    def test_country(self):
+        country_query = ["United States", "Portugal"]
+        res = requests.get(VineyardAllTests.url, params={"country": country_query}).json()
+
+        vineyards: list[JsonObject] = res["list"]
+        self.assertGreater(len(vineyards), 0)
+
+        country_set = set(country_query)
+        for vineyard in vineyards:
+            country: str = vineyard["country"]
+            self.assertTrue(country in country_set)
 
 
 class VineyardIdTests(unittest.TestCase):
@@ -172,6 +319,54 @@ class RegionAllTests(unittest.TestCase):
         for region in regions:
             country: str = region["country"]
             self.assertTrue(country in country_set)
+
+
+class RegionIdTests(unittest.TestCase):
+    url = f"{base_url}/regions"
+
+    def test_status_code_200(self):
+        res = requests.get(f"{RegionIdTests.url}/1")
+        self.assertEqual(res.status_code, 200)
+
+    def test_status_code_404(self):
+        res = requests.get(f"{RegionIdTests.url}/0")
+        self.assertEqual(res.status_code, 404)
+
+    def test_format(self):
+        res = requests.get(f"{RegionIdTests.url}/1").json()
+
+        self.assertEqual(type(res["coordinates"]), dict)
+        self.assertEqual(type(res["country"]), str)
+        self.assertEqual(type(res["id"]), int)
+        self.assertEqual(type(res["image"]), dict)
+        self.assertEqual(type(res["name"]), str)
+        self.assertEqual(type(res["rating"]), float)
+        self.assertEqual(type(res["related"]), dict)
+        self.assertEqual(type(res["reviews"]), int)
+        self.assertEqual(type(res["tags"]), list)
+        self.assertEqual(type(res["tripTypes"]), list)
+        self.assertEqual(type(res["url"]), str)
+
+        coordinates: dict = res["coordinates"]
+        self.assertEqual(type(coordinates["latitude"]), float)
+        self.assertEqual(type(coordinates["longitude"]), float)
+
+        image: dict = res["image"]
+        self.assertEqual(type(image["height"]), int)
+        self.assertEqual(type(image["width"]), int)
+        self.assertEqual(type(image["url"]), str)
+
+        related: dict = res["related"]
+        self.assertEqual(type(related["vineyards"]), list)
+        self.assertEqual(type(related["wines"]), list)
+
+        tags: list = res["tags"]
+        self.assertGreater(len(tags), 0)
+        self.assertEqual(type(tags[0]), str)
+
+        trip_types: list = res["tripTypes"]
+        self.assertGreater(len(trip_types), 0)
+        self.assertEqual(type(trip_types[0]), str)
 
     def test_rating(self):
         start_rating = 4.5
