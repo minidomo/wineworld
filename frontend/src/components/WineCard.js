@@ -1,38 +1,56 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import {Link} from 'react-router-dom';
+import Button from "react-bootstrap/esm/Button";
+import { Link } from "react-router-dom";
 
 
-const WineCard = () => {
-  return (
-    <div>
-        <Row md ={10} className="p-4 g-4 justify-content-center">
-            <Col>
-                <Card border = 'dark'>
-                    <Card.Body>
-                        <Card.Title> Wine Name</Card.Title>
-                        <Card.Subtitle> Wine Type</Card.Subtitle>
-                        <Card.Text>
-                            Winery:
-                            Rating:
-                            Reviews:
-                            Image placeholder
-                            Region link placeholder
-                        </Card.Text>
+const WineCard = (props) => {
+    const {
+        id,
+        name,
+        country,
+        region,
+        type,
+        winery,
+        rating,
+        reviews,
+        image,
+        // reddit,
+        // vineyards,
+        // regions,
+    } = props.wine
 
-                    </Card.Body>
-                    <Card.Footer className="text-muted">
-                        <li>
-                            <Link to = {`/Wines/${1}`}> See more</Link>
-                        </li>
-                    </Card.Footer>
-                </Card>
-            </Col>
-        </Row>
-    </div>
+    return (
+        // <Card border="dark" style={{ width: "80%", height: "50%" }}>
+        <Card border="dark" style={{height:"40rem"}}>
+            {/* <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 50}} src={image} /> */}
+            <Card.Img class="img-thumbnail" variant ="top" src={image} style={{height:"50%", width:"100%", objectFit:"contain",}}/>
+            <Card.Body>
+                <Card.Title> <small> {name} </small> </Card.Title>
+                <Card.Subtitle> {type} Wine </Card.Subtitle>
+                <Card.Text>
+                        Country: {country}
+                        <br />
+                        Region: {region}
+                        <br />
+                        Winery: {winery}
+                        <br />
+                        Rating: {rating}
+                        <br />
+                        Reviews: {reviews}
+                        
+                </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+                <Button
+                className="btn btn-primary stretched-link"
+                variant="secondary"
+                href= {`/wines/${id}`}              
+                >
+                    See More
+                </Button>
+            </Card.Footer>
+        </Card>
   )
 }
-
 export default WineCard

@@ -1,38 +1,47 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/esm/Button';
 
-
-const VineyardCard = () => {
+const VineyardCard = (props) => {
+    const {
+        id,
+        name,
+        country,
+        price,
+        rating,
+        reviews,
+        image,
+        // latitude,
+        // longitude,
+        // wines,
+        // regions,
+        // url,
+    } = props.vineyard
+    
   return (
-    <div>
-        <Row md ={10} className="p-4 g-4 justify-content-center">
-            <Col>
-                <Card border = 'dark'>
-                    <Card.Body>
-                        <Card.Title> Vineyard Name</Card.Title>
-                        <Card.Subtitle> Country </Card.Subtitle>
-                        <Card.Text>
-                            Price:
-                            Rating:
-                            Review Count:
-                            Image placeholder
-                            Region link placeholder
-                        </Card.Text>
-
-                    </Card.Body>
-                    <Card.Footer className="text-muted">
-                        <li>
-                            <Link to = {`/Vineyards/${1}`}> See more</Link>
-                        </li>
-                    </Card.Footer>
-                </Card>
-            </Col>
-        </Row>
-    </div>
+    <Card border="dark" style={{height:"27rem"}}>
+        <Card.Img variant ="top" src={image} style={{height:"50%", width:"100%", objectFit:"cover",}}/>
+        <Card.Body>
+            <Card.Title> {name} </Card.Title>
+            <Card.Subtitle> {country} </Card.Subtitle>
+            <Card.Text>
+                    Price: {price}
+                    <br />
+                    Rating: {rating}
+                    <br />
+                    Review Count: {reviews}
+            </Card.Text>
+        </Card.Body>
+        <Card.Footer className="text-muted">
+            <Button
+            className="btn btn-primary stretched-link"
+            variant="secondary"
+            href= {`/vineyards/${id}`}              
+            >
+                See More
+            </Button>
+        </Card.Footer>
+    </Card>
   )
 }
-
 export default VineyardCard
