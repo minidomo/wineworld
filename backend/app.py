@@ -116,6 +116,7 @@ def get_all_wines():
     data = {
         "page": params.page,
         "totalPages": total_pages,
+        "totalInstances": len(wines),
         "length": len(wine_list),
         "list": wine_list,
     }
@@ -200,6 +201,7 @@ def get_all_vineyards():
     data = {
         "page": params.page,
         "totalPages": total_pages,
+        "totalInstances":len(vineyards),
         "length": len(vineyard_list),
         "list": vineyard_list,
     }
@@ -300,6 +302,7 @@ def get_all_regions():
     data = {
         "page": params.page,
         "totalPages": total_pages,
+        "totalInstances": len(regions),
         "length": len(region_list),
         "list": region_list,
     }
