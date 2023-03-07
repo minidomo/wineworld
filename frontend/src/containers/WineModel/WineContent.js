@@ -1,12 +1,31 @@
-import WineData from '../../api-example/data/wines.json'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import '../image.css';
+import axios from "axios";
+import { useState, useEffect } from 'react';
 
 const WineContent = () => {
+    const [wines, setWines] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        let mounted = true;
+        axios.get('https://api.wineworld.me/wines')
+          .then(response => {
+              if(mounted) {
+                  // list = response.data;
+                  setWines(response.data.list);
+              }
+          })
+          .catch(errRes => {
+              console.error(errRes);
+          })
+        return () => mounted = false;
+      }, [])
+  
     return (
-        WineData.data.map(wd => (<Col>
+        wines.map(wd => (<Col>
             {
                 <Card border='dark' style={{width: 200}}>
                     <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 50}} src={wd.image} />
