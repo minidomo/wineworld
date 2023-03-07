@@ -16,8 +16,7 @@ const RegionModel = () => {
     useEffect(() => {
       const getRegions = async () => {
         if (regions === undefined || regions.length === 0) {
-            // axios.get('https://api.wineworld.me/regions')
-            get('https://api.wineworld.me/regions')
+            axios.get('https://api.wineworld.me/regions')
                 .then((response) => {
                     setRegions(response.data.list)
                 })
@@ -54,7 +53,6 @@ const RegionModel = () => {
                 </Col>
             </Row>
 
-
             <Row md={5} className="d-flex g-4 p-4 justify-content-left">
                 {
                     regions.map((region) => {
@@ -65,7 +63,6 @@ const RegionModel = () => {
                         )
                     })
                 }
-
             </Row>
         </Container>
     )

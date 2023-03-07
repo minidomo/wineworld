@@ -23,8 +23,7 @@ const WineModel = () => {
         const getWines = async () => {
             if (wines === undefined || wines.length === 0) {
                 // const response = await client.get('wines')
-                // axios.get('https://api.wineworld.me/wines')
-                get('https://api.wineworld.me/wines')
+                axios.get('https://api.wineworld.me/wines')
                     .then((response) => {
                         setWines(response.data.list);
                     })
@@ -79,43 +78,6 @@ const WineModel = () => {
             </Row>
 
             <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                {/* {
-                    wines.map((wine) =>
-                    (<Col>
-                        {
-                            <Card border="dark" style={{width:200}}>        
-                            <Card.Img variant ="top" src={wine.image}/>
-                            <Card.Body>
-                                <Card.Title> {wine.name} </Card.Title>
-                                <Card.Subtitle> Country: {wine.country} </Card.Subtitle>
-                                <Card.Subtitle> Region: {wine.region} </Card.Subtitle>
-                                <Card.Subtitle> Wine Type: {wine.type} </Card.Subtitle>
-                                <Card.Text>
-                                    <p>
-                                        Winery: {wine.winery}
-                                    </p>
-                                    <p>
-                                        Rating: {wine.rating}
-                                    </p>
-                                    <p>
-                                        Reviews: {wine.reviews}
-                                    </p>
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <Button
-                                className="btn btn-primary stretched-link"
-                                variant="secondary"
-                                href= {`/wines/${wine.id}`}              
-                                >
-                                    See More
-                                </Button>
-                            </Card.Footer>
-                        </Card>
-                        }
-                    </Col>)
-                    )
-                } */}
                 {
                     wines.map((wine) => {
                         return (
