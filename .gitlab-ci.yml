@@ -1,5 +1,3 @@
-image: node:19.6
-
 variables:
   GIT_DEPTH: 1
 
@@ -13,6 +11,7 @@ cache:
 
 build-frontend:
   stage: build
+  image: node:19.6
   script:
     - cd frontend
     - npm install
@@ -25,3 +24,22 @@ test-backend-style:
     - cd backend
     - pip3 install -r requirements.txt
     - make test-style
+
+test-backend-api:
+  stage: test
+  image: python:3.10.6
+  script:
+    - cd backend
+    - pip3 install -r requirements.txt
+    - cp $BACKEND_ENV_FILE .env
+    - make test-api
+
+postman_tests:
+  stage: test
+  image: 
+    name: postman/newman:alpine
+    entrypoint: [""]
+  script:
+    - cd backend
+    - newman --version
+    - newman run Postman.json

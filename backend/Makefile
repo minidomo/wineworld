@@ -55,3 +55,6 @@ scrape-all:
 	make scrape name=regions mode=final
 	make scrape name=vineyards mode=final
 	make scrape name=wines mode=final
+
+test-api:
+	python3 tests.py

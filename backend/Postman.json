@@ -1,0 +1,994 @@
+{
+	"info": {
+		"_postman_id": "6a263cde-2717-434c-b91a-20e308a7258b",
+		"name": "WineWorld API Documentation",
+		"description": "Find information about wines, vineyards, and wine regions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21507814"
+	},
+	"item": [
+		{
+			"name": "Wines",
+			"item": [
+				{
+					"name": "Read list of all wines",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Response is an object\", function() {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response length is a number\", function() {",
+									"    pm.expect(response.length).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response list is an array\", function() {",
+									"    pm.expect(response.list).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Response page is a number\", function() {",
+									"    pm.expect(response.page).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response totalPages is a number\", function() {",
+									"    pm.expect(response.totalPages).to.be.a(\"number\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/wines?name=Pêra-Manca Tinto 1990&nameSort=true&country=[\"United States\", \"Brazil\"]&winery=[\"Cartuxa\", \"Fourier\"]&startRating=0.0&endRating=5.0&startReviews=0&endReviews=99999&type=[\"Red\", \"White\", \"Dessert\"]&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"wines"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Pêra-Manca Tinto 1990",
+									"description": "The name of the wine to search by"
+								},
+								{
+									"key": "nameSort",
+									"value": "true",
+									"description": "true = sort alphabetically; false = sort reverse alphabetically"
+								},
+								{
+									"key": "country",
+									"value": "[\"United States\", \"Brazil\"]",
+									"description": "The countries to search by"
+								},
+								{
+									"key": "winery",
+									"value": "[\"Cartuxa\", \"Fourier\"]",
+									"description": "The wineries to search by"
+								},
+								{
+									"key": "startRating",
+									"value": "0.0",
+									"description": "The start (inclusive) value for the range of ratings to search by"
+								},
+								{
+									"key": "endRating",
+									"value": "5.0",
+									"description": "The end (inclusive) value for the range of ratings to search by"
+								},
+								{
+									"key": "startReviews",
+									"value": "0",
+									"description": "The start (inclusive) value for the range of # ratings to search by"
+								},
+								{
+									"key": "endReviews",
+									"value": "99999",
+									"description": "The end (inclusive) value for the range of # ratings to search by"
+								},
+								{
+									"key": "type",
+									"value": "[\"Red\", \"White\", \"Dessert\"]",
+									"description": "The types of wine to search by"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "The page number to be on"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "The list of wines corresponding to the provided query parameters. Returns complete list of wines if no parameters specified.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.wineworld.me/wines?nameSort=true&startRating=0.0&endRating=5.0&startReviews=0&endReviews=99999&type=Red&country=United States&page=1",
+									"protocol": "https",
+									"host": [
+										"api",
+										"wineworld",
+										"me"
+									],
+									"path": [
+										"wines"
+									],
+									"query": [
+										{
+											"key": "nameSort",
+											"value": "true"
+										},
+										{
+											"key": "startRating",
+											"value": "0.0"
+										},
+										{
+											"key": "endRating",
+											"value": "5.0"
+										},
+										{
+											"key": "startReviews",
+											"value": "0"
+										},
+										{
+											"key": "endReviews",
+											"value": "99999"
+										},
+										{
+											"key": "type",
+											"value": "Red"
+										},
+										{
+											"key": "country",
+											"value": "United States"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.22.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Mar 2023 02:00:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42224"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"length\": 20,\n    \"list\": [\n        {\n            \"country\": \"United States\",\n            \"id\": 310,\n            \"image\": \"https://images.vivino.com/thumbs/_IiGnDHSSaOc9u9c9CzVSA_pb_x300.png\",\n            \"name\": \"Beckstoffer Dr. Crane Vineyard 2012\",\n            \"rating\": 4.9,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 32,\n            \"type\": \"Red\",\n            \"winery\": \"Realm\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 307,\n            \"image\": \"https://images.vivino.com/thumbs/_IiGnDHSSaOc9u9c9CzVSA_pb_x300.png\",\n            \"name\": \"Beckstoffer Dr. Crane Vineyard 2015\",\n            \"rating\": 4.9,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 33,\n            \"type\": \"Red\",\n            \"winery\": \"Realm\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 407,\n            \"image\": \"https://images.vivino.com/thumbs/qmeRPQC1QCaTbAZ2n85ELQ_pb_x300.png\",\n            \"name\": \"Beckstoffer Dr. Crane Vineyard Cabernet Sauvignon 2009\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 28,\n            \"type\": \"Red\",\n            \"winery\": \"Paul Hobbs\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 474,\n            \"image\": \"https://images.vivino.com/thumbs/qmeRPQC1QCaTbAZ2n85ELQ_pb_x300.png\",\n            \"name\": \"Beckstoffer Dr. Crane Vineyard Cabernet Sauvignon N.V.\",\n            \"rating\": 4.7,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 735,\n            \"type\": \"Red\",\n            \"winery\": \"Paul Hobbs\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 413,\n            \"image\": \"https://images.vivino.com/thumbs/LrhoS6eaRLCL0aXgQ41e9w_pb_x300.png\",\n            \"name\": \"Blueline Estate Cabernet Franc 2014\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Calistoga\",\n            \"reviews\": 27,\n            \"type\": \"Red\",\n            \"winery\": \"Hourglass\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 356,\n            \"image\": \"https://images.vivino.com/thumbs/aWeZrSwlRFuHjHuaCgLCxQ_pb_x300.png\",\n            \"name\": \"Bootlegger's Hill Pinot Noir 2014\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Russian River Valley\",\n            \"reviews\": 70,\n            \"type\": \"Red\",\n            \"winery\": \"Cirq\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 416,\n            \"image\": \"https://images.vivino.com/thumbs/jCASOVd4Q7eAAgaKDTUC-w_pb_x300.png\",\n            \"name\": \"Brinkman Block Cabernet Sauvignon 2015\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 26,\n            \"type\": \"Red\",\n            \"winery\": \"Hunnicutt\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 378,\n            \"image\": \"https://images.vivino.com/thumbs/wNq6CTO5TG-pTZdn-CRapw_pb_x300.png\",\n            \"name\": \"Broken Stones 2006\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Paso Robles\",\n            \"reviews\": 41,\n            \"type\": \"Red\",\n            \"winery\": \"Saxum\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 388,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2003\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 38,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 392,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2004\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 36,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 336,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2007\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 146,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 312,\n            \"image\": \"https://images.vivino.com/thumbs/ELHDIsL6TOGR9_nfTRjC0w_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2010\",\n            \"rating\": 4.9,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 28,\n            \"type\": \"Red\",\n            \"winery\": \"Promise\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 380,\n            \"image\": \"https://images.vivino.com/thumbs/gt9rZXKHQTyzXOZNOBn_HA_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2010\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 40,\n            \"type\": \"Red\",\n            \"winery\": \"Martin Estate\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 334,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2013\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 167,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 339,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2014\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 132,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 345,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon 2015\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 109,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 434,\n            \"image\": \"https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon N.V.\",\n            \"rating\": 4.7,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"Rutherford\",\n            \"reviews\": 1596,\n            \"type\": \"Red\",\n            \"winery\": \"Scarecrow\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 371,\n            \"image\": \"https://images.vivino.com/thumbs/05c129iwR-mOludhobyiCA_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon St. Helena Mountain 2010\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 51,\n            \"type\": \"Red\",\n            \"winery\": \"Del Dotto\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 387,\n            \"image\": \"https://images.vivino.com/thumbs/05c129iwR-mOludhobyiCA_pb_x300.png\",\n            \"name\": \"Cabernet Sauvignon St. Helena Mountain 2016\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 38,\n            \"type\": \"Red\",\n            \"winery\": \"Del Dotto\"\n        },\n        {\n            \"country\": \"United States\",\n            \"id\": 363,\n            \"image\": \"https://images.vivino.com/thumbs/NnvfxpP_S2GycGg7VNkeYQ_375x500.jpg\",\n            \"name\": \"Cabernet Sauvignon St. Helena Mountain Family Reserve 2012\",\n            \"rating\": 4.8,\n            \"redditPosts\": [\n                \"https://www.redditmedia.com/r/wine/comments/11goijd/in_need_of_similar_wine_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fqejk/favorite_wine_brand_and_type/\",\n                \"https://www.redditmedia.com/r/wine/comments/11fl40u/wedding_wine_list_help/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f68l1/vivino_for_info_about_a_wine_and_its_region_is/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f5ql2/retail_storage/\",\n                \"https://www.redditmedia.com/r/wine/comments/11f3b16/i_know_nothing_about_wine_need_recommendations/\",\n                \"https://www.redditmedia.com/r/wine/comments/11erbi8/looking_for_recommendations_for_a_very_good_1983/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ecy1r/bottles_stored_and_sold_upside_down/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ec5lj/please_give_pairings_for_these_dishes/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dvzs4/wine_beautiful_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dnm57/is_it_really_bad_if_i_drink_a_whole_bottle_by/\",\n                \"https://www.redditmedia.com/r/wine/comments/11dkwy5/wine_and_mexican_molé/\",\n                \"https://www.redditmedia.com/r/wine/comments/11ck3vl/2014_clos_rougeard_les_poyeux_saumur_champigny/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7jxo/wine_connoisseurs_of_reddit_what_is_the_least/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c7bhp/please_help_choose_wine/\",\n                \"https://www.redditmedia.com/r/wine/comments/11c0r17/wine_pairing_with_ethiopian_food/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bu20g/pairing_suggestions_for_lowspice_hot_pot_from_the/\",\n                \"https://www.redditmedia.com/r/wine/comments/11bpvni/large_quality_wine_retailer_in_seattle/\",\n                \"https://www.redditmedia.com/r/wine/comments/11b82le/ive_heat_damaged_my_500bottle_collection_where_to/\",\n                \"https://www.redditmedia.com/r/wine/comments/119cu2s/rant_why_do_so_many_nonwine_people_insist_fine/\"\n            ],\n            \"region\": \"St. Helena\",\n            \"reviews\": 59,\n            \"type\": \"Red\",\n            \"winery\": \"Del Dotto\"\n        }\n    ],\n    \"page\": 1,\n    \"totalPages\": 3\n}"
+						}
+					]
+				},
+				{
+					"name": "Read a wine",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Response is an object\", function() {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response id is a number\", function() {",
+									"    pm.expect(response.id).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response country is a string\", function() {",
+									"    pm.expect(response.country).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response image is a string\", function() {",
+									"    pm.expect(response.image).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response name is a string\", function() {",
+									"    pm.expect(response.name).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response rating is a number\", function() {",
+									"    pm.expect(response.rating).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response redditPosts is an array\", function() {",
+									"    pm.expect(response.redditPosts).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/wines/:wineId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"wines",
+								":wineId"
+							],
+							"variable": [
+								{
+									"key": "wineId",
+									"value": "1",
+									"description": "(Required) The unique identifier of the wine"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "The wine corresponding to the provided `wineId`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.wineworld.me/wines/:wineId",
+									"protocol": "https",
+									"host": [
+										"api",
+										"wineworld",
+										"me"
+									],
+									"path": [
+										"wines",
+										":wineId"
+									],
+									"variable": [
+										{
+											"key": "wineId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.22.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Mar 2023 02:00:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3287"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"country\": \"Portugal\",\n    \"id\": 1,\n    \"image\": \"https://images.vivino.com/thumbs/gEj2IcxrQrydjxMfYw7fvQ_pb_x300.png\",\n    \"name\": \"Colheita Porto 1937\",\n    \"rating\": 4.7,\n    \"redditPosts\": [\n        \"https://www.redditmedia.com/r/wine/comments/11ee5qd/worst_oldworld_fortified_wines/\",\n        \"https://www.redditmedia.com/r/wine/comments/116qbmr/2001_niepoort_colheita_port_is_it_still_drinkable/\",\n        \"https://www.redditmedia.com/r/wine/comments/113wape/best_port_wine/\",\n        \"https://www.redditmedia.com/r/wine/comments/113t35t/wines_with_mussels/\",\n        \"https://www.redditmedia.com/r/wine/comments/111ghxc/residual_sugar_is_overhated_and_its_impact_on/\",\n        \"https://www.redditmedia.com/r/wine/comments/111aohh/wine_clubs/\",\n        \"https://www.redditmedia.com/r/wine/comments/10hu1e4/lets_talk_about_marsala/\",\n        \"https://www.redditmedia.com/r/wine/comments/10fwqd0/old_vintage_port_prices/\",\n        \"https://www.redditmedia.com/r/wine/comments/1071cxi/pacojet_a_wine/\",\n        \"https://www.redditmedia.com/r/wine/comments/106kx2l/wine_tasting_with_friends_portugal/\",\n        \"https://www.redditmedia.com/r/wine/comments/105woqm/porto_recommendations/\",\n        \"https://www.redditmedia.com/r/wine/comments/1020qcm/1976_grange_hermitage/\",\n        \"https://www.redditmedia.com/r/wine/comments/1005kp3/happy_new_years_eve/\",\n        \"https://www.redditmedia.com/r/wine/comments/zuy8af/bottle_of_port_has_clumps/\",\n        \"https://www.redditmedia.com/r/wine/comments/zrgqca/7_course_dinner_for_8_people_enough_wine/\",\n        \"https://www.redditmedia.com/r/wine/comments/zregmf/need_some_napa_winery_recommendation/\",\n        \"https://www.redditmedia.com/r/wine/comments/zqj6f2/am_i_missing_something_why_is_the_grahams_first/\",\n        \"https://www.redditmedia.com/r/wine/comments/zpq9ur/port/\",\n        \"https://www.redditmedia.com/r/wine/comments/zo5blq/best_type_of_wine_for_mulled_wine/\",\n        \"https://www.redditmedia.com/r/wine/comments/zm4yua/which_wine_with_sousvide_duck/\"\n    ],\n    \"region\": \"Porto\",\n    \"related\": {\n        \"regions\": [\n            {\n                \"country\": \"Portugal\",\n                \"id\": 1,\n                \"image\": {\n                    \"height\": 413,\n                    \"url\": \"https://media-cdn.tripadvisor.com/media/photo-s/26/56/72/6a/we-go-everywhere.jpg\",\n                    \"width\": 550\n                },\n                \"name\": \"Porto\",\n                \"rating\": 4.8,\n                \"reviews\": 511,\n                \"tags\": [\n                    \"Spas & Wellness\",\n                    \"Churches & Cathedrals\",\n                    \"Sightseeing Tours\",\n                    \"City Tours\",\n                    \"Kayaking & Canoeing\",\n                    \"Attractions\",\n                    \"Food & Drink\",\n                    \"Sights & Landmarks\",\n                    \"Outdoor Activities\",\n                    \"Boat Tours & Water Sports\",\n                    \"Spas\",\n                    \"Sacred & Religious Sites\",\n                    \"Tours\",\n                    \"Walking Tours\",\n                    \"Private Tours\",\n                    \"Activities\",\n                    \"Day Trips\",\n                    \"Speed Boats Tours\",\n                    \"Other\",\n                    \"Points of Interest & Landmarks\",\n                    \"Stand-Up Paddleboarding\",\n                    \"Waterskiing & Jetskiing\",\n                    \"Wine Tours & Tastings\",\n                    \"Boat Tours\",\n                    \"Adrenaline & Extreme Tours\",\n                    \"Historical & Heritage Tours\",\n                    \"Architectural Buildings\"\n                ],\n                \"tripTypes\": [\n                    \"Couples\",\n                    \"Solo travel\"\n                ],\n                \"url\": \"https://www.tripadvisor.com/Tourism-g189180-Porto_Porto_District_Northern_Portugal-Vacations.html\"\n            }\n        ],\n        \"vineyards\": [\n            {\n                \"country\": \"Portugal\",\n                \"id\": 1,\n                \"image\": \"https://s3-media4.fl.yelpcdn.com/bphoto/7mzUI-71VubxRX_e4-9x3w/o.jpg\",\n                \"name\": \"Sandeman\",\n                \"price\": 2,\n                \"rating\": 4,\n                \"reviews\": 41,\n                \"url\": \"https://www.yelp.com/biz/sandeman-vila-nova-de-gaia\"\n            },\n            {\n                \"country\": \"Portugal\",\n                \"id\": 2,\n                \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/EwWlshEC4K4ehUTsPjfojQ/o.jpg\",\n                \"name\": \"Ramos Pinto - Port & Douro Wine\",\n                \"price\": 1,\n                \"rating\": 4.5,\n                \"reviews\": 18,\n                \"url\": \"https://www.yelp.com/biz/ramos-pinto-port-e-douro-wine-vila-nova-de-gaia\"\n            }\n        ]\n    },\n    \"reviews\": 260,\n    \"type\": \"Port\",\n    \"winery\": \"Burmester\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Vineyards",
+			"item": [
+				{
+					"name": "Read list of all vineyards",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Response is an object\", function() {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response length is a number\", function() {",
+									"    pm.expect(response.length).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response list is an array\", function() {",
+									"    pm.expect(response.list).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Response page is a number\", function() {",
+									"    pm.expect(response.page).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response totalPages is a number\", function() {",
+									"    pm.expect(response.totalPages).to.be.a(\"number\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vineyards?name=\"The Austin Winery\"&nameSort=true&country=[\"United States\", \"Canada\"]&startPrice=1&endPrice=4&startRating=0.0&endRating=5.0&startReviews=0&endReviews=99999&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vineyards"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "\"The Austin Winery\"",
+									"description": "The name of the vineyard to search by"
+								},
+								{
+									"key": "nameSort",
+									"value": "true",
+									"description": "true = sort alphabetically; false = sort reverse alphabetically"
+								},
+								{
+									"key": "country",
+									"value": "[\"United States\", \"Canada\"]",
+									"description": "The countries to search by"
+								},
+								{
+									"key": "startPrice",
+									"value": "1",
+									"description": "The start (inclusive) value for the range of price levels to search by"
+								},
+								{
+									"key": "endPrice",
+									"value": "4",
+									"description": "The end (inclusive) value for the range of price levels to search by"
+								},
+								{
+									"key": "startRating",
+									"value": "0.0",
+									"description": "The start (inclusive) value for the range of ratings to search by"
+								},
+								{
+									"key": "endRating",
+									"value": "5.0",
+									"description": "The end (inclusive) value for the range of ratings to search by"
+								},
+								{
+									"key": "startReviews",
+									"value": "0",
+									"description": "The start (inclusive) value for the range of # ratings to search by"
+								},
+								{
+									"key": "endReviews",
+									"value": "99999",
+									"description": "The end (inclusive) value for the range of # ratings to search by"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "The page number to be on"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "The list of vineyards corresponding to the provided query parameters. Returns complete list of vineyards if no parameters specified.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/vineyards?nameSort=true&startPrice=1&endPrice=4&startRating=0.0&endRating=5.0&startReviews=0&endReviews=99999&page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"vineyards"
+									],
+									"query": [
+										{
+											"key": "nameSort",
+											"value": "true"
+										},
+										{
+											"key": "startPrice",
+											"value": "1"
+										},
+										{
+											"key": "endPrice",
+											"value": "4"
+										},
+										{
+											"key": "startRating",
+											"value": "0.0"
+										},
+										{
+											"key": "endRating",
+											"value": "5.0"
+										},
+										{
+											"key": "startReviews",
+											"value": "0"
+										},
+										{
+											"key": "endReviews",
+											"value": "99999"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"length\": 20,\n    \"list\": [\n        {\n            \"coordinates\": {\n                \"latitude\": 38.625,\n                \"longitude\": -8.91296\n            },\n            \"country\": \"Portugal\",\n            \"id\": 45,\n            \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/Za_p_u864tuBdR-KKImENg/o.jpg\",\n            \"name\": \"A.S.L. Tomé\",\n            \"price\": 2,\n            \"rating\": 5.0,\n            \"reviews\": 1,\n            \"url\": \"https://www.yelp.com/biz/a-s-l-tom%C3%A9-palmela\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.2339,\n                \"longitude\": -122.639\n            },\n            \"country\": \"United States\",\n            \"id\": 197,\n            \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/EL-b5UZhsnrGlOY1ZF1j8w/o.jpg\",\n            \"name\": \"Adobe Road Wines\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 159,\n            \"url\": \"https://www.yelp.com/biz/adobe-road-wines-petaluma\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.4706,\n                \"longitude\": -122.429\n            },\n            \"country\": \"United States\",\n            \"id\": 92,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/bmSlPBFtPdhh_qmX8sx6Dw/o.jpg\",\n            \"name\": \"Alpha Omega\",\n            \"price\": 3,\n            \"rating\": 4.0,\n            \"reviews\": 902,\n            \"url\": \"https://www.yelp.com/biz/alpha-omega-saint-helena-2\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 43.0533,\n                \"longitude\": 11.489\n            },\n            \"country\": \"Italy\",\n            \"id\": 220,\n            \"image\": \"https://s3-media4.fl.yelpcdn.com/bphoto/VAfvI5xEjWdfyBnpEUqnOQ/o.jpg\",\n            \"name\": \"Altesino\",\n            \"price\": 2,\n            \"rating\": 4.0,\n            \"reviews\": 5,\n            \"url\": \"https://www.yelp.com/biz/altesino-montalcino\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": -34.8916,\n                \"longitude\": 138.824\n            },\n            \"country\": \"Australia\",\n            \"id\": 201,\n            \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/_4owYdN1Oc2zG2muMXtbgA/o.jpg\",\n            \"name\": \"Anderson Hill Winery\",\n            \"price\": 2,\n            \"rating\": 5.0,\n            \"reviews\": 8,\n            \"url\": \"https://www.yelp.com/biz/anderson-hill-winery-lenswood\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 36.7178,\n                \"longitude\": -4.42335\n            },\n            \"country\": \"Spain\",\n            \"id\": 49,\n            \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/vWiYJFlQ3Hj2MrocSkBSrw/o.jpg\",\n            \"name\": \"Antigua Casa de Guardia\",\n            \"price\": 1,\n            \"rating\": 4.5,\n            \"reviews\": 34,\n            \"url\": \"https://www.yelp.com/biz/antigua-casa-de-guardia-m%C3%A1laga-2\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 34.4145,\n                \"longitude\": -119.69\n            },\n            \"country\": \"United States\",\n            \"id\": 105,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/JHJngGG2V6S1eAGL_HDmag/o.jpg\",\n            \"name\": \"Area 5.1 Winery\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 251,\n            \"url\": \"https://www.yelp.com/biz/area-5-1-winery-santa-barbara\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.2692,\n                \"longitude\": -122.355\n            },\n            \"country\": \"United States\",\n            \"id\": 190,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/tlqtG1yDsFfpRoDWpw-Elw/o.jpg\",\n            \"name\": \"Artesa Vineyards & Winery\",\n            \"price\": 2,\n            \"rating\": 4.0,\n            \"reviews\": 1656,\n            \"url\": \"https://www.yelp.com/biz/artesa-vineyards-and-winery-napa-2\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": -34.5253,\n                \"longitude\": 139.0\n            },\n            \"country\": \"Australia\",\n            \"id\": 15,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/p6YKovhHmfnES6-SgBy07Q/o.jpg\",\n            \"name\": \"Artisans of Barossa\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 17,\n            \"url\": \"https://www.yelp.com/biz/artisans-of-barossa-vine-vale\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.2169,\n                \"longitude\": -122.684\n            },\n            \"country\": \"United States\",\n            \"id\": 173,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/lZ25o45yjzhtUmK8u-MIbw/o.jpg\",\n            \"name\": \"Azari Vineyards\",\n            \"price\": 2,\n            \"rating\": 5.0,\n            \"reviews\": 70,\n            \"url\": \"https://www.yelp.com/biz/azari-vineyards-petaluma-2\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 42.3023,\n                \"longitude\": 13.7643\n            },\n            \"country\": \"Italy\",\n            \"id\": 64,\n            \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/6ZwRBF-uvbbYO6vy38XEwg/o.jpg\",\n            \"name\": \"Azienda Agricola Luigi Cataldi Madonna\",\n            \"price\": 3,\n            \"rating\": 5.0,\n            \"reviews\": 1,\n            \"url\": \"https://www.yelp.com/biz/azienda-agricola-luigi-cataldi-madonna-ofena\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 45.7194,\n                \"longitude\": 11.5661\n            },\n            \"country\": \"Italy\",\n            \"id\": 58,\n            \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/PVRoTBXR3ONE9QmNU4mXAA/o.jpg\",\n            \"name\": \"Azienda Vinicola Col Dovigo\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 2,\n            \"url\": \"https://www.yelp.com/biz/azienda-vinicola-col-dovigo-breganze-2\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 45.4381,\n                \"longitude\": 12.3333\n            },\n            \"country\": \"Italy\",\n            \"id\": 158,\n            \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/4gqGpWz6QXa0H3TO_ZZIAQ/o.jpg\",\n            \"name\": \"Bacaro al Ravano\",\n            \"price\": 2,\n            \"rating\": 4.0,\n            \"reviews\": 8,\n            \"url\": \"https://www.yelp.com/biz/bacaro-al-ravano-venezia\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.419,\n                \"longitude\": -122.814\n            },\n            \"country\": \"United States\",\n            \"id\": 137,\n            \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/mhwEZXdUtUD9AU_Uu605_g/o.jpg\",\n            \"name\": \"Balletto Vineyards\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 195,\n            \"url\": \"https://www.yelp.com/biz/balletto-vineyards-santa-rosa\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.3017,\n                \"longitude\": -122.425\n            },\n            \"country\": \"United States\",\n            \"id\": 179,\n            \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/0_mQaVb3tFesjJ7Ws-d2uQ/o.jpg\",\n            \"name\": \"Bartholomew Estate Winery\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 48,\n            \"url\": \"https://www.yelp.com/biz/bartholomew-estate-winery-sonoma\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": -36.8144,\n                \"longitude\": 175.082\n            },\n            \"country\": \"New Zealand\",\n            \"id\": 163,\n            \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/PS92l9Xd3MBGWr5ekV8q6g/o.jpg\",\n            \"name\": \"Batch Winery\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 11,\n            \"url\": \"https://www.yelp.com/biz/batch-winery-auckland\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.4666,\n                \"longitude\": -122.788\n            },\n            \"country\": \"United States\",\n            \"id\": 136,\n            \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/Zw1ECR4Ppo2_FWGMaN3zug/o.jpg\",\n            \"name\": \"Battaglini Winery & Vineyard\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 43,\n            \"url\": \"https://www.yelp.com/biz/battaglini-winery-and-vineyard-santa-rosa\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.4768,\n                \"longitude\": -122.798\n            },\n            \"country\": \"United States\",\n            \"id\": 129,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/MekWOpdnLbH1aYxOU0DiFA/o.jpg\",\n            \"name\": \"Benovia Winery\",\n            \"price\": 3,\n            \"rating\": 4.5,\n            \"reviews\": 55,\n            \"url\": \"https://www.yelp.com/biz/benovia-winery-santa-rosa\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.3607,\n                \"longitude\": -122.543\n            },\n            \"country\": \"United States\",\n            \"id\": 183,\n            \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/hbeiBdEqtZkt234Mkx-aCw/o.jpg\",\n            \"name\": \"Benziger Family Winery\",\n            \"price\": 2,\n            \"rating\": 4.5,\n            \"reviews\": 570,\n            \"url\": \"https://www.yelp.com/biz/benziger-family-winery-glen-ellen\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 38.5105,\n                \"longitude\": -122.48\n            },\n            \"country\": \"United States\",\n            \"id\": 76,\n            \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/BTSkEDKeD4DNR2abibYWfA/o.jpg\",\n            \"name\": \"Beringer Vineyards\",\n            \"price\": 2,\n            \"rating\": 3.5,\n            \"reviews\": 760,\n            \"url\": \"https://www.yelp.com/biz/beringer-vineyards-st-helena\"\n        }\n    ],\n    \"page\": 1,\n    \"totalPages\": 12\n}"
+						}
+					]
+				},
+				{
+					"name": "Read a vineyard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Response is an object\", function() {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response id is a number\", function() {",
+									"    pm.expect(response.id).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response country is a string\", function() {",
+									"    pm.expect(response.country).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response image is a string\", function() {",
+									"    pm.expect(response.image).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response name is a string\", function() {",
+									"    pm.expect(response.name).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response rating is a number\", function() {",
+									"    pm.expect(response.rating).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response coordinates is an object\", function() {",
+									"    pm.expect(response.coordinates).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response price is a number\", function() {",
+									"    pm.expect(response.price).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response related is an object\", function() {",
+									"    pm.expect(response.related).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response reviews is a number\", function() {",
+									"    pm.expect(response.reviews).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response url is a string\", function() {",
+									"    pm.expect(response.url).to.be.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vineyards/:vineyardId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vineyards",
+								":vineyardId"
+							],
+							"variable": [
+								{
+									"key": "vineyardId",
+									"value": "1",
+									"description": "(Required) The unique identifier of the vineyard"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "The wine corresponding to the provided `vineyardId`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/vineyards/:vineyardId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"vineyards",
+										":vineyardId"
+									],
+									"variable": [
+										{
+											"key": "vineyardId",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.22.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Mar 2023 08:11:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3612"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"coordinates\": {\n        \"latitude\": 48.3973,\n        \"longitude\": 15.47\n    },\n    \"country\": \"Austria\",\n    \"id\": 10,\n    \"image\": \"https://s3-media3.fl.yelpcdn.com/bphoto/K3e5BMK8FdGYcn6fO_NRCg/o.jpg\",\n    \"name\": \"Weingut Prager\",\n    \"price\": 3,\n    \"rating\": 5,\n    \"related\": {\n        \"regions\": [\n            {\n                \"country\": \"Austria\",\n                \"id\": 14,\n                \"image\": {\n                    \"height\": 412,\n                    \"url\": \"https://media-cdn.tripadvisor.com/media/photo-s/01/44/22/51/un-paisaje-precioso-y.jpg\",\n                    \"width\": 550\n                },\n                \"name\": \"Wachau\",\n                \"rating\": 4.1,\n                \"reviews\": 59,\n                \"tags\": [\n                    \"Points of Interest & Landmarks\",\n                    \"Shopping\",\n                    \"Churches & Cathedrals\",\n                    \"Food & Drink\",\n                    \"Activities\",\n                    \"Wineries & Vineyards\",\n                    \"Attractions\",\n                    \"Gift & Specialty Shops\",\n                    \"Sights & Landmarks\"\n                ],\n                \"tripTypes\": [\n                    \"Couples\"\n                ],\n                \"url\": \"https://www.tripadvisor.com/Tourism-g190417-Lower_Austria-Vacations.html\"\n            }\n        ],\n        \"wines\": [\n            {\n                \"country\": \"Austria\",\n                \"id\": 31,\n                \"image\": \"https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png\",\n                \"name\": \"Unendlich Riesling 2007\",\n                \"rating\": 4.8,\n                \"region\": \"Wachau\",\n                \"reviews\": 31,\n                \"type\": \"White\",\n                \"winery\": \"F.X. Pichler\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 183,\n                \"image\": \"https://images.vivino.com/thumbs/W7Tblf6DSU6rZjeCpIkJ8Q_pb_x300.png\",\n                \"name\": \"Singerriedel - Riesling Smaragd 2002\",\n                \"rating\": 4.8,\n                \"region\": \"Wachau\",\n                \"reviews\": 26,\n                \"type\": \"White\",\n                \"winery\": \"Franz Hirtzberger\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 184,\n                \"image\": \"https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png\",\n                \"name\": \"Unendlich Riesling 2017\",\n                \"rating\": 4.8,\n                \"region\": \"Wachau\",\n                \"reviews\": 26,\n                \"type\": \"White\",\n                \"winery\": \"F.X. Pichler\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 186,\n                \"image\": \"https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png\",\n                \"name\": \"Unendlich Riesling N.V.\",\n                \"rating\": 4.7,\n                \"region\": \"Wachau\",\n                \"reviews\": 428,\n                \"type\": \"White\",\n                \"winery\": \"F.X. Pichler\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 196,\n                \"image\": \"https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png\",\n                \"name\": \"Unendlich Riesling 2009\",\n                \"rating\": 4.7,\n                \"region\": \"Wachau\",\n                \"reviews\": 58,\n                \"type\": \"White\",\n                \"winery\": \"F.X. Pichler\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 205,\n                \"image\": \"https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png\",\n                \"name\": \"Unendlich Riesling 2011\",\n                \"rating\": 4.7,\n                \"region\": \"Wachau\",\n                \"reviews\": 34,\n                \"type\": \"White\",\n                \"winery\": \"F.X. Pichler\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 230,\n                \"image\": \"https://images.vivino.com/thumbs/W7Tblf6DSU6rZjeCpIkJ8Q_pb_x300.png\",\n                \"name\": \"Singerriedel - Riesling Smaragd 2013\",\n                \"rating\": 4.6,\n                \"region\": \"Wachau\",\n                \"reviews\": 196,\n                \"type\": \"White\",\n                \"winery\": \"Franz Hirtzberger\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 232,\n                \"image\": \"https://images.vivino.com/thumbs/W7Tblf6DSU6rZjeCpIkJ8Q_pb_x300.png\",\n                \"name\": \"Singerriedel - Riesling Smaragd 2011\",\n                \"rating\": 4.6,\n                \"region\": \"Wachau\",\n                \"reviews\": 179,\n                \"type\": \"White\",\n                \"winery\": \"Franz Hirtzberger\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 240,\n                \"image\": \"https://images.vivino.com/thumbs/Clc1N_neRBq_orOAKw9aqg_pb_x300.png\",\n                \"name\": \"Unendlich Riesling 2013\",\n                \"rating\": 4.6,\n                \"region\": \"Wachau\",\n                \"reviews\": 72,\n                \"type\": \"White\",\n                \"winery\": \"F.X. Pichler\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 245,\n                \"image\": \"https://images.vivino.com/thumbs/W7Tblf6DSU6rZjeCpIkJ8Q_pb_x300.png\",\n                \"name\": \"Singerriedel - Riesling Smaragd 2009\",\n                \"rating\": 4.6,\n                \"region\": \"Wachau\",\n                \"reviews\": 58,\n                \"type\": \"White\",\n                \"winery\": \"Franz Hirtzberger\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 285,\n                \"image\": \"https://images.vivino.com/thumbs/W7Tblf6DSU6rZjeCpIkJ8Q_pb_x300.png\",\n                \"name\": \"Singerriedel - Riesling Smaragd 2003\",\n                \"rating\": 4.6,\n                \"region\": \"Wachau\",\n                \"reviews\": 31,\n                \"type\": \"White\",\n                \"winery\": \"Franz Hirtzberger\"\n            },\n            {\n                \"country\": \"Austria\",\n                \"id\": 298,\n                \"image\": \"https://images.vivino.com/thumbs/LjnragvGQh-DIIGggDUhkQ_pb_x300.png\",\n                \"name\": \"Achleiten Riesling 2007\",\n                \"rating\": 4.6,\n                \"region\": \"Wachau\",\n                \"reviews\": 28,\n                \"type\": \"White\",\n                \"winery\": \"Prager\"\n            }\n        ]\n    },\n    \"reviews\": 1,\n    \"url\": \"https://www.yelp.com/biz/weingut-prager-weissenkirchen-in-der-wachau\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Regions",
+			"item": [
+				{
+					"name": "Read list of all regions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Response is an object\", function() {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response length is a number\", function() {",
+									"    pm.expect(response.length).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response list is an array\", function() {",
+									"    pm.expect(response.list).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Response page is a number\", function() {",
+									"    pm.expect(response.page).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response totalPages is a number\", function() {",
+									"    pm.expect(response.totalPages).to.be.a(\"number\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/regions?name=\"Altenjo\"&nameSort=true&country=[Portugal, United States]&startRating=0.0&endRating=5.0&startReviews=0&endReviews=99999&tags=[\"Sights and Landmarks\", \"Food and Drink\"]&tripTypes=[\"Business\", \"Couples\"]&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"regions"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "\"Altenjo\"",
+									"description": "The name of the region to search by"
+								},
+								{
+									"key": "nameSort",
+									"value": "true",
+									"description": "true = sort alphabetically; false = sort reverse alphabetically"
+								},
+								{
+									"key": "country",
+									"value": "[Portugal, United States]",
+									"description": "The countries to search by"
+								},
+								{
+									"key": "startRating",
+									"value": "0.0",
+									"description": "The start (inclusive) value for the range of ratings to search by"
+								},
+								{
+									"key": "endRating",
+									"value": "5.0",
+									"description": "The end (inclusive) value for the range of ratings to search by"
+								},
+								{
+									"key": "startReviews",
+									"value": "0",
+									"description": "The start (inclusive) value for the range of # reviews to search by"
+								},
+								{
+									"key": "endReviews",
+									"value": "99999",
+									"description": "The end (inclusive) value for the range of # reviews to search by"
+								},
+								{
+									"key": "tags",
+									"value": "[\"Sights and Landmarks\", \"Food and Drink\"]",
+									"description": "The tags (stuff the region has - e.g. Signts & Landmarks, Food & Drink) of regions to search by"
+								},
+								{
+									"key": "tripTypes",
+									"value": "[\"Business\", \"Couples\"]",
+									"description": "The trip types (what kinds of trips this region would be good for - e.g. \"Business\", \"Couples\") to search by"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "The page number to be on"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "The list of regions corresponding to the provided query parameters. Returns complete list of regions if no parameters specified.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/regions?nameSort=true&startRating=4.8&country=Italy&page=2&country=Australia&tags=Shopping",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"regions"
+									],
+									"query": [
+										{
+											"key": "nameSort",
+											"value": "true"
+										},
+										{
+											"key": "startRating",
+											"value": "4.8"
+										},
+										{
+											"key": "country",
+											"value": "Italy"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "country",
+											"value": "Australia"
+										},
+										{
+											"key": "tags",
+											"value": "Shopping"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.22.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Mar 2023 08:09:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1432"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"length\": 2,\n    \"list\": [\n        {\n            \"coordinates\": {\n                \"latitude\": -34.5168,\n                \"longitude\": 138.969\n            },\n            \"country\": \"Australia\",\n            \"id\": 19,\n            \"image\": {\n                \"height\": 413,\n                \"url\": \"https://media-cdn.tripadvisor.com/media/photo-s/1d/13/32/71/delightful-stay-in-bilyara.jpg\",\n                \"width\": 550\n            },\n            \"name\": \"Barossa\",\n            \"rating\": 4.8,\n            \"reviews\": 1441,\n            \"tags\": [\n                \"Churches & Cathedrals\",\n                \"Wine Bars\",\n                \"Historic Walking Areas\",\n                \"Attractions\",\n                \"Food & Drink\",\n                \"Bus Tours\",\n                \"Sights & Landmarks\",\n                \"Food Tours\",\n                \"Nightlife\",\n                \"Shopping\",\n                \"Antique Stores\",\n                \"Tours\",\n                \"Private Tours\",\n                \"Activities\",\n                \"Day Trips\",\n                \"Museums\",\n                \"Lookouts\",\n                \"Wine Tours & Tastings\",\n                \"Wineries & Vineyards\",\n                \"Art Galleries\",\n                \"Gift & Specialty Shops\"\n            ],\n            \"tripTypes\": [\n                \"Couples\",\n                \"Friends getaway\"\n            ],\n            \"url\": \"https://www.tripadvisor.com/Tourism-g495039-Tanunda_Barossa_Valley_South_Australia-Vacations.html\"\n        },\n        {\n            \"coordinates\": {\n                \"latitude\": 42.8935,\n                \"longitude\": 12.6482\n            },\n            \"country\": \"Italy\",\n            \"id\": 25,\n            \"image\": {\n                \"height\": 229,\n                \"url\": \"https://media-cdn.tripadvisor.com/media/photo-s/17/83/2d/f8/due-giornate-tra-musica.jpg\",\n                \"width\": 550\n            },\n            \"name\": \"Montefalco Sagrantino\",\n            \"rating\": 4.9,\n            \"reviews\": 767,\n            \"tags\": [\n                \"Attractions\",\n                \"Shopping\",\n                \"Churches & Cathedrals\",\n                \"Activities\",\n                \"Bars & Clubs\",\n                \"Sacred & Religious Sites\",\n                \"Wineries & Vineyards\",\n                \"Food & Drink\",\n                \"Nightlife\",\n                \"Gift & Specialty Shops\",\n                \"Sights & Landmarks\"\n            ],\n            \"tripTypes\": [\n                \"Couples\",\n                \"Friends getaway\"\n            ],\n            \"url\": \"https://www.tripadvisor.com/Tourism-g608939-Montefalco_Province_of_Perugia_Umbria-Vacations.html\"\n        }\n    ],\n    \"page\": 1,\n    \"totalPages\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Read a region",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.test(\"Response is an object\", function() {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response id is a number\", function() {",
+									"    pm.expect(response.id).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response country is a string\", function() {",
+									"    pm.expect(response.country).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response image is an object\", function() {",
+									"    pm.expect(response.image).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response name is a string\", function() {",
+									"    pm.expect(response.name).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response rating is a number\", function() {",
+									"    pm.expect(response.rating).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response coordinates is an object\", function() {",
+									"    pm.expect(response.coordinates).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response related is an object\", function() {",
+									"    pm.expect(response.related).to.be.an(\"object\");",
+									"});",
+									"",
+									"pm.test(\"Response reviews is a number\", function() {",
+									"    pm.expect(response.reviews).to.be.a(\"number\");",
+									"});",
+									"",
+									"pm.test(\"Response url is a string\", function() {",
+									"    pm.expect(response.url).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test(\"Response tags is an array\", function() {",
+									"    pm.expect(response.tags).to.be.an(\"array\");",
+									"});",
+									"",
+									"pm.test(\"Response tripTypes is an array\", function() {",
+									"    pm.expect(response.tripTypes).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/regions/:regionId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"regions",
+								":regionId"
+							],
+							"variable": [
+								{
+									"key": "regionId",
+									"value": "1",
+									"description": "(Required) The unique identifier of the region"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "The region corresponding to the provided `regionId`",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/regions/:regionId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"regions",
+										":regionId"
+									],
+									"variable": [
+										{
+											"key": "regionId",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.22.0 (Ubuntu)"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 06 Mar 2023 08:11:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2564"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"coordinates\": {\n        \"latitude\": 34.6678,\n        \"longitude\": -120.117\n    },\n    \"country\": \"United States\",\n    \"id\": 3,\n    \"image\": {\n        \"height\": 450,\n        \"url\": \"https://media-cdn.tripadvisor.com/media/photo-s/19/8b/fb/16/die-neverland-ranch-war.jpg\",\n        \"width\": 450\n    },\n    \"name\": \"Sta. Rita Hills\",\n    \"rating\": 4.1,\n    \"related\": {\n        \"vineyards\": [\n            {\n                \"country\": \"United States\",\n                \"id\": 202,\n                \"image\": \"https://s3-media4.fl.yelpcdn.com/bphoto/Sam2Wv5bvNpEtcTLNYeB3g/o.jpg\",\n                \"name\": \"Carhartt Family Wines\",\n                \"price\": 2,\n                \"rating\": 4.5,\n                \"reviews\": 561,\n                \"url\": \"https://www.yelp.com/biz/carhartt-family-wines-los-olivos\"\n            },\n            {\n                \"country\": \"United States\",\n                \"id\": 203,\n                \"image\": \"https://s3-media2.fl.yelpcdn.com/bphoto/wHilkiD9MUr1CIJMutiMow/o.jpg\",\n                \"name\": \"Saarloos & Sons\",\n                \"price\": 2,\n                \"rating\": 4.5,\n                \"reviews\": 507,\n                \"url\": \"https://www.yelp.com/biz/saarloos-and-sons-los-olivos\"\n            },\n            {\n                \"country\": \"United States\",\n                \"id\": 204,\n                \"image\": \"https://s3-media1.fl.yelpcdn.com/bphoto/TpPsvmQVES-F47GB31hCNA/o.jpg\",\n                \"name\": \"Dreamcôte Wine Co.\",\n                \"price\": 2,\n                \"rating\": 4.5,\n                \"reviews\": 154,\n                \"url\": \"https://www.yelp.com/biz/dreamc%C3%B4te-wine-co-los-olivos\"\n            }\n        ],\n        \"wines\": [\n            {\n                \"country\": \"United States\",\n                \"id\": 17,\n                \"image\": \"https://images.vivino.com/thumbs/DtBMhsMBTtiA4URvVaUBNA_pb_x300.png\",\n                \"name\": \"Rattrapante Grenache 2012\",\n                \"rating\": 4.9,\n                \"region\": \"Sta. Rita Hills\",\n                \"reviews\": 34,\n                \"type\": \"Red\",\n                \"winery\": \"Sine Qua Non\"\n            },\n            {\n                \"country\": \"United States\",\n                \"id\": 18,\n                \"image\": \"https://images.vivino.com/thumbs/hhlGZQVnR7C_RYEn8e677g_pb_x300.png\",\n                \"name\": \"Chardonnay 2016\",\n                \"rating\": 4.6,\n                \"region\": \"Sta. Rita Hills\",\n                \"reviews\": 38,\n                \"type\": \"White\",\n                \"winery\": \"Sea Smoke\"\n            },\n            {\n                \"country\": \"United States\",\n                \"id\": 364,\n                \"image\": \"https://images.vivino.com/thumbs/czzcC4ZaStGChaDkmFYmww_pb_x300.png\",\n                \"name\": \"The 17th Nail in My Cranium 2005\",\n                \"rating\": 4.8,\n                \"region\": \"Sta. Rita Hills\",\n                \"reviews\": 58,\n                \"type\": \"Red\",\n                \"winery\": \"Sine Qua Non\"\n            },\n            {\n                \"country\": \"United States\",\n                \"id\": 376,\n                \"image\": \"https://images.vivino.com/thumbs/eoESQg64S8mw1BwEJVVkGQ_pb_x300.png\",\n                \"name\": \"Stockholm Syndrome Eleven Confession Vineyard Grenache N.V.\",\n                \"rating\": 4.8,\n                \"region\": \"Sta. Rita Hills\",\n                \"reviews\": 42,\n                \"type\": \"Red\",\n                \"winery\": \"Sine Qua Non\"\n            },\n            {\n                \"country\": \"United States\",\n                \"id\": 379,\n                \"image\": \"https://images.vivino.com/thumbs/eoESQg64S8mw1BwEJVVkGQ_pb_x300.png\",\n                \"name\": \"Stockholm Syndrome Eleven Confession Vineyard Grenache 2010\",\n                \"rating\": 4.8,\n                \"region\": \"Sta. Rita Hills\",\n                \"reviews\": 40,\n                \"type\": \"Red\",\n                \"winery\": \"Sine Qua Non\"\n            }\n        ]\n    },\n    \"reviews\": 90,\n    \"tags\": [\n        \"Shopping\",\n        \"Wine Bars\",\n        \"Activities\",\n        \"Wineries & Vineyards\",\n        \"Food & Drink\",\n        \"Gift & Specialty Shops\",\n        \"Nightlife\"\n    ],\n    \"tripTypes\": [\n        \"Couples\",\n        \"Friends getaway\"\n    ],\n    \"url\": \"https://www.tripadvisor.com/Tourism-g32660-Los_Olivos_California-Vacations.html\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.wineworld.me",
+			"type": "string"
+		}
+	]
+}

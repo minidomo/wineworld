@@ -15,7 +15,6 @@ app = Flask(__name__)
 CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["SQLALCHEMY_DATABASE_URI"]
 db = SQLAlchemy(app)
-app.app_context().push()
 
 
 class Wine(db.Model):
