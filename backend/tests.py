@@ -10,9 +10,10 @@ load_dotenv()
 JsonObject = dict[str, Any]
 base_url = os.environ["TEST_API_URL"]
 
+
 class WineAllTests(unittest.TestCase):
     url = f"{base_url}/wines"
-    
+
     def test_status_code_200(self):
         res = requests.get(WineAllTests.url)
         self.assertEqual(res.status_code, 200)
