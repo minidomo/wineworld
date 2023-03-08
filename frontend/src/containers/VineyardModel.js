@@ -16,8 +16,7 @@ const VineyardModel = () => {
     useEffect(() => {
         const getVineyards = async () => {
             if (vineyards === undefined || vineyards.length === 0) {
-                // axios.get('https://api.wineworld.me/vineyards')
-                get('https://api.wineworld.me/vineyards')
+                axios.get('https://api.wineworld.me/vineyards')
                     .then((response) => {
                         setVineyards(response.data.list);
                     })

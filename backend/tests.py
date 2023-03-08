@@ -40,6 +40,7 @@ class WineAllTests(unittest.TestCase):
         self.assertEqual(type(res["list"]), list)
         self.assertEqual(type(res["page"]), int)
         self.assertEqual(type(res["totalPages"]), int)
+        self.assertEqual(type(res["totalInstances"]), int)
 
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
@@ -155,6 +156,7 @@ class VineyardAllTests(unittest.TestCase):
         self.assertEqual(type(res["list"]), list)
         self.assertEqual(type(res["page"]), int)
         self.assertEqual(type(res["totalPages"]), int)
+        self.assertEqual(type(res["totalInstances"]), int)
 
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
@@ -270,6 +272,7 @@ class RegionAllTests(unittest.TestCase):
         self.assertEqual(type(res["list"]), list)
         self.assertEqual(type(res["page"]), int)
         self.assertEqual(type(res["totalPages"]), int)
+        self.assertEqual(type(res["totalInstances"]), int)
 
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)

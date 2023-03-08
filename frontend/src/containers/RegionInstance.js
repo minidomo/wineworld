@@ -2,14 +2,15 @@ import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {get} from '../api-example/siteapi';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col'
 import Button from 'react-bootstrap/esm/Button'
+import WineCard from '../components/WineCard';
+import VineyardCard from '../components/VineyardCard';
 
 
 const RegionInstance = () => {
-    let {id} = useParams
+    let {id} = useParams();
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
     const [rating, setRating] = useState(0);
@@ -28,8 +29,7 @@ const RegionInstance = () => {
 
     useEffect(() => {
     let mounted = true;
-    // axios.get(`https://api.wineworld.me/region/${id}`)
-    get(`https://api.wineworld.me/region/${id}`)
+    axios.get(`https://api.wineworld.me/regions/${id}`)
         .then(response => {
         if(mounted) {
             setName(response.data['name']);
@@ -38,13 +38,13 @@ const RegionInstance = () => {
             setReviews(response.data['reviews']);
             setTags(response.data['tags']);
             setTripTypes(response.data['tripTypes']);
-            setImage(response.data.image['url']); //check
-            setImageHeight(response.data.image['height']); //check
-            setImageWidth(response.data.image['width']); //check
+            setImage(response.data.image['url']);
+            setImageHeight(response.data.image['height']);
+            setImageWidth(response.data.image['width']);
             setLatitude(response.data.coordinates['latitude']); //check
             setLongitude(response.data.coordinates['longitude']); //check
-            setWines(response.data.related['wines']); //check
-            setVineyards(response.data.related['vineayards']); //check
+            setWines(response.data.related['wines']);
+            setVineyards(response.data.related['vineyards']);
             setUrl(response.data['url']);
         }
         })
@@ -66,31 +66,37 @@ const RegionInstance = () => {
             <br />
             Reviews: {reviews}
             <br />
-            Trip Type: {tripTypes}
+            Trip Type: {tripTypes.join(", ")}
             <br />
-            Tags: {tags}
+            Tags: {tags.join(", ")}
             </p>
         </div>
         </Row>
-        <Row md ={10} className="p-4 g-4 justify-content-center">
-        <Col>
-            {/* fix link */}
-            <Button
-            className="btn btn-primary stretched-link"
-            variant="secondary"
-            href={"/Wines"}>
-            Explore Wine
-            </Button>
-        </Col>
-        <Col>
-            {/* fix link */}
-            <Button
-            className="btn btn-primary stretched-link"
-            variant="secondary"
-            href={"/Vineyards"}>
-            Explore Vineyard
-            </Button>
-        </Col>
+        <Row md = {10} className = "p-4 g-4">
+            <h5 align="left">Related Wines</h5>
+            {
+                wines.map((wine) => {
+                    return (
+                        <Col>
+                            <WineCard wine = {wine} />
+                        </Col>
+                        
+                    )
+                })
+            }
+        </Row>
+        <Row md = {10} className = "p-4 g-4">
+            <h5 align="left">Related Vineyards</h5>
+            {
+                vineyards.map((vineyard) => {
+                    return (
+                        <Col>
+                            <VineyardCard vineyard = {vineyard} />
+                        </Col>
+                        
+                    )
+                })
+            }
         </Row>
     </div>
     )

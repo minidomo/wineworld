@@ -22,7 +22,7 @@ const WineCard = (props) => {
 
     return (
         // <Card border="dark" style={{ width: "80%", height: "50%" }}>
-        <Card border="dark" style={{height:"40rem"}}>
+        <Card border="dark" style={{height:"35rem", width:"18rem"}}>
             {/* <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 50}} src={image} /> */}
             <Card.Img class="img-thumbnail" variant ="top" src={image} style={{height:"50%", width:"100%", objectFit:"contain",}}/>
             <Card.Body>
@@ -45,9 +45,9 @@ const WineCard = (props) => {
                 <Button
                 className="btn btn-primary stretched-link"
                 variant="secondary"
-                href= {`/wines/${id}`}              
+                href= {`/Wines/${id}`}              
                 >
-                    See More
+                    View Wine
                 </Button>
             </Card.Footer>
         </Card>

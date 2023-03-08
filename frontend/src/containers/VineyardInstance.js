@@ -2,14 +2,15 @@ import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {get} from '../api-example/siteapi';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col'
 import Button from 'react-bootstrap/esm/Button'
+import WineCard from '../components/WineCard';
+import RegionCard from '../components/RegionCard';
 
 
 const VineyardInstance = () => {
-    let {id} = useParams
+    let {id} = useParams();
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
     const [price, setPrice] = useState(0);
@@ -25,8 +26,7 @@ const VineyardInstance = () => {
 
     useEffect(() => {
     let mounted = true;
-    // axios.get(`https://api.wineworld.me/vineyard/${id}`)
-    get(`https://api.wineworld.me/vineyard/${id}`)
+    axios.get(`https://api.wineworld.me/vineyards/${id}`)
         .then(response => {
         if (mounted) {
             setName(response.data['name']);
@@ -66,25 +66,31 @@ const VineyardInstance = () => {
             </p>
         </div>
         </Row>
-        <Row md = {10} className = "p-4 g-4 justify-content-center">
-        <Col>
-            {/* fix link */}
-            <Button
-            className="btn btn-primary stretched-link"
-            variant="secondary"
-            href={"/Wines"}>
-            Explore Wine
-            </Button>
-        </Col>
-        <Col>
-            {/* fix link */}
-            <Button
-            className="btn btn-primary stretched-link"
-            variant="secondary"
-            href={"/Regions"}>
-            Explore Region
-            </Button>
-        </Col>
+        <Row md = {10} className = "p-4 g-4">
+            <h5 align="left">Related Wines</h5>
+            {
+                wines.map((wine) => {
+                    return (
+                        <Col>
+                            <WineCard wine = {wine} />
+                        </Col>
+                        
+                    )
+                })
+            }
+        </Row>
+        <Row md = {10} className = "p-4 g-4">
+            <h5 align="left">Related Regions</h5>
+            {
+                regions.map((region) => {
+                    return (
+                        <Col>
+                            <RegionCard region = {region} />
+                        </Col>
+                        
+                    )
+                })
+            }
         </Row>
     </div>
     )
