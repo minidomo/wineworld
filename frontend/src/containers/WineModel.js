@@ -1,14 +1,11 @@
 import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import { get } from '../api-example/siteapi';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import WineCard from '../components/WineCard';
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
-import Card from 'react-bootstrap/Card';
-import Button from "react-bootstrap/esm/Button";
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 
@@ -75,16 +72,16 @@ const WineModel = () => {
             <br></br>
             <Row>
                 <Col>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled = {page == 1}>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page == 1}>
                         Previous
                     </button>
                 </Col>
                 <Col>
-                <Row> <h5>Page {page} of {totalPages}</h5></Row>
-                <Row> <h6>Found {totalInstances} wines</h6></Row>
+                    <Row> <h5>Page {page} of {totalPages}</h5></Row>
+                    <Row> <h6>Found {totalInstances} wines</h6></Row>
                 </Col>
                 <Col>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled = {page == totalPages}>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page == totalPages}>
                         Next
                     </button>
                 </Col>

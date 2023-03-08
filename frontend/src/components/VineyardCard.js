@@ -19,7 +19,7 @@ const VineyardCard = (props) => {
     } = props.vineyard
     
   return (
-    <Card border="dark" style={{height:"27rem"}}>
+    <Card border="dark" style={{height:"30rem", width:"18rem"}}>
         <Card.Img variant ="top" src={image} style={{height:"50%", width:"100%", objectFit:"cover",}}/>
         <Card.Body>
             <Card.Title> {name} </Card.Title>
@@ -36,9 +36,9 @@ const VineyardCard = (props) => {
             <Button
             className="btn btn-primary stretched-link"
             variant="secondary"
-            href= {`/vineyards/${id}`}              
+            href= {`/Vineyards/${id}`}              
             >
-                See More
+                See Vineyard
             </Button>
         </Card.Footer>
     </Card>
