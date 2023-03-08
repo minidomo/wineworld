@@ -77,7 +77,7 @@ const VineyardModel = () => {
                 </Col>
                 <Col>
                 <Row> <h5>Page {page} of {totalPages}</h5></Row>
-                <Row> <h6>Our Collection of {totalInstances} Vineyards</h6></Row>
+                <Row> <h6>Found {totalInstances} vineyards</h6></Row>
                 </Col>
                 <Col>
                     <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled = {page == totalPages}>
