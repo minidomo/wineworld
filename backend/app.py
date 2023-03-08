@@ -201,7 +201,7 @@ def get_all_vineyards():
     data = {
         "page": params.page,
         "totalPages": total_pages,
-        "totalInstances":len(vineyards),
+        "totalInstances": len(vineyards),
         "length": len(vineyard_list),
         "list": vineyard_list,
     }
