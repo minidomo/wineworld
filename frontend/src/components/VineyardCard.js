@@ -11,11 +11,6 @@ const VineyardCard = (props) => {
         rating,
         reviews,
         image,
-        // latitude,
-        // longitude,
-        // wines,
-        // regions,
-        // url,
     } = props.vineyard
     
   return (
@@ -25,7 +20,7 @@ const VineyardCard = (props) => {
             <Card.Title> {name} </Card.Title>
             <Card.Subtitle> {country} </Card.Subtitle>
             <Card.Text>
-                    Price: {price}
+                    Price Level: {price}
                     <br />
                     Rating: {rating}
                     <br />

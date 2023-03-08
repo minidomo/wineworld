@@ -15,9 +15,6 @@ const WineCard = (props) => {
         rating,
         reviews,
         image,
-        // reddit,
-        // vineyards,
-        // regions,
     } = props.wine
 
     return (

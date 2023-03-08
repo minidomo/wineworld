@@ -58,7 +58,7 @@ const VineyardInstance = () => {
         <Row>
         <div className='p-5'>
             <p align = 'left'>
-            Price: {price}
+            Price Level: {price}
             <br />
             Rating: {rating}
             <br />
