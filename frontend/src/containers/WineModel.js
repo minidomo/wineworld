@@ -77,7 +77,7 @@ const WineModel = () => {
                 </Col>
             </Row>
 
-            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+            <Row md={3} className="d-flex g-4 p-4 justify-content-left">
                 {
                     wines.map((wine) => {
                         return (
