@@ -80,7 +80,7 @@ const WineModel = () => {
                     </button>
                 </Col>
                 <Col>
-                <Row> <h6>Page {page} of {totalPages}</h6></Row>
+                <Row> <h5>Page {page} of {totalPages}</h5></Row>
                 <Row> <h6>Out Collection of {totalInstances} Wines</h6></Row>
                 </Col>
                 <Col>

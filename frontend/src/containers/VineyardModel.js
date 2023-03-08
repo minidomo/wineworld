@@ -76,7 +76,7 @@ const VineyardModel = () => {
                     </button>
                 </Col>
                 <Col>
-                <Row> <h6>Page {page} of {totalPages}</h6></Row>
+                <Row> <h5>Page {page} of {totalPages}</h5></Row>
                 <Row> <h6>Our Collection of {totalInstances} Vineyards</h6></Row>
                 </Col>
                 <Col>
