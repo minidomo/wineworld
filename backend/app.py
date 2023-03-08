@@ -111,7 +111,7 @@ def get_all_wines():
     params.page = clamp(1, total_pages, params.page)
 
     indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    wine_list = [WineUtil.to_json(e) for e in wines[indices]]
+    wine_list = [WineUtil.to_json(e, small=True) for e in wines[indices]]
 
     data = {
         "page": params.page,
@@ -195,7 +195,7 @@ def get_all_vineyards():
     params.page = clamp(1, total_pages, params.page)
 
     indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    vineyard_list = [VineyardUtil.to_json(e) for e in vineyards[indices]]
+    vineyard_list = [VineyardUtil.to_json(e, small=True) for e in vineyards[indices]]
 
     data = {
         "page": params.page,
@@ -295,7 +295,7 @@ def get_all_regions():
     params.page = clamp(1, total_pages, params.page)
 
     indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    region_list = [RegionUtil.to_json(e) for e in regions[indices]]
+    region_list = [RegionUtil.to_json(e, small=True) for e in regions[indices]]
 
     data = {
         "page": params.page,
