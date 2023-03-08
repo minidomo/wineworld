@@ -1,14 +1,11 @@
 import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import {get} from '../api-example/siteapi';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import WineCard from '../components/WineCard';
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
-import Card from 'react-bootstrap/Card';
-import Button from "react-bootstrap/esm/Button";
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 
