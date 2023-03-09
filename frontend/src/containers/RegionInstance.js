@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col'
 import WineCard from '../components/WineCard';
 import VineyardCard from '../components/VineyardCard';
+import Map from '../components/Map';
+import { handleVineyardImageError } from '../util/handleImageError';
 
 
 const RegionInstance = () => {
