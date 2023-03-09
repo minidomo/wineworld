@@ -1,6 +1,5 @@
 variables:
   GIT_DEPTH: 1
-  PIPELINE_TRIGGER: /^(\s+)?pipeline.*/i
 
 stages:
   - build
@@ -17,8 +16,6 @@ build-frontend:
     - cd frontend
     - npm install
     - npm run build
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 test-backend-style:
   stage: test
@@ -27,8 +24,6 @@ test-backend-style:
     - cd backend
     - pip3 install -r requirements.txt
     - make test-style
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 test-backend-api:
   stage: test
@@ -38,8 +33,6 @@ test-backend-api:
     - pip3 install -r requirements.txt
     - cp $BACKEND_ENV_FILE .env
     - make test-api
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 postman_tests:
   stage: test
@@ -50,8 +43,6 @@ postman_tests:
     - cd backend
     - newman --version
     - newman run Postman.json
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 selenium_tests:
   stage: test
@@ -63,8 +54,6 @@ selenium_tests:
   script:
     - cd frontend
     - python3 -m unittest discover -s tests
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 jest_tests:
   stage: test
@@ -72,8 +61,6 @@ jest_tests:
   script:
     - cd frontend
     - npm test
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 frontend_style_tests:
   stage: test
@@ -82,5 +69,3 @@ frontend_style_tests:
     - cd frontend
     - npm run lint
     - npm run prettier:check
-  rules:
-    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
