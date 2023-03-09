@@ -4,11 +4,17 @@ import WineCard from "../components/WineCard";
 import RegionCard from "../components/RegionCard";
 import VineyardCard from "../components/VineyardCard";
 import DeveloperCard from "../components/DeveloperCard";
+import HomeCard from "../components/HomeCard";
 import ToolCard from "../components/ToolCard";
 import GitLabImage from "../assets/gitlab.png";
 import ApiCard from "../components/ApiCard";
+import WineImage from "../assets/wine.jpg";
 import ReactImage from "../assets/logo512.png";
-
+import { Link } from 'react-router-dom';
+import NavBar from "../components/NavBar";
+import { BrowserRouter } from "react-router-dom";
+import App from "../App.js";
+import About from "../containers/About.js";
 
 it("Init Wine", () => {
     const wine = {
@@ -211,5 +217,41 @@ it("Init Wine", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("Init NavBar", () => {
+    const component = renderer.create(<BrowserRouter><NavBar/></BrowserRouter>);
+  
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  
+  it("Init App", () => {
+    const component = renderer.create(<App/>);
+  
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("Init About", () => {
+    const component = renderer.create(<About/>);
+  
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+ 
+
+  it("Init HomeCard", () => {
+    const Home = {
+        title: "Wine",
+        image: WineImage,
+        text: "Check out some wines!",
+        link: "https://www.google.com/",
+      };
+    const component = renderer.create(<BrowserRouter><HomeCard home={Home} /></BrowserRouter>);
+  
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
 
   
