@@ -1,7 +1,8 @@
 import unittest
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 
@@ -11,11 +12,12 @@ class TestInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        service = ChromeService(executable_path=ChromeDriverManager().install())
-        # service = Service(executable_path="../chromedriver/linux64/chromedriver")
+        # service = ChromeService(executable_path=ChromeDriverManager().install())
+        service = Service(executable_path="../chromedriver/win32/chromedriver")
 
         options = webdriver.ChromeOptions()
-        options.binary_location = "C:\Program Files\Google"
+        # options.binary_location = "C:\Program Files\Google"
+        # options.binary_location = os.getcwd()
 
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         options.add_argument("--headless")

@@ -19,13 +19,13 @@ const RegionInstance = () => {
     const [tags, setTags] = useState([]);
     const [tripTypes, setTripTypes] = useState([]);
     const [image, setImage] = useState('');
-    const [imageHeight, setImageHeight] = useState(0);
-    const [imageWidth, setImageWidth] = useState(0);
+    // const [imageHeight, setImageHeight] = useState(0);
+    // const [imageWidth, setImageWidth] = useState(0);
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
     const [wines, setWines] = useState([]);
     const [vineyards, setVineyards] = useState([]);
-    const [url, setUrl] = useState('');
+    // const [url, setUrl] = useState('');
 
 
     useEffect(() => {
@@ -40,20 +40,20 @@ const RegionInstance = () => {
             setTags(response.data['tags']);
             setTripTypes(response.data['tripTypes']);
             setImage(response.data.image['url']);
-            setImageHeight(response.data.image['height']);
-            setImageWidth(response.data.image['width']);
+            // setImageHeight(response.data.image['height']);
+            // setImageWidth(response.data.image['width']);
             setLatitude(response.data.coordinates['latitude']); //check
             setLongitude(response.data.coordinates['longitude']); //check
             setWines(response.data.related['wines']);
             setVineyards(response.data.related['vineyards']);
-            setUrl(response.data['url']);
+            // setUrl(response.data['url']);
         }
         })
         .catch(errRes => {
         console.error(errRes);
         })
     return () => mounted = false;
-    }, [])
+    }, [id])
 
     return (
     <div>
