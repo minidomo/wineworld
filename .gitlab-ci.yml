@@ -59,7 +59,8 @@ selenium_tests:
 
 jest_tests:
   stage: test
-  image: python:3.10.7
+  image: node:19.6
+
   script:
-    - cd frontend/__tests__
-    - npm test --silent
+    - cd frontend
+    - npm test
