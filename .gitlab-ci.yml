@@ -16,6 +16,8 @@ build-frontend:
     - cd frontend
     - npm install
     - npm run build
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 test-backend-style:
   stage: test
@@ -24,6 +26,8 @@ test-backend-style:
     - cd backend
     - pip3 install -r requirements.txt
     - make test-style
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 test-backend-api:
   stage: test
@@ -33,16 +37,20 @@ test-backend-api:
     - pip3 install -r requirements.txt
     - cp $BACKEND_ENV_FILE .env
     - make test-api
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 postman_tests:
   stage: test
-  image: 
+  image:
     name: postman/newman:alpine
     entrypoint: [""]
   script:
     - cd backend
     - newman --version
     - newman run Postman.json
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 selenium_tests:
   stage: test
@@ -52,15 +60,18 @@ selenium_tests:
   before_script:
     - pip3 install selenium
   script:
-    - cd frontend/tests 
+    - cd frontend/tests
     - python3 homeTests.py
     - python3 instanceTests.py
     - python3 elementTests.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 jest_tests:
   stage: test
   image: node:19.6
-
   script:
     - cd frontend
     - npm test
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
