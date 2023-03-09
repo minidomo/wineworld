@@ -1,0 +1,411 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Init Api 1`] = `
+<div
+  className="card"
+  style={
+    Object {
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    src="gitlab.png"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      GitLab API
+    </div>
+    <p
+      className="card-text"
+    >
+      A Javascript library for front-end development
+    </p>
+    <a
+      href="https://docs.gitlab.com/ee/api/"
+    >
+      <button
+        className="btn btn-primary"
+        disabled={false}
+        type="button"
+      >
+        Learn More
+      </button>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Init Api 2`] = `
+<div
+  className="card"
+  style={
+    Object {
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    src="gitlab.png"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      GitLab API
+    </div>
+    <p
+      className="card-text"
+    >
+      A Javascript library for front-end development
+    </p>
+    <a
+      href="https://docs.gitlab.com/ee/api/"
+    >
+      <button
+        className="btn btn-primary"
+        disabled={false}
+        type="button"
+      >
+        Learn More
+      </button>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Init Developer 1`] = `
+<div
+  className="card"
+  style={
+    Object {
+      "height": "42rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    src="rayPic.jpg"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      Ray Yin
+    </div>
+    <p
+      className="card-text"
+    >
+       I'm a junior studying Computer Science at UT Austin. In my free time I enjoy playing volleyball and trying new restaurants.
+    </p>
+  </div>
+  <div
+    className="list-group-flush list-group"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="list-group-item"
+      data-rr-ui-event-key={null}
+      onClick={[Function]}
+    >
+      Front-end
+    </div>
+    <div
+      className="list-group-item"
+      data-rr-ui-event-key={null}
+      onClick={[Function]}
+    >
+       Commits: 
+      0
+    </div>
+    <div
+      className="list-group-item"
+      data-rr-ui-event-key={null}
+      onClick={[Function]}
+    >
+       Issues: 
+      0
+    </div>
+    <div
+      className="list-group-item"
+      data-rr-ui-event-key={null}
+      onClick={[Function]}
+    >
+       Unit Tests: 
+      10
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Init Region 1`] = `
+<div
+  className="card border-dark"
+  style={
+    Object {
+      "height": "30rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    src="https://media-cdn.tripadvisor.com/media/photo-s/19/8b/fb/16/die-neverland-ranch-war.jpg"
+    style={
+      Object {
+        "height": "50%",
+        "objectFit": "cover",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+       
+      Sta. Rita Hills
+       
+    </div>
+    <div
+      className="card-subtitle h6"
+    >
+       
+      United States
+       
+    </div>
+    <p
+      className="card-text"
+    >
+      <small>
+        Rating: 
+        4.1
+        <br />
+        Review Count: 
+        90
+        <br />
+        Trip Type: 
+        Couples, Friends getaway
+      </small>
+    </p>
+  </div>
+  <div
+    className="text-muted card-footer"
+  >
+    <a
+      className="btn btn-primary stretched-link btn btn-secondary"
+      disabled={false}
+      href="Regions/3"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      Explore Region
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Init Tool 1`] = `
+<div
+  className="card"
+  style={
+    Object {
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    src="logo512.png"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      React
+    </div>
+    <p
+      className="card-text"
+    >
+      A Javascript library for front-end development
+    </p>
+    <a
+      href="https://reactjs.org/"
+    >
+      <button
+        className="btn btn-primary"
+        disabled={false}
+        type="button"
+      >
+        Learn More
+      </button>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Init Vineyard 1`] = `
+<div
+  className="card border-dark"
+  style={
+    Object {
+      "height": "30rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    className="card-img-top"
+    src="https://s3-media4.fl.yelpcdn.com/bphoto/Sam2Wv5bvNpEtcTLNYeB3g/o.jpg"
+    style={
+      Object {
+        "height": "50%",
+        "objectFit": "cover",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+       
+      Carhartt Family Wines
+       
+    </div>
+    <div
+      className="card-subtitle h6"
+    >
+       
+      United States
+       
+    </div>
+    <p
+      className="card-text"
+    >
+      Price: 
+      2
+      <br />
+      Rating: 
+      4.5
+      <br />
+      Review Count: 
+      561
+    </p>
+  </div>
+  <div
+    className="text-muted card-footer"
+  >
+    <a
+      className="btn btn-primary stretched-link btn btn-secondary"
+      disabled={false}
+      href="/Vineyards/202"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      See Vineyard
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Init Wine 1`] = `
+<div
+  className="card border-dark"
+  style={
+    Object {
+      "height": "35rem",
+      "width": "18rem",
+    }
+  }
+>
+  <img
+    class="img-thumbnail"
+    className="card-img-top"
+    src="https://images.vivino.com/thumbs/_IiGnDHSSaOc9u9c9CzVSA_pb_x300.png"
+    style={
+      Object {
+        "height": "50%",
+        "objectFit": "contain",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+       
+      <small>
+         
+        Beckstoffer Dr. Crane Vineyard 2012
+         
+      </small>
+       
+    </div>
+    <div
+      className="card-subtitle h6"
+    >
+       
+      Red
+       Wine 
+    </div>
+    <p
+      className="card-text"
+    >
+      Country: 
+      United States
+      <br />
+      Region: 
+      St. Helena
+      <br />
+      Winery: 
+      Realm
+      <br />
+      Rating: 
+      4.9
+      <br />
+      Reviews: 
+      32
+    </p>
+  </div>
+  <div
+    className="card-footer"
+  >
+    <a
+      className="btn btn-primary stretched-link btn btn-secondary"
+      disabled={false}
+      href="/Wines/310"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      View Wine
+    </a>
+  </div>
+</div>
+`;
