@@ -24,7 +24,7 @@
 | Phase | Project Leader |
 | :---: | -------------- |
 |   1   | JB Ladera      |
-|   2   |                |
+|   2   | Saniya Shaju   |
 |   3   |                |
 |   4   |                |
 
@@ -49,8 +49,8 @@
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
 | Austin Barret   |                            |                            |
-| JB Ladera       |                            |                            |
-| Ryan Parappuram |                            |                            |
+| JB Ladera       |             25             |             57             |
+| Ryan Parappuram |             16             |             20             |
 | Saniya Shaju    |                            |                            |
 | Joshua Yin      |                            |                            |
 
