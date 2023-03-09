@@ -3,10 +3,15 @@ FROM ubuntu:latest
 RUN apt-get -y update 
 RUN apt-get install -y python3 python3-pip wget
 
+ENV NODE_VERSION 19.6.1
+
 RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
     && . ~/.nvm/nvm.sh \
-    && nvm install v19.6.1 \
-    && npm install -g npm@latest
+    && nvm install $NODE_VERSION \
+    && nvm use $NODE_VERSION 
+
+ENV NODE_PATH ~/.nvm/v$NODE_VERSION/lib/node_modules
+ENV PATH ~/.nvm/v$NODE_VERSION/bin:$PATH
 
 # https://github.com/joyzoursky/docker-python-chromedriver/blob/master/py-debian/3.10/Dockerfile
 # install google chrome
@@ -19,9 +24,6 @@ RUN apt-get install -y google-chrome-stable
 ENV DISPLAY=:99
 
 WORKDIR /.tempbuild
-
-# COPY package*.json ./
-# RUN npm ci
 
 COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
