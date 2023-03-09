@@ -4,5 +4,6 @@
             "column": 120
         }
     ],
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black"
 }

@@ -1,13 +1,27 @@
-FROM node:19.7.0
+FROM ubuntu:latest
 
-RUN apt-get update -y
-RUN apt-get install -y python3
-RUN apt-get install -y python3-pip
+RUN apt-get -y update 
+RUN apt-get install -y python3 python3-pip wget
+
+RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash \
+    && . ~/.nvm/nvm.sh \
+    && nvm install v19.6.1 \
+    && npm install -g npm@latest
+
+# https://github.com/joyzoursky/docker-python-chromedriver/blob/master/py-debian/3.10/Dockerfile
+# install google chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get -y update
+RUN apt-get install -y google-chrome-stable
+
+# set display port to avoid crash
+ENV DISPLAY=:99
 
 WORKDIR /.tempbuild
 
-COPY package*.json ./
-RUN npm ci
+# COPY package*.json ./
+# RUN npm ci
 
 COPY requirements.txt ./
 RUN pip3 install -r requirements.txt

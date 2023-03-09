@@ -54,16 +54,14 @@ postman_tests:
 
 selenium_tests:
   stage: test
-  image: python:3.10.7
+  image: python:3.10.6
   services:
     - selenium/standalone-chrome
   before_script:
     - pip3 install selenium
   script:
-    - cd frontend/tests
-    - python3 homeTests.py
-    - python3 instanceTests.py
-    - python3 elementTests.py
+    - cd frontend
+    - python3 -m unittest discover -s tests
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
