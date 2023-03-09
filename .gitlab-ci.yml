@@ -1,5 +1,6 @@
 variables:
   GIT_DEPTH: 1
+  PIPELINE_TRIGGER: /^(\s+)?pipeline.*/i
 
 stages:
   - build
@@ -17,7 +18,7 @@ build-frontend:
     - npm install
     - npm run build
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 test-backend-style:
   stage: test
@@ -27,7 +28,7 @@ test-backend-style:
     - pip3 install -r requirements.txt
     - make test-style
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 test-backend-api:
   stage: test
@@ -38,7 +39,7 @@ test-backend-api:
     - cp $BACKEND_ENV_FILE .env
     - make test-api
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 postman_tests:
   stage: test
@@ -50,22 +51,20 @@ postman_tests:
     - newman --version
     - newman run Postman.json
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 selenium_tests:
   stage: test
-  image: python:3.10.7
+  image: python:3.10.6
   services:
     - selenium/standalone-chrome
   before_script:
     - pip3 install selenium
   script:
-    - cd frontend/tests
-    - python3 homeTests.py
-    - python3 instanceTests.py
-    - python3 elementTests.py
+    - cd frontend
+    - python3 -m unittest discover -s tests
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 jest_tests:
   stage: test
@@ -74,7 +73,7 @@ jest_tests:
     - cd frontend
     - npm test
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
 
 frontend_style_tests:
   stage: test
@@ -84,4 +83,4 @@ frontend_style_tests:
     - npm run lint
     - npm run prettier:check
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_DESCRIPTION =~ $PIPELINE_TRIGGER
