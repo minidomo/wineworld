@@ -1,13 +1,12 @@
-import React from 'react'
-import axios from "axios";
-import { useState, useEffect } from 'react';
-// import Button from 'react-bootstrap/esm/Button'
-import Row from 'react-bootstrap/esm/Row'
-import Col from 'react-bootstrap/esm/Col'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+// Import Button from 'react-bootstrap/esm/Button'
+import Col from 'react-bootstrap/esm/Col';
+import Row from 'react-bootstrap/esm/Row';
 import { useParams } from 'react-router-dom';
-// import Container from 'react-bootstrap/esm/Container';
-import VineyardCard from '../components/VineyardCard';
+// Import Container from 'react-bootstrap/esm/Container';
 import RegionCard from '../components/RegionCard';
+import VineyardCard from '../components/VineyardCard';
 import { handleWineImageError } from '../util/handleImageError';
 
 const WineInstance = () => {
@@ -26,27 +25,28 @@ const WineInstance = () => {
 
     useEffect(() => {
         let mounted = true;
-        axios.get(`https://api.wineworld.me/wines/${id}`)
+        axios
+            .get(`https://api.wineworld.me/wines/${id}`)
             .then(response => {
                 if (mounted) {
-                    setName(response.data['name']);
-                    setCountry(response.data['country']);
-                    setRegion(response.data['region']);
-                    setType(response.data['type']);
-                    setWinery(response.data['winery']);
-                    setRating(response.data['rating']);
-                    setReviews(response.data['reviews']);
-                    setImage(response.data['image']);
-                    setReddit(response.data['redditPosts']);
-                    setVineyards(response.data.related['vineyards']);
-                    setRegions(response.data.related['regions']);
+                    setName(response.data.name);
+                    setCountry(response.data.country);
+                    setRegion(response.data.region);
+                    setType(response.data.type);
+                    setWinery(response.data.winery);
+                    setRating(response.data.rating);
+                    setReviews(response.data.reviews);
+                    setImage(response.data.image);
+                    setReddit(response.data.redditPosts);
+                    setVineyards(response.data.related.vineyards);
+                    setRegions(response.data.related.regions);
                 }
             })
             .catch(errRes => {
                 console.error(errRes);
             });
-        return () => mounted = false;
-    }, [id])
+        return () => (mounted = false);
+    }, [id]);
 
     return (
         <div>
@@ -57,9 +57,8 @@ const WineInstance = () => {
             <h5>{type} Wine</h5>
             <Row>
                 <span class="border-bottom border-secondary">
-                    <div className='p-5'>
+                    <div className="p-5">
                         <p align="center">
-
                             <h6>
                                 Country: {country}
                                 <br />
@@ -75,58 +74,46 @@ const WineInstance = () => {
                                 <br />
                                 Reviews: {reviews}
                             </h6>
-
-
                         </p>
-
                     </div>
-
                 </span>
             </Row>
             <Row md={10} className="p-4 g-4">
                 <h5 align="left">Related Vineyards</h5>
-                {
-                    vineyards.map((vineyard) => {
-                        return (
-                            <Col>
-                                <VineyardCard vineyard={vineyard} />
-                            </Col>
-
-                        )
-                    })
-                }
+                {vineyards.map(vineyard => (
+                    <Col>
+                        <VineyardCard vineyard={vineyard} />
+                    </Col>
+                ))}
             </Row>
             <Row md={10} className="p-4 g-4">
                 <Col>
                     <h5 align="left">Related Regions</h5>
-                    {
-                        regions.map((region) => {
-                            return (
-                                <Col>
-                                    <RegionCard region={region} />
-                                </Col>
-
-                            )
-                        })
-                    }
+                    {regions.map(region_data => (
+                        <Col>
+                            <RegionCard region={region_data} />
+                        </Col>
+                    ))}
                 </Col>
-
             </Row>
             <Row className="p-4 g-4">
-
                 <h5 align="left">Learn More About {type} Wine</h5>
-                {
-                    reddit.map((reddit_link) => {
-                        return (
-                            <Col>
-                                <iframe title="reddit_frame" id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
-                            </Col>
-
-                        )
-                    })
-                }
+                {reddit.map(reddit_link => (
+                    <Col>
+                        <iframe
+                            title="reddit_frame"
+                            id={'reddit-embed'}
+                            src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`}
+                            sandbox={'allow-scripts allow-same-origin allow-popups'}
+                            style={{ border: 'none' }}
+                            height={'249'}
+                            width={'640'}
+                            scrolling={'no'}
+                        ></iframe>
+                    </Col>
+                ))}
             </Row>
         </div>
-    )
-}
-export default WineInstance
+    );
+};
+export default WineInstance;

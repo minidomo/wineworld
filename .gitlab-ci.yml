@@ -75,3 +75,13 @@ jest_tests:
     - npm test
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+frontend_style_tests:
+  stage: test
+  image: node:19.6
+  script:
+    - cd frontend
+    - npm run lint
+    - npm run prettier:check
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
