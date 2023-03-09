@@ -1,6 +1,7 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
 import Button from "react-bootstrap/esm/Button";
+import { Link } from "react-router-dom";
 
 const RegionCard = (props) => {
     const {
@@ -19,8 +20,8 @@ const RegionCard = (props) => {
 
 
     return (
-        <Card border= 'dark' style={{height:"30rem", width:"18rem"}}>
-            <Card.Img variant ="top" src={image.url} style={{height:"50%", width:"100%", objectFit:"cover",}}/>
+        <Card border='dark' style={{ height: "30rem", width: "18rem" }}>
+            <Card.Img variant="top" src={image.url} style={{ height: "50%", width: "100%", objectFit: "cover", }} />
             <Card.Body>
                 <Card.Title> {name} </Card.Title>
                 <Card.Subtitle> {country} </Card.Subtitle>
@@ -36,17 +37,11 @@ const RegionCard = (props) => {
                     </small>
                 </Card.Text>
             </Card.Body>
-            <Card.Footer className="text-muted">
-                <Button
-                className="btn btn-primary stretched-link"
-                variant="secondary"
-                href={`Regions/${id}`}                
-                >
-                    Explore Region
-                </Button>
-            </Card.Footer>
+            <div class="card-footer">
+                <Link to={`/Regions/${id}`} class="btn btn-secondary stretched-link" >Explore Region</Link>
+            </div>
         </Card>
     )
-  }
- 
-  export default RegionCard
+}
+
+export default RegionCard

@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import VineyardCard from '../components/VineyardCard';
 import RegionCard from '../components/RegionCard';
-
+import DarkMode from '../components/DarkMode';
 
 
 const WineInstance = () => {
@@ -79,23 +79,35 @@ const WineInstance = () => {
                 <Col>
                     <img src={image} class="img-fluid" alt="..."></img>
                     <h3>{name}</h3>
-                    <h5 class="text-muted">{type} Wine</h5>
+                    <h5>{type} Wine</h5>
                 </Col>
+                <span class="border-bottom border-secondary">
                 <Col>
                     <div className='p-5'>
-                        <p align="left">
-                            Country: {country}
-                            <br />
-                            Region: {region}
-                            <br />
-                            Winery: {winery}
-                            <br />
-                            Rating: {rating}
-                            <br />
-                            Reviews: {reviews}
+                        <p align="center">
+                            
+                                <h6>
+                                    Country: {country}
+                                    <br />
+                                    <br />
+                                    Region: {region}
+                                    <br />
+                                    <br />
+                                    Winery: {winery}
+                                    <br />
+                                    <br />
+                                    Rating: {rating}
+                                    <br />
+                                    <br />
+                                    Reviews: {reviews}
+                                </h6>
+                            
+
                         </p>
+
                     </div>
                 </Col>
+                </span>
             </Row>
             <Row md={10} className="p-4 g-4">
                 <h5 align="left">Related Vineyards</h5>
@@ -126,16 +138,15 @@ const WineInstance = () => {
                 </Col>
 
             </Row>
-            {/* <Col>
-                <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
-            </Col> */}
-            <Row>
+            <Row className="p-4 g-4">
+
+                <h5 align="left">Learn More About {type} Wine</h5>
                 {
                     reddit.map((reddit_link) => {
                         // console.log(reddit_link);
                         return (
                             <Col>
-                                <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
+                                <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
                             </Col>
 
                         )

@@ -41,15 +41,9 @@ const WineCard = (props) => {
                         
                 </Card.Text>
             </Card.Body>
-            <Card.Footer>
-                <Button
-                className="btn btn-primary stretched-link"
-                variant="secondary"
-                href= {`/Wines/${id}`}              
-                >
-                    View Wine
-                </Button>
-            </Card.Footer>
+            <div class="card-footer">
+                <Link to = {`/Wines/${id}`} class="btn btn-secondary stretched-link" >View Wine</Link>
+            </div>
         </Card>
   )
 }
