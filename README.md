@@ -52,7 +52,7 @@
 | JB Ladera       |             25             |             57             |
 | Ryan Parappuram |             16             |             20             |
 | Saniya Shaju    |             25             |             35             |
-| Joshua Yin      |                            |                            |
+| Joshua Yin      |             20             |             25             |
 
 **Phase 3**
 
