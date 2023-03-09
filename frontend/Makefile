@@ -3,3 +3,8 @@ build-guitest:
 
 guitest:
 	docker run --rm wineworld-guitest
+
+style-py:
+	ruff . --fix
+	isort --profile black .
+	black .
