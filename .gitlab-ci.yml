@@ -53,9 +53,9 @@ selenium_tests:
     - pip3 install selenium
   script:
     - cd frontend/tests 
-    - python3 homeTest.py
-    - python3 instanceTest.py
-    - python3 elementTest.py
+    - python3 homeTests.py
+    - python3 instanceTests.py
+    - python3 elementTests.py
 
 jest_tests:
   stage: test
