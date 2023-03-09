@@ -21,7 +21,6 @@ const fetchGitLabData = async () => {
         totalIssues = 0,
         totalUnitTests = 0;
     await client.get('projects/43416454/repository/commits?per_page=9999').then(response => {
-        console.log(response.data);
         teamData.forEach(member => {
             member.commits = 0;
             member.issues = 0;

@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 const DeveloperCard = props => {
-    console.log(props);
     const { name, bio, role, commits, issues, unit_tests, image } = props.devCard;
 
     return (

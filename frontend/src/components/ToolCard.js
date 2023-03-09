@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const ToolCard = props => {
-    console.log(props);
     const { name, image, text, url } = props.tool;
 
     return (
