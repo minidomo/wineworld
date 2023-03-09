@@ -7,9 +7,11 @@ import Col from 'react-bootstrap/esm/Col'
 import WineCard from '../components/WineCard';
 import VineyardCard from '../components/VineyardCard';
 import Map from '../components/Map';
+import { handleRegionImageError } from '../util/handleImageError';
+
 
 const RegionInstance = () => {
-    let {id} = useParams();
+    let { id } = useParams();
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');
     const [rating, setRating] = useState(0);
@@ -40,8 +42,8 @@ const RegionInstance = () => {
             setImage(response.data.image['url']);
             setImageHeight(response.data.image['height']);
             setImageWidth(response.data.image['width']);
-            setLatitude(response.data.coordinates['latitude']);
-            setLongitude(response.data.coordinates['longitude']);
+            setLatitude(response.data.coordinates['latitude']); //check
+            setLongitude(response.data.coordinates['longitude']); //check
             setWines(response.data.related['wines']);
             setVineyards(response.data.related['vineyards']);
             setUrl(response.data['url']);
@@ -55,7 +57,7 @@ const RegionInstance = () => {
 
     return (
     <div>
-        <img src={image} class="img-fluid" alt="..."></img>
+        <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
         <h3>{name}</h3>
         <h6>{country}</h6>
         <Row>
@@ -103,7 +105,7 @@ const RegionInstance = () => {
             lng = {longitude}
             />
         </Row>
-
+    
     </div>
     )
 }
