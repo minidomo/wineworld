@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import VineyardCard from '../components/VineyardCard';
 import RegionCard from '../components/RegionCard';
+import { handleWineImageError } from '../util/handleImageError';
 
 
 const WineInstance = () => {
@@ -52,7 +53,7 @@ const WineInstance = () => {
         <div>
             <Row>
                 <Col>
-                    <img src={image} class="img-fluid" alt="..."></img>
+                    <img src={image} class="img-fluid" alt="..." onError={handleWineImageError}></img>
                     <h3>{name}</h3>
                     <h5 class="text-muted">{type} Wine</h5>
                 </Col>
