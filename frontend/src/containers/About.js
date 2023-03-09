@@ -14,7 +14,6 @@ import { toolData } from '../components/ToolData.js';
 
 const client = axios.create({
     baseURL: 'https://gitlab.com/api/v4/',
-    headers: { 'PRIVATE-TOKEN': 'glpat-8b25mfH7tj6qdzrFRfv1' },
 });
 
 const fetchGitLabData = async () => {

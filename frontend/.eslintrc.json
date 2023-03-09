@@ -126,13 +126,6 @@
                 "allowSingleLine": true
             }
         ],
-        "capitalized-comments": [
-            "error",
-            "always",
-            {
-                "ignoreConsecutiveComments": true
-            }
-        ],
         "comma-dangle": [
             "error",
             "always-multiline"

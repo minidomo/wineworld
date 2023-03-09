@@ -26,7 +26,7 @@ const teamData = [
             'and drive cars!',
         commits: 0,
         issues: 0,
-        unit_tests: 10,
+        unit_tests: 23,
         image: RyanImage,
     },
     {
@@ -38,7 +38,7 @@ const teamData = [
             'my spare time.',
         commits: 0,
         issues: 0,
-        unit_tests: 10,
+        unit_tests: 23,
         image: JBImage,
     },
     {
@@ -62,7 +62,7 @@ const teamData = [
             'reading books.',
         commits: 0,
         issues: 0,
-        unit_tests: 10,
+        unit_tests: 0,
         image: AustinImage,
     },
 ];
