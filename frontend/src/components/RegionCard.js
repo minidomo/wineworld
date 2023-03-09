@@ -1,6 +1,6 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
-import Button from "react-bootstrap/esm/Button";
+// import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import { handleRegionImageError } from "../util/handleImageError";
 
@@ -11,18 +11,18 @@ const RegionCard = (props) => {
         country,
         rating,
         reviews,
-        tags,
+        // tags,
         tripTypes,
         image,
         // imageHeight,
         // imageWidth,
-        url,
+        // url,
     } = props.region
 
 
     return (
-        <Card border= 'dark' style={{height:"30rem", width:"18rem"}}>
-            <Card.Img variant ="top" src={image.url} style={{height:"50%", width:"100%", objectFit:"cover",}}/>
+        <Card border='dark' style={{ height: "30rem", width: "18rem" }}>
+            <Card.Img variant="top" src={image.url} style={{ height: "50%", width: "100%", objectFit: "cover", }} onError={handleRegionImageError} />
             <Card.Body>
                 <Card.Title> {name} </Card.Title>
                 <Card.Subtitle> {country} </Card.Subtitle>

@@ -1,9 +1,6 @@
 import React from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 
-
-
-
 const Map = ({lat, lng}) => {
    
     const mapStyles = {
@@ -18,9 +15,9 @@ const Map = ({lat, lng}) => {
     }    
 
 
-    const defaultCenter = {
-    lat: -3.745, lng: -38.523, zoom: 12
-    }
+    // const defaultCenter = {
+    // lat: -3.745, lng: -38.523, zoom: 12
+    // }
 
 
     const myPos = {    

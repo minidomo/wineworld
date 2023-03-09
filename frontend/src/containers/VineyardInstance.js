@@ -21,7 +21,8 @@ const VineyardInstance = () => {
     const [longitude, setLongitude] = useState(0);
     const [wines, setWines] = useState([]);
     const [regions, setRegions] = useState([]);
-    const [url, setUrl] = useState('');
+    // const [url, setUrl] = useState('');
+    
 
 
     useEffect(() => {
@@ -37,7 +38,7 @@ const VineyardInstance = () => {
                     setImage(response.data['image']);
                     setLatitude(response.data.coordinates['latitude']);
                     setLongitude(response.data.coordinates['longitude']);
-                    setUrl(response.data['url']);
+                    // setUrl(response.data['url']);
                     setWines(response.data.related['wines']);
                     setRegions(response.data.related['regions']);
                 }
@@ -47,7 +48,7 @@ const VineyardInstance = () => {
             })
 
         return () => mounted = false;
-    }, [])
+    }, [id])
 
 
     return (

@@ -88,7 +88,7 @@ const fetchGitLabData = async () => {
 
 
 const About = () => {
-    const [teamList, setTeamList] = useState([]);
+    // const [teamList, setTeamList] = useState([]);
     const [totalCommits, setTotalCommits] = useState(0);
     const [totalIssues, setTotalIssues] = useState(0);
 
@@ -98,7 +98,7 @@ const About = () => {
             const gitLabData = await fetchGitLabData();
             setTotalCommits(gitLabData.totalCommits);
             setTotalIssues(gitLabData.totalIssues);
-            setTeamList(gitLabData.teamInfo);
+            // setTeamList(gitLabData.teamInfo);
         };
         fetchData();
     }, []);
@@ -109,7 +109,7 @@ const About = () => {
             <Container className="p-4">
             </Container>
 
-            <Container className="p-4" style={{ backgroundColor: '#8174F4' }}>
+            <Container className="p-4" style={{ backgroundColor: '#AAA' }}>
                 <h1 className="d-flex justify-content-center p-4 ">Welcome to WineWorld!</h1>
                 <p className="mx-auto">
                     WineWorld is an innovative platform that provides a comprehensive guide to the world of wine, vineyards, and wine regions.

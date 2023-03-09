@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/esm/Col'
 import WineCard from '../components/WineCard';
 import VineyardCard from '../components/VineyardCard';
 import Map from '../components/Map';
-import { handleVineyardImageError } from '../util/handleImageError';
+import { handleRegionImageError } from '../util/handleImageError';
 
 
 const RegionInstance = () => {
@@ -57,7 +57,7 @@ const RegionInstance = () => {
 
     return (
     <div>
-        <img src={image} class="img-fluid" alt="..."></img>
+        <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
         <h3>{name}</h3>
         <h6>{country}</h6>
         <Row>

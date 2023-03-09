@@ -1,15 +1,14 @@
 import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/esm/Button'
+// import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import { useParams } from 'react-router-dom';
-import Container from 'react-bootstrap/esm/Container';
+// import Container from 'react-bootstrap/esm/Container';
 import VineyardCard from '../components/VineyardCard';
 import RegionCard from '../components/RegionCard';
 import { handleWineImageError } from '../util/handleImageError';
-import DarkMode from '../components/DarkMode';
 
 const WineInstance = () => {
     let { id } = useParams();
@@ -47,7 +46,7 @@ const WineInstance = () => {
                 console.error(errRes);
             });
         return () => mounted = false;
-    }, [])
+    }, [id])
 
     return (
         <div>
@@ -121,7 +120,7 @@ const WineInstance = () => {
                     reddit.map((reddit_link) => {
                         return (
                             <Col>
-                                <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
+                                <iframe title="reddit_frame" id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
                             </Col>
 
                         )

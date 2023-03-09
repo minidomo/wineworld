@@ -1,14 +1,14 @@
 import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import { get } from '../api-example/siteapi';
+// import { get } from '../api-example/siteapi';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import VineyardCard from '../components/VineyardCard';
-import Spinner from "react-bootstrap/Spinner";
+// import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+// import Dropdown from 'react-bootstrap/Dropdown'
+// import DropdownButton from 'react-bootstrap/DropdownButton'
 
 function clamp(minVal, maxVal, val) {
     if (val < minVal)
@@ -41,12 +41,12 @@ const VineyardModel = () => {
         } else {
             setPage(clamp(1, totalPages, page));
         }
-    }, [page])
+    }, [totalPages, page])
 
     return (
         <Container>
             <h1 class="display-4">Vineyards</h1>
-            <Row>
+            {/* <Row>
                 <Col>
                     <DropdownButton id="dropdown-basic-button" variant="secondary" size="sm" menuVariant="dark" title="Sort By" className="mt-2">
                         <Dropdown.Item href="#/action-1">Name</Dropdown.Item>
@@ -67,11 +67,11 @@ const VineyardModel = () => {
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </form>
                 </Col>
-            </Row>
+            </Row> */}
             <br></br>
             <Row>
                 <Col>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page == 1}>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
                         Previous
                     </button>
                 </Col>
@@ -80,7 +80,7 @@ const VineyardModel = () => {
                     <Row> <h6>Found {totalInstances} vineyards</h6></Row>
                 </Col>
                 <Col>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page == totalPages}>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
                         Next
                     </button>
                 </Col>
