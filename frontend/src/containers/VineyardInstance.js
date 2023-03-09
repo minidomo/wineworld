@@ -22,7 +22,7 @@ const VineyardInstance = () => {
     const [wines, setWines] = useState([]);
     const [regions, setRegions] = useState([]);
     // const [url, setUrl] = useState('');
-    
+
 
 
     useEffect(() => {
@@ -54,18 +54,26 @@ const VineyardInstance = () => {
     return (
         <div>
             <img src={image} class="img-fluid" alt="..." onError={handleVineyardImageError}></img>
+            <br />
+            <br />
             <h3>{name}</h3>
-            <h6>{country}</h6>
+            <h5>{country}</h5>
             <Row>
-                <div className='p-5'>
-                    <p align='left'>
-                        Price Level: {price}
-                        <br />
-                        Rating: {rating}
-                        <br />
-                        Reviews: {reviews}
-                    </p>
-                </div>
+                <span class="border-bottom border-secondary">
+                    <div className='p-5'>
+                        <p align='center'>
+                            <h6>
+                                Price Level: {price}
+                                <br />
+                                <br />
+                                Rating: {rating}
+                                <br />
+                                <br />
+                                Reviews: {reviews}
+                            </h6>
+                        </p>
+                    </div>
+                </span>
             </Row>
             <Row md={10} className="p-4 g-4">
                 <h5 align="left">Related Wines</h5>

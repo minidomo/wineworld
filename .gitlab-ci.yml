@@ -43,3 +43,13 @@ postman_tests:
     - cd backend
     - newman --version
     - newman run Postman.json
+
+frontend_python_tests:
+  stage: frontend_tests
+  image: python:3.10.7
+  services:
+    - selenium/standalone-chrome
+  before_script:
+    - pip3 install selenium
+  script:
+    - cd front-end && python3 guitests.py

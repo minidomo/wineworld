@@ -12,7 +12,7 @@ class TestInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        service = Service(executable_path="../chromedriver/linux64/chromedriver")
+        service = Service(executable_path="../chromedriver/win32/chromedriver")
         # driver = webdriver.Chrome(service=service)
 
         options = webdriver.ChromeOptions()
@@ -32,5 +32,50 @@ class TestInstances(unittest.TestCase):
     def tearDownClass(self):
         self.driver.quit()
 
+    def test_HomeAboutLink(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
+        element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
+        element.click()
+
+        # WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="navbarText"]/ul/li[1]/a')))
+        element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[1]/a')
+        self.driver.execute_script("arguments[0].click();", element)
+
+        self.assertEqual(self.driver.current_url, URL + "About")
+
     def test_HomeWinesLink(self):
-        
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
+        element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
+        element.click()
+
+        # WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="navbarText"]/ul/li[2]/a')))
+        element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[2]/a')
+        self.driver.execute_script("arguments[0].click();", element)
+
+        self.assertEqual(self.driver.current_url, URL + "Wines")
+
+    def test_HomeVineyardsLink(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
+        element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
+        element.click()
+
+        # WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="navbarText"]/ul/li[3]/a')))
+        element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[3]/a')
+        self.driver.execute_script("arguments[0].click();", element)
+
+        self.assertEqual(self.driver.current_url, URL + "Vineyards")
+
+    def test_HomeRegionsLink(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'navbar-brand')))
+        element = self.driver.find_element(By.CLASS_NAME, 'navbar-brand')
+        element.click()
+
+        # WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="navbarText"]/ul/li[4]/a')))
+        element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[4]/a')
+        self.driver.execute_script("arguments[0].click();", element)
+
+        self.assertEqual(self.driver.current_url, URL + "Regions")
+    
+
+if __name__ == '__main__':
+    unittest.main()

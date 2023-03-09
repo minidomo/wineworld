@@ -50,38 +50,37 @@ const WineInstance = () => {
 
     return (
         <div>
+            <img src={image} class="img-fluid" alt="..." onError={handleWineImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{type} Wine</h5>
             <Row>
-                <Col>
-                    <img src={image} class="img-fluid" alt="..." onError={handleWineImageError}></img>
-                    <h3>{name}</h3>
-                    <h5>{type} Wine</h5>
-                </Col>
                 <span class="border-bottom border-secondary">
-                <Col>
                     <div className='p-5'>
                         <p align="center">
-                            
-                                <h6>
-                                    Country: {country}
-                                    <br />
-                                    <br />
-                                    Region: {region}
-                                    <br />
-                                    <br />
-                                    Winery: {winery}
-                                    <br />
-                                    <br />
-                                    Rating: {rating}
-                                    <br />
-                                    <br />
-                                    Reviews: {reviews}
-                                </h6>
-                            
+
+                            <h6>
+                                Country: {country}
+                                <br />
+                                <br />
+                                Region: {region}
+                                <br />
+                                <br />
+                                Winery: {winery}
+                                <br />
+                                <br />
+                                Rating: {rating}
+                                <br />
+                                <br />
+                                Reviews: {reviews}
+                            </h6>
+
 
                         </p>
 
                     </div>
-                </Col>
+
                 </span>
             </Row>
             <Row md={10} className="p-4 g-4">

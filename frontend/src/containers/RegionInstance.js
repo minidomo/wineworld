@@ -29,84 +29,94 @@ const RegionInstance = () => {
 
 
     useEffect(() => {
-    let mounted = true;
-    axios.get(`https://api.wineworld.me/regions/${id}`)
-        .then(response => {
-        if(mounted) {
-            setName(response.data['name']);
-            setCountry(response.data['country']);
-            setRating(response.data['rating']);
-            setReviews(response.data['reviews']);
-            setTags(response.data['tags']);
-            setTripTypes(response.data['tripTypes']);
-            setImage(response.data.image['url']);
-            // setImageHeight(response.data.image['height']);
-            // setImageWidth(response.data.image['width']);
-            setLatitude(response.data.coordinates['latitude']); //check
-            setLongitude(response.data.coordinates['longitude']); //check
-            setWines(response.data.related['wines']);
-            setVineyards(response.data.related['vineyards']);
-            // setUrl(response.data['url']);
-        }
-        })
-        .catch(errRes => {
-        console.error(errRes);
-        })
-    return () => mounted = false;
+        let mounted = true;
+        axios.get(`https://api.wineworld.me/regions/${id}`)
+            .then(response => {
+                if (mounted) {
+                    setName(response.data['name']);
+                    setCountry(response.data['country']);
+                    setRating(response.data['rating']);
+                    setReviews(response.data['reviews']);
+                    setTags(response.data['tags']);
+                    setTripTypes(response.data['tripTypes']);
+                    setImage(response.data.image['url']);
+                    // setImageHeight(response.data.image['height']);
+                    // setImageWidth(response.data.image['width']);
+                    setLatitude(response.data.coordinates['latitude']); //check
+                    setLongitude(response.data.coordinates['longitude']); //check
+                    setWines(response.data.related['wines']);
+                    setVineyards(response.data.related['vineyards']);
+                    // setUrl(response.data['url']);
+                }
+            })
+            .catch(errRes => {
+                console.error(errRes);
+            })
+        return () => mounted = false;
     }, [id])
 
     return (
-    <div>
-        <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
-        <h3>{name}</h3>
-        <h6>{country}</h6>
-        <Row>
-        <div className='p-5'>
-            <p align ="left">
-            Rating: {rating}
+        <div>
+            <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
             <br />
-            Reviews: {reviews}
             <br />
-            Trip Type: {tripTypes.join(", ")}
-            <br />
-            Tags: {tags.join(", ")}
-            </p>
+            <h3>{name}</h3>
+            <h5>{country}</h5>
+            <Row>
+                <span class="border-bottom border-secondary">
+
+                    <div className='p-5'>
+                        <h6>
+                            <p align="center">
+                                Rating: {rating}
+                                <br />
+                                <br />
+                                Reviews: {reviews}
+                                <br />
+                                <br />
+                                Trip Type: {tripTypes.join(", ")}
+                                <br />
+                                <br />
+                                Tags: {tags.join(", ")}
+                            </p>
+                        </h6>
+                    </div>
+                </span>
+            </Row>
+            <Row md={10} className="p-4 g-4">
+                <h5 align="left">Related Wines</h5>
+                {
+                    wines.map((wine) => {
+                        return (
+                            <Col>
+                                <WineCard wine={wine} />
+                            </Col>
+
+                        )
+                    })
+                }
+            </Row>
+            <Row md={10} className="p-4 g-4">
+                <h5 align="left">Related Vineyards</h5>
+                {
+                    vineyards.map((vineyard) => {
+                        return (
+                            <Col>
+                                <VineyardCard vineyard={vineyard} />
+                            </Col>
+
+                        )
+                    })
+                }
+            </Row>
+            <Row>
+                <Map
+                    lat={latitude}
+                    lng={longitude}
+                />
+            </Row>
+
         </div>
-        </Row>
-        <Row md = {10} className = "p-4 g-4">
-            <h5 align="left">Related Wines</h5>
-            {
-                wines.map((wine) => {
-                    return (
-                        <Col>
-                            <WineCard wine = {wine} />
-                        </Col>
-                        
-                    )
-                })
-            }
-        </Row>
-        <Row md = {10} className = "p-4 g-4">
-            <h5 align="left">Related Vineyards</h5>
-            {
-                vineyards.map((vineyard) => {
-                    return (
-                        <Col>
-                            <VineyardCard vineyard = {vineyard} />
-                        </Col>
-                        
-                    )
-                })
-            }
-        </Row>
-        <Row>
-            <Map
-            lat = {latitude}
-            lng = {longitude}
-            />
-        </Row>
-    
-    </div>
     )
 }
 export default RegionInstance

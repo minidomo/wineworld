@@ -226,7 +226,7 @@ const About = () => {
                             <Card.Body>
                                 <Card.Title>Austin Barret</Card.Title>
                                 <Card.Text>
-                                    I'm a sophomore computer science major at UT Austin. My hobbies include cooking, windsurfing, and reading books.
+                                    I'm a sophomore computer science major at UT Austin. My hobbies include windsurfing, writing music, and hanging out with friends.
                                 </Card.Text>
                             </Card.Body>
                             <ListGroup className="list-group-flush">
@@ -256,7 +256,7 @@ const About = () => {
                                     A Javascript library for front-end development
                                 </Card.Text>
                                 <a href="https://reactjs.org/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -271,7 +271,7 @@ const About = () => {
                                     Collaborative software development platform
                                 </Card.Text>
                                 <a href="https://about.gitlab.com/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -286,7 +286,7 @@ const About = () => {
                                     Designated communication platform
                                 </Card.Text>
                                 <a href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -301,7 +301,7 @@ const About = () => {
                                     Bootstrap framework for React
                                 </Card.Text>
                                 <a href="https://react-bootstrap.github.io/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -316,7 +316,7 @@ const About = () => {
                                     Platform for API development and testing
                                 </Card.Text>
                                 <a href="https://www.postman.com/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -335,7 +335,7 @@ const About = () => {
                                     Hosting platform for WineWorld
                                 </Card.Text>
                                 <a href="https://aws.amazon.com/amplify/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -350,7 +350,7 @@ const About = () => {
                                     Domain name registration for
                                 </Card.Text>
                                 <a href="https://www.namecheap.com/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -365,7 +365,7 @@ const About = () => {
                                     Popular code editing software
                                 </Card.Text>
                                 <a href="https://code.visualstudio.com/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -380,7 +380,7 @@ const About = () => {
                                     Javascript package manager
                                 </Card.Text>
                                 <a href="https://www.npmjs.com/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -395,7 +395,7 @@ const About = () => {
                                     Routing from amplify to domain
                                 </Card.Text>
                                 <a href="https://aws.amazon.com/route53/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -417,7 +417,7 @@ const About = () => {
                                     GitLab API was used to find repository statistics
                                 </Card.Text>
                                 <a href="https://docs.gitlab.com/ee/api/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -432,7 +432,7 @@ const About = () => {
                                     Wines API was used to find general information about wines such as price, name, and country
                                 </Card.Text>
                                 <a href="https://sampleapis.com/api-list/wines">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -447,7 +447,7 @@ const About = () => {
                                     Yelp Fusion API was used to find information about vineyards like ratings based on reviews and price level
                                 </Card.Text>
                                 <a href="https://fusion.yelp.com/">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
@@ -462,7 +462,7 @@ const About = () => {
                                     Tripadvisor API was used to find information about regions including country, ratings, and relevant tags
                                 </Card.Text>
                                 <a href="https://www.tripadvisor.com/developers">
-                                    <Button variant="primary">Learn More</Button>
+                                    <Button variant="secondary">Learn More</Button>
                                 </a>
                             </Card.Body>
                         </Card>
