@@ -52,7 +52,14 @@ selenium_tests:
   before_script:
     - pip3 install selenium
   script:
-    - cd front-end/tests 
+    - cd frontend/tests 
     - python3 homeTest.py
     - python3 instanceTest.py
     - python3 elementTest.py
+
+  jest_tests:
+    stage: test
+    image: python:3.10.7
+    script:
+      - cd frontend/__tests__
+      - npm test --silent
