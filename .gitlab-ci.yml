@@ -57,9 +57,9 @@ selenium_tests:
     - python3 instanceTest.py
     - python3 elementTest.py
 
-  jest_tests:
-    stage: test
-    image: python:3.10.7
-    script:
-      - cd frontend/__tests__
-      - npm test --silent
+jest_tests:
+  stage: test
+  image: python:3.10.7
+  script:
+    - cd frontend/__tests__
+    - npm test --silent
