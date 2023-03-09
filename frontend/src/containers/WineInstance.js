@@ -1,15 +1,14 @@
 import React from 'react'
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/esm/Button'
+// import Button from 'react-bootstrap/esm/Button'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
 import { useParams } from 'react-router-dom';
-import Container from 'react-bootstrap/esm/Container';
+// import Container from 'react-bootstrap/esm/Container';
 import VineyardCard from '../components/VineyardCard';
 import RegionCard from '../components/RegionCard';
-
-
+import { handleWineImageError } from '../util/handleImageError';
 
 const WineInstance = () => {
     let { id } = useParams();
@@ -47,55 +46,42 @@ const WineInstance = () => {
                 console.error(errRes);
             });
         return () => mounted = false;
-    }, [])
+    }, [id])
 
     return (
         <div>
+            <img src={image} class="img-fluid" alt="..." onError={handleWineImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{type} Wine</h5>
             <Row>
-                {/* <table class="table">
-                <tbody>
-                    <tr>
-                        <th scope='row'>Country</th>
-                        <td>{country}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Region</th>
-                        <td>{region}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Winery</th>
-                        <td>{winery}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Rating</th>
-                        <td>{rating}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Reviews</th>
-                        <td>{reviews}</td>
-                    </tr>
-                </tbody>
-            </table> */}
-                <Col>
-                    <img src={image} class="img-fluid" alt="..."></img>
-                    <h3>{name}</h3>
-                    <h5 class="text-muted">{type} Wine</h5>
-                </Col>
-                <Col>
+                <span class="border-bottom border-secondary">
                     <div className='p-5'>
-                        <p align="left">
-                            Country: {country}
-                            <br />
-                            Region: {region}
-                            <br />
-                            Winery: {winery}
-                            <br />
-                            Rating: {rating}
-                            <br />
-                            Reviews: {reviews}
+                        <p align="center">
+
+                            <h6>
+                                Country: {country}
+                                <br />
+                                <br />
+                                Region: {region}
+                                <br />
+                                <br />
+                                Winery: {winery}
+                                <br />
+                                <br />
+                                Rating: {rating}
+                                <br />
+                                <br />
+                                Reviews: {reviews}
+                            </h6>
+
+
                         </p>
+
                     </div>
-                </Col>
+
+                </span>
             </Row>
             <Row md={10} className="p-4 g-4">
                 <h5 align="left">Related Vineyards</h5>
@@ -126,16 +112,14 @@ const WineInstance = () => {
                 </Col>
 
             </Row>
-            {/* <Col>
-                <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
-            </Col> */}
-            <Row>
+            <Row className="p-4 g-4">
+
+                <h5 align="left">Learn More About {type} Wine</h5>
                 {
                     reddit.map((reddit_link) => {
-                        // console.log(reddit_link);
                         return (
                             <Col>
-                                <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
+                                <iframe title="reddit_frame" id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
                             </Col>
 
                         )
