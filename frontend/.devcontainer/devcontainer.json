@@ -1,7 +1,7 @@
 {
 	"build": {
 		"context": "../",
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "../docker/dev/Dockerfile"
 	},
 	"appPort": 3000,
 	"customizations": {
