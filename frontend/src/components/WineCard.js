@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { handleWineImageError } from "../util/handleImageError";
 
 const WineCard = (props) => {
+    console.log(props);
     const {
         id,
         name,
