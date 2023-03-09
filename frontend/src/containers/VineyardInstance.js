@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col'
-import Button from 'react-bootstrap/esm/Button'
 import WineCard from '../components/WineCard';
 import RegionCard from '../components/RegionCard';
+import Map from '../components/Map';
 
 
 const VineyardInstance = () => {
@@ -35,11 +35,11 @@ const VineyardInstance = () => {
             setRating(response.data['rating']);
             setReviews(response.data['reviews']);
             setImage(response.data['image']);
-            setLatitude(response.data.coordinates['latitude']); //check
-            setLongitude(response.data.coordinates['longitude']); //check
+            setLatitude(response.data.coordinates['latitude']);
+            setLongitude(response.data.coordinates['longitude']);
             setUrl(response.data['url']);
-            setWines(response.data.related['wines']); //check
-            setRegions(response.data.related['regions']); //check
+            setWines(response.data.related['wines']);
+            setRegions(response.data.related['regions']);
         }
         })
         .catch(errRes => {
@@ -58,7 +58,7 @@ const VineyardInstance = () => {
         <Row>
         <div className='p-5'>
             <p align = 'left'>
-            Price: {price}
+            Price Level: {price}
             <br />
             Rating: {rating}
             <br />
@@ -92,6 +92,13 @@ const VineyardInstance = () => {
                 })
             }
         </Row>
+        <Row>
+            <Map
+            lat = {latitude}
+            lng = {longitude}
+            />
+        </Row>
+
     </div>
     )
 }

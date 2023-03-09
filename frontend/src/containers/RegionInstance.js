@@ -4,10 +4,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col'
-import Button from 'react-bootstrap/esm/Button'
 import WineCard from '../components/WineCard';
 import VineyardCard from '../components/VineyardCard';
-
+import Map from '../components/Map';
 
 const RegionInstance = () => {
     let {id} = useParams();
@@ -41,8 +40,8 @@ const RegionInstance = () => {
             setImage(response.data.image['url']);
             setImageHeight(response.data.image['height']);
             setImageWidth(response.data.image['width']);
-            setLatitude(response.data.coordinates['latitude']); //check
-            setLongitude(response.data.coordinates['longitude']); //check
+            setLatitude(response.data.coordinates['latitude']);
+            setLongitude(response.data.coordinates['longitude']);
             setWines(response.data.related['wines']);
             setVineyards(response.data.related['vineyards']);
             setUrl(response.data['url']);
@@ -98,6 +97,13 @@ const RegionInstance = () => {
                 })
             }
         </Row>
+        <Row>
+            <Map
+            lat = {latitude}
+            lng = {longitude}
+            />
+        </Row>
+
     </div>
     )
 }

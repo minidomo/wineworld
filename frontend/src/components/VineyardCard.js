@@ -12,20 +12,15 @@ const VineyardCard = (props) => {
         rating,
         reviews,
         image,
-        // latitude,
-        // longitude,
-        // wines,
-        // regions,
-        // url,
     } = props.vineyard
-
-    return (
-        <Card border="dark" style={{ height: "30rem", width: "18rem" }}>
-            <Card.Img variant="top" src={image} style={{ height: "50%", width: "100%", objectFit: "cover", }} />
-            <Card.Body>
-                <Card.Title> {name} </Card.Title>
-                <Card.Subtitle> {country} </Card.Subtitle>
-                <Card.Text>
+    
+  return (
+    <Card border="dark" style={{height:"30rem", width:"18rem"}}>
+        <Card.Img variant ="top" src={image} style={{height:"50%", width:"100%", objectFit:"cover",}}/>
+        <Card.Body>
+            <Card.Title> {name} </Card.Title>
+            <Card.Subtitle> {country} </Card.Subtitle>
+            <Card.Text>
                     Price: {price}
                     <br />
                     Rating: {rating}

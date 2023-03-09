@@ -10,7 +10,6 @@ import VineyardCard from '../components/VineyardCard';
 import RegionCard from '../components/RegionCard';
 import DarkMode from '../components/DarkMode';
 
-
 const WineInstance = () => {
     let { id } = useParams();
     const [name, setName] = useState('');
@@ -52,30 +51,6 @@ const WineInstance = () => {
     return (
         <div>
             <Row>
-                {/* <table class="table">
-                <tbody>
-                    <tr>
-                        <th scope='row'>Country</th>
-                        <td>{country}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Region</th>
-                        <td>{region}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Winery</th>
-                        <td>{winery}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Rating</th>
-                        <td>{rating}</td>
-                    </tr>
-                    <tr>
-                        <th scope='row'>Reviews</th>
-                        <td>{reviews}</td>
-                    </tr>
-                </tbody>
-            </table> */}
                 <Col>
                     <img src={image} class="img-fluid" alt="..."></img>
                     <h3>{name}</h3>
@@ -143,7 +118,6 @@ const WineInstance = () => {
                 <h5 align="left">Learn More About {type} Wine</h5>
                 {
                     reddit.map((reddit_link) => {
-                        // console.log(reddit_link);
                         return (
                             <Col>
                                 <iframe id={"reddit-embed"} src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`} sandbox={"allow-scripts allow-same-origin allow-popups"} style={{ border: "none" }} height={"249"} width={"640"} scrolling={"no"}></iframe>
