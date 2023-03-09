@@ -51,7 +51,7 @@
 | Austin Barret   |             20             |             25             |
 | JB Ladera       |             25             |             57             |
 | Ryan Parappuram |             16             |             20             |
-| Saniya Shaju    |                            |                            |
+| Saniya Shaju    |             25             |             35             |
 | Joshua Yin      |                            |                            |
 
 **Phase 3**
