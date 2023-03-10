@@ -1,38 +1,38 @@
-import React from "react";
+import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import {Link} from 'react-router-dom';
+// Import Button from 'react-bootstrap/esm/Button';
+import { Link } from 'react-router-dom';
+import { handleVineyardImageError } from '../util/handleImageError';
 
+const VineyardCard = props => {
+    const { id, name, country, price, rating, reviews, image } = props.vineyard;
 
-const VineyardCard = () => {
-  return (
-    <div>
-        <Row md ={10} className="p-4 g-4 justify-content-center">
-            <Col>
-                <Card border = 'dark'>
-                    <Card.Body>
-                        <Card.Title> Vineyard Name</Card.Title>
-                        <Card.Subtitle> Country </Card.Subtitle>
-                        <Card.Text>
-                            Price:
-                            Rating:
-                            Review Count:
-                            Image placeholder
-                            Region link placeholder
-                        </Card.Text>
+    return (
+        <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
+            <Card.Img
+                variant="top"
+                src={image}
+                style={{ height: '50%', width: '100%', objectFit: 'cover' }}
+                onError={handleVineyardImageError}
+            />
+            <Card.Body>
+                <Card.Title> {name} </Card.Title>
+                <Card.Subtitle> {country} </Card.Subtitle>
+                <Card.Text>
+                    Price Level: {price}
+                    <br />
+                    Rating: {rating}
+                    <br />
+                    Review Count: {reviews}
+                </Card.Text>
+            </Card.Body>
 
-                    </Card.Body>
-                    <Card.Footer className="text-muted">
-                        <li>
-                            <Link to = {`/Vineyards/${1}`}> See more</Link>
-                        </li>
-                    </Card.Footer>
-                </Card>
-            </Col>
-        </Row>
-    </div>
-  )
-}
-
-export default VineyardCard
+            <div class="card-footer">
+                <Link to={`/Vineyards/${id}`} class="btn btn-secondary stretched-link">
+                    See Vineyard
+                </Link>
+            </div>
+        </Card>
+    );
+};
+export default VineyardCard;

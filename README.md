@@ -15,7 +15,7 @@
 | Phase |                 Git SHA                  |
 | :---: | :--------------------------------------: |
 |   1   | e807eedc3a72e6cf686c10ed2f606094ec2b5612 |
-|   2   |                                          |
+|   2   | 871829eb345b733598da119ac163abe4cc985062 |
 |   3   |                                          |
 |   4   |                                          |
 
@@ -24,7 +24,7 @@
 | Phase | Project Leader |
 | :---: | -------------- |
 |   1   | JB Ladera      |
-|   2   |                |
+|   2   | Saniya Shaju   |
 |   3   |                |
 |   4   |                |
 
@@ -48,11 +48,11 @@
 
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
-| Austin Barret   |                            |                            |
-| JB Ladera       |                            |                            |
-| Ryan Parappuram |                            |                            |
-| Saniya Shaju    |                            |                            |
-| Joshua Yin      |                            |                            |
+| Austin Barret   |             20             |             25             |
+| JB Ladera       |             25             |             57             |
+| Ryan Parappuram |             25             |             35             |
+| Saniya Shaju    |             25             |             35             |
+| Joshua Yin      |             20             |             25             |
 
 **Phase 3**
 

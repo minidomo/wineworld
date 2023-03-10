@@ -1,0 +1,9 @@
+{
+    "editor.rulers": [
+        {
+            "column": 120
+        }
+    ],
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black"
+}
