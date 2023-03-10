@@ -20,46 +20,38 @@ const fetchGitLabData = async () => {
     let totalCommits = 0,
         totalIssues = 0,
         totalUnitTests = 0;
-    await client.get('projects/43416454/repository/commits?per_page=9999').then(response => {
+
+    await client.get('projects/43416454/repository/contributors').then(response => {
         teamData.forEach(member => {
             member.commits = 0;
             member.issues = 0;
             totalUnitTests += member.unit_tests;
         });
+
         response.data.forEach(element => {
-            const { author_name } = element;
+            const { name, commits } = element;
             teamData.forEach(member => {
-                if (member.name === author_name || member.gitlab_id === author_name) {
-                    member.commits++;
+                if (member.name === name || member.alt_names.has(name)) {
+                    member.commits += commits;
+                    totalCommits += commits;
                 }
             });
         });
-        totalCommits = response.data.length;
     });
 
-    await client.get('projects/43416454/issues_statistics?author_username=jrayyin').then(response => {
-        teamData[0].issues = response.data.statistics.counts.all;
-        totalIssues += response.data.statistics.counts.all;
-    });
+    const issueStatisticsPromises = teamData.map(member =>
+        client.get('projects/43416454/issues_statistics', {
+            params: {
+                author_username: member.gitlab_id,
+            },
+        }),
+    );
 
-    await client.get('projects/43416454/issues_statistics?author_username=saniyashaju').then(response => {
-        teamData[1].issues = response.data.statistics.counts.all;
-        totalIssues += response.data.statistics.counts.all;
-    });
-
-    await client.get('projects/43416454/issues_statistics?author_username=minidomo').then(response => {
-        teamData[2].issues = response.data.statistics.counts.all;
-        totalIssues += response.data.statistics.counts.all;
-    });
-
-    await client.get('projects/43416454/issues_statistics?author_username=rparappuram').then(response => {
-        teamData[3].issues = response.data.statistics.counts.all;
-        totalIssues += response.data.statistics.counts.all;
-    });
-
-    await client.get('projects/43416454/issues_statistics?author_username=acbarret').then(response => {
-        teamData[4].issues = response.data.statistics.counts.all;
-        totalIssues += response.data.statistics.counts.all;
+    const issueStatistics = await Promise.all(issueStatisticsPromises);
+    issueStatistics.forEach((response, i) => {
+        const count = response.data.statistics.counts.all;
+        teamData[i].issues = count;
+        totalIssues += count;
     });
 
     return {
@@ -74,6 +66,7 @@ const About = () => {
     const [teamList, setTeamList] = useState([]);
     const [totalCommits, setTotalCommits] = useState(0);
     const [totalIssues, setTotalIssues] = useState(0);
+    const [totalTotalTests, setTotalTests] = useState(0);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
@@ -83,6 +76,7 @@ const About = () => {
                 setTotalCommits(gitLabData.totalCommits);
                 setTotalIssues(gitLabData.totalIssues);
                 setTeamList(gitLabData.teamData);
+                setTotalTests(gitLabData.totalUnitTests);
                 setLoaded(true);
             }
         };
@@ -110,7 +104,7 @@ const About = () => {
                         <h2>Total Issues: {totalIssues}</h2>
                     </Col>
                     <Col className="d-flex justify-content-center">
-                        <h2>Total Tests: 0</h2>
+                        <h2>Total Tests: {totalTotalTests}</h2>
                     </Col>
                 </Row>
 
