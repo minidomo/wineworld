@@ -1,62 +1,6 @@
 {
     "data": [
         {
-            "name": "Rutherford Wine Shoppe",
-            "price": 2,
-            "rating": 4.5,
-            "reviews": 15,
-            "image": "https://s3-media2.fl.yelpcdn.com/bphoto/cJDDrsoFZs_GLzfXz5eMSA/o.jpg",
-            "country": "United States",
-            "url": "https://www.yelp.com/biz/rutherford-wine-shoppe-rutherford",
-            "longitude": -74.11248,
-            "latitude": 40.8244,
-            "regions": [
-                "Rutherford"
-            ]
-        },
-        {
-            "name": "Make Wine With Us",
-            "price": 2,
-            "rating": 4.5,
-            "reviews": 28,
-            "image": "https://s3-media3.fl.yelpcdn.com/bphoto/8MFYX231srwj9eLjqjkhYg/o.jpg",
-            "country": "United States",
-            "url": "https://www.yelp.com/biz/make-wine-with-us-wallington",
-            "longitude": -74.1025676014328,
-            "latitude": 40.8430890524582,
-            "regions": [
-                "Rutherford"
-            ]
-        },
-        {
-            "name": "Corrado's Wine and Beer Making",
-            "price": 2,
-            "rating": 3.5,
-            "reviews": 22,
-            "image": "https://s3-media2.fl.yelpcdn.com/bphoto/SMvOl4XsPrPAwxxgJ1Jizw/o.jpg",
-            "country": "United States",
-            "url": "https://www.yelp.com/biz/corrados-wine-and-beer-making-clifton",
-            "longitude": -74.1515001,
-            "latitude": 40.8894974,
-            "regions": [
-                "Rutherford"
-            ]
-        },
-        {
-            "name": "Wine Country",
-            "price": 2,
-            "rating": 2.5,
-            "reviews": 9,
-            "image": "https://s3-media4.fl.yelpcdn.com/bphoto/1Q71bfCYc_lheRjqvxTv8A/o.jpg",
-            "country": "United States",
-            "url": "https://www.yelp.com/biz/wine-country-saddle-brook-2",
-            "longitude": -74.08727,
-            "latitude": 40.89618,
-            "regions": [
-                "Rutherford"
-            ]
-        },
-        {
             "name": "Eberle Winery",
             "price": 2,
             "rating": 4.5,
@@ -1519,7 +1463,6 @@
             "latitude": 44.0536563,
             "regions": [
                 "Châteauneuf-du-Pape",
-                "Tavel",
                 "Gigondas"
             ]
         },
@@ -1535,7 +1478,6 @@
             "latitude": 44.1047,
             "regions": [
                 "Châteauneuf-du-Pape",
-                "Tavel",
                 "Gigondas"
             ]
         },
@@ -1564,28 +1506,8 @@
             "longitude": 4.7353773,
             "latitude": 46.9375443,
             "regions": [
-                "Chassagne-Montrachet 1er Cru 'Cailleret'",
-                "Chassagne-Montrachet Premier Cru",
-                "Chassagne-Montrachet 1er Cru 'Les Grandes Ruchottes'",
                 "Auxey-Duresses",
-                "Chassagne-Montrachet 1er Cru 'Les Vergers'",
-                "Chassagne-Montrachet 1er Cru 'Abbaye de Morgeot'",
-                "Montrachet Grand Cru",
-                "Chassagne-Montrachet 1er Cru 'Morgeot'"
-            ]
-        },
-        {
-            "name": "Société Moillard Grivot",
-            "price": 2,
-            "rating": 5.0,
-            "reviews": 1,
-            "image": "https://s3-media3.fl.yelpcdn.com/bphoto/W2XdbVh3LSVqQOTg0PWbIA/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/soci%C3%A9t%C3%A9-moillard-grivot-nuits-saint-georges-2",
-            "longitude": 4.95125,
-            "latitude": 47.13924,
-            "regions": [
-                "La Tâche Grand Cru"
+                "Montrachet Grand Cru"
             ]
         },
         {
@@ -1604,62 +1526,6 @@
             ]
         },
         {
-            "name": "Champagne Roger Brun",
-            "price": 3,
-            "rating": 5.0,
-            "reviews": 2,
-            "image": "https://s3-media4.fl.yelpcdn.com/bphoto/kidjbzlccwIhzNSoKeZexA/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/champagne-roger-brun-ay",
-            "longitude": 4.00324,
-            "latitude": 49.05419,
-            "regions": [
-                "Champagne Grand Cru 'Aÿ'"
-            ]
-        },
-        {
-            "name": "Champagne de Castellane",
-            "price": 4,
-            "rating": 5.0,
-            "reviews": 6,
-            "image": "https://s3-media1.fl.yelpcdn.com/bphoto/qzfvhf1zRYKQFA-RnUuaew/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/champagne-de-castellane-epernay",
-            "longitude": 3.96822,
-            "latitude": 49.04268,
-            "regions": [
-                "Champagne Grand Cru 'Aÿ'"
-            ]
-        },
-        {
-            "name": "Château Prieuré-Lichine",
-            "price": 2,
-            "rating": 5.0,
-            "reviews": 7,
-            "image": "https://s3-media1.fl.yelpcdn.com/bphoto/M51raW5x4PInGL-XJMicdw/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/ch%C3%A2teau-prieur%C3%A9-lichine-margaux-cantenac",
-            "longitude": -0.6561904,
-            "latitude": 45.02913160000001,
-            "regions": [
-                "Margaux"
-            ]
-        },
-        {
-            "name": "Château Giscours",
-            "price": 2,
-            "rating": 5.0,
-            "reviews": 2,
-            "image": "https://s3-media3.fl.yelpcdn.com/bphoto/cDt8ipUj-VBJg8AlmgpI1g/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/ch%C3%A2teau-giscours-labarde-5",
-            "longitude": -0.675788,
-            "latitude": 45.041083,
-            "regions": [
-                "Margaux"
-            ]
-        },
-        {
             "name": "Wine in Provence",
             "price": 2,
             "rating": 5.0,
@@ -1671,21 +1537,6 @@
             "latitude": 43.5296486568716,
             "regions": [
                 "Coteaux d'Aix-en-Provence"
-            ]
-        },
-        {
-            "name": "Château Gaudrelle",
-            "price": 1,
-            "rating": 5.0,
-            "reviews": 2,
-            "image": "https://s3-media1.fl.yelpcdn.com/bphoto/N8MeeE40-mHGViQgaLSqTA/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/ch%C3%A2teau-gaudrelle-rochecorbon",
-            "longitude": 0.7381,
-            "latitude": 47.4061089,
-            "regions": [
-                "Vouvray",
-                "Montlouis-sur-Loire"
             ]
         },
         {
@@ -1742,8 +1593,7 @@
             "longitude": 4.75389,
             "latitude": 46.9464111,
             "regions": [
-                "Auxey-Duresses",
-                "Chassagne-Montrachet 1er Cru 'Abbaye de Morgeot'"
+                "Auxey-Duresses"
             ]
         },
         {
@@ -1789,20 +1639,6 @@
             ]
         },
         {
-            "name": "Chateau Figeac",
-            "price": 4,
-            "rating": 5.0,
-            "reviews": 3,
-            "image": "https://s3-media1.fl.yelpcdn.com/bphoto/uiBfW9lzjanDjbk8rrVHJA/o.jpg",
-            "country": "France",
-            "url": "https://www.yelp.com/biz/chateau-figeac-saint-%C3%A9milion-2",
-            "longitude": -0.20162,
-            "latitude": 44.91502,
-            "regions": [
-                "Pomerol"
-            ]
-        },
-        {
             "name": "Chateau le Chatelet",
             "price": 3,
             "rating": 5.0,
@@ -1813,8 +1649,6 @@
             "longitude": -0.163398839754564,
             "latitude": 44.8953307634323,
             "regions": [
-                "Pomerol",
-                "Saint-Émilion Grand Cru",
                 "Saint-Émilion"
             ]
         },
@@ -1942,8 +1776,7 @@
             "longitude": -8.89570903778076,
             "latitude": 38.5253219604492,
             "regions": [
-                "Palmela",
-                "Setúbal"
+                "Palmela"
             ]
         },
         {
@@ -1971,8 +1804,7 @@
             "longitude": -9.0153904,
             "latitude": 38.5181313,
             "regions": [
-                "Palmela",
-                "Setúbal"
+                "Palmela"
             ]
         },
         {
@@ -2113,22 +1945,7 @@
             "longitude": 8.34748,
             "latitude": 44.8547,
             "regions": [
-                "Malvasia di Castelnuovo don Bosco",
                 "Brachetto d'Acqui"
-            ]
-        },
-        {
-            "name": "Cascina Albano",
-            "price": 1,
-            "rating": 5.0,
-            "reviews": 1,
-            "image": "https://s3-media4.fl.yelpcdn.com/bphoto/nzsxj4EuwExuEhWLzgYB8A/o.jpg",
-            "country": "Italy",
-            "url": "https://www.yelp.com/biz/cascina-albano-barbaresco",
-            "longitude": 8.08686063067398,
-            "latitude": 44.7255814625333,
-            "regions": [
-                "Barbaresco"
             ]
         },
         {
@@ -2753,48 +2570,6 @@
             "latitude": -33.976983,
             "regions": [
                 "Margaret River"
-            ]
-        },
-        {
-            "name": "Viña Cousiño Macul",
-            "price": 2,
-            "rating": 4.5,
-            "reviews": 11,
-            "image": "https://s3-media4.fl.yelpcdn.com/bphoto/No1QmZ7xNrnyKY_ho5o7Cw/o.jpg",
-            "country": "Chile",
-            "url": "https://www.yelp.com/biz/vi%C3%B1a-cousi%C3%B1o-macul-santiago",
-            "longitude": -70.5623458180606,
-            "latitude": -33.4985071376208,
-            "regions": [
-                "Puente Alto"
-            ]
-        },
-        {
-            "name": "Concha y Toro",
-            "price": 3,
-            "rating": 3.5,
-            "reviews": 20,
-            "image": "https://s3-media3.fl.yelpcdn.com/bphoto/ASwDmN_8brsHLkDOhaswHg/o.jpg",
-            "country": "Chile",
-            "url": "https://www.yelp.com/biz/concha-y-toro-pirque",
-            "longitude": -70.5740485328668,
-            "latitude": -33.6354231442139,
-            "regions": [
-                "Puente Alto"
-            ]
-        },
-        {
-            "name": "Viña Santa Rita",
-            "price": 2,
-            "rating": 4.0,
-            "reviews": 5,
-            "image": "https://s3-media1.fl.yelpcdn.com/bphoto/08a3J3qYNFCXM0koHdROsg/o.jpg",
-            "country": "Chile",
-            "url": "https://www.yelp.com/biz/vi%C3%B1a-santa-rita-buin",
-            "longitude": -70.6764020978394,
-            "latitude": -33.7248480335069,
-            "regions": [
-                "Puente Alto"
             ]
         },
         {
