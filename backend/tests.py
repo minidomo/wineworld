@@ -4,6 +4,9 @@ from typing import Any
 
 import requests
 from dotenv import load_dotenv
+from werkzeug.test import TestResponse
+
+from app import app
 
 load_dotenv()
 
@@ -506,6 +509,68 @@ class RegionIdTests(unittest.TestCase):
             cur_name: str = regions[i]["name"].lower()
             next_name: str = regions[i + 1]["name"].lower()
             self.assertTrue(cur_name <= next_name)
+
+
+class RegionLimitTests(unittest.TestCase):
+    endpoint = "/regions/limits"
+
+    def setUp(self) -> None:
+        self.ctx = app.app_context()
+        self.ctx.push()
+        self.client = app.test_client()
+
+    def tearDown(self) -> None:
+        self.ctx.pop()
+
+    def test_status_code_200(self):
+        res: TestResponse = self.client.get(RegionLimitTests.endpoint)
+        self.assertEqual(res.status_code, 200)
+
+    def test_format(self):
+        res: JsonObject = self.client.get(RegionLimitTests.endpoint).get_json()
+
+        self.assertEqual(type(res["rating"]), dict)
+        self.assertEqual(type(res["reviews"]), dict)
+        self.assertEqual(type(res["tripTypes"]), list)
+        self.assertEqual(type(res["tags"]), list)
+        self.assertEqual(type(res["countries"]), list)
+        self.assertEqual(type(res["sort"]), list)
+
+        self.assertEqual(type(res["rating"]["min"]), float)
+        self.assertEqual(type(res["rating"]["max"]), float)
+        self.assertEqual(type(res["reviews"]["min"]), int)
+
+        trip_types: list[str] = res["tripTypes"]
+        self.assertGreater(len(trip_types), 0)
+        self.assertEqual(type(trip_types[0]), str)
+        for i in range(len(trip_types) - 1):
+            self.assertTrue(trip_types[i] <= trip_types[i + 1])
+
+        tags: list[str] = res["tags"]
+        self.assertGreater(len(tags), 0)
+        self.assertEqual(type(tags[0]), str)
+        for i in range(len(tags) - 1):
+            self.assertTrue(tags[i] <= tags[i + 1])
+
+        countries: list[str] = res["countries"]
+        self.assertGreater(len(countries), 0)
+        self.assertEqual(type(countries[0]), str)
+        for i in range(len(countries) - 1):
+            self.assertTrue(countries[i] <= countries[i + 1])
+
+        # TODO implement sorting first
+        # sort_methods: list[str] = res["sort"]
+        # self.assertGreater(len(sort_methods), 0)
+        # self.assertEqual(type(sort_methods[0]), str)
+
+    def test_values(self):
+        res: JsonObject = self.client.get(RegionLimitTests.endpoint).get_json()
+
+        self.assertEqual(res["rating"]["min"], 0.0)
+        self.assertEqual(res["rating"]["max"], 5.0)
+        self.assertEqual(res["reviews"]["min"], 0)
+
+        # TODO check sort values
 
 
 if __name__ == "__main__":
