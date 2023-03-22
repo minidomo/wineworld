@@ -95,6 +95,7 @@ class RegionParams:
         self.end_reviews = request.args.get("endReviews", type=int)
         self.tags = request.args.getlist("tags")
         self.trip_types = request.args.getlist("tripTypes")
+        self.sort = request.args.get("sort", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:
