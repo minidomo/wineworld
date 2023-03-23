@@ -3,6 +3,10 @@ from typing import Any
 from urllib.parse import urlencode
 
 from app import app
+from sort_method_data import region_sort_methods
+from pyuca import Collator
+
+collator = Collator()
 
 JsonObject = dict[str, Any]
 
@@ -13,6 +17,10 @@ def create_url(url: str, params: JsonObject | None = None):
     if params is None:
         return url
     return f"{url}?{urlencode(params,True)}"
+
+
+def is_alphabetical_order(reverse: bool, *elements: str) -> bool:
+    return sorted(elements, key=collator.sort_key, reverse=reverse) == list(elements)
 
 
 class WineAllTests(unittest.TestCase):
@@ -443,9 +451,7 @@ class RegionAllTests(unittest.TestCase):
                 self.assertTrue(trip_type in trip_types)
 
     def test_sort(self):
-        # json files have booleans but are 'true' and 'false' whereas python's booleans are 'True' and 'False'
-        # using 'True' or 'False' in params will not convert to 'true' or 'false', so just type it as a string
-        res = self.client.get(create_url(RegionAllTests.endpoint, {"nameSort": "true"})).get_json()
+        res = self.client.get(create_url(RegionAllTests.endpoint, {"sort": "name_asc"})).get_json()
 
         regions: list[JsonObject] = res["list"]
         self.assertGreater(len(regions), 0)
@@ -453,12 +459,10 @@ class RegionAllTests(unittest.TestCase):
         for i in range(len(regions) - 1):
             cur_name: str = regions[i]["name"].lower()
             next_name: str = regions[i + 1]["name"].lower()
-            self.assertTrue(cur_name <= next_name)
+            self.assertTrue(is_alphabetical_order(False, cur_name, next_name))
 
     def test_sort_reverse(self):
-        # json files have booleans but are 'true' and 'false' whereas python's booleans are 'True' and 'False'
-        # using 'True' or 'False' in params will not convert to 'true' or 'false', so just type it as a string
-        res = self.client.get(create_url(RegionAllTests.endpoint, {"nameSort": "false"})).get_json()
+        res = self.client.get(create_url(RegionAllTests.endpoint, {"sort": "name_desc"})).get_json()
 
         regions: list[JsonObject] = res["list"]
         self.assertGreater(len(regions), 0)
@@ -466,7 +470,7 @@ class RegionAllTests(unittest.TestCase):
         for i in range(len(regions) - 1):
             cur_name: str = regions[i]["name"].lower()
             next_name: str = regions[i + 1]["name"].lower()
-            self.assertTrue(cur_name >= next_name)
+            self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
 
     def test_mix_1(self):
         country_query = ["United States", "Portugal"]
@@ -476,12 +480,12 @@ class RegionAllTests(unittest.TestCase):
         start_reviews = 50
 
         params: dict[str, Any] = {
-            "nameSort": "true",
             "country": country_query,
             "tripTypes": trip_types_query,
             "tags": tags_query,
             "endRating": end_rating,
             "startReviews": start_reviews,
+            "sort": "rating_desc",
         }
 
         res = self.client.get(create_url(RegionAllTests.endpoint, params)).get_json()
@@ -509,9 +513,9 @@ class RegionAllTests(unittest.TestCase):
 
         # checking sort
         for i in range(len(regions) - 1):
-            cur_name: str = regions[i]["name"].lower()
-            next_name: str = regions[i + 1]["name"].lower()
-            self.assertTrue(cur_name <= next_name)
+            cur_rating: float = regions[i]["rating"]
+            next_rating: float = regions[i + 1]["rating"]
+            self.assertTrue(cur_rating >= next_rating)
 
 
 class RegionIdTests(unittest.TestCase):
@@ -593,7 +597,7 @@ class RegionLimitTests(unittest.TestCase):
         self.assertEqual(type(res["tripTypes"]), list)
         self.assertEqual(type(res["tags"]), list)
         self.assertEqual(type(res["countries"]), list)
-        self.assertEqual(type(res["sort"]), list)
+        self.assertEqual(type(res["sorts"]), list)
 
         self.assertEqual(type(res["rating"]["min"]), float)
         self.assertEqual(type(res["rating"]["max"]), float)
@@ -603,24 +607,25 @@ class RegionLimitTests(unittest.TestCase):
         self.assertGreater(len(trip_types), 0)
         self.assertEqual(type(trip_types[0]), str)
         for i in range(len(trip_types) - 1):
-            self.assertTrue(trip_types[i] <= trip_types[i + 1])
+            self.assertTrue(is_alphabetical_order(False, trip_types[i], trip_types[i + 1]))
 
         tags: list[str] = res["tags"]
         self.assertGreater(len(tags), 0)
         self.assertEqual(type(tags[0]), str)
         for i in range(len(tags) - 1):
-            self.assertTrue(tags[i] <= tags[i + 1])
+            self.assertTrue(is_alphabetical_order(False, tags[i], tags[i + 1]))
 
         countries: list[str] = res["countries"]
         self.assertGreater(len(countries), 0)
         self.assertEqual(type(countries[0]), str)
         for i in range(len(countries) - 1):
-            self.assertTrue(countries[i] <= countries[i + 1])
+            self.assertTrue(is_alphabetical_order(False, countries[i], countries[i + 1]))
 
-        # TODO implement sorting first
-        # sort_methods: list[str] = res["sort"]
-        # self.assertGreater(len(sort_methods), 0)
-        # self.assertEqual(type(sort_methods[0]), str)
+        sort_methods: list[dict] = res["sorts"]
+        self.assertGreater(len(sort_methods), 0)
+        self.assertEqual(type(sort_methods[0]), dict)
+        for i in range(len(sort_methods) - 1):
+            self.assertTrue(sort_methods[i]["id"] <= sort_methods[i + 1]["id"])
 
     def test_values(self):
         res: JsonObject = self.client.get(RegionLimitTests.endpoint).get_json()
@@ -629,7 +634,9 @@ class RegionLimitTests(unittest.TestCase):
         self.assertEqual(res["rating"]["max"], 5.0)
         self.assertEqual(res["reviews"]["min"], 0)
 
-        # TODO check sort values
+        sort_methods: list[JsonObject] = res["sorts"]
+        for sort_method in sort_methods:
+            self.assertTrue(sort_method["id"] in region_sort_methods)
 
 
 if __name__ == "__main__":

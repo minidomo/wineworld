@@ -5,49 +5,49 @@ region_sort_methods: dict[str, SortMethod] = {
     e.id: e
     for e in [
         SortMethod(
-            key=Region.name.key,
+            column=Region.name,
             ascending=True,
             name="Name",
             group="Name",
         ),
         SortMethod(
-            key=Region.name.key,
+            column=Region.name,
             ascending=False,
             name="Name (Reverse)",
             group="Name",
         ),
         SortMethod(
-            key=Region.rating.key,
+            column=Region.rating,
             ascending=True,
             name="Rating (Low to High)",
             group="Rating",
         ),
         SortMethod(
-            key=Region.rating.key,
+            column=Region.rating,
             ascending=False,
             name="Rating (High to Low)",
             group="Rating",
         ),
         SortMethod(
-            key=Region.reviews.key,
+            column=Region.reviews,
             ascending=True,
             name="Review Count (Low to High)",
             group="Review Count",
         ),
         SortMethod(
-            key=Region.reviews.key,
+            column=Region.reviews,
             ascending=False,
             name="Review Count (High to Low)",
             group="Review Count",
         ),
         SortMethod(
-            key=Region.country.key,
+            column=Region.country,
             ascending=True,
             name="Country",
             group="Country",
         ),
         SortMethod(
-            key=Region.country.key,
+            column=Region.country,
             ascending=False,
             name="Country (Reverse)",
             group="Country",
