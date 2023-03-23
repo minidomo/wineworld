@@ -4,13 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-// import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/esm/Button';
+// import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
+// import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 // import MenuItem from '../components/MenuItem';
 // import { menuItem } from '../components/MenuItems';
-// import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
-import MenuItem from '../components/MenuItem';
-import { MenuItems } from '../components/MenuItems';
+// import MenuItem from '../components/MenuItem';
+// import { MenuItems } from '../components/MenuItems';
 import WineCard from '../components/WineCard';
 // import Spinner from "react-bootstrap/Spinner";
 
@@ -27,7 +28,8 @@ const WineModel = () => {
     const [totalInstances, setTotalInstances] = useState(1);
     const [filters, setFilters] = useState([]);
     const [sortName, setSortName] = useState('Sort By');
-    const [isActive, setIsActive] = useState('');
+    const [orderName, setOrderName] = useState('Order');
+    // const [isActive, setIsActive] = useState('');
 
     useEffect(() => {
         async function callApi() {
@@ -71,16 +73,94 @@ const WineModel = () => {
             <h1 class="display-4">Wines</h1>
             <Row>
                 <Col>
-                    <ul className='menus'>
-                        {
-                            MenuItem.map((menu, index) => {
-                                const depthLevel = 0;
-                                return <MenuItem items={menu} key={index} depthLevel={depthLevel} />;
-                            })
-                        }
-                    </ul>
+                    <DropdownButton
+                        variant="secondary"
+                        size="sm"
+                        menuVariant="dark"
+                        title="Filter"
+                    >
+                        <div class="container">
+                            <Row>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Type"
+                                    ></DropdownButton>
+                                </Col>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Country"
+                                    ></DropdownButton>
+                                </Col>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Region"
+                                    ></DropdownButton>
+                                </Col>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Winery"
+                                    ></DropdownButton>
+                                </Col>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Reviews"
+                                    ></DropdownButton>
+                                </Col>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Ratings"
+                                    >
+                                        <div class="container">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="formGroupExampleInput">Min (1-5)</label>
+                                                    <input type="text" class="form-control"
+                                                        id="formGroupExampleInput" placeholder="">
+                                                    </input>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="formGroupExampleInput2">Max (1-5)</label>
+                                                    <input type="text" class="form-control"
+                                                        id="formGroupExampleInput2" placeholder="">
+                                                    </input>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </DropdownButton>
+
+                                </Col>
+                            </Row>
+                            {/* <Row>
+                                <label for="customRange3" class="form-label"><br></br>
+                                    Rating</label>
+                                <input type="range" class="form-range" min="0" max="5" step="0.5"
+                                    id="customRange2"></input>
+                            </Row> */}
+
+
+                        </div>
+                    </DropdownButton>
+
                 </Col>
-                <Col>
+                {/* <Col>
                     <DropdownButton
                         id="dropdown-basic-button"
                         variant="secondary"
@@ -117,7 +197,7 @@ const WineModel = () => {
                         </DropdownButton>
                     </DropdownButton>
 
-                </Col>
+                </Col> */}
                 <Col>
                     <DropdownButton
                         id="dropdown-basic-button"
@@ -127,8 +207,20 @@ const WineModel = () => {
                         title={sortName}
                         className="mt-2"
                     >
-                        <Dropdown.Item onClick={() => setSortName('Name: Ascending')}>Name: Ascending</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setSortName('Name: Descending')}>Name: Descending</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
+                    </DropdownButton>
+                </Col>
+                <Col>
+                    <DropdownButton
+                        id="dropdown-basic-button"
+                        variant="secondary"
+                        size="sm"
+                        menuVariant="dark"
+                        title={orderName}
+                        className="mt-2"
+                    >
+                        <Dropdown.Item onClick={() => setOrderName('Ascending')}>Ascending</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setOrderName('Descending')}>Descending</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>
@@ -138,15 +230,6 @@ const WineModel = () => {
                             Search
                         </button>
                     </form>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    {filters}
-                </Col>
-                <Col>
-                </Col>
-                <Col>
                 </Col>
             </Row>
             <br></br>
