@@ -2,9 +2,10 @@ import unittest
 from typing import Any
 from urllib.parse import urlencode
 
+from pyuca import Collator
+
 from app import app
 from sort_method_data import region_sort_methods
-from pyuca import Collator
 
 collator = Collator()
 
