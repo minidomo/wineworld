@@ -7,6 +7,7 @@ class SortMethod:
         self.key: str = column.key
         self.name = name
         self.group = group
+        self.ascending = ascending
 
         direction = "asc" if ascending else "desc"
         self.id = f"{self.key}_{direction}"
@@ -17,4 +18,5 @@ class SortMethod:
             "id": self.id,
             "name": self.name,
             "group": self.group,
+            "ascending": self.ascending,
         }

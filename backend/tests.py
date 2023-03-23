@@ -607,26 +607,22 @@ class RegionLimitTests(unittest.TestCase):
         trip_types: list[str] = res["tripTypes"]
         self.assertGreater(len(trip_types), 0)
         self.assertEqual(type(trip_types[0]), str)
-        for i in range(len(trip_types) - 1):
-            self.assertTrue(is_alphabetical_order(False, trip_types[i], trip_types[i + 1]))
+        self.assertTrue(is_alphabetical_order(False, *trip_types))
 
         tags: list[str] = res["tags"]
         self.assertGreater(len(tags), 0)
         self.assertEqual(type(tags[0]), str)
-        for i in range(len(tags) - 1):
-            self.assertTrue(is_alphabetical_order(False, tags[i], tags[i + 1]))
+        self.assertTrue(is_alphabetical_order(False, *tags))
 
         countries: list[str] = res["countries"]
         self.assertGreater(len(countries), 0)
         self.assertEqual(type(countries[0]), str)
-        for i in range(len(countries) - 1):
-            self.assertTrue(is_alphabetical_order(False, countries[i], countries[i + 1]))
+        self.assertTrue(is_alphabetical_order(False, *countries))
 
         sort_methods: list[dict] = res["sorts"]
         self.assertGreater(len(sort_methods), 0)
         self.assertEqual(type(sort_methods[0]), dict)
-        for i in range(len(sort_methods) - 1):
-            self.assertTrue(sort_methods[i]["id"] <= sort_methods[i + 1]["id"])
+        self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):
         res: JsonObject = self.client.get(RegionLimitTests.endpoint).get_json()
