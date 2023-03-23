@@ -327,8 +327,8 @@ def get_region(id: int):
     return data
 
 
-@app.route("/regions/limits", methods=["GET"])
-def get_region_limits():
+@app.route("/regions/constraints", methods=["GET"])
+def get_region_constraints():
     countries_query: Select = db.select(Region.country)
     countries_query = countries_query.distinct().order_by(Region.country.asc())
     countries: list[str] = db.session.execute(countries_query).scalars().all()

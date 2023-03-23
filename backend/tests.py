@@ -576,7 +576,7 @@ class RegionIdTests(unittest.TestCase):
 
 
 class RegionLimitTests(unittest.TestCase):
-    endpoint = "/regions/limits"
+    endpoint = "/regions/constraints"
 
     def setUp(self) -> None:
         self.ctx = app.app_context()
