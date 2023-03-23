@@ -115,14 +115,14 @@ const RegionModel = () => {
                     </button>
                 </Col>
             </Row>
-            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+            <Row className="g-4 p-4">
                 {regions.map(region => (
                     <Col>
                         <RegionCard region={region} />
                     </Col>
                 ))}
             </Row>
-        </Container>
+        </Container >
     );
 };
 export default RegionModel;

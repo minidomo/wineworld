@@ -2,11 +2,17 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+// import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import Row from 'react-bootstrap/Row';
+// import MenuItem from '../components/MenuItem';
+// import { menuItem } from '../components/MenuItems';
+// import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
+import MenuItem from '../components/MenuItem';
+import { MenuItems } from '../components/MenuItems';
 import WineCard from '../components/WineCard';
-// Import Spinner from "react-bootstrap/Spinner";
-// Import Dropdown from 'react-bootstrap/Dropdown'
-// import DropdownButton from 'react-bootstrap/DropdownButton'
+// import Spinner from "react-bootstrap/Spinner";
 
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
@@ -19,6 +25,9 @@ const WineModel = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
+    const [filters, setFilters] = useState([]);
+    const [sortName, setSortName] = useState('Sort By');
+    const [isActive, setIsActive] = useState('');
 
     useEffect(() => {
         async function callApi() {
@@ -40,24 +49,36 @@ const WineModel = () => {
         }
     }, [totalPages, page]);
 
+    // function filterList(props) {
+    //     const { isActive, fList } = props;
+    //     if (isActive) {
+    //         return (
+    //             <button onClick={
+    //                 () => setFilters([
+    //                     ...filters,
+    //                     'Red',
+    //                 ])}>
+
+    //             </button>
+    //         );
+    //     } else {
+    //     }
+    //     return <></>;
+    // }
+
     return (
         <Container>
             <h1 class="display-4">Wines</h1>
-            {/* <Row>
+            <Row>
                 <Col>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
-                        title="Sort By"
-                        className="mt-2"
-                    >
-                        <Dropdown.Item href="#/action-1">Name</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Winery</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Region</Dropdown.Item>
-                        <Dropdown.Item href="#/action-4">Rating</Dropdown.Item>
-                    </DropdownButton>
+                    <ul className='menus'>
+                        {
+                            MenuItem.map((menu, index) => {
+                                const depthLevel = 0;
+                                return <MenuItem items={menu} key={index} depthLevel={depthLevel} />;
+                            })
+                        }
+                    </ul>
                 </Col>
                 <Col>
                     <DropdownButton
@@ -65,11 +86,49 @@ const WineModel = () => {
                         variant="secondary"
                         size="sm"
                         menuVariant="dark"
-                        title="Order"
+                        title="Filter"
                         className="mt-2"
                     >
-                        <Dropdown.Item href="#/action-1">Ascending</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Descending</Dropdown.Item>
+                        <DropdownButton
+                            id="dropdown-dropright-basic-button"
+                            variant="secondary"
+                            size="sm"
+                            menuVariant="dark"
+                            title="Type"
+                        // onClick={() => setFilters('Type')}
+                        >
+                            <Dropdown.Item
+
+                            >Red</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilters('White')}>White</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Port</Dropdown.Item>
+                        </DropdownButton>
+
+                        <DropdownButton
+                            class="btn-group dropend"
+                            variant="secondary"
+                            size="sm"
+                            menuVariant="dark"
+                            title="Country"
+                        >
+                            <Dropdown.Item href="#/action-1">'Merica</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">France</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Portugal</Dropdown.Item>
+                        </DropdownButton>
+                    </DropdownButton>
+
+                </Col>
+                <Col>
+                    <DropdownButton
+                        id="dropdown-basic-button"
+                        variant="secondary"
+                        size="sm"
+                        menuVariant="dark"
+                        title={sortName}
+                        className="mt-2"
+                    >
+                        <Dropdown.Item onClick={() => setSortName('Name: Ascending')}>Name: Ascending</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setSortName('Name: Descending')}>Name: Descending</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>
@@ -80,7 +139,16 @@ const WineModel = () => {
                         </button>
                     </form>
                 </Col>
-            </Row> */}
+            </Row>
+            <Row>
+                <Col>
+                    {filters}
+                </Col>
+                <Col>
+                </Col>
+                <Col>
+                </Col>
+            </Row>
             <br></br>
             <Row>
                 <Col>
@@ -111,7 +179,7 @@ const WineModel = () => {
                 </Col>
             </Row>
 
-            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+            <Row className="g-4 p-4">
                 {wines.map(wine => (
                     <Col>
                         <WineCard wine={wine} />

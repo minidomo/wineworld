@@ -110,7 +110,7 @@ const VineyardModel = () => {
                     </button>
                 </Col>
             </Row>
-            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+            <Row className="g-4 p-4">
                 {vineyards.map(vineyard => (
                     <Col>
                         <VineyardCard vineyard={vineyard} />
