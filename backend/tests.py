@@ -575,7 +575,7 @@ class RegionIdTests(unittest.TestCase):
         self.assertEqual(type(trip_types[0]), str)
 
 
-class RegionLimitTests(unittest.TestCase):
+class RegionConstraintTests(unittest.TestCase):
     endpoint = "/regions/constraints"
 
     def setUp(self) -> None:
@@ -587,11 +587,11 @@ class RegionLimitTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
-        res = self.client.get(RegionLimitTests.endpoint)
+        res = self.client.get(RegionConstraintTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
-        res: JsonObject = self.client.get(RegionLimitTests.endpoint).get_json()
+        res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
 
         self.assertEqual(type(res["rating"]), dict)
         self.assertEqual(type(res["reviews"]), dict)
@@ -625,7 +625,7 @@ class RegionLimitTests(unittest.TestCase):
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):
-        res: JsonObject = self.client.get(RegionLimitTests.endpoint).get_json()
+        res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
 
         self.assertEqual(res["rating"]["min"], 0.0)
         self.assertEqual(res["rating"]["max"], 5.0)
