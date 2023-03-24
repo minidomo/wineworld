@@ -54,16 +54,9 @@ make server-background # runs the server in the background
    ```
 
 4. Starting the server with the new changes.
-   
-   **If the server is currently running**
-
    ```console
-   make stop-server
-   ```
-
-   **If the server is not running**
-
-   ```console
+   cd backend
+   make build-server
    systemctl restart wineworld
    ```
 
