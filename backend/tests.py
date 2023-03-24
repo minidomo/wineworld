@@ -5,7 +5,11 @@ from urllib.parse import urlencode
 from pyuca import Collator
 
 from app import app
-from sort_method_data import region_sort_methods
+from sort_method_data import (
+    region_sort_methods,
+    vineyard_sort_methods,
+    wine_sort_methods,
+)
 
 collator = Collator()
 
@@ -115,6 +119,28 @@ class WineAllTests(unittest.TestCase):
             country: str = wine["country"]
             self.assertTrue(country in country_set)
 
+    def test_sort(self):
+        res = self.client.get(create_url(WineAllTests.endpoint, {"sort": "name_asc"})).get_json()
+
+        wines: list[JsonObject] = res["list"]
+        self.assertGreater(len(wines), 0)
+
+        for i in range(len(wines) - 1):
+            cur_name: str = wines[i]["name"].lower()
+            next_name: str = wines[i + 1]["name"].lower()
+            self.assertTrue(is_alphabetical_order(False, cur_name, next_name))
+
+    def test_sort_reverse(self):
+        res = self.client.get(create_url(WineAllTests.endpoint, {"sort": "name_desc"})).get_json()
+
+        wines: list[JsonObject] = res["list"]
+        self.assertGreater(len(wines), 0)
+
+        for i in range(len(wines) - 1):
+            cur_name: str = wines[i]["name"].lower()
+            next_name: str = wines[i + 1]["name"].lower()
+            self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
+
 
 class WineIdTests(unittest.TestCase):
     endpoint = "/wines"
@@ -156,6 +182,67 @@ class WineIdTests(unittest.TestCase):
         related: dict = res["related"]
         self.assertEqual(type(related["regions"]), list)
         self.assertEqual(type(related["vineyards"]), list)
+
+
+class WineConstraintTests(unittest.TestCase):
+    endpoint = "/wines/constraints"
+
+    def setUp(self) -> None:
+        self.ctx = app.app_context()
+        self.ctx.push()
+        self.client = app.test_client()
+
+    def tearDown(self) -> None:
+        self.ctx.pop()
+
+    def test_status_code_200(self):
+        res = self.client.get(WineConstraintTests.endpoint)
+        self.assertEqual(res.status_code, 200)
+
+    def test_format(self):
+        res: JsonObject = self.client.get(WineConstraintTests.endpoint).get_json()
+
+        self.assertEqual(type(res["rating"]), dict)
+        self.assertEqual(type(res["reviews"]), dict)
+        self.assertEqual(type(res["wineries"]), list)
+        self.assertEqual(type(res["types"]), list)
+        self.assertEqual(type(res["countries"]), list)
+        self.assertEqual(type(res["sorts"]), list)
+
+        self.assertEqual(type(res["rating"]["min"]), float)
+        self.assertEqual(type(res["rating"]["max"]), float)
+        self.assertEqual(type(res["reviews"]["min"]), int)
+
+        wineries: list[str] = res["wineries"]
+        self.assertGreater(len(wineries), 0)
+        self.assertEqual(type(wineries[0]), str)
+        self.assertTrue(is_alphabetical_order(False, *wineries))
+
+        types: list[str] = res["types"]
+        self.assertGreater(len(types), 0)
+        self.assertEqual(type(types[0]), str)
+        self.assertTrue(is_alphabetical_order(False, *types))
+
+        countries: list[str] = res["countries"]
+        self.assertGreater(len(countries), 0)
+        self.assertEqual(type(countries[0]), str)
+        self.assertTrue(is_alphabetical_order(False, *countries))
+
+        sort_methods: list[dict] = res["sorts"]
+        self.assertGreater(len(sort_methods), 0)
+        self.assertEqual(type(sort_methods[0]), dict)
+        self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
+
+    def test_values(self):
+        res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
+
+        self.assertEqual(res["rating"]["min"], 0.0)
+        self.assertEqual(res["rating"]["max"], 5.0)
+        self.assertEqual(res["reviews"]["min"], 0)
+
+        sort_methods: list[JsonObject] = res["sorts"]
+        for sort_method in sort_methods:
+            self.assertTrue(sort_method["id"] in wine_sort_methods)
 
 
 class VineyardAllTests(unittest.TestCase):
@@ -249,6 +336,28 @@ class VineyardAllTests(unittest.TestCase):
             country: str = vineyard["country"]
             self.assertTrue(country in country_set)
 
+    def test_sort(self):
+        res = self.client.get(create_url(VineyardAllTests.endpoint, {"sort": "name_asc"})).get_json()
+
+        vineyards: list[JsonObject] = res["list"]
+        self.assertGreater(len(vineyards), 0)
+
+        for i in range(len(vineyards) - 1):
+            cur_name: str = vineyards[i]["name"].lower()
+            next_name: str = vineyards[i + 1]["name"].lower()
+            self.assertTrue(is_alphabetical_order(False, cur_name, next_name))
+
+    def test_sort_reverse(self):
+        res = self.client.get(create_url(VineyardAllTests.endpoint, {"sort": "name_desc"})).get_json()
+
+        vineyards: list[JsonObject] = res["list"]
+        self.assertGreater(len(vineyards), 0)
+
+        for i in range(len(vineyards) - 1):
+            cur_name: str = vineyards[i]["name"].lower()
+            next_name: str = vineyards[i + 1]["name"].lower()
+            self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
+
 
 class VineyardIdTests(unittest.TestCase):
     endpoint = "/vineyards"
@@ -290,6 +399,56 @@ class VineyardIdTests(unittest.TestCase):
         related: dict = res["related"]
         self.assertEqual(type(related["regions"]), list)
         self.assertEqual(type(related["wines"]), list)
+
+
+class VineyardConstraintTests(unittest.TestCase):
+    endpoint = "/vineyards/constraints"
+
+    def setUp(self) -> None:
+        self.ctx = app.app_context()
+        self.ctx.push()
+        self.client = app.test_client()
+
+    def tearDown(self) -> None:
+        self.ctx.pop()
+
+    def test_status_code_200(self):
+        res = self.client.get(VineyardConstraintTests.endpoint)
+        self.assertEqual(res.status_code, 200)
+
+    def test_format(self):
+        res: JsonObject = self.client.get(VineyardConstraintTests.endpoint).get_json()
+
+        self.assertEqual(type(res["rating"]), dict)
+        self.assertEqual(type(res["reviews"]), dict)
+        self.assertEqual(type(res["price"]), dict)
+        self.assertEqual(type(res["countries"]), list)
+        self.assertEqual(type(res["sorts"]), list)
+
+        self.assertEqual(type(res["rating"]["min"]), float)
+        self.assertEqual(type(res["rating"]["max"]), float)
+        self.assertEqual(type(res["reviews"]["min"]), int)
+
+        countries: list[str] = res["countries"]
+        self.assertGreater(len(countries), 0)
+        self.assertEqual(type(countries[0]), str)
+        self.assertTrue(is_alphabetical_order(False, *countries))
+
+        sort_methods: list[dict] = res["sorts"]
+        self.assertGreater(len(sort_methods), 0)
+        self.assertEqual(type(sort_methods[0]), dict)
+        self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
+
+    def test_values(self):
+        res: JsonObject = self.client.get(VineyardConstraintTests.endpoint).get_json()
+
+        self.assertEqual(res["rating"]["min"], 0.0)
+        self.assertEqual(res["rating"]["max"], 5.0)
+        self.assertEqual(res["reviews"]["min"], 0)
+
+        sort_methods: list[JsonObject] = res["sorts"]
+        for sort_method in sort_methods:
+            self.assertTrue(sort_method["id"] in vineyard_sort_methods)
 
 
 class RegionAllTests(unittest.TestCase):

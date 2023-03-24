@@ -13,19 +13,21 @@ from models import (
     app,
     db,
 )
-from sort_method_data import wine_sort_methods, vineyard_sort_methods, region_sort_methods
+from sort_method_data import (
+    region_sort_methods,
+    vineyard_sort_methods,
+    wine_sort_methods,
+)
 from util import (
     PAGE_SIZE,
     RegionParams,
     RegionUtil,
-    UnaryPredicate,
     VineyardParams,
     VineyardUtil,
     WineParams,
     WineUtil,
     clamp,
     determine_total_pages,
-    every,
 )
 
 """
