@@ -81,42 +81,23 @@ def get_all_wines():
     if params.end_reviews is not None:
         query = query.filter(Wine.reviews <= params.end_reviews)
 
-    wines: list[Wine] = db.session.execute(query).scalars().all()
-
-    def is_valid_country(e: Wine) -> bool:
-        for country in params.country:
-            if e.country == country:
-                return True
-        return False
-
-    def is_valid_type(e: Wine) -> bool:
-        for type in params.type:
-            if e.type == type:
-                return True
-        return False
-
-    def is_valid_winery(e: Wine) -> bool:
-        for winery in params.winery:
-            if e.winery == winery:
-                return True
-        return False
-
-    filters: list[UnaryPredicate[Wine]] = []
-
     if len(params.country) > 0:
-        filters.append(is_valid_country)
+        clauses = [Wine.country == e for e in params.country]
+        query = query.filter(or_(*clauses))
 
     if len(params.type) > 0:
-        filters.append(is_valid_type)
+        clauses = [Wine.type == e for e in params.type]
+        query = query.filter(or_(*clauses))
 
     if len(params.winery) > 0:
-        filters.append(is_valid_winery)
+        clauses = [Wine.winery == e for e in params.winery]
+        query = query.filter(or_(*clauses))
 
-    wines = list(filter(lambda e: every(e, filters), wines))
+    if params.sort in wine_sort_methods:
+        sort_method = wine_sort_methods[params.sort]
+        query = query.order_by(sort_method.clause)
 
-    if params.name_sort is not None:
-        reverse = not params.name_sort
-        wines.sort(key=lambda e: e.name.lower(), reverse=reverse)
+    wines: list[Wine] = db.session.execute(query).scalars().all()
 
     total_pages = determine_total_pages(len(wines), PAGE_SIZE)
     params.page = clamp(1, total_pages, params.page)
@@ -218,24 +199,15 @@ def get_all_vineyards():
     if params.end_reviews is not None:
         query = query.filter(Vineyard.reviews <= params.end_reviews)
 
-    vineyards: list[Vineyard] = db.session.execute(query).scalars().all()
-
-    def is_valid_country(e: Vineyard) -> bool:
-        for country in params.country:
-            if e.country == country:
-                return True
-        return False
-
-    filters: list[UnaryPredicate[Vineyard]] = []
-
     if len(params.country) > 0:
-        filters.append(is_valid_country)
+        clauses = [Vineyard.country == e for e in params.country]
+        query = query.filter(or_(*clauses))
 
-    vineyards = list(filter(lambda e: every(e, filters), vineyards))
+    if params.sort in vineyard_sort_methods:
+        sort_method = vineyard_sort_methods[params.sort]
+        query = query.order_by(sort_method.clause)
 
-    if params.name_sort is not None:
-        reverse = not params.name_sort
-        vineyards.sort(key=lambda e: e.name.lower(), reverse=reverse)
+    vineyards: list[Vineyard] = db.session.execute(query).scalars().all()
 
     total_pages = determine_total_pages(len(vineyards), PAGE_SIZE)
     params.page = clamp(1, total_pages, params.page)

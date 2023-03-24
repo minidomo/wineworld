@@ -80,7 +80,6 @@ wine_sort_methods: dict[str, SortMethod] = {
 }
 
 vineyard_sort_methods: dict[str, SortMethod] = {
-    # sort methods for name, price, rating, reviews, country
     e.id: e
     for e in [
         SortMethod(
