@@ -29,7 +29,6 @@ const WineModel = () => {
     const [filters, setFilters] = useState([]);
     const [sortName, setSortName] = useState('Sort By');
     const [orderName, setOrderName] = useState('Order');
-    // const [isActive, setIsActive] = useState('');
 
     useEffect(() => {
         async function callApi() {
@@ -51,23 +50,6 @@ const WineModel = () => {
         }
     }, [totalPages, page]);
 
-    // function filterList(props) {
-    //     const { isActive, fList } = props;
-    //     if (isActive) {
-    //         return (
-    //             <button onClick={
-    //                 () => setFilters([
-    //                     ...filters,
-    //                     'Red',
-    //                 ])}>
-
-    //             </button>
-    //         );
-    //     } else {
-    //     }
-    //     return <></>;
-    // }
-
     return (
         <Container>
             <h1 class="display-4">Wines</h1>
@@ -78,6 +60,7 @@ const WineModel = () => {
                         size="sm"
                         menuVariant="dark"
                         title="Filter"
+                        className="mt-2"
                     >
                         <div class="container">
                             <Row>
@@ -148,56 +131,10 @@ const WineModel = () => {
 
                                 </Col>
                             </Row>
-                            {/* <Row>
-                                <label for="customRange3" class="form-label"><br></br>
-                                    Rating</label>
-                                <input type="range" class="form-range" min="0" max="5" step="0.5"
-                                    id="customRange2"></input>
-                            </Row> */}
-
-
                         </div>
                     </DropdownButton>
 
                 </Col>
-                {/* <Col>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
-                        title="Filter"
-                        className="mt-2"
-                    >
-                        <DropdownButton
-                            id="dropdown-dropright-basic-button"
-                            variant="secondary"
-                            size="sm"
-                            menuVariant="dark"
-                            title="Type"
-                        // onClick={() => setFilters('Type')}
-                        >
-                            <Dropdown.Item
-
-                            >Red</Dropdown.Item>
-                            <Dropdown.Item onClick={() => setFilters('White')}>White</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Port</Dropdown.Item>
-                        </DropdownButton>
-
-                        <DropdownButton
-                            class="btn-group dropend"
-                            variant="secondary"
-                            size="sm"
-                            menuVariant="dark"
-                            title="Country"
-                        >
-                            <Dropdown.Item href="#/action-1">'Merica</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">France</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Portugal</Dropdown.Item>
-                        </DropdownButton>
-                    </DropdownButton>
-
-                </Col> */}
                 <Col>
                     <DropdownButton
                         id="dropdown-basic-button"
