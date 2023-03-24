@@ -13,7 +13,7 @@ from models import (
     app,
     db,
 )
-from sort_method_data import region_sort_methods
+from sort_method_data import wine_sort_methods, vineyard_sort_methods, region_sort_methods
 from util import (
     PAGE_SIZE,
     RegionParams,
@@ -158,6 +158,40 @@ def get_wine(id: int):
     return data
 
 
+@app.route("/wines/constraints", methods=["GET"])
+def get_wine_constraints():
+    countries_query: Select = db.select(Wine.country)
+    countries_query = countries_query.distinct().order_by(Wine.country.asc())
+    countries: list[str] = db.session.execute(countries_query).scalars().all()
+
+    wineries_query: Select = db.select(Wine.winery)
+    wineries_query = wineries_query.distinct().order_by(Wine.winery.asc())
+    wineries: list[str] = db.session.execute(wineries_query).scalars().all()
+
+    types_query: Select = db.select(Wine.type)
+    types_query = types_query.distinct().order_by(Wine.type.asc())
+    types: list[str] = db.session.execute(types_query).scalars().all()
+
+    sorts = [e.to_json() for e in wine_sort_methods.values()]
+    sorts.sort(key=lambda e: e["id"])
+
+    data = {
+        "rating": {
+            "min": 0.0,
+            "max": 5.0,
+        },
+        "reviews": {
+            "min": 0,
+        },
+        "types": types,
+        "wineries": wineries,
+        "countries": countries,
+        "sorts": sorts,
+    }
+
+    return data
+
+
 @app.route("/vineyards", methods=["GET"])
 def get_all_vineyards():
     params = VineyardParams(request)
@@ -240,6 +274,34 @@ def get_vineyard(id: int):
             "wines": [WineUtil.to_json(e, small=True) for e in wines],
             "regions": [RegionUtil.to_json(e, small=True) for e in regions],
         },
+    }
+
+    return data
+
+
+@app.route("/vineyards/constraints", methods=["GET"])
+def get_vineyard_constraints():
+    countries_query: Select = db.select(Vineyard.country)
+    countries_query = countries_query.distinct().order_by(Vineyard.country.asc())
+    countries: list[str] = db.session.execute(countries_query).scalars().all()
+
+    sorts = [e.to_json() for e in vineyard_sort_methods.values()]
+    sorts.sort(key=lambda e: e["id"])
+
+    data = {
+        "rating": {
+            "min": 0.0,
+            "max": 5.0,
+        },
+        "reviews": {
+            "min": 0,
+        },
+        "price": {
+            "min": 0,
+            "max": 4,
+        },
+        "countries": countries,
+        "sorts": sorts,
     }
 
     return data
