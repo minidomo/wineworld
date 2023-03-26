@@ -17,7 +17,7 @@ const Search = () => {
     const location = useLocation();
     const query = location.pathname.split("/Search/").at(-1);
 
-    //reformat query with spaces
+    // reformat query with spaces
     const words = query.split('%20');
     const searchQuery = words.join(" ");
     console.log(searchQuery);
@@ -75,7 +75,7 @@ const Search = () => {
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {vineyards.map(vineyard => (
                             <Col>
-                                <VineyardCard vineyard={vineyard} />
+                                <VineyardCard vineyard={vineyard} regex={searchQuery}/>
                             </Col>
                         ))}
                     </Row>
@@ -85,7 +85,7 @@ const Search = () => {
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {regions.map(region => (
                             <Col>
-                                <RegionCard region={region} />
+                                <RegionCard region={region} regex={searchQuery}/>
                             </Col>
                         ))}
                     </Row>

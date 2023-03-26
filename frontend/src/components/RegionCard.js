@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 // Import Button from "react-bootstrap/esm/Button";
+import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
 import { handleRegionImageError } from '../util/handleImageError';
 
@@ -19,6 +20,13 @@ const RegionCard = props => {
         // url,
     } = props.region;
 
+    function highlightText(input) {
+        if (props.regex != null) {
+          return <ECHighlighter searchPhrase={props.regex} text={input} />;
+        }
+        return input;
+      }
+
     return (
         <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
             <Card.Img
@@ -28,8 +36,8 @@ const RegionCard = props => {
                 onError={handleRegionImageError}
             />
             <Card.Body>
-                <Card.Title> {name} </Card.Title>
-                <Card.Subtitle> {country} </Card.Subtitle>
+                <Card.Title> {highlightText(name)} </Card.Title>
+                <Card.Subtitle> {highlightText(country)} </Card.Subtitle>
                 <Card.Text>
                     <small>
                         Rating: {rating}

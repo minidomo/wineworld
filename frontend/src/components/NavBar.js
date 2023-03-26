@@ -10,7 +10,6 @@ const NavBar = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         navigate(`/Search/${query}`);
-        console.log("test");
     };
 
     return (
