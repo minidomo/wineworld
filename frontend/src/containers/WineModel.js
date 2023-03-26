@@ -8,6 +8,8 @@ import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import WineCard from '../components/WineCard';
 // import Spinner from "react-bootstrap/Spinner";
+import {useNavigate} from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
@@ -28,6 +30,13 @@ const WineModel = () => {
     const [countriesList, setCountriesList] = useState([]);
     const [wineryList, setWineryList] = useState([]);
     const [sortList, setSortList] = useState([]);
+
+    const [query, setQuery] = useState('');
+    const navigate = useNavigate();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        navigate(`/Wines/Search/${query}`);
+    };
 
     useEffect(() => {
         async function callApi() {
@@ -276,12 +285,9 @@ const WineModel = () => {
                     </DropdownButton>
                 </Col>
                 <Col>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search"></input>
-                        <button class="btn btn-outline-secondary" type="submit">
-                            Search
-                        </button>
-                    </form>
+                    <Form onSubmit={handleSubmit} className="d-flex">
+                        <Form.Control type="search" placeholder="search" onChange={(event) => setQuery(event.target.value)}/>
+                    </Form>
                 </Col>
             </Row>
             <br></br>
