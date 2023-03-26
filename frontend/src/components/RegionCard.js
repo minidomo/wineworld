@@ -29,6 +29,7 @@ const RegionCard = props => {
       }
 
     return (
+        <Container>
         <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
             <Card.Img
                 variant="top"
@@ -41,25 +42,21 @@ const RegionCard = props => {
                 <Card.Subtitle> {highlightText(country)} </Card.Subtitle>
                 <Card.Text>
                     <small>
-                        Rating: {rating}
-                        <br />
-                        Review Count: {reviews}
-                        <br />
-                        Trip Type: {tripTypes.join(', ')}
-                        {/* <br />
-                        Tags: {tags.join(", ")} */}
-                            </small>
-                        </Card.Text>
-                    </Card.Body>
-                    <div class="card-footer">
-                        <Link to={`/Regions/${id}`} class="btn btn-secondary stretched-link">
-                            Explore Region
-                        </Link>
-                    </div>
-                </Card>
-            </Container>
-        // </div>
-
+                    Rating: {rating}
+                    <br />
+                    Review Count: {reviews}
+                    <br />
+                    Trip Type: {tripTypes.join(', ')}
+                    </small>
+                </Card.Text>
+                </Card.Body>
+                <div class="card-footer">
+                    <Link to={`/Regions/${id}`} class="btn btn-secondary stretched-link">
+                        Explore Region
+                    </Link>
+                </div>
+        </Card>
+        </Container>
     );
 };
 
