@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 // Import Button from "react-bootstrap/esm/Button";
+import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
 import { handleRegionImageError } from '../util/handleImageError';
 
@@ -20,28 +21,32 @@ const RegionCard = props => {
         // url,
     } = props.region;
 
-    return (
-        // <div class="row justify-content-md-center">
+    function highlightText(input) {
+        if (props.regex != null) {
+          return <ECHighlighter searchPhrase={props.regex} text={input} />;
+        }
+        return input;
+      }
 
-            <Container>
-                <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
-                    <Card.Img
-                        variant="top"
-                        src={image.url}
-                        style={{ height: '50%', width: '100%', objectFit: 'cover' }}
-                        onError={handleRegionImageError}
-                    />
-                    <Card.Body>
-                        <Card.Title> {name} </Card.Title>
-                        <Card.Subtitle> {country} </Card.Subtitle>
-                        <Card.Text>
-                            <small>
-                                Rating: {rating}
-                                <br />
-                                Review Count: {reviews}
-                                <br />
-                                Trip Type: {tripTypes.join(', ')}
-                                {/* <br />
+    return (
+        <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
+            <Card.Img
+                variant="top"
+                src={image.url}
+                style={{ height: '50%', width: '100%', objectFit: 'cover' }}
+                onError={handleRegionImageError}
+            />
+            <Card.Body>
+                <Card.Title> {highlightText(name)} </Card.Title>
+                <Card.Subtitle> {highlightText(country)} </Card.Subtitle>
+                <Card.Text>
+                    <small>
+                        Rating: {rating}
+                        <br />
+                        Review Count: {reviews}
+                        <br />
+                        Trip Type: {tripTypes.join(', ')}
+                        {/* <br />
                         Tags: {tags.join(", ")} */}
                             </small>
                         </Card.Text>

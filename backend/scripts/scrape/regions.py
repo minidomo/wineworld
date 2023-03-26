@@ -21,9 +21,9 @@ class RegionScript(AbstractScrapeScript):
         data = self.read_json_file(self.root_dir / "data/raw/region_info.json")
         return data["location_details"]
 
-    def get_region_photos(self) -> JsonObject:
-        data = self.read_json_file(self.root_dir / "data/raw/region_photos.json")
-        return data["location_photos"]
+    def get_region_photos(self) -> list[JsonObject]:
+        data = self.read_json_file(self.root_dir / "data/misc/reviewed_photos.json")
+        return data["data"]
 
     def get_locations(self) -> list[JsonObject]:
         data = self.read_json_file(self.root_dir / "data/modify/region_location_details.json")
@@ -43,7 +43,7 @@ class RegionScript(AbstractScrapeScript):
                 location_list = location["raw"]
 
                 rating_info = self.determine_rating_info(location_list)
-                image = self.get_first_image(region_photos[id]["data"])
+                image = self.get_first_image(region_photos, id)
 
                 model: JsonObject = {
                     "name": location["name"],
@@ -69,14 +69,19 @@ class RegionScript(AbstractScrapeScript):
 
         return {"data": regions}
 
-    def get_first_image(self, photo_submissions: list[JsonObject]) -> JsonObject:
-        image = photo_submissions[0]["images"]["large"]
+    def get_first_image(self, photo_submissions: list[JsonObject], id: str) -> JsonObject:
+        for photo_submission in photo_submissions:
+            if photo_submission["is_good"] and photo_submission["location_id"] == id:
+                images = photo_submission["images"]
+                image = images["large"]
 
-        return {
-            "url": image["url"],
-            "width": image["width"],
-            "height": image["height"],
-        }
+                return {
+                    "url": image["url"],
+                    "width": image["width"],
+                    "height": image["height"],
+                }
+
+        return {}
 
     def determine_tags(self, location_list: list[JsonObject]) -> list[str]:
         tag_set: set[str] = set()
