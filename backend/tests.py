@@ -72,17 +72,19 @@ class WineAllTests(unittest.TestCase):
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
 
-    def test_min_clamp_page(self):
-        page_num = -1
+    def test_page_out_of_bounds_1(self):
+        page_num = 0
         res = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], 1)
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
-    def test_max_clamp_page(self):
-        page_num = 39485
+    def test_page_out_of_bounds_2(self):
+        page_num = 4956894
         res = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], res["totalPages"])
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
     def test_length(self):
         res = self.client.get(WineAllTests.endpoint).get_json()
@@ -289,17 +291,19 @@ class VineyardAllTests(unittest.TestCase):
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
 
-    def test_min_clamp_page(self):
-        page_num = -1
+    def test_page_out_of_bounds_1(self):
+        page_num = 0
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], 1)
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
-    def test_max_clamp_page(self):
-        page_num = 39485
+    def test_page_out_of_bounds_2(self):
+        page_num = 4956894
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], res["totalPages"])
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
     def test_length(self):
         res = self.client.get(VineyardAllTests.endpoint).get_json()
@@ -495,17 +499,19 @@ class RegionAllTests(unittest.TestCase):
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
 
-    def test_min_clamp_page(self):
-        page_num = -1
+    def test_page_out_of_bounds_1(self):
+        page_num = 0
         res = self.client.get(create_url(RegionAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], 1)
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
-    def test_max_clamp_page(self):
-        page_num = 39485
+    def test_page_out_of_bounds_2(self):
+        page_num = 4956894
         res = self.client.get(create_url(RegionAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], res["totalPages"])
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
     def test_length(self):
         res = self.client.get(RegionAllTests.endpoint).get_json()
