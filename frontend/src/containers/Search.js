@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import WineCard from '../components/WineCard';
-import VineyardCard from '../components/VineyardCard';
+import { useLocation } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
-
+import VineyardCard from '../components/VineyardCard';
+import WineCard from '../components/WineCard';
 
 const Search = () => {
     const [wines, setWines] = useState([]);
     const [vineyards, setVineyards] = useState([]);
     const [regions, setRegions] = useState([]);
     const location = useLocation();
-    const query = location.pathname.split("/Search/").at(-1)
+    const query = location.pathname.split("/Search/").at(-1);
 
     //reformat query with spaces
-    const words = query.split('%20')
-    const searchQuery = words.join(" ")
-    console.log(searchQuery)
-    //const queryRE = new RegExp(`(?:${query.replaceAll("%20", "|")})`, "i");
-    
+    const words = query.split('%20');
+    const searchQuery = words.join(" ");
+    console.log(searchQuery);
+
     useEffect(() => {
         async function searchWines() {
             const response = await axios.get('https://api.wineworld.me/wines', {
@@ -31,7 +29,7 @@ const Search = () => {
                     name: searchQuery,
                 },
             });
-            setWines(response.data.list)
+            setWines(response.data.list);
         }
 
         async function searchVineyards() {
@@ -40,7 +38,7 @@ const Search = () => {
                     name: searchQuery,
                 },
             });
-            setVineyards(response.data.list)
+            setVineyards(response.data.list);
         }
 
         async function searchRegions() {
@@ -49,14 +47,15 @@ const Search = () => {
                     name: searchQuery,
                 },
             });
-            setRegions(response.data.list)
+            setRegions(response.data.list);
         }
 
         searchWines();
         searchVineyards();
         searchRegions();
-    }, [wines, vineyards, regions])
-    
+        console.log("useEffect");
+    }, [searchQuery]);
+
     return (
         <Container>
             <h1> Search Results</h1>
@@ -93,7 +92,7 @@ const Search = () => {
                 </Tab>
             </Tabs>
         </Container>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;

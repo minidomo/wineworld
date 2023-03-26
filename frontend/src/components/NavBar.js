@@ -8,9 +8,10 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        navigate(`/Search/${query}`)
-    }
+        event.preventDefault();
+        navigate(`/Search/${query}`);
+        console.log("test");
+    };
 
     return (
         <nav class={`navbar bg-${DarkMode('')}`} data-bs-theme={DarkMode('')}>
@@ -61,8 +62,7 @@ const NavBar = () => {
                 </div>
             </nav>
         </nav>
-    )
-    
+    );
 };
 
 export default NavBar;
