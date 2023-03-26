@@ -101,16 +101,13 @@ def get_all_wines():
         query = query.order_by(sort_method.clause)
 
     query = query.limit(PAGE_SIZE)
-
-    params.page = max(params.page, 1)
     query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    rows: list[Row] = db.session.execute(query).fetchall()
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
 
     wine_list: list[JsonObject] = [WineUtil.to_json(e, small=True) for e, _ in rows]
     _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
     total_pages = determine_total_pages(total_instances, PAGE_SIZE)
-    params.page = min(params.page, total_pages)
 
     data = {
         "page": params.page,
@@ -215,16 +212,13 @@ def get_all_vineyards():
         query = query.order_by(sort_method.clause)
 
     query = query.limit(PAGE_SIZE)
-
-    params.page = max(params.page, 1)
     query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    rows: list[Row] = db.session.execute(query).fetchall()
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
 
     vineyard_list: list[JsonObject] = [VineyardUtil.to_json(e, small=True) for e, _ in rows]
     _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
     total_pages = determine_total_pages(total_instances, PAGE_SIZE)
-    params.page = min(params.page, total_pages)
 
     data = {
         "page": params.page,
@@ -329,16 +323,13 @@ def get_all_regions():
         query = query.order_by(sort_method.clause)
 
     query = query.limit(PAGE_SIZE)
-
-    params.page = max(params.page, 1)
     query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    rows: list[Row] = db.session.execute(query).fetchall()
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
 
     region_list: list[JsonObject] = [RegionUtil.to_json(e, small=True) for e, _ in rows]
     _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
     total_pages = determine_total_pages(total_instances, PAGE_SIZE)
-    params.page = min(params.page, total_pages)
 
     data = {
         "page": params.page,
