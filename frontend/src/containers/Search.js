@@ -22,7 +22,8 @@ const Search = () => {
     const words = query.split('%20')
     const searchQuery = words.join(" ")
     console.log(searchQuery)
-
+    //const queryRE = new RegExp(`(?:${query.replaceAll("%20", "|")})`, "i");
+    
     useEffect(() => {
         async function searchWines() {
             const response = await axios.get('https://api.wineworld.me/wines', {
@@ -65,7 +66,7 @@ const Search = () => {
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {wines.map(wine => (
                             <Col>
-                                <WineCard wine={wine} />
+                                <WineCard wine={wine} regex={searchQuery} />
                             </Col>
                         ))}
                     </Row>
