@@ -4,16 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/esm/Button';
-// import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
-// import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-// import MenuItem from '../components/MenuItem';
-// import { menuItem } from '../components/MenuItems';
-// import MenuItem from '../components/MenuItem';
-// import { MenuItems } from '../components/MenuItems';
 import WineCard from '../components/WineCard';
 // import Spinner from "react-bootstrap/Spinner";
 
@@ -70,32 +62,60 @@ const WineModel = () => {
     function updateConstraints(category, id) {
         var checkbox = document.getElementById(id);
         if (checkbox.checked === true) {
-            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('Check', '')))));
+            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('CheckW', '')))));
         } else {
-            setApiLink(apiLink.replace(category.concat('=').concat(id.replace('Check', '')), ''));
+            setApiLink(apiLink.replace('&'.concat(category.concat('=').concat(id.replace('CheckW', ''))), ''));
         }
     }
 
     function updateReviews(id) {
         var reviewText = document.getElementById(id);
-        if (reviewText.TEXT_NODE !== '0' && !isNaN(reviewText.TEXT_NODE)) {
-            setApiLink(apiLink.concat('&startReviews=').concat(reviewText.TEXT_NODE));
+        if (reviewText.value !== '0' && !isNaN(reviewText.value)) {
+            setApiLink(apiLink.concat('&startReviews=').concat(reviewText.value));
         } else {
             setApiLink(apiLink.replace('&startReviews', ''));
         }
     }
 
-    function updateSort(id) {
-        var item = document.getElementById(id);
-        if (item.selected === true) {
-            // setApiLink(apiLink.replace(('sort=*&').concat(id.replace('Check', '')), ''));
-            setApiLink(apiLink.concat('&sort='.concat(id)));
+    const SortList = props => {
+        const { name, id } = props.constraint;
+
+        function sortOperations() {
+            var preString = 'sort=',
+            searchString = '&';
+            var preIndex;
+            var adjustIndex;
+            if (apiLink.indexOf(preString) === -1) {
+                preIndex = apiLink.length;
+                adjustIndex = preIndex;
+            } else {
+                preIndex = apiLink.indexOf(preString);
+                adjustIndex = preIndex - 1;
+            }
+            var searchIndex;
+            if (apiLink.substring(preIndex).indexOf(searchString) === -1) {
+                searchIndex = apiLink.length;
+            } else {
+                searchIndex = preIndex + apiLink.substring(preIndex).indexOf(searchString);
+            }
+
+            setApiLink(apiLink.replace(apiLink.substring(adjustIndex, searchIndex), '').concat('&sort='.concat(id)));
+            // console.log(apiLink);
+            // setApiLink(apiLink.concat('&sort='.concat(id)));
+            setSortName(name);
         }
-    }
+        return (
+            <Dropdown.Item
+                id={ id }
+                onClick={() => sortOperations()}
+            >{ name }</Dropdown.Item>
+        );
+    };
 
     return (
         <Container>
             <h1 class="display-4">Wines</h1>
+            <h6>{ apiLink }</h6>
             <Row>
                 <Col>
                     <DropdownButton
@@ -118,9 +138,9 @@ const WineModel = () => {
                                             {typeList.map(constraint => (
                                                 <FormCheck>
                                                     <FormCheck.Input
-                                                        id={constraint.concat('Check')}
+                                                        id={constraint.concat('CheckW')}
                                                         onClick={() => updateConstraints('type',
-                                                            constraint.concat('Check'))}
+                                                            constraint.concat('CheckW'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -139,9 +159,9 @@ const WineModel = () => {
                                             {countriesList.map(constraint => (
                                                 <FormCheck>
                                                     <FormCheck.Input
-                                                        id={constraint.concat('Check')}
+                                                        id={constraint.concat('CheckW')}
                                                         onClick={() => updateConstraints('country',
-                                                            constraint.concat('Check'))}
+                                                            constraint.concat('CheckW'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -160,9 +180,9 @@ const WineModel = () => {
                                             {wineryList.map(constraint => (
                                                 <FormCheck>
                                                     <FormCheck.Input
-                                                        id={constraint.concat('Check')}
+                                                        id={constraint.concat('CheckW')}
                                                         onClick={() => updateConstraints('type',
-                                                            constraint.concat('Check'))}
+                                                            constraint.concat('CheckW'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -179,9 +199,9 @@ const WineModel = () => {
                                     >
                                         {/* <FormCheck>
                                             <FormCheck.Input
-                                                id={constraint.concat('Check')}
+                                                id={constraint.concat('CheckW')}
                                                 onClick={() => updateConstraints('type',
-                                                    constraint.concat('Check'))}
+                                                    constraint.concat('CheckW'))}
                                             ></FormCheck.Input>
                                             <FormCheck.Label>{constraint}</FormCheck.Label>
                                         </FormCheck> */}
@@ -249,12 +269,9 @@ const WineModel = () => {
                         title={sortName}
                         className="mt-2"
                     >
-                        {/* {sortList.name.map(constraint => (
-                            <Dropdown.Item
-                                id={constraint.id}
-                                onClick={() => updateSort(constraint.id)}
-                            >{ constraint.name }</Dropdown.Item>
-                        ))} */}
+                        {sortList.map(constraint => (
+                            <SortList constraint = {constraint}/>
+                        ))}
                         <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
                     </DropdownButton>
                 </Col>

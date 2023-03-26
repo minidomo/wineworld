@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import RegionCard from '../components/RegionCard';
 // Import Spinner from "react-bootstrap/Spinner";
@@ -22,10 +23,15 @@ const RegionModel = () => {
     const [totalInstances, setTotalInstances] = useState(1);
     const [sortName, setSortName] = useState('Sort By');
     const [orderName, setOrderName] = useState('Order');
+    const [apiLink, setApiLink] = useState('https://api.wineworld.me/regions?');
+    const [tagsList, setTagsList] = useState([]);
+    const [countriesList, setCountriesList] = useState([]);
+    const [tripTypesList, setTripTypesList] = useState([]);
+    const [sortList, setSortList] = useState([]);
 
     useEffect(() => {
         async function callApi() {
-            const response = await axios.get('https://api.wineworld.me/regions', {
+            const response = await axios.get(apiLink, {
                 params: {
                     page: page,
                 },
@@ -34,6 +40,15 @@ const RegionModel = () => {
             setRegions(response.data.list);
             setTotalPages(response.data.totalPages);
             setTotalInstances(response.data.totalInstances);
+
+            const constraintsResponse = await axios.get(
+                'https://api.wineworld.me/regions/constraints', {
+            });
+
+            setCountriesList(constraintsResponse.data.countries);
+            setTagsList(constraintsResponse.data.tags);
+            setTripTypesList(constraintsResponse.data.tripTypes);
+            setSortList(constraintsResponse.data.sorts);
         }
 
         if (page >= 1 && page <= totalPages) {
@@ -43,11 +58,56 @@ const RegionModel = () => {
         }
     }, [totalPages, page]);
 
+    function updateConstraints(category, id) {
+        var checkbox = document.getElementById(id);
+        if (checkbox.checked === true) {
+            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('CheckR', '')))));
+        } else {
+            setApiLink(apiLink.replace('&'.concat(category.concat('=').concat(id.replace('CheckR', ''))), ''));
+        }
+    }
+
+    const SortList = props => {
+        const { name, id } = props.constraint;
+
+        function sortOperations() {
+            var preString = 'sort=',
+                searchString = '&';
+            var preIndex;
+            var adjustIndex;
+            if (apiLink.indexOf(preString) === -1) {
+                preIndex = apiLink.length;
+                adjustIndex = preIndex;
+            } else {
+                preIndex = apiLink.indexOf(preString);
+                adjustIndex = preIndex - 1;
+            }
+            var searchIndex;
+            if (apiLink.substring(preIndex).indexOf(searchString) === -1) {
+                searchIndex = apiLink.length;
+            } else {
+                searchIndex = preIndex + apiLink.substring(preIndex).indexOf(searchString);
+            }
+
+            setApiLink(apiLink.replace(apiLink.substring(adjustIndex, searchIndex), '').concat('&sort='.concat(id)));
+            // console.log(apiLink);
+            // setApiLink(apiLink.concat('&sort='.concat(id)));
+            setSortName(name);
+        }
+        return (
+            <Dropdown.Item
+                id={id}
+                onClick={() => sortOperations()}
+            >{name}</Dropdown.Item>
+        );
+    };
+
     return (
         <Container>
             <h1 class="display-4">Regions</h1>
+            <h6>{apiLink}</h6>
             <Row>
-            <Col>
+                <Col>
                     <DropdownButton
                         variant="secondary"
                         size="sm"
@@ -62,31 +122,28 @@ const RegionModel = () => {
                                         variant="secondary"
                                         size="sm"
                                         menuVariant="dark"
-                                        title="Type"
-                                    ></DropdownButton>
-                                </Col>
-                                <Col>
-                                    <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
                                         title="Country"
-                                    ></DropdownButton>
+                                    >
+                                        <Container>
+                                            {countriesList.map(constraint => (
+                                                <FormCheck>
+                                                    <FormCheck.Input
+                                                        id={constraint.concat('CheckR')}
+                                                        onClick={() => updateConstraints('country',
+                                                            constraint.concat('CheckR'))}
+                                                    ></FormCheck.Input>
+                                                    <FormCheck.Label>{constraint}</FormCheck.Label>
+                                                </FormCheck>
+                                            ))}
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
                                         variant="secondary"
                                         size="sm"
                                         menuVariant="dark"
-                                        title="Region"
-                                    ></DropdownButton>
-                                </Col>
-                                <Col>
-                                    <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Winery"
+                                        title="Rating"
                                     ></DropdownButton>
                                 </Col>
                                 <Col>
@@ -102,26 +159,42 @@ const RegionModel = () => {
                                         variant="secondary"
                                         size="sm"
                                         menuVariant="dark"
-                                        title="Ratings"
+                                        title="Tags"
                                     >
-                                        <div class="container">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="formGroupExampleInput">Min (1-5)</label>
-                                                    <input type="text" class="form-control"
-                                                        id="formGroupExampleInput" placeholder="">
-                                                    </input>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="formGroupExampleInput2">Max (1-5)</label>
-                                                    <input type="text" class="form-control"
-                                                        id="formGroupExampleInput2" placeholder="">
-                                                    </input>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <Container>
+                                            {tagsList.map(constraint => (
+                                                <FormCheck>
+                                                    <FormCheck.Input
+                                                        id={constraint.concat('CheckR')}
+                                                        onClick={() => updateConstraints('tags',
+                                                            constraint.concat('CheckR'))}
+                                                    ></FormCheck.Input>
+                                                    <FormCheck.Label>{constraint}</FormCheck.Label>
+                                                </FormCheck>
+                                            ))}
+                                        </Container>
                                     </DropdownButton>
-
+                                </Col>
+                                <Col>
+                                    <DropdownButton
+                                        variant="secondary"
+                                        size="sm"
+                                        menuVariant="dark"
+                                        title="Trip Type"
+                                    >
+                                        <Container>
+                                            {tripTypesList.map(constraint => (
+                                                <FormCheck>
+                                                    <FormCheck.Input
+                                                        id={constraint.concat('CheckR')}
+                                                        onClick={() => updateConstraints('tripTypes',
+                                                            constraint.concat('CheckR'))}
+                                                    ></FormCheck.Input>
+                                                    <FormCheck.Label>{constraint}</FormCheck.Label>
+                                                </FormCheck>
+                                            ))}
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                             </Row>
                         </div>
@@ -137,20 +210,10 @@ const RegionModel = () => {
                         title={sortName}
                         className="mt-2"
                     >
+                        {sortList.map(constraint => (
+                            <SortList constraint={constraint} />
+                        ))}
                         <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
-                    </DropdownButton>
-                </Col>
-                <Col>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
-                        title={orderName}
-                        className="mt-2"
-                    >
-                        <Dropdown.Item onClick={() => setOrderName('Ascending')}>Ascending</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setOrderName('Descending')}>Descending</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>
