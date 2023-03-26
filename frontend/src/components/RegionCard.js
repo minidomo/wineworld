@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 // Import Button from "react-bootstrap/esm/Button";
 import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
@@ -47,15 +48,18 @@ const RegionCard = props => {
                         Trip Type: {tripTypes.join(', ')}
                         {/* <br />
                         Tags: {tags.join(", ")} */}
-                    </small>
-                </Card.Text>
-            </Card.Body>
-            <div class="card-footer">
-                <Link to={`/Regions/${id}`} class="btn btn-secondary stretched-link">
-                    Explore Region
-                </Link>
-            </div>
-        </Card>
+                            </small>
+                        </Card.Text>
+                    </Card.Body>
+                    <div class="card-footer">
+                        <Link to={`/Regions/${id}`} class="btn btn-secondary stretched-link">
+                            Explore Region
+                        </Link>
+                    </div>
+                </Card>
+            </Container>
+        // </div>
+
     );
 };
 

@@ -87,7 +87,7 @@ const About = () => {
         <Stack>
             <Container className="p-4"></Container>
 
-            <Container className="p-4" style={{ backgroundColor: '#FFFFFF' }}>
+            <Container className="p-4" style={{ backgroundColor: '#BBB' }}>
                 <h1 className="d-flex justify-content-center p-4 ">Welcome to WineWorld!</h1>
                 <p className="mx-auto">
                     WineWorld is an innovative platform that provides a comprehensive guide to the world of wine,

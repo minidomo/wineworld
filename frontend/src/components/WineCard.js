@@ -1,9 +1,11 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 // Import Button from "react-bootstrap/esm/Button";
 import { handleWineImageError } from '../util/handleImageError';
 import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
+
 
 const WineCard = props => {
     const { id, name, country, region, type, winery, rating, reviews, image } = props.wine;
