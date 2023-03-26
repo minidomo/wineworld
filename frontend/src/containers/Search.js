@@ -9,11 +9,15 @@ import { useLocation } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Search = () => {
     const [wines, setWines] = useState([]);
     const [vineyards, setVineyards] = useState([]);
     const [regions, setRegions] = useState([]);
+    const [wineLoaded, setWineLoaded] = useState(false);
+    const [vineyardLoaded, setVineyardLoaded] = useState(false);
+    const [regionLoaded, setRegionLoaded] = useState(false);
     const location = useLocation();
     const query = location.pathname.split("/Search/").at(-1);
 
@@ -30,6 +34,7 @@ const Search = () => {
                 },
             });
             setWines(response.data.list);
+            setWineLoaded(true);
         }
 
         async function searchVineyards() {
@@ -39,6 +44,7 @@ const Search = () => {
                 },
             });
             setVineyards(response.data.list);
+            setVineyardLoaded(true);
         }
 
         async function searchRegions() {
@@ -48,6 +54,7 @@ const Search = () => {
                 },
             });
             setRegions(response.data.list);
+            setRegionLoaded(true);
         }
 
         searchWines();
@@ -63,31 +70,43 @@ const Search = () => {
                 <Tab eventKey="wines" title ="Wines">
                     <h6 class="display-4">Wine Results</h6>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                        {wines.map(wine => (
+                        {wineLoaded ? (
+                            wines.map(wine => (
                             <Col>
                                 <WineCard wine={wine} regex={searchQuery} />
                             </Col>
-                        ))}
+                            ))) : (
+                            <Spinner animation="border" role="status"></Spinner>
+                        )
+                        }
                     </Row>
                 </Tab>
                 <Tab eventKey="vineyards" title ="Vineyards">
                     <h6 class="display-4">Vineyard Results</h6>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                        {vineyards.map(vineyard => (
+                        { vineyardLoaded ?  (
+                            vineyards.map(vineyard => (
                             <Col>
                                 <VineyardCard vineyard={vineyard} regex={searchQuery}/>
                             </Col>
-                        ))}
+                            ))) : (
+                            <Spinner animation="border" role="status"></Spinner>
+                        )
+                        }
                     </Row>
                 </Tab>
                 <Tab eventKey="regions" title ="Regions">
                     <h6 class="display-4">Region Results</h6>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                        {regions.map(region => (
+                        { regionLoaded ? (
+                            regions.map(region => (
                             <Col>
                                 <RegionCard region={region} regex={searchQuery}/>
                             </Col>
-                        ))}
+                            ))) : (
+                                <Spinner animation="border" role="status"></Spinner>                                
+                            )
+                        }
                     </Row>
                 </Tab>
             </Tabs>
