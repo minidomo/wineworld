@@ -28,7 +28,8 @@ const teamData = [
             'and drive cars!',
         commits: 0,
         issues: 0,
-        unit_tests: 23,
+        // 33 backend, 54 postman
+        unit_tests: 87,
         image: RyanImage,
     },
     {
@@ -41,7 +42,7 @@ const teamData = [
             'my spare time.',
         commits: 0,
         issues: 0,
-        unit_tests: 23,
+        unit_tests: 26,
         image: JBImage,
     },
     {
