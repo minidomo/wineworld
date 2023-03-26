@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
+import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/esm/Button';
 // import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
@@ -29,10 +31,16 @@ const WineModel = () => {
     const [filters, setFilters] = useState([]);
     const [sortName, setSortName] = useState('Sort By');
     const [orderName, setOrderName] = useState('Order');
+    const [apiLink, setApiLink] = useState('https://api.wineworld.me/wines?');
+    const [typeList, setTypeList] = useState([]);
+    const [countriesList, setCountriesList] = useState([]);
+    const [wineryList, setWineryList] = useState([]);
+    const [sortList, setSortList] = useState([]);
 
     useEffect(() => {
         async function callApi() {
-            const response = await axios.get('https://api.wineworld.me/wines', {
+            const response = await axios.get(
+                apiLink, {
                 params: {
                     page: page,
                 },
@@ -41,6 +49,15 @@ const WineModel = () => {
             setWines(response.data.list);
             setTotalPages(response.data.totalPages);
             setTotalInstances(response.data.totalInstances);
+
+            const constraintsResponse = await axios.get(
+                'https://api.wineworld.me/wines/constraints', {
+            });
+
+            setTypeList(constraintsResponse.data.types);
+            setCountriesList(constraintsResponse.data.countries);
+            setWineryList(constraintsResponse.data.wineries);
+            setSortList(constraintsResponse.data.sorts);
         }
 
         if (page >= 1 && page <= totalPages) {
@@ -49,6 +66,32 @@ const WineModel = () => {
             setPage(clamp(1, totalPages, page));
         }
     }, [totalPages, page]);
+
+    function updateConstraints(category, id) {
+        var checkbox = document.getElementById(id);
+        if (checkbox.checked === true) {
+            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('Check', '')))));
+        } else {
+            setApiLink(apiLink.replace(category.concat('=').concat(id.replace('Check', '')), ''));
+        }
+    }
+
+    function updateReviews(id) {
+        var reviewText = document.getElementById(id);
+        if (reviewText.TEXT_NODE !== '0' && !isNaN(reviewText.TEXT_NODE)) {
+            setApiLink(apiLink.concat('&startReviews=').concat(reviewText.TEXT_NODE));
+        } else {
+            setApiLink(apiLink.replace('&startReviews', ''));
+        }
+    }
+
+    function updateSort(id) {
+        var item = document.getElementById(id);
+        if (item.selected === true) {
+            // setApiLink(apiLink.replace(('sort=*&').concat(id.replace('Check', '')), ''));
+            setApiLink(apiLink.concat('&sort='.concat(id)));
+        }
+    }
 
     return (
         <Container>
@@ -70,7 +113,20 @@ const WineModel = () => {
                                         size="sm"
                                         menuVariant="dark"
                                         title="Type"
-                                    ></DropdownButton>
+                                    >
+                                        <Container>
+                                            {typeList.map(constraint => (
+                                                <FormCheck>
+                                                    <FormCheck.Input
+                                                        id={constraint.concat('Check')}
+                                                        onClick={() => updateConstraints('type',
+                                                            constraint.concat('Check'))}
+                                                    ></FormCheck.Input>
+                                                    <FormCheck.Label>{constraint}</FormCheck.Label>
+                                                </FormCheck>
+                                            ))}
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
@@ -78,15 +134,20 @@ const WineModel = () => {
                                         size="sm"
                                         menuVariant="dark"
                                         title="Country"
-                                    ></DropdownButton>
-                                </Col>
-                                <Col>
-                                    <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Region"
-                                    ></DropdownButton>
+                                    >
+                                        <Container>
+                                            {countriesList.map(constraint => (
+                                                <FormCheck>
+                                                    <FormCheck.Input
+                                                        id={constraint.concat('Check')}
+                                                        onClick={() => updateConstraints('country',
+                                                            constraint.concat('Check'))}
+                                                    ></FormCheck.Input>
+                                                    <FormCheck.Label>{constraint}</FormCheck.Label>
+                                                </FormCheck>
+                                            ))}
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
@@ -94,7 +155,20 @@ const WineModel = () => {
                                         size="sm"
                                         menuVariant="dark"
                                         title="Winery"
-                                    ></DropdownButton>
+                                    >
+                                        <Container>
+                                            {wineryList.map(constraint => (
+                                                <FormCheck>
+                                                    <FormCheck.Input
+                                                        id={constraint.concat('Check')}
+                                                        onClick={() => updateConstraints('type',
+                                                            constraint.concat('Check'))}
+                                                    ></FormCheck.Input>
+                                                    <FormCheck.Label>{constraint}</FormCheck.Label>
+                                                </FormCheck>
+                                            ))}
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
@@ -102,7 +176,38 @@ const WineModel = () => {
                                         size="sm"
                                         menuVariant="dark"
                                         title="Reviews"
-                                    ></DropdownButton>
+                                    >
+                                        {/* <FormCheck>
+                                            <FormCheck.Input
+                                                id={constraint.concat('Check')}
+                                                onClick={() => updateConstraints('type',
+                                                    constraint.concat('Check'))}
+                                            ></FormCheck.Input>
+                                            <FormCheck.Label>{constraint}</FormCheck.Label>
+                                        </FormCheck> */}
+                                        <Container>
+                                            {/* <Form>
+                                                <Form.Group>
+                                                    <Form.Label>
+                                                        Minimum Review Count
+                                                    </Form.Label>
+                                                    <Form.Control
+                                                        id='MinReviews'
+                                                        onClick={() => updateReviews('MinReviews')}>
+                                                    </Form.Control>
+                                                </Form.Group>
+                                            </Form> */}
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">
+                                                    Minimum Review Count
+                                                </label>
+                                                <input type="text" class="form-control"
+                                                    id="MinReviews" placeholder="0"
+                                                    onClick={() => updateReviews('MinReviews')}>
+                                                </input>
+                                            </div>
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
@@ -111,7 +216,7 @@ const WineModel = () => {
                                         menuVariant="dark"
                                         title="Ratings"
                                     >
-                                        <div class="container">
+                                        <Container>
                                             <form>
                                                 <div class="form-group">
                                                     <label for="formGroupExampleInput">Min (1-5)</label>
@@ -126,7 +231,7 @@ const WineModel = () => {
                                                     </input>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </Container>
                                     </DropdownButton>
 
                                 </Col>
@@ -144,20 +249,13 @@ const WineModel = () => {
                         title={sortName}
                         className="mt-2"
                     >
+                        {/* {sortList.name.map(constraint => (
+                            <Dropdown.Item
+                                id={constraint.id}
+                                onClick={() => updateSort(constraint.id)}
+                            >{ constraint.name }</Dropdown.Item>
+                        ))} */}
                         <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
-                    </DropdownButton>
-                </Col>
-                <Col>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
-                        title={orderName}
-                        className="mt-2"
-                    >
-                        <Dropdown.Item onClick={() => setOrderName('Ascending')}>Ascending</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setOrderName('Descending')}>Descending</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>
