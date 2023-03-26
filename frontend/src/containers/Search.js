@@ -69,6 +69,7 @@ const Search = () => {
             <Tabs defaultActiveKey="wines">
                 <Tab eventKey="wines" title ="Wines">
                     <h6 class="display-4">Wine Results</h6>
+                    <p hidden = {wines.length > 0}>No wines seem to match your search</p>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {wineLoaded ? (
                             wines.map(wine => (
@@ -83,6 +84,7 @@ const Search = () => {
                 </Tab>
                 <Tab eventKey="vineyards" title ="Vineyards">
                     <h6 class="display-4">Vineyard Results</h6>
+                    <p hidden = {vineyards.length > 0}>No vineyards seem to match your search</p>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         { vineyardLoaded ?  (
                             vineyards.map(vineyard => (
@@ -97,6 +99,7 @@ const Search = () => {
                 </Tab>
                 <Tab eventKey="regions" title ="Regions">
                     <h6 class="display-4">Region Results</h6>
+                    <p hidden = {regions.length > 0}>No regions seem to match your search</p>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         { regionLoaded ? (
                             regions.map(region => (
