@@ -7,6 +7,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import WineCard from '../components/WineCard';
+import "./Cards.css"
 // import Spinner from "react-bootstrap/Spinner";
 
 function clamp(minVal, maxVal, val) {
@@ -125,7 +126,7 @@ const WineModel = () => {
                         title="Filter"
                         className="mt-2"
                     >
-                        <div class="container">
+                        <div  class="container" style={{height: 1000}}>
                             <Row>
                                 <Col>
                                     <DropdownButton
@@ -170,7 +171,7 @@ const WineModel = () => {
                                     </DropdownButton>
                                 </Col>
                                 <Col>
-                                    <DropdownButton
+                                    <DropdownButton 
                                         variant="secondary"
                                         size="sm"
                                         menuVariant="dark"
