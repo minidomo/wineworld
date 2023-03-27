@@ -2,11 +2,20 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 // Import Button from 'react-bootstrap/esm/Button';
+import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
 import { handleVineyardImageError } from '../util/handleImageError';
 
+
 const VineyardCard = props => {
     const { id, name, country, price, rating, reviews, image } = props.vineyard;
+
+    function highlightText(input) {
+        if (props.regex != null) {
+          return <ECHighlighter searchPhrase={props.regex} text={input} />;
+        }
+        return input;
+      }
 
     return (
         <Container>
@@ -18,8 +27,8 @@ const VineyardCard = props => {
                     onError={handleVineyardImageError}
                 />
                 <Card.Body>
-                    <Card.Title> {name} </Card.Title>
-                    <Card.Subtitle> {country} </Card.Subtitle>
+                    <Card.Title> {highlightText(name)} </Card.Title>
+                    <Card.Subtitle> {highlightText(country)} </Card.Subtitle>
                     <Card.Text>
                         Price Level: {price}
                         <br />
@@ -28,7 +37,6 @@ const VineyardCard = props => {
                         Review Count: {reviews}
                     </Card.Text>
                 </Card.Body>
-
                 <div class="card-footer">
                     <Link to={`/Vineyards/${id}`} class="btn btn-secondary stretched-link">
                         See Vineyard

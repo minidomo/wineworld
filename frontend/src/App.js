@@ -2,21 +2,18 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/NavBar';
-
 import About from './containers/About';
 import Home from './containers/Home';
-
-import RegionInstance from './containers/RegionInstance';
-import Regions from './containers/RegionModel';
-import VineyardInstance from './containers/VineyardInstance';
-import Vineyards from './containers/VineyardModel';
-import WineInstance from './containers/WineInstance';
 import Wines from './containers/WineModel';
-// Import Wines from './containers/WineModel/Wines';
-
-// Import Vineyards from './containers/VineyardModel/Vineyards';
-
-// Import Regions from './containers/RegionModel/Regions';
+import WineInstance from './containers/WineInstance';
+import WineSearch from './containers/WineSearch'
+import Vineyards from './containers/VineyardModel';
+import VineyardInstance from './containers/VineyardInstance';
+import VineyardSearch from './containers/VineyardSearch';
+import Regions from './containers/RegionModel';
+import RegionInstance from './containers/RegionInstance';
+import RegionSearch from './containers/RegionSearch';
+import Search from './containers/Search';
 
 const App = () => (
     <Router>
@@ -32,6 +29,11 @@ const App = () => (
                     <Route path="/Regions" element={<Regions />}></Route>
                     <Route path="/Regions/:id" element={<RegionInstance />}></Route>
                     <Route path="/About" element={<About />}></Route>
+
+                    <Route path="/Search/:query" element={<Search />}></Route>
+                    <Route path="/Wines/Search/:query" element={<WineSearch />}></Route>
+                    <Route path="/Vineyards/Search/:query" element={<VineyardSearch />}></Route>
+                    <Route path="/Regions/Search/:query" element={<RegionSearch />}></Route>
                 </Routes>
             </div>
         </div>

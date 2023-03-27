@@ -2,16 +2,24 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 // Import Button from "react-bootstrap/esm/Button";
-import { Link } from 'react-router-dom';
 import { handleWineImageError } from '../util/handleImageError';
+import ECHighlighter from "react-ec-highlighter";
+import { Link } from 'react-router-dom';
 
 
 const WineCard = props => {
     const { id, name, country, region, type, winery, rating, reviews, image } = props.wine;
 
+    function highlightText (input) {
+        if (props.regex != null) {
+          return <ECHighlighter searchPhrase={props.regex} text={input} />
+        }
+        return input
+      }    
+
     return (
-        // <Card border="dark" style={{ width: "80%", height: "50%" }}>
         <Container>
+            {/* <Card border="dark" style={{ width: "80%", height: "50%" }}> */}
             <Card border="dark" style={{ height: '35rem', width: '18rem' }}>
                 {/* <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 50}} src={image} /> */}
                 <Card.Img
@@ -24,15 +32,15 @@ const WineCard = props => {
                 <Card.Body>
                     <Card.Title>
                         {' '}
-                        <small> {name} </small>{' '}
+                        <small> {highlightText(name)}  </small>{' '}
                     </Card.Title>
-                    <Card.Subtitle> {type} Wine </Card.Subtitle>
+                    <Card.Subtitle> {highlightText(type)} Wine </Card.Subtitle>
                     <Card.Text>
-                        Country: {country}
+                        Country: {highlightText(country)} 
                         <br />
-                        Region: {region}
+                        Region: {highlightText(region)} 
                         <br />
-                        Winery: {winery}
+                        Winery: {highlightText(winery)} 
                         <br />
                         Rating: {rating}
                         <br />
@@ -46,6 +54,7 @@ const WineCard = props => {
                 </div>
             </Card>
         </Container>
+        
     );
 };
 export default WineCard;
