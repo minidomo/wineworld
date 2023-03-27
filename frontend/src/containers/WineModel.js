@@ -140,10 +140,6 @@ const WineModel = () => {
     return (
         <Container>
             <h1 class="display-4">Wines</h1>
-            <h6>{apiLink}</h6>
-            <h6>{type}</h6>
-            <h6>{page}</h6>
-            <h6>{country}</h6>
             <Row>
                 <Col>
                     <DropdownButton
@@ -282,7 +278,7 @@ const WineModel = () => {
                                                     </input>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="formGroupExampleInput2">Max (1 - 5)</label>
+                                                    <label for="formGroupExampleInput2">Max (0 - 5)</label>
                                                     <input type="text" class="form-control"
                                                         id="maxRating" placeholder="5"
                                                         onChange={() =>
