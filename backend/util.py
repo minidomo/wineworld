@@ -116,13 +116,13 @@ class RegionUtil:
             "id": data.id,
             "name": data.name,
             "country": data.country,
-            "rating": data.rating,
+            "rating": float(data.rating),
             "reviews": data.reviews,
             "tags": data.tags,
             "tripTypes": data.trip_types,
             "coordinates": {
-                "longitude": data.longitude,
-                "latitude": data.latitude,
+                "longitude": float(data.longitude),
+                "latitude": float(data.latitude),
             },
             "url": data.url,
             "image": {
@@ -149,7 +149,7 @@ class WineUtil:
             "name": data.name,
             "winery": data.winery,
             "image": data.image,
-            "rating": data.rating,
+            "rating": float(data.rating),
             "reviews": data.reviews,
             "country": data.country,
             "region": data.region,
@@ -184,14 +184,14 @@ class VineyardUtil:
             "id": data.id,
             "name": data.name,
             "price": data.price,
-            "rating": data.rating,
+            "rating": float(data.rating),
             "reviews": data.reviews,
             "image": data.image,
             "country": data.country,
             "url": data.url,
             "coordinates": {
-                "longitude": data.longitude,
-                "latitude": data.latitude,
+                "longitude": float(data.longitude),
+                "latitude": float(data.latitude),
             },
         }
 
