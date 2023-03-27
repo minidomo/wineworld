@@ -6,10 +6,13 @@ import About from './containers/About';
 import Home from './containers/Home';
 import Wines from './containers/WineModel';
 import WineInstance from './containers/WineInstance';
+import WineSearch from './containers/WineSearch'
 import Vineyards from './containers/VineyardModel';
 import VineyardInstance from './containers/VineyardInstance';
+import VineyardSearch from './containers/VineyardSearch';
 import Regions from './containers/RegionModel';
 import RegionInstance from './containers/RegionInstance';
+import RegionSearch from './containers/RegionSearch';
 import Search from './containers/Search';
 
 const App = () => (
@@ -28,6 +31,9 @@ const App = () => (
                     <Route path="/About" element={<About />}></Route>
 
                     <Route path="/Search/:query" element={<Search />}></Route>
+                    <Route path="/Wines/Search/:query" element={<WineSearch />}></Route>
+                    <Route path="/Vineyards/Search/:query" element={<VineyardSearch />}></Route>
+                    <Route path="/Regions/Search/:query" element={<RegionSearch />}></Route>
                 </Routes>
             </div>
         </div>
