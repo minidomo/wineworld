@@ -42,7 +42,7 @@ const teamData = [
             'my spare time.',
         commits: 0,
         issues: 0,
-        unit_tests: 26,
+        unit_tests: 29,
         image: JBImage,
     },
     {
