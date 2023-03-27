@@ -155,6 +155,32 @@ class WineAllTests(unittest.TestCase):
             next_name: str = wines[i + 1]["name"].lower()
             self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
 
+    def test_floating_point_rating(self):
+        """Written by JB"""
+        res1 = self.client.get(create_url(WineAllTests.endpoint)).get_json()
+        original: JsonObject = res1["list"][0]
+        rating: float = original["rating"]
+
+        res2 = self.client.get(
+            create_url(
+                WineAllTests.endpoint,
+                {
+                    "startRating": rating,
+                    "endRating": rating,
+                },
+            )
+        ).get_json()
+
+        wines: list[JsonObject] = res2["list"]
+        self.assertGreater(len(wines), 0)
+        found_original = False
+
+        for wine in wines:
+            self.assertAlmostEqual(wine["rating"], rating)
+            found_original |= wine["id"] == original["id"]
+
+        self.assertTrue(found_original)
+
 
 class WineIdTests(unittest.TestCase):
     endpoint = "/wines"
@@ -391,6 +417,32 @@ class VineyardAllTests(unittest.TestCase):
             cur_name: str = vineyards[i]["name"].lower()
             next_name: str = vineyards[i + 1]["name"].lower()
             self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
+
+    def test_floating_point_rating(self):
+        """Written by JB"""
+        res1 = self.client.get(create_url(VineyardAllTests.endpoint)).get_json()
+        original: JsonObject = res1["list"][0]
+        rating: float = original["rating"]
+
+        res2 = self.client.get(
+            create_url(
+                VineyardAllTests.endpoint,
+                {
+                    "startRating": rating,
+                    "endRating": rating,
+                },
+            )
+        ).get_json()
+
+        vineyards: list[JsonObject] = res2["list"]
+        self.assertGreater(len(vineyards), 0)
+        found_original = False
+
+        for vineyard in vineyards:
+            self.assertAlmostEqual(vineyard["rating"], rating)
+            found_original |= vineyard["id"] == original["id"]
+
+        self.assertTrue(found_original)
 
 
 class VineyardIdTests(unittest.TestCase):
@@ -735,6 +787,32 @@ class RegionAllTests(unittest.TestCase):
             cur_rating: float = regions[i]["rating"]
             next_rating: float = regions[i + 1]["rating"]
             self.assertTrue(cur_rating >= next_rating)
+
+    def test_floating_point_rating(self):
+        """Written by JB"""
+        res1 = self.client.get(create_url(RegionAllTests.endpoint)).get_json()
+        original: JsonObject = res1["list"][0]
+        rating: float = original["rating"]
+
+        res2 = self.client.get(
+            create_url(
+                RegionAllTests.endpoint,
+                {
+                    "startRating": rating,
+                    "endRating": rating,
+                },
+            )
+        ).get_json()
+
+        regions: list[JsonObject] = res2["list"]
+        self.assertGreater(len(regions), 0)
+        found_original = False
+
+        for region in regions:
+            self.assertAlmostEqual(region["rating"], rating)
+            found_original |= region["id"] == original["id"]
+
+        self.assertTrue(found_original)
 
 
 class RegionIdTests(unittest.TestCase):
