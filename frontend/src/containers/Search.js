@@ -19,7 +19,7 @@ const Search = () => {
     const [vineyardLoaded, setVineyardLoaded] = useState(false);
     const [regionLoaded, setRegionLoaded] = useState(false);
     const location = useLocation();
-    const query = location.pathname.split("/Search/").at(-1);
+    const query = location.pathname.split("/search/").at(-1);
 
     // reformat query with spaces
     const words = query.split('%20');

@@ -5,9 +5,11 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import WineCard from '../components/WineCard';
+import "./Cards.css"
 // import Spinner from "react-bootstrap/Spinner";
 import {useNavigate} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -43,7 +45,7 @@ const WineModel = () => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/Wines/Search/${query}`);
+        navigate(`/wines/search/${query}`);
     };
 
     useEffect(() => {
@@ -158,7 +160,7 @@ const WineModel = () => {
                         title="Filter"
                         className="mt-2"
                     >
-                        <div class="container">
+                        <div  class="container" style={{height: 1000}}>
                             <Row>
                                 <Col>
                                     <DropdownButton
@@ -207,7 +209,7 @@ const WineModel = () => {
                                     </DropdownButton>
                                 </Col>
                                 <Col>
-                                    <DropdownButton
+                                    <DropdownButton 
                                         variant="secondary"
                                         size="sm"
                                         menuVariant="dark"
@@ -320,16 +322,21 @@ const WineModel = () => {
                 </Col>
                 <Col>
                     <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search" onChange={(event) => setQuery(event.target.value)}/>
+                        <Form.Control type="search" placeholder="search wines" onChange={(event) => setQuery(event.target.value)}/>
                     </Form>
                 </Col>
             </Row>
             <br></br>
             <Row>
                 <Col>
+                <ButtonGroup>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(Math.max(page + -4, 1))} disabled={page === 1}>
+                        &lt;&lt;
+                    </button>
                     <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
                         Previous
                     </button>
+                </ButtonGroup> 
                 </Col>
                 <Col>
                     <Row>
@@ -344,13 +351,15 @@ const WineModel = () => {
                     </Row>
                 </Col>
                 <Col>
-                    <button
-                        class="btn btn-outline-secondary"
-                        onClick={() => setPage(page + 1)}
-                        disabled={page === totalPages}
-                    >
-                        Next
-                    </button>
+                    <ButtonGroup>
+                        <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+                            Next
+                        </button>
+                        <button class="btn btn-outline-secondary" onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
+                            &gt;&gt;
+                        </button>
+                    </ButtonGroup>
+                    
                 </Col>
             </Row>
 

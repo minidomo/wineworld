@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import VineyardCard from '../components/VineyardCard';
@@ -40,7 +41,7 @@ const VineyardModel = () => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/Vineyards/Search/${query}`);
+        navigate(`/vineyards/search/${query}`);
     };
 
     useEffect(() => {
@@ -285,16 +286,21 @@ const VineyardModel = () => {
                 </Col>
                 <Col>
                     <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search" onChange={(event) => setQuery(event.target.value)}/>
+                        <Form.Control type="search" placeholder="search vineyards" onChange={(event) => setQuery(event.target.value)}/>
                     </Form>
                 </Col>
             </Row>
             <br></br>
             <Row>
                 <Col>
+                <ButtonGroup>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(Math.max(page + -4, 1))} disabled={page === 1}>
+                        &lt;&lt;
+                    </button>
                     <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
                         Previous
                     </button>
+                </ButtonGroup> 
                 </Col>
                 <Col>
                     <Row>
@@ -309,13 +315,14 @@ const VineyardModel = () => {
                     </Row>
                 </Col>
                 <Col>
-                    <button
-                        class="btn btn-outline-secondary"
-                        onClick={() => setPage(page + 1)}
-                        disabled={page === totalPages}
-                    >
-                        Next
-                    </button>
+                <ButtonGroup>
+                        <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+                            Next
+                        </button>
+                        <button class="btn btn-outline-secondary" onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
+                            &gt;&gt;
+                        </button>
+                    </ButtonGroup>
                 </Col>
             </Row>
             <Row className="g-4 p-4">

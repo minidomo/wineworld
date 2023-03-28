@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import { handleWineImageError } from '../util/handleImageError';
+import RedditCarousel from '../components/RedditCarousel';
+import './WineInstance.css';
 
 const WineInstance = () => {
     let { id } = useParams();
@@ -96,23 +98,11 @@ const WineInstance = () => {
                     ))}
                 </Col>
             </Row>
-            <Row className="p-4 g-4">
-                <h5 align="left">Learn More About {type} Wine</h5>
-                {reddit.map(reddit_link => (
-                    <Col>
-                        <iframe
-                            title="reddit_frame"
-                            id={'reddit-embed'}
-                            src={`${reddit_link}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`}
-                            sandbox={'allow-scripts allow-same-origin allow-popups'}
-                            style={{ border: 'none' }}
-                            height={'249'}
-                            width={'640'}
-                            scrolling={'no'}
-                        ></iframe>
-                    </Col>
-                ))}
-            </Row>
+
+            <div id='learn-more-section' className='p-4 g-4'>
+                <h5>Learn more about {type} wine</h5>
+                <RedditCarousel redditUrls={reddit} />
+            </div>
         </div>
     );
 };

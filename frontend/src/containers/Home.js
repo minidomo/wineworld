@@ -10,18 +10,28 @@ const Home = () => (
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <HomeCard title="Wines" text="Find wines that satisfy your taste" link="/Wines" image={wineimage} />
+                    <HomeCard
+                        title="Wines"
+                        text="Find wines that satisfy your taste"
+                        link="/wines"
+                        image={wineimage}
+                    />
                 </div>
                 <div class="col">
                     <HomeCard
                         title="Vineyards"
                         text="Discover amazing vineyards"
-                        link="/Vineyards"
+                        link="/vineyards"
                         image={vineyardsimage}
                     />
                 </div>
                 <div class="col">
-                    <HomeCard title="Regions" text="Explore new regions" link="/Regions" image={regionsimage} />
+                    <HomeCard
+                        title="Regions"
+                        text="Explore new regions"
+                        link="/regions"
+                        image={regionsimage}
+                    />
                 </div>
             </div>
         </div>

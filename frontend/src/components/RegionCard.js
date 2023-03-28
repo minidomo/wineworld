@@ -1,25 +1,12 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-// Import Button from "react-bootstrap/esm/Button";
 import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
 import { handleRegionImageError } from '../util/handleImageError';
 
 const RegionCard = props => {
-    const {
-        id,
-        name,
-        country,
-        rating,
-        reviews,
-        // Tags,
-        tripTypes,
-        image,
-        // ImageHeight,
-        // imageWidth,
-        // url,
-    } = props.region;
+    const {id, name, country, rating, reviews, tripTypes, image} = props.region;
 
     function highlightText(input) {
         if (props.regex != null) {
@@ -51,7 +38,7 @@ const RegionCard = props => {
                 </Card.Text>
                 </Card.Body>
                 <div class="card-footer">
-                    <Link to={`/Regions/${id}`} class="btn btn-secondary stretched-link">
+                    <Link to={`/regions/${id}`} class="btn btn-secondary stretched-link">
                         Explore Region
                     </Link>
                 </div>
