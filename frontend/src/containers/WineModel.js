@@ -37,7 +37,7 @@ const WineModel = () => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/Wines/Search/${query}`);
+        navigate(`/wines/search/${query}`);
     };
 
     useEffect(() => {
@@ -288,7 +288,7 @@ const WineModel = () => {
                 </Col>
                 <Col>
                     <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search" onChange={(event) => setQuery(event.target.value)}/>
+                        <Form.Control type="search" placeholder="search wines" onChange={(event) => setQuery(event.target.value)}/>
                     </Form>
                 </Col>
             </Row>

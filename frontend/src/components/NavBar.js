@@ -9,7 +9,7 @@ const NavBar = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/Search/${query}`);
+        navigate(`/search/${query}`);
     };
 
     return (
@@ -33,22 +33,22 @@ const NavBar = () => {
                     <div class="collapse navbar-collapse" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <Link class="nav-link" to="/About">
+                                <Link class="nav-link" to="/about">
                                     About
                                 </Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" to="/Wines">
+                                <Link class="nav-link" to="/wines">
                                     Wines
                                 </Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" to="/Vineyards">
+                                <Link class="nav-link" to="/vineyards">
                                     Vineyards
                                 </Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" to="/Regions">
+                                <Link class="nav-link" to="/regions">
                                     Regions
                                 </Link>
                             </li>

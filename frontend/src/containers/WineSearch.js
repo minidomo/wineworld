@@ -11,7 +11,7 @@ const WineSearch = () => {
     const [wines, setWines] = useState([]);
     const [wineLoaded, setWineLoaded] = useState(false);
     const location = useLocation();
-    const query = location.pathname.split("/Search/").at(-1);
+    const query = location.pathname.split("/search/").at(-1);
     const words = query.split('%20');
     const searchQuery = words.join(" ");
 
