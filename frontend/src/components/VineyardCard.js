@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-// Import Button from 'react-bootstrap/esm/Button';
 import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
 import { handleVineyardImageError } from '../util/handleImageError';
@@ -38,7 +37,7 @@ const VineyardCard = props => {
                     </Card.Text>
                 </Card.Body>
                 <div class="card-footer">
-                    <Link to={`/Vineyards/${id}`} class="btn btn-secondary stretched-link">
+                    <Link to={`/vineyards/${id}`} class="btn btn-secondary stretched-link">
                         See Vineyard
                     </Link>
                 </div>

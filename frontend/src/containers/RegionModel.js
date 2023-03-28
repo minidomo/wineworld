@@ -35,7 +35,7 @@ const RegionModel = () => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/Regions/Search/${query}`);
+        navigate(`/regions/search/${query}`);
     };
 
     useEffect(() => {
@@ -227,7 +227,7 @@ const RegionModel = () => {
                 </Col>
                 <Col>
                     <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search" onChange={(event) => setQuery(event.target.value)}/>
+                        <Form.Control type="search" placeholder="search regions" onChange={(event) => setQuery(event.target.value)}/>
                     </Form>
                 </Col>
             </Row>

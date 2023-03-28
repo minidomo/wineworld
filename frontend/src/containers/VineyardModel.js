@@ -32,7 +32,7 @@ const VineyardModel = () => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/Vineyards/Search/${query}`);
+        navigate(`/vineyards/search/${query}`);
     };
 
     useEffect(() => {
@@ -213,7 +213,7 @@ const VineyardModel = () => {
                 </Col>
                 <Col>
                     <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search" onChange={(event) => setQuery(event.target.value)}/>
+                        <Form.Control type="search" placeholder="search vineyards" onChange={(event) => setQuery(event.target.value)}/>
                     </Form>
                 </Col>
             </Row>

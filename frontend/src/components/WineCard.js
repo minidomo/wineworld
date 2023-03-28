@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-// Import Button from "react-bootstrap/esm/Button";
 import { handleWineImageError } from '../util/handleImageError';
 import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
@@ -21,7 +20,6 @@ const WineCard = props => {
         <Container>
             {/* <Card border="dark" style={{ width: "80%", height: "50%" }}> */}
             <Card border="dark" style={{ height: '35rem', width: '18rem' }}>
-                {/* <Card.Img class="rounded mx-auto d-block" variant="top" style={{width: 50}} src={image} /> */}
                 <Card.Img
                     class="img-thumbnail"
                     variant="top"
@@ -48,7 +46,7 @@ const WineCard = props => {
                     </Card.Text>
                 </Card.Body>
                 <div class="card-footer">
-                    <Link to={`/Wines/${id}`} class="btn btn-secondary stretched-link">
+                    <Link to={`/wines/${id}`} class="btn btn-secondary stretched-link">
                         View Wine
                     </Link>
                 </div>
