@@ -1,0 +1,10 @@
+#reddit-carousel {
+    height: 400px;
+    width: 800px;
+    max-width: 100%;
+}
+
+#reddit-carousel .carousel-inner,
+#reddit-carousel .carousel-item {
+    height: 100%;
+}
