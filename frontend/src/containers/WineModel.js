@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import WineCard from '../components/WineCard';
@@ -294,9 +295,14 @@ const WineModel = () => {
             <br></br>
             <Row>
                 <Col>
+                <ButtonGroup>
+                    <button class="btn btn-outline-secondary" onClick={() => setPage(Math.max(page + -4, 1))} disabled={page === 1}>
+                        &lt;&lt;
+                    </button>
                     <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
                         Previous
                     </button>
+                </ButtonGroup> 
                 </Col>
                 <Col>
                     <Row>
@@ -311,13 +317,15 @@ const WineModel = () => {
                     </Row>
                 </Col>
                 <Col>
-                    <button
-                        class="btn btn-outline-secondary"
-                        onClick={() => setPage(page + 1)}
-                        disabled={page === totalPages}
-                    >
-                        Next
-                    </button>
+                    <ButtonGroup>
+                        <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+                            Next
+                        </button>
+                        <button class="btn btn-outline-secondary" onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
+                            &gt;&gt;
+                        </button>
+                    </ButtonGroup>
+                    
                 </Col>
             </Row>
 
