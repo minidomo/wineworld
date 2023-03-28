@@ -5,10 +5,10 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { useParams } from 'react-router-dom';
 // Import Container from 'react-bootstrap/esm/Container';
+import RedditCarousel from '../components/RedditCarousel';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import { handleWineImageError } from '../util/handleImageError';
-import RedditCarousel from '../components/RedditCarousel';
 import './WineInstance.css';
 
 const WineInstance = () => {

@@ -1,19 +1,18 @@
 import axios from 'axios';
 import qs from 'qs';
 import React, { useState, useEffect } from 'react';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Form from 'react-bootstrap/Form';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
+import { useNavigate } from 'react-router-dom';
 import WineCard from '../components/WineCard';
-import "./Cards.css"
-// import Spinner from "react-bootstrap/Spinner";
-import {useNavigate} from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-
+import './Cards.css';
+// import Spinner from 'react-bootstrap/Spinner';
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
     if (val > maxVal) return maxVal;
@@ -43,7 +42,7 @@ const WineModel = () => {
 
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         event.preventDefault();
         navigate(`/wines/search/${query}`);
     };
@@ -150,24 +149,24 @@ const WineModel = () => {
 
     return (
         <Container>
-            <h1 class="display-4">Wines</h1>
+            <h1 class='display-4'>Wines</h1>
             <Row>
                 <Col>
                     <DropdownButton
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
-                        title="Filter"
-                        className="mt-2"
+                        variant='secondary'
+                        size='sm'
+                        menuVariant='dark'
+                        title='Filter'
+                        className='mt-2'
                     >
-                        <div  class="container" style={{height: 1000}}>
+                        <div class='container' style={{ height: 1000 }}>
                             <Row>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Type"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Type'
                                     >
                                         <Container>
                                             {typeList.map(constraint => (
@@ -187,10 +186,10 @@ const WineModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Country"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Country'
                                     >
                                         <Container>
                                             {countriesList.map(constraint => (
@@ -209,11 +208,11 @@ const WineModel = () => {
                                     </DropdownButton>
                                 </Col>
                                 <Col>
-                                    <DropdownButton 
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Winery"
+                                    <DropdownButton
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Winery'
                                     >
                                         <Container>
                                             {wineryList.map(constraint => (
@@ -233,10 +232,10 @@ const WineModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Reviews"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Reviews'
                                     >
                                         {/* <FormCheck>
                                             <FormCheck.Input
@@ -258,12 +257,12 @@ const WineModel = () => {
                                                     </Form.Control>
                                                 </Form.Group>
                                             </Form> */}
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">
+                                            <div class='mb-3'>
+                                                <label for='exampleFormControlInput1' class='form-label'>
                                                     Minimum Review Count
                                                 </label>
-                                                <input type="text" class="form-control"
-                                                    id="minReviews" placeholder="0"
+                                                <input type='text' class='form-control'
+                                                    id='minReviews' placeholder='0'
                                                     onChange={() =>
                                                     updateNumConstraints('reviews', 'minReviews')}>
                                                 </input>
@@ -273,25 +272,25 @@ const WineModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Ratings"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Ratings'
                                     >
                                         <Container>
                                             <form>
-                                                <div class="form-group">
-                                                    <label for="formGroupExampleInput">Min (0 - 5)</label>
-                                                    <input type="text" class="form-control"
-                                                        id="minRating" placeholder="0"
+                                                <div class='form-group'>
+                                                    <label for='formGroupExampleInput'>Min (0 - 5)</label>
+                                                    <input type='text' class='form-control'
+                                                        id='minRating' placeholder='0'
                                                         onChange={() =>
                                                             updateNumConstraints('startRating', 'minRating')}>
                                                     </input>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="formGroupExampleInput2">Max (0 - 5)</label>
-                                                    <input type="text" class="form-control"
-                                                        id="maxRating" placeholder="5"
+                                                <div class='form-group'>
+                                                    <label for='formGroupExampleInput2'>Max (0 - 5)</label>
+                                                    <input type='text' class='form-control'
+                                                        id='maxRating' placeholder='5'
                                                         onChange={() =>
                                                             updateNumConstraints('endRating', 'maxRating')}>
                                                     </input>
@@ -308,12 +307,12 @@ const WineModel = () => {
                 </Col>
                 <Col>
                     <DropdownButton
-                        id="dropdown-basic-button"
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
+                        id='dropdown-basic-button'
+                        variant='secondary'
+                        size='sm'
+                        menuVariant='dark'
                         title={sortName}
-                        className="mt-2"
+                        className='mt-2'
                     >
                         {sortList.map(constraint => (
                             <SortList constraint={constraint} />
@@ -321,8 +320,9 @@ const WineModel = () => {
                     </DropdownButton>
                 </Col>
                 <Col>
-                    <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search wines" onChange={(event) => setQuery(event.target.value)}/>
+                    <Form onSubmit={handleSubmit} className='d-flex'>
+                        <Form.Control type='search' placeholder='search wines' onChange={event =>
+                            setQuery(event.target.value)}/>
                     </Form>
                 </Col>
             </Row>
@@ -330,13 +330,14 @@ const WineModel = () => {
             <Row>
                 <Col>
                 <ButtonGroup>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(Math.max(page + -4, 1))} disabled={page === 1}>
+                    <button class='btn btn-outline-secondary' onClick={() => setPage(Math.max(page + -4, 1))}
+                    disabled={page === 1}>
                         &lt;&lt;
                     </button>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
+                    <button class='btn btn-outline-secondary' onClick={() => setPage(page - 1)} disabled={page === 1}>
                         Previous
                     </button>
-                </ButtonGroup> 
+                </ButtonGroup>
                 </Col>
                 <Col>
                     <Row>
@@ -352,18 +353,19 @@ const WineModel = () => {
                 </Col>
                 <Col>
                     <ButtonGroup>
-                        <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+                        <button class='btn btn-outline-secondary' onClick={() => setPage(page + 1)}
+                        disabled={page === totalPages}>
                             Next
                         </button>
-                        <button class="btn btn-outline-secondary" onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
+                        <button class='btn btn-outline-secondary' onClick={() =>
+                            setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
                             &gt;&gt;
                         </button>
                     </ButtonGroup>
-                    
                 </Col>
             </Row>
 
-            <Row className="g-4 p-4">
+            <Row className='g-4 p-4'>
                 {wines.map(wine => (
                     <Col>
                         <WineCard wine={wine} />

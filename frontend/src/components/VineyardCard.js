@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import ECHighlighter from "react-ec-highlighter";
+import ECHighlighter from 'react-ec-highlighter';
 import { Link } from 'react-router-dom';
 import { handleVineyardImageError } from '../util/handleImageError';
 
@@ -18,9 +18,9 @@ const VineyardCard = props => {
 
     return (
         <Container>
-            <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
+            <Card border='dark' style={{ height: '30rem', width: '18rem' }}>
                 <Card.Img
-                    variant="top"
+                    variant='top'
                     src={image}
                     style={{ height: '50%', width: '100%', objectFit: 'cover' }}
                     onError={handleVineyardImageError}
@@ -36,8 +36,8 @@ const VineyardCard = props => {
                         Review Count: {reviews}
                     </Card.Text>
                 </Card.Body>
-                <div class="card-footer">
-                    <Link to={`/vineyards/${id}`} class="btn btn-secondary stretched-link">
+                <div class='card-footer'>
+                    <Link to={`/vineyards/${id}`} class='btn btn-secondary stretched-link'>
                         See Vineyard
                     </Link>
                 </div>

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
 import { useLocation } from 'react-router-dom';
 import WineCard from '../components/WineCard';
-import Spinner from 'react-bootstrap/Spinner';
 
 const WineSearch = () => {
     const [wines, setWines] = useState([]);
     const [wineLoaded, setWineLoaded] = useState(false);
     const location = useLocation();
-    const query = location.pathname.split("/search/").at(-1);
+    const query = location.pathname.split('/search/').at(-1);
     const words = query.split('%20');
-    const searchQuery = words.join(" ");
+    const searchQuery = words.join(' ');
 
     useEffect(() => {
         async function searchWines() {
@@ -27,25 +27,25 @@ const WineSearch = () => {
         }
 
         searchWines();
-    }, [searchQuery])
+    }, [searchQuery]);
 
     return (
         <Container>
             <h1> Wine Search Results</h1>
-            <p style={{opacity: 0.65}} hidden = {wines.length > 0}>No wines seem to match your search</p>
-            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+            <p style={{ opacity: 0.65 }} hidden = { wines.length > 0 }>No wines seem to match your search</p>
+            <Row md={4} className='d-flex g-4 p-4 justify-content-left'>
                 {wineLoaded ? (
                     wines.map(wine => (
                     <Col>
-                        <WineCard wine={wine} regex={searchQuery} />
+                        <WineCard wine={ wine } regex={ searchQuery } />
                     </Col>
                     ))) : (
-                    <Spinner animation="border" role="status"></Spinner>
+                    <Spinner animation='border' role='status'></Spinner>
                 )
                 }
             </Row>
         </Container>
-    )
-}
+    );
+};
 
-export default WineSearch
+export default WineSearch;
