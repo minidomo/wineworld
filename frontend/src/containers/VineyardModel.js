@@ -28,6 +28,14 @@ const VineyardModel = () => {
     const [sortName, setSortName] = useState('Sort By');
     const [countriesList, setCountriesList] = useState([]);
     const [sortList, setSortList] = useState([]);
+    const [country, setCountry] = useState([]);
+    const [startPrice, setStartPrice] = useState(1);
+    const [endPrice, setEndPrice] = useState(4);
+    const [startReviews, setStartReviews] = useState(0);
+    const [endReviews, setEndReviews] = useState(99999);
+    const [startRating, setStartRating] = useState(0.0);
+    const [endRating, setEndRating] = useState(5.0);
+    const [sort, setSort] = useState([]);
 
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
@@ -41,6 +49,17 @@ const VineyardModel = () => {
             const response = await axios.get(apiLink, {
                 params: {
                     page: page,
+                    country: country,
+                    startPrice: startPrice,
+                    endPrice: endPrice,
+                    startReviews: startReviews,
+                    endReviews: endReviews,
+                    startRating: startRating,
+                    endRating: endRating,
+                    sort: sort,
+                },
+                paramsSerializer: {
+                    indexes: null,
                 },
             });
             setVineyards(response.data.list);
@@ -60,14 +79,58 @@ const VineyardModel = () => {
         } else {
             setPage(clamp(1, totalPages, page));
         }
-    }, [totalPages, page]);
+    }, [totalPages, page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort]);
 
-    function updateConstraints(category, id) {
-        var checkbox = document.getElementById(id);
+    function updateConstraints(category, categoryList, constraint, id) {
+        let checkbox = document.getElementById(id);
+        let listCopy = categoryList.map(x => x);
         if (checkbox.checked === true) {
-            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('CheckV', '')))));
+            listCopy.push(constraint);
         } else {
-            setApiLink(apiLink.replace('&'.concat(category.concat('=').concat(id.replace('CheckV', ''))), ''));
+            const index = listCopy.indexOf(constraint);
+            if (index > -1) {
+                listCopy.splice(index, 1);
+            }
+        }
+        if (category === 'country') {
+            setCountry(listCopy);
+        }
+    }
+
+    function updateNumConstraints(category, id) {
+        var val = document.getElementById(id).value;
+        console.log(val);
+
+        if (category === 'startReviews') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartReviews(val);
+            } else {
+                setStartReviews(0);
+            }
+        } else if (category === 'startRating') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartRating(val);
+            } else {
+                setStartRating(1);
+            }
+        } else if (category === 'endRating') {
+            if (val !== '0' && !isNaN(val)) {
+                setEndRating(val);
+            } else {
+                setEndRating(5);
+            }
+        } else if (category === 'startPrice') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartPrice(val);
+            } else {
+                setStartPrice(1);
+            }
+        } else if (category === 'endPrice') {
+            if (val !== '0' && !isNaN(val)) {
+                setEndPrice(val);
+            } else {
+                setEndPrice(4);
+            }
         }
     }
 
@@ -75,41 +138,20 @@ const VineyardModel = () => {
         const { name, id } = props.constraint;
 
         function sortOperations() {
-            var preString = 'sort=',
-            searchString = '&';
-            var preIndex;
-            var adjustIndex;
-            if (apiLink.indexOf(preString) === -1) {
-                preIndex = apiLink.length;
-                adjustIndex = preIndex;
-            } else {
-                preIndex = apiLink.indexOf(preString);
-                adjustIndex = preIndex - 1;
-            }
-            var searchIndex;
-            if (apiLink.substring(preIndex).indexOf(searchString) === -1) {
-                searchIndex = apiLink.length;
-            } else {
-                searchIndex = preIndex + apiLink.substring(preIndex).indexOf(searchString);
-            }
-
-            setApiLink(apiLink.replace(apiLink.substring(adjustIndex, searchIndex), '').concat('&sort='.concat(id)));
-            // console.log(apiLink);
-            // setApiLink(apiLink.concat('&sort='.concat(id)));
+            setSort(id);
             setSortName(name);
         }
         return (
             <Dropdown.Item
-                id={ id }
+                id={id}
                 onClick={() => sortOperations()}
-            >{ name }</Dropdown.Item>
+            >{name}</Dropdown.Item>
         );
     };
 
     return (
         <Container>
             <h1 class="display-4">Vineyards</h1>
-            <h6>{ apiLink }</h6>
             <Row>
                 <Col>
                     <DropdownButton
@@ -133,8 +175,8 @@ const VineyardModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckV')}
-                                                        onClick={() => updateConstraints('country',
-                                                            constraint.concat('CheckV'))}
+                                                        onClick={() => updateConstraints('country', country,
+                                                            constraint, constraint.concat('CheckV'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -150,7 +192,24 @@ const VineyardModel = () => {
                                         title="Price Level"
                                     >
                                         <Container>
-                                            Slider
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="formGroupExampleInput">Min (1 - 4)</label>
+                                                    <input type="text" class="form-control"
+                                                        id="minPrice" placeholder="1"
+                                                        onChange={() =>
+                                                            updateNumConstraints('startPrice', 'minPrice')}>
+                                                    </input>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="formGroupExampleInput2">Max (1 - 4)</label>
+                                                    <input type="text" class="form-control"
+                                                        id="maxPrice" placeholder="4"
+                                                        onChange={() =>
+                                                            updateNumConstraints('endPrice', 'maxPrice')}>
+                                                    </input>
+                                                </div>
+                                            </form>
                                         </Container>
                                     </DropdownButton>
                                 </Col>
@@ -162,7 +221,16 @@ const VineyardModel = () => {
                                         title="Reviews"
                                     >
                                         <Container>
-                                            Slider
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">
+                                                    Minimum Review Count
+                                                </label>
+                                                <input type="text" class="form-control"
+                                                    id="minReviews" placeholder="0"
+                                                    onChange={() =>
+                                                        updateNumConstraints('startReviews', 'minReviews')}>
+                                                </input>
+                                            </div>
                                         </Container>
                                     </DropdownButton>
                                 </Col>
@@ -173,22 +241,26 @@ const VineyardModel = () => {
                                         menuVariant="dark"
                                         title="Ratings"
                                     >
-                                        <div class="container">
+                                        <Container>
                                             <form>
                                                 <div class="form-group">
-                                                    <label for="formGroupExampleInput">Min (1-5)</label>
+                                                    <label for="formGroupExampleInput">Min (0 - 5)</label>
                                                     <input type="text" class="form-control"
-                                                        id="formGroupExampleInput" placeholder="">
+                                                        id="minRating" placeholder="0"
+                                                        onChange={() =>
+                                                            updateNumConstraints('startRating', 'minRating')}>
                                                     </input>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="formGroupExampleInput2">Max (1-5)</label>
+                                                    <label for="formGroupExampleInput2">Max (0 - 5)</label>
                                                     <input type="text" class="form-control"
-                                                        id="formGroupExampleInput2" placeholder="">
+                                                        id="maxRating" placeholder="5"
+                                                        onChange={() =>
+                                                            updateNumConstraints('endRating', 'maxRating')}>
                                                     </input>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </Container>
                                     </DropdownButton>
 
                                 </Col>
@@ -207,7 +279,7 @@ const VineyardModel = () => {
                         className="mt-2"
                     >
                         {sortList.map(constraint => (
-                            <SortList constraint = {constraint}/>
+                            <SortList constraint={constraint} />
                         ))}
                         <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
                     </DropdownButton>

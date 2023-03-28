@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -27,11 +28,18 @@ const WineModel = () => {
     const [filters, setFilters] = useState([]);
     const [sortName, setSortName] = useState('Sort By');
     const [orderName, setOrderName] = useState('Order');
-    const [apiLink, setApiLink] = useState('https://api.wineworld.me/wines?');
+    const apiLink = 'https://api.wineworld.me/wines?';
     const [typeList, setTypeList] = useState([]);
     const [countriesList, setCountriesList] = useState([]);
     const [wineryList, setWineryList] = useState([]);
     const [sortList, setSortList] = useState([]);
+    const [type, setType] = useState([]);
+    const [country, setCountry] = useState([]);
+    const [winery, setWinery] = useState([]);
+    const [reviews, setReviews] = useState(0);
+    const [startRating, setStartRating] = useState(0.0);
+    const [endRating, setEndRating] = useState(5.0);
+    const [sort, setSort] = useState([]);
 
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
@@ -46,6 +54,16 @@ const WineModel = () => {
                 apiLink, {
                 params: {
                     page: page,
+                    type: type,
+                    country: country,
+                    winery: winery,
+                    startReviews: reviews,
+                    startRating: startRating,
+                    endRating: endRating,
+                    sort: sort,
+                },
+                paramsSerializer: {
+                    indexes: null,
                 },
             });
 
@@ -68,23 +86,50 @@ const WineModel = () => {
         } else {
             setPage(clamp(1, totalPages, page));
         }
-    }, [totalPages, page]);
+    }, [totalPages, page, type, country, winery, reviews, startRating, endRating, sort]);
 
-    function updateConstraints(category, id) {
-        var checkbox = document.getElementById(id);
+    function updateConstraints(category, categoryList, constraint, id) {
+        let checkbox = document.getElementById(id);
+        let listCopy = categoryList.map(x => x);
         if (checkbox.checked === true) {
-            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('CheckW', '')))));
+            listCopy.push(constraint);
         } else {
-            setApiLink(apiLink.replace('&'.concat(category.concat('=').concat(id.replace('CheckW', ''))), ''));
+            const index = listCopy.indexOf(constraint);
+            if (index > -1) {
+                listCopy.splice(index, 1);
+            }
+        }
+        if (category === 'type') {
+            setType(listCopy);
+        } else if (category === 'country') {
+            setCountry(listCopy);
+        } else if (category === 'winery') {
+            setWinery(listCopy);
         }
     }
 
-    function updateReviews(id) {
-        var reviewText = document.getElementById(id);
-        if (reviewText.value !== '0' && !isNaN(reviewText.value)) {
-            setApiLink(apiLink.concat('&startReviews=').concat(reviewText.value));
-        } else {
-            setApiLink(apiLink.replace('&startReviews', ''));
+    function updateNumConstraints(category, id) {
+        var val = document.getElementById(id).value;
+        console.log(val);
+
+        if (category === 'reviews') {
+            if (val !== '0' && !isNaN(val)) {
+                setReviews(val);
+            } else {
+                setReviews(0);
+            }
+        } else if (category === 'startRating') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartRating(val);
+            } else {
+                setStartRating(1);
+            }
+        } else if (category === 'endRating') {
+            if (val !== '0' && !isNaN(val)) {
+                setEndRating(val);
+            } else {
+                setEndRating(5);
+            }
         }
     }
 
@@ -92,41 +137,20 @@ const WineModel = () => {
         const { name, id } = props.constraint;
 
         function sortOperations() {
-            var preString = 'sort=',
-            searchString = '&';
-            var preIndex;
-            var adjustIndex;
-            if (apiLink.indexOf(preString) === -1) {
-                preIndex = apiLink.length;
-                adjustIndex = preIndex;
-            } else {
-                preIndex = apiLink.indexOf(preString);
-                adjustIndex = preIndex - 1;
-            }
-            var searchIndex;
-            if (apiLink.substring(preIndex).indexOf(searchString) === -1) {
-                searchIndex = apiLink.length;
-            } else {
-                searchIndex = preIndex + apiLink.substring(preIndex).indexOf(searchString);
-            }
-
-            setApiLink(apiLink.replace(apiLink.substring(adjustIndex, searchIndex), '').concat('&sort='.concat(id)));
-            // console.log(apiLink);
-            // setApiLink(apiLink.concat('&sort='.concat(id)));
+            setSort(id);
             setSortName(name);
         }
         return (
             <Dropdown.Item
-                id={ id }
+                id={id}
                 onClick={() => sortOperations()}
-            >{ name }</Dropdown.Item>
+            >{name}</Dropdown.Item>
         );
     };
 
     return (
         <Container>
             <h1 class="display-4">Wines</h1>
-            <h6>{ apiLink }</h6>
             <Row>
                 <Col>
                     <DropdownButton
@@ -150,8 +174,10 @@ const WineModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckW')}
-                                                        onClick={() => updateConstraints('type',
-                                                            constraint.concat('CheckW'))}
+                                                        onClick={() => {
+                                                            updateConstraints('type', type, constraint,
+                                                            constraint.concat('CheckW'));
+                                                        }}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -171,8 +197,10 @@ const WineModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckW')}
-                                                        onClick={() => updateConstraints('country',
-                                                            constraint.concat('CheckW'))}
+                                                        onClick={() => {
+                                                            updateConstraints('country', country, constraint,
+                                                            constraint.concat('CheckW'));
+                                                        }}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -192,8 +220,10 @@ const WineModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckW')}
-                                                        onClick={() => updateConstraints('type',
-                                                            constraint.concat('CheckW'))}
+                                                        onClick={() => {
+                                                            updateConstraints('winery', winery, constraint,
+                                                            constraint.concat('CheckW'));
+                                                        }}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -233,8 +263,9 @@ const WineModel = () => {
                                                     Minimum Review Count
                                                 </label>
                                                 <input type="text" class="form-control"
-                                                    id="MinReviews" placeholder="0"
-                                                    onClick={() => updateReviews('MinReviews')}>
+                                                    id="minReviews" placeholder="0"
+                                                    onChange={() =>
+                                                    updateNumConstraints('reviews', 'minReviews')}>
                                                 </input>
                                             </div>
                                         </Container>
@@ -250,15 +281,19 @@ const WineModel = () => {
                                         <Container>
                                             <form>
                                                 <div class="form-group">
-                                                    <label for="formGroupExampleInput">Min (1-5)</label>
+                                                    <label for="formGroupExampleInput">Min (0 - 5)</label>
                                                     <input type="text" class="form-control"
-                                                        id="formGroupExampleInput" placeholder="">
+                                                        id="minRating" placeholder="0"
+                                                        onChange={() =>
+                                                            updateNumConstraints('startRating', 'minRating')}>
                                                     </input>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="formGroupExampleInput2">Max (1-5)</label>
+                                                    <label for="formGroupExampleInput2">Max (0 - 5)</label>
                                                     <input type="text" class="form-control"
-                                                        id="formGroupExampleInput2" placeholder="">
+                                                        id="maxRating" placeholder="5"
+                                                        onChange={() =>
+                                                            updateNumConstraints('endRating', 'maxRating')}>
                                                     </input>
                                                 </div>
                                             </form>
@@ -281,9 +316,8 @@ const WineModel = () => {
                         className="mt-2"
                     >
                         {sortList.map(constraint => (
-                            <SortList constraint = {constraint}/>
+                            <SortList constraint={constraint} />
                         ))}
-                        <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>

@@ -31,6 +31,14 @@ const RegionModel = () => {
     const [countriesList, setCountriesList] = useState([]);
     const [tripTypesList, setTripTypesList] = useState([]);
     const [sortList, setSortList] = useState([]);
+    const [country, setCountry] = useState([]);
+    const [startReviews, setStartReviews] = useState(0);
+    const [endReviews, setEndReviews] = useState(99999);
+    const [startRating, setStartRating] = useState(0.0);
+    const [endRating, setEndRating] = useState(5.0);
+    const [tripTypes, setTripTypes] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [sort, setSort] = useState([]);
 
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
@@ -44,6 +52,17 @@ const RegionModel = () => {
             const response = await axios.get(apiLink, {
                 params: {
                     page: page,
+                    country: country,
+                    startReviews: startReviews,
+                    endReviews: endReviews,
+                    startRating: startRating,
+                    endRating: endRating,
+                    tripTypes: tripTypes,
+                    tags: tags,
+                    sort: sort,
+                },
+                paramsSerializer: {
+                    indexes: null,
                 },
             });
 
@@ -66,14 +85,56 @@ const RegionModel = () => {
         } else {
             setPage(clamp(1, totalPages, page));
         }
-    }, [totalPages, page]);
+    }, [totalPages, page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort]);
 
-    function updateConstraints(category, id) {
-        var checkbox = document.getElementById(id);
+    function updateConstraints(category, categoryList, constraint, id) {
+        let checkbox = document.getElementById(id);
+        let listCopy = categoryList.map(x => x);
         if (checkbox.checked === true) {
-            setApiLink(apiLink.concat('&'.concat(category.concat('=').concat(id.replace('CheckR', '')))));
+            listCopy.push(constraint);
         } else {
-            setApiLink(apiLink.replace('&'.concat(category.concat('=').concat(id.replace('CheckR', ''))), ''));
+            const index = listCopy.indexOf(constraint);
+            if (index > -1) {
+                listCopy.splice(index, 1);
+            }
+        }
+        if (category === 'country') {
+            setCountry(listCopy);
+        } else if (category === 'tags') {
+            setTags(listCopy);
+        } else if (category === 'tripTypes') {
+            setTripTypes(listCopy);
+        }
+    }
+
+    function updateNumConstraints(category, id) {
+        var val = document.getElementById(id).value;
+        console.log(val);
+
+        if (category === 'startReviews') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartReviews(val);
+            } else {
+                setStartReviews(0);
+            }
+        } else if (category === 'endReviews') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartRating(val);
+            } else {
+                setStartRating(99999);
+            }
+        } else if (category === 'startRating') {
+            if (val !== '0' && !isNaN(val)) {
+                setStartRating(val);
+            } else {
+                setStartRating(1);
+            }
+        } else if (category === 'endRating') {
+            if (val !== '0' && !isNaN(val)) {
+                setEndRating(val);
+            } else {
+                setEndRating(5);
+            }
         }
     }
 
@@ -81,27 +142,7 @@ const RegionModel = () => {
         const { name, id } = props.constraint;
 
         function sortOperations() {
-            var preString = 'sort=',
-                searchString = '&';
-            var preIndex;
-            var adjustIndex;
-            if (apiLink.indexOf(preString) === -1) {
-                preIndex = apiLink.length;
-                adjustIndex = preIndex;
-            } else {
-                preIndex = apiLink.indexOf(preString);
-                adjustIndex = preIndex - 1;
-            }
-            var searchIndex;
-            if (apiLink.substring(preIndex).indexOf(searchString) === -1) {
-                searchIndex = apiLink.length;
-            } else {
-                searchIndex = preIndex + apiLink.substring(preIndex).indexOf(searchString);
-            }
-
-            setApiLink(apiLink.replace(apiLink.substring(adjustIndex, searchIndex), '').concat('&sort='.concat(id)));
-            // console.log(apiLink);
-            // setApiLink(apiLink.concat('&sort='.concat(id)));
+            setSort(id);
             setSortName(name);
         }
         return (
@@ -115,7 +156,6 @@ const RegionModel = () => {
     return (
         <Container>
             <h1 class="display-4">Regions</h1>
-            <h6>{apiLink}</h6>
             <Row>
                 <Col>
                     <DropdownButton
@@ -139,8 +179,8 @@ const RegionModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckR')}
-                                                        onClick={() => updateConstraints('country',
-                                                            constraint.concat('CheckR'))}
+                                                        onClick={() => updateConstraints('country', country,
+                                                            constraint, constraint.concat('CheckR'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -154,7 +194,28 @@ const RegionModel = () => {
                                         size="sm"
                                         menuVariant="dark"
                                         title="Rating"
-                                    ></DropdownButton>
+                                    >
+                                        <Container>
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="formGroupExampleInput">Min (0 - 5)</label>
+                                                    <input type="text" class="form-control"
+                                                        id="minRating" placeholder="0"
+                                                        onChange={() =>
+                                                            updateNumConstraints('startRating', 'minRating')}>
+                                                    </input>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="formGroupExampleInput2">Max (0 - 5)</label>
+                                                    <input type="text" class="form-control"
+                                                        id="maxRating" placeholder="5"
+                                                        onChange={() =>
+                                                            updateNumConstraints('endRating', 'maxRating')}>
+                                                    </input>
+                                                </div>
+                                            </form>
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
@@ -162,7 +223,20 @@ const RegionModel = () => {
                                         size="sm"
                                         menuVariant="dark"
                                         title="Reviews"
-                                    ></DropdownButton>
+                                    >
+                                        <Container>
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">
+                                                    Minimum Review Count
+                                                </label>
+                                                <input type="text" class="form-control"
+                                                    id="minReviews" placeholder="0"
+                                                    onChange={() =>
+                                                        updateNumConstraints('startReviews', 'minReviews')}>
+                                                </input>
+                                            </div>
+                                        </Container>
+                                    </DropdownButton>
                                 </Col>
                                 <Col>
                                     <DropdownButton
@@ -176,8 +250,8 @@ const RegionModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckR')}
-                                                        onClick={() => updateConstraints('tags',
-                                                            constraint.concat('CheckR'))}
+                                                        onClick={() => updateConstraints('tags', tags,
+                                                            constraint, constraint.concat('CheckR'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -197,8 +271,8 @@ const RegionModel = () => {
                                                 <FormCheck>
                                                     <FormCheck.Input
                                                         id={constraint.concat('CheckR')}
-                                                        onClick={() => updateConstraints('tripTypes',
-                                                            constraint.concat('CheckR'))}
+                                                        onClick={() => updateConstraints('tripTypes', tripTypes,
+                                                            constraint, constraint.concat('CheckR'))}
                                                     ></FormCheck.Input>
                                                     <FormCheck.Label>{constraint}</FormCheck.Label>
                                                 </FormCheck>
@@ -223,7 +297,6 @@ const RegionModel = () => {
                         {sortList.map(constraint => (
                             <SortList constraint={constraint} />
                         ))}
-                        <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>
