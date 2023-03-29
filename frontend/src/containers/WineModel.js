@@ -9,6 +9,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import WineCard from '../components/WineCard';
+import Pagination from 'react-bootstrap/Pagination';
 import "./Cards.css"
 // import Spinner from "react-bootstrap/Spinner";
 import {useNavigate} from 'react-router-dom';
@@ -87,6 +88,13 @@ const WineModel = () => {
             setPage(clamp(1, totalPages, page));
         }
     }, [totalPages, page, type, country, winery, reviews, startRating, endRating, sort]);
+
+    function handleClick(pageTarget) {
+        setPage(clamp(1, totalPages, pageTarget));
+        console.log("handle");
+        //setLoaded(false);
+      }
+    
 
     function updateConstraints(category, categoryList, constraint, id) {
         let checkbox = document.getElementById(id);
@@ -327,42 +335,32 @@ const WineModel = () => {
                 </Col>
             </Row>
             <br></br>
-            <Row>
-                <Col>
-                <ButtonGroup>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(Math.max(page + -4, 1))} disabled={page === 1}>
-                        &lt;&lt;
-                    </button>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
-                        Previous
-                    </button>
-                </ButtonGroup> 
-                </Col>
-                <Col>
-                    <Row>
                         {' '}
-                        <h5>
-                            Page {page} of {totalPages}
-                        </h5>
-                    </Row>
+                        <Pagination className="justify-content-center">
+                            <Pagination.First  onClick={() => handleClick(Math.max(page + -4, 1))} disabled={page === 1} />
+                            <Pagination.Prev onClick={() => handleClick(page - 1)} disabled={page === 1}/>
+                            {page > 3 && (
+                                <Pagination.Item
+                                    onClick={() => handleClick(1)}
+                                    active={1 === page}> 1 </Pagination.Item>)}
+                            {page > 4 && <Pagination.Ellipsis />}
+                            <Pagination.Item onClick={() => handleClick(page - 2)} hidden={page < 3}>{page-2}</Pagination.Item>
+                            <Pagination.Item onClick={() => handleClick(page - 1)} hidden={page < 2}>{page-1}</Pagination.Item>
+                            <Pagination.Item active>{page}</Pagination.Item>
+                            <Pagination.Item onClick={() => handleClick(page + 1)} hidden={page > totalPages-1}>{page+1}</Pagination.Item>
+                            <Pagination.Item onClick={() => handleClick(page + 2)} hidden={page > totalPages-2}>{page+2}</Pagination.Item>
+                            {page < totalPages - 3 && <Pagination.Ellipsis />}
+                            {page < totalPages - 2 && (
+                                <Pagination.Item
+                                    onClick={() => handleClick(totalPages)}
+                                    active={page === totalPages}> {totalPages} </Pagination.Item>)}
+                            <Pagination.Next onClick={() => handleClick(page + 1)} disabled={page === totalPages} />
+                            <Pagination.Last onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}/>
+                        </Pagination>
                     <Row>
                         {' '}
                         <h6>Found {totalInstances} wines</h6>
                     </Row>
-                </Col>
-                <Col>
-                    <ButtonGroup>
-                        <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
-                            Next
-                        </button>
-                        <button class="btn btn-outline-secondary" onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
-                            &gt;&gt;
-                        </button>
-                    </ButtonGroup>
-                    
-                </Col>
-            </Row>
-
             <Row className="g-4 p-4">
                 {wines.map(wine => (
                     <Col>

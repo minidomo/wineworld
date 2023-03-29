@@ -24,7 +24,6 @@ const Search = () => {
     // reformat query with spaces
     const words = query.split('%20');
     const searchQuery = words.join(" ");
-    console.log(searchQuery);
 
     useEffect(() => {
         async function searchWines() {
@@ -60,7 +59,6 @@ const Search = () => {
         searchWines();
         searchVineyards();
         searchRegions();
-        console.log("useEffect");
     }, [searchQuery]);
 
     return (

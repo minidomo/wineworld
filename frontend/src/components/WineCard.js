@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { handleWineImageError } from '../util/handleImageError';
 import ECHighlighter from "react-ec-highlighter";
 import { Link } from 'react-router-dom';
+import Highlighter from "react-highlight-words";
 
 
 const WineCard = props => {
@@ -11,9 +12,16 @@ const WineCard = props => {
 
     function highlightText (input) {
         if (props.regex != null) {
-          return <ECHighlighter searchPhrase={props.regex} text={input} />
+          const searchWords = props.regex.split(/\s/).filter(word => word)
+          console.log(props.regex);
+          return <Highlighter 
+          highlightClassName="highlighter"
+          searchWords={[searchWords]}
+          autoEscape={false}
+          textToHighlight = {input} />;
         }
-        return input
+        
+        return input;
       }    
 
     return (
