@@ -44,7 +44,7 @@ class TestSearch(unittest.TestCase):
         searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input')
         searchInput.send_keys("red" + Keys.ENTER)
 
-         WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'))
         )
         element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
@@ -58,7 +58,7 @@ class TestSearch(unittest.TestCase):
         searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input')
         searchInput.send_keys("port" + Keys.ENTER)
 
-         WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div/div[2]/a'))
         )
         element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div/div[2]/a')
@@ -72,7 +72,7 @@ class TestSearch(unittest.TestCase):
         searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input')
         searchInput.send_keys("mon" + Keys.ENTER)
 
-         WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'))
         )
         element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
