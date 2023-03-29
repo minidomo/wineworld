@@ -53,60 +53,60 @@ const RegionInstance = () => {
 
     return (
         <Container>
-            { loaded ? (
+            {loaded ? (
                 <div>
-                <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
-                <br />
-                <br />
-                <h3>{name}</h3>
-                <h5>{country}</h5>
-                <Row>
-                    <span class="border-bottom border-secondary">
-                        <div className="p-5">
-                            <h6>
-                                <p align="center">
-                                    Rating: {rating}
-                                    <br />
-                                    <br />
-                                    Reviews: {reviews}
-                                    <br />
-                                    <br />
-                                    Trip Type: {tripTypes.join(', ')}
-                                    <br />
-                                    <br />
-                                    Tags: {tags.join(', ')}
-                                </p>
-                            </h6>
-                        </div>
-                    </span>
-                </Row>
-                <Row className='p-5'>
-                    <h5 align="left">Location</h5>
-                    <Map lat={latitude} lng={longitude} />
-                </Row>
-                <Row md={10} className="p-4 g-4">
-                    <h5 align="left">Related Wines</h5>
-                    {wines.map(wine => (
-                        <Col>
-                            <WineCard wine={wine} />
-                        </Col>
-                    ))}
-                </Row>
-                <Row md={10} className="p-4 g-4">
-                    <h5 align="left">Related Vineyards</h5>
-                    {vineyards.map(vineyard => (
-                        <Col>
-                            <VineyardCard vineyard={vineyard} />
-                        </Col>
-                    ))}
-                </Row>
+                    <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
+                    <br />
+                    <br />
+                    <h3>{name}</h3>
+                    <h5>{country}</h5>
+                    <Row>
+                        <span class="border-bottom border-secondary">
+                            <div className="p-5">
+                                <h6>
+                                    <p align="center">
+                                        Rating: {rating}
+                                        <br />
+                                        <br />
+                                        Reviews: {reviews}
+                                        <br />
+                                        <br />
+                                        Trip Type: {tripTypes.join(', ')}
+                                        <br />
+                                        <br />
+                                        Tags: {tags.join(', ')}
+                                    </p>
+                                </h6>
+                            </div>
+                        </span>
+                    </Row>
+                    <Row className='p-5'>
+                        <h5 align="left">Location</h5>
+                        <Map lat={latitude} lng={longitude} />
+                    </Row>
+                    <Row md={10} className="p-4 g-4">
+                        <h5 align="left">Related Wines</h5>
+                        {wines.map(wine => (
+                            <Col>
+                                <WineCard wine={wine} />
+                            </Col>
+                        ))}
+                    </Row>
+                    <Row md={10} className="p-4 g-4">
+                        <h5 align="left">Related Vineyards</h5>
+                        {vineyards.map(vineyard => (
+                            <Col>
+                                <VineyardCard vineyard={vineyard} />
+                            </Col>
+                        ))}
+                    </Row>
                 </div>
-                ) : (
-                    <Spinner animation='border' role='status'></Spinner>
-                )
+            ) : (
+                <Spinner animation='border' role='status'></Spinner>
+            )
             }
         </Container>
-        
+
     );
 };
 export default RegionInstance;

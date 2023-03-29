@@ -13,13 +13,9 @@ import { useNavigate } from 'react-router-dom';
 import WineCard from '../components/WineCard';
 import Pagination from 'react-bootstrap/Pagination';
 import "./Cards.css"
-// import Spinner from "react-bootstrap/Spinner";
-
-function clamp(minVal, maxVal, val) {
-    if (val < minVal) return minVal;
-    if (val > maxVal) return maxVal;
-    return val;
-}
+import "./ModelPagination.css"
+import { clamp } from '../util/clamp';
+import Spinner from "react-bootstrap/Spinner";
 
 const WineModel = () => {
     const [wines, setWines] = useState([]);
@@ -91,17 +87,8 @@ const WineModel = () => {
         }
     }, [totalPages, page, type, country, winery, startReviews, endReviews, startRating, endRating, sort]);
 
-    function handleClick(pageTarget) {
+    function handlePagination(pageTarget) {
         setPage(clamp(1, totalPages, pageTarget));
-        console.log("handle");
-        //setLoaded(false);
-    }
-
-
-    function handleClick(pageTarget) {
-        setPage(clamp(1, totalPages, pageTarget));
-        console.log("handle");
-        //setLoaded(false);
     }
 
 
@@ -361,38 +348,40 @@ const WineModel = () => {
                 </Col>
             </Row>
             <br></br>
-            {' '}
             <Pagination className="justify-content-center">
-                <Pagination.First onClick={() => handleClick(Math.max(page + -4, 1))} disabled={page === 1} />
-                <Pagination.Prev onClick={() => handleClick(page - 1)} disabled={page === 1} />
+                <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
+                <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
                 {page > 3 && (
                     <Pagination.Item
-                        onClick={() => handleClick(1)}
+                        onClick={() => handlePagination(1)}
                         active={1 === page}> 1 </Pagination.Item>)}
                 {page > 4 && <Pagination.Ellipsis />}
-                <Pagination.Item onClick={() => handleClick(page - 2)} hidden={page < 3}>{page - 2}</Pagination.Item>
-                <Pagination.Item onClick={() => handleClick(page - 1)} hidden={page < 2}>{page - 1}</Pagination.Item>
+                <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>{page - 2}</Pagination.Item>
+                <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>{page - 1}</Pagination.Item>
                 <Pagination.Item active>{page}</Pagination.Item>
-                <Pagination.Item onClick={() => handleClick(page + 1)} hidden={page > totalPages - 1}>{page + 1}</Pagination.Item>
-                <Pagination.Item onClick={() => handleClick(page + 2)} hidden={page > totalPages - 2}>{page + 2}</Pagination.Item>
+                <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>{page + 1}</Pagination.Item>
+                <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>{page + 2}</Pagination.Item>
                 {page < totalPages - 3 && <Pagination.Ellipsis />}
                 {page < totalPages - 2 && (
                     <Pagination.Item
-                        onClick={() => handleClick(totalPages)}
+                        onClick={() => handlePagination(totalPages)}
                         active={page === totalPages}> {totalPages} </Pagination.Item>)}
-                <Pagination.Next onClick={() => handleClick(page + 1)} disabled={page === totalPages} />
-                <Pagination.Last onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages} />
+                <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
+                <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
             </Pagination>
             <Row>
-                {' '}
                 <h6>Found {totalInstances} wines</h6>
             </Row>
-            <Row className="g-4 p-4">
-                {wines.map(wine => (
-                    <Col>
-                        <WineCard wine={wine} />
-                    </Col>
-                ))}
+            <Row md={4} className='d-flex g-4 p-4'>
+                {loaded ? (
+                    wines.map(wine => (
+                        <Col>
+                            <WineCard wine={wine} />
+                        </Col>
+                    ))) : (
+                    <Spinner animation='border' role='status'></Spinner>
+                )
+                }
             </Row>
         </Container>
     );
