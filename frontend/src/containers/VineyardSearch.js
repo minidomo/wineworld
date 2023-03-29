@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
 import { useLocation } from 'react-router-dom';
 import VineyardCard from '../components/VineyardCard';
-import Spinner from 'react-bootstrap/Spinner';
 
 const VineyardSearch = () => {
     const [vineyards, setVineyards] = useState([]);
     const [vineyardLoaded, setVineyardLoaded] = useState(false);
     const location = useLocation();
-    const query = location.pathname.split("/search/").at(-1);
+    const query = location.pathname.split('/search/').at(-1);
     const words = query.split('%20');
-    const searchQuery = words.join(" ");
+    const searchQuery = words.join(' ');
 
     useEffect(() => {
         async function searchVineyards() {
@@ -28,8 +28,6 @@ const VineyardSearch = () => {
 
         searchVineyards();
     }, [searchQuery])
-
-
 
     return (
         <Container>
@@ -50,4 +48,4 @@ const VineyardSearch = () => {
     )
 }
 
-export default VineyardSearch
+export default VineyardSearch;

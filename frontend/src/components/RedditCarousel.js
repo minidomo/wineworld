@@ -4,7 +4,7 @@ import './RedditCarousel.css';
 
 function RedditCarousel(props) {
     /** @type {string[]} */
-    const redditUrls = props.redditUrls
+    const redditUrls = props.redditUrls;
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex, e) => setIndex(selectedIndex);
@@ -15,7 +15,7 @@ function RedditCarousel(props) {
                 redditUrls.map((redditUrl, i) => (
                     <Carousel.Item>
                         <iframe
-                            title="reddit_frame"
+                            title='reddit_frame'
                             id={`reddit-embed-${i}`}
                             src={`${redditUrl}?ref_source=embed&amp;ref=share&amp;embed=true&amp;theme=dark`}
                             sandbox={'allow-scripts allow-same-origin allow-popups'}

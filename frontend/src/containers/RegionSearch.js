@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
 import { useLocation } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
-import Spinner from 'react-bootstrap/Spinner';
-
 const RegionSearch = () => {
     const [regions, setRegions] = useState([]);
     const [regionLoaded, setRegionLoaded] = useState(false);
     const location = useLocation();
-    const query = location.pathname.split("/search/").at(-1);
+    const query = location.pathname.split('/search/').at(-1);
     const words = query.split('%20');
-    const searchQuery = words.join(" ");
+    const searchQuery = words.join(' ');
 
     useEffect(() => {
         async function searchRegions() {
@@ -47,7 +46,7 @@ const RegionSearch = () => {
             </Row>
 
         </Container>
-    )
-}
+    );
+};
 
-export default RegionSearch
+export default RegionSearch;

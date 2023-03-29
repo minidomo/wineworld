@@ -11,11 +11,11 @@ const WineCard = props => {
 
     return (
         <Container>
-            {/* <Card border="dark" style={{ width: "80%", height: "50%" }}> */}
-            <Card border="dark" style={{ height: '35rem', width: '18rem' }}>
+            {/* <Card border='dark' style={{ width: '80%', height: '50%' }}> */}
+            <Card border='dark' style={{ height: '35rem', width: '18rem' }}>
                 <Card.Img
-                    class="img-thumbnail"
-                    variant="top"
+                    class='img-thumbnail'
+                    variant='top'
                     src={image}
                     style={{ height: '50%', width: '100%', objectFit: 'contain' }}
                     onError={handleWineImageError}
@@ -38,14 +38,13 @@ const WineCard = props => {
                         Reviews: {reviews}
                     </Card.Text>
                 </Card.Body>
-                <div class="card-footer">
-                    <Link to={`/wines/${id}`} class="btn btn-secondary stretched-link">
+                <div class='card-footer'>
+                    <Link to={`/wines/${id}`} class='btn btn-secondary stretched-link'>
                         View Wine
                     </Link>
                 </div>
             </Card>
         </Container>
-
     );
 };
 export default WineCard;

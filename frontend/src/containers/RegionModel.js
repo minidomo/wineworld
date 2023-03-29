@@ -1,17 +1,16 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// Import { get } from '../api-example/siteapi';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Form from 'react-bootstrap/Form';
 import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
+import { useNavigate } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
-// Import Spinner from "react-bootstrap/Spinner";
-import {useNavigate} from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
@@ -21,12 +20,13 @@ function clamp(minVal, maxVal, val) {
 
 const RegionModel = () => {
     const [regions, setRegions] = useState([]);
+    const [loaded, setLoaded] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
     const [sortName, setSortName] = useState('Sort By');
     const [orderName, setOrderName] = useState('Order');
-    const [apiLink, setApiLink] = useState('https://api.wineworld.me/regions?');
+    const apiLink = 'https://api.wineworld.me/regions?';
     const [tagsList, setTagsList] = useState([]);
     const [countriesList, setCountriesList] = useState([]);
     const [tripTypesList, setTripTypesList] = useState([]);
@@ -42,7 +42,7 @@ const RegionModel = () => {
 
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         event.preventDefault();
         navigate(`/regions/search/${query}`);
     };
@@ -67,6 +67,7 @@ const RegionModel = () => {
             });
 
             setRegions(response.data.list);
+            setLoaded(true);
             setTotalPages(response.data.totalPages);
             setTotalInstances(response.data.totalInstances);
 
@@ -119,9 +120,9 @@ const RegionModel = () => {
             }
         } else if (category === 'endReviews') {
             if (val !== '0' && !isNaN(val)) {
-                setStartRating(val);
+                setEndReviews(val);
             } else {
-                setStartRating(99999);
+                setEndReviews(99999);
             }
         } else if (category === 'startRating') {
             if (val !== '0' && !isNaN(val)) {
@@ -155,24 +156,24 @@ const RegionModel = () => {
 
     return (
         <Container>
-            <h1 class="display-4">Regions</h1>
+            <h1 class='display-4'>Regions</h1>
             <Row>
                 <Col>
                     <DropdownButton
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
-                        title="Filter"
-                        className="mt-2"
+                        variant='secondary'
+                        size='sm'
+                        menuVariant='dark'
+                        title='Filter'
+                        className='mt-2'
                     >
-                        <div class="container">
+                        <div class='container'>
                             <Row>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Country"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Country'
                                     >
                                         <Container>
                                             {countriesList.map(constraint => (
@@ -190,25 +191,25 @@ const RegionModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Rating"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Rating'
                                     >
                                         <Container>
                                             <form>
-                                                <div class="form-group">
-                                                    <label for="formGroupExampleInput">Min (0 - 5)</label>
-                                                    <input type="text" class="form-control"
-                                                        id="minRating" placeholder="0"
+                                                <div class='form-group'>
+                                                    <label for='formGroupExampleInput'>Min (0 - 5)</label>
+                                                    <input type='text' class='form-control'
+                                                        id='minRating' placeholder='0'
                                                         onChange={() =>
                                                             updateNumConstraints('startRating', 'minRating')}>
                                                     </input>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="formGroupExampleInput2">Max (0 - 5)</label>
-                                                    <input type="text" class="form-control"
-                                                        id="maxRating" placeholder="5"
+                                                <div class='form-group'>
+                                                    <label for='formGroupExampleInput2'>Max (0 - 5)</label>
+                                                    <input type='text' class='form-control'
+                                                        id='maxRating' placeholder='5'
                                                         onChange={() =>
                                                             updateNumConstraints('endRating', 'maxRating')}>
                                                     </input>
@@ -219,20 +220,30 @@ const RegionModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Reviews"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Reviews'
                                     >
                                         <Container>
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">
+                                            <div class='mb-3'>
+                                                <label for='exampleFormControlInput1' class='form-label'>
                                                     Minimum Review Count
                                                 </label>
-                                                <input type="text" class="form-control"
-                                                    id="minReviews" placeholder="0"
+                                                <input type='text' class='form-control'
+                                                    id='minReviews' placeholder='0'
                                                     onChange={() =>
                                                         updateNumConstraints('startReviews', 'minReviews')}>
+                                                </input>
+                                            </div>
+                                            <div class='mb-3'>
+                                                <label for='exampleFormControlInput1' class='form-label'>
+                                                    Maximum Review Count
+                                                </label>
+                                                <input type='text' class='form-control'
+                                                    id='maxReviews' placeholder='max'
+                                                    onChange={() =>
+                                                    updateNumConstraints('endReviews', 'maxReviews')}>
                                                 </input>
                                             </div>
                                         </Container>
@@ -240,10 +251,10 @@ const RegionModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Tags"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Tags'
                                     >
                                         <Container>
                                             {tagsList.map(constraint => (
@@ -261,10 +272,10 @@ const RegionModel = () => {
                                 </Col>
                                 <Col>
                                     <DropdownButton
-                                        variant="secondary"
-                                        size="sm"
-                                        menuVariant="dark"
-                                        title="Trip Type"
+                                        variant='secondary'
+                                        size='sm'
+                                        menuVariant='dark'
+                                        title='Trip Type'
                                     >
                                         <Container>
                                             {tripTypesList.map(constraint => (
@@ -287,12 +298,12 @@ const RegionModel = () => {
                 </Col>
                 <Col>
                     <DropdownButton
-                        id="dropdown-basic-button"
-                        variant="secondary"
-                        size="sm"
-                        menuVariant="dark"
+                        id='dropdown-basic-button'
+                        variant='secondary'
+                        size='sm'
+                        menuVariant='dark'
                         title={sortName}
-                        className="mt-2"
+                        className='mt-2'
                     >
                         {sortList.map(constraint => (
                             <SortList constraint={constraint} />
@@ -300,22 +311,25 @@ const RegionModel = () => {
                     </DropdownButton>
                 </Col>
                 <Col>
-                    <Form onSubmit={handleSubmit} className="d-flex">
-                        <Form.Control type="search" placeholder="search regions" onChange={(event) => setQuery(event.target.value)}/>
+                    <Form onSubmit={handleSubmit} className='d-flex'>
+                        <Form.Control type='search' placeholder='search regions' onChange={event =>
+                            setQuery(event.target.value)} />
                     </Form>
                 </Col>
             </Row>
             <br></br>
             <Row>
                 <Col>
-                <ButtonGroup>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(Math.max(page + -4, 1))} disabled={page === 1}>
-                        &lt;&lt;
-                    </button>
-                    <button class="btn btn-outline-secondary" onClick={() => setPage(page - 1)} disabled={page === 1}>
-                        Previous
-                    </button>
-                </ButtonGroup> 
+                    <ButtonGroup>
+                        <button class='btn btn-outline-secondary' onClick={() => setPage(Math.max(page + -4, 1))}
+                            disabled={page === 1}>
+                            &lt;&lt;
+                        </button>
+                        <button class='btn btn-outline-secondary' onClick={() => setPage(page - 1)}
+                            disabled={page === 1}>
+                            Previous
+                        </button>
+                    </ButtonGroup>
                 </Col>
                 <Col>
                     <Row>
@@ -331,21 +345,27 @@ const RegionModel = () => {
                 </Col>
                 <Col>
                     <ButtonGroup>
-                        <button class="btn btn-outline-secondary" onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+                        <button class='btn btn-outline-secondary' onClick={() => setPage(page + 1)}
+                            disabled={page === totalPages}>
                             Next
                         </button>
-                        <button class="btn btn-outline-secondary" onClick={() => setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
+                        <button class='btn btn-outline-secondary' onClick={() =>
+                            setPage(Math.min(page + 4, totalPages))} disabled={page === totalPages}>
                             &gt;&gt;
                         </button>
                     </ButtonGroup>
                 </Col>
             </Row>
-            <Row className="g-4 p-4">
-                {regions.map(region => (
-                    <Col>
-                        <RegionCard region={region} />
-                    </Col>
-                ))}
+            <Row md={4} className='g-4 p-4'>
+                { loaded ? (
+                    regions.map(region => (
+                        <Col>
+                            <RegionCard region={region} />
+                        </Col>
+                    ))) : (
+                        <Spinner animation='border' role='status'></Spinner>
+                    )
+                }
             </Row>
         </Container >
     );

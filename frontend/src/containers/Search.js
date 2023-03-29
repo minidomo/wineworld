@@ -1,15 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useLocation } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
-import Spinner from 'react-bootstrap/Spinner';
 
 const Search = () => {
     const [wines, setWines] = useState([]);
@@ -19,7 +19,7 @@ const Search = () => {
     const [vineyardLoaded, setVineyardLoaded] = useState(false);
     const [regionLoaded, setRegionLoaded] = useState(false);
     const location = useLocation();
-    const query = location.pathname.split("/search/").at(-1);
+    const query = location.pathname.split('/search/').at(-1);
 
     // reformat query with spaces
     const words = query.split('%20');
@@ -75,7 +75,7 @@ const Search = () => {
                                     <WineCard wine={wine} searchQuery={searchQuery} />
                                 </Col>
                             ))) : (
-                            <Spinner animation="border" role="status"></Spinner>
+                            <Spinner animation='border' role='status'></Spinner>
                         )
                         }
                     </Row>
@@ -90,7 +90,7 @@ const Search = () => {
                                     <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
                                 </Col>
                             ))) : (
-                            <Spinner animation="border" role="status"></Spinner>
+                            <Spinner animation='border' role='status'></Spinner>
                         )
                         }
                     </Row>
@@ -110,8 +110,8 @@ const Search = () => {
                         }
                     </Row>
                 </Tab>
-            </Tabs>
-        </Container>
+            </Tabs >
+        </Container >
     );
 };
 

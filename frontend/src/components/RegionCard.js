@@ -31,8 +31,8 @@ const RegionCard = props => {
                         </small>
                     </Card.Text>
                 </Card.Body>
-                <div class="card-footer">
-                    <Link to={`/regions/${id}`} class="btn btn-secondary stretched-link">
+                <div class='card-footer'>
+                    <Link to={`/regions/${id}`} class='btn btn-secondary stretched-link'>
                         Explore Region
                     </Link>
                 </div>
