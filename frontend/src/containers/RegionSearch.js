@@ -35,7 +35,7 @@ const RegionSearch = () => {
       <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>
         No regions seem to match your search
       </p>
-      <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+      <Row className="d-flex g-4 p-4 justify-content-left">
         {regionLoaded ? (
           regions.map(region => (
             <Col>
