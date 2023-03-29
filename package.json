@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "google-maps-react": "^2.0.6",
-    "react-ec-highlighter": "^1.1.2",
-    "react-highlight-words": "^0.20.0"
-  }
-}
