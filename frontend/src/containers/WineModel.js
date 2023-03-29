@@ -213,26 +213,7 @@ const WineModel = () => {
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
-                    {/* <FormCheck>
-                                            <FormCheck.Input
-                                                id={constraint.concat('CheckW')}
-                                                onClick={() => updateConstraints('type',
-                                                    constraint.concat('CheckW'))}
-                                            ></FormCheck.Input>
-                                            <FormCheck.Label>{constraint}</FormCheck.Label>
-                                        </FormCheck> */}
                     <Container>
-                      {/* <Form>
-                                                <Form.Group>
-                                                    <Form.Label>
-                                                        Minimum Review Count
-                                                    </Form.Label>
-                                                    <Form.Control
-                                                        id='MinReviews'
-                                                        onClick={() => updateReviews('MinReviews')}>
-                                                    </Form.Control>
-                                                </Form.Group>
-                                            </Form> */}
                       <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">
                           Minimum Review Count
@@ -347,7 +328,7 @@ const WineModel = () => {
       <Row>
         <h6>Found {totalInstances} wines</h6>
       </Row>
-      <Row md={4} className="d-flex g-4 p-4">
+      <Row className="d-flex g-4 p-4">
         {loaded ? (
           wines.map(wine => (
             <Col>

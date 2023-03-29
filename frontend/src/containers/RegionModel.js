@@ -1,3 +1,4 @@
+import './Cards.css';
 import './ModelPagination.css';
 
 import axios from 'axios';
@@ -83,10 +84,9 @@ const RegionModel = () => {
     setPage(clamp(1, totalPages, pageTarget));
   }
 
-  function updateConstraints(category, categoryList, constraint, id) {
-    let checkbox = document.getElementById(id);
+  function updateConstraints(element, constraint, category, categoryList) {
     let listCopy = categoryList.map(x => x);
-    if (checkbox.checked === true) {
+    if (element.checked === true) {
       listCopy.push(constraint);
     } else {
       const index = listCopy.indexOf(constraint);
@@ -148,6 +148,31 @@ const RegionModel = () => {
     );
   };
 
+  function createCheckboxDropdownItems(itemNames, callback, callbackArgs) {
+    return (
+      <>
+        {itemNames.map(name => (
+          <Dropdown.Item
+            onClick={e => {
+              e.stopPropagation();
+              const checkbox = e.currentTarget.querySelector('input');
+              checkbox.click();
+            }}
+          >
+            <FormCheck
+              type="checkbox"
+              label={name}
+              onClick={e => {
+                e.stopPropagation();
+                callback(e.currentTarget, name, ...callbackArgs);
+              }}
+            />
+          </Dropdown.Item>
+        ))}
+      </>
+    );
+  }
+
   return (
     <Container>
       <h1 class="display-4">Regions</h1>
@@ -157,21 +182,14 @@ const RegionModel = () => {
             <div class="container">
               <Row>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Country">
-                    <Container>
-                      {countriesList.map(constraint => (
-                        <FormCheck>
-                          <FormCheck.Input
-                            id={constraint.concat('CheckR')}
-                            onClick={() =>
-                              updateConstraints('country', country, constraint, constraint.concat('CheckR'))
-                            }
-                          ></FormCheck.Input>
-                          <FormCheck.Label>{constraint}</FormCheck.Label>
-                        </FormCheck>
-                      ))}
-                    </Container>
-                  </DropdownButton>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Country
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(countriesList, updateConstraints, ['country', country])}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Rating">
@@ -232,54 +250,40 @@ const RegionModel = () => {
                   </DropdownButton>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Tags">
-                    <Container>
-                      {tagsList.map(constraint => (
-                        <FormCheck>
-                          <FormCheck.Input
-                            id={constraint.concat('CheckR')}
-                            onClick={() => updateConstraints('tags', tags, constraint, constraint.concat('CheckR'))}
-                          ></FormCheck.Input>
-                          <FormCheck.Label>{constraint}</FormCheck.Label>
-                        </FormCheck>
-                      ))}
-                    </Container>
-                  </DropdownButton>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Tags
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(tagsList, updateConstraints, ['tags', tags])}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Trip Type">
-                    <Container>
-                      {tripTypesList.map(constraint => (
-                        <FormCheck>
-                          <FormCheck.Input
-                            id={constraint.concat('CheckR')}
-                            onClick={() =>
-                              updateConstraints('tripTypes', tripTypes, constraint, constraint.concat('CheckR'))
-                            }
-                          ></FormCheck.Input>
-                          <FormCheck.Label>{constraint}</FormCheck.Label>
-                        </FormCheck>
-                      ))}
-                    </Container>
-                  </DropdownButton>
+                <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Trip Type
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(tripTypesList, updateConstraints, ['tripTypes', tripTypes])}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
               </Row>
             </div>
           </DropdownButton>
         </Col>
         <Col>
-          <DropdownButton
-            id="dropdown-basic-button"
-            variant="secondary"
-            size="sm"
-            menuVariant="dark"
-            title={sortName}
-            className="mt-2"
-          >
-            {sortList.map(constraint => (
-              <SortList constraint={constraint} />
-            ))}
-          </DropdownButton>
+        <Dropdown className="mt-2">
+            <Dropdown.Toggle id="dropdown-basic-button" variant="secondary" size="sm">
+              {sortName}
+            </Dropdown.Toggle>
+            <Dropdown.Menu variant="dark" className="custom">
+              {sortList.map(constraint => (
+                <SortList constraint={constraint} />
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </Col>
         <Col>
           <Form onSubmit={handleSubmit} className="d-flex">
@@ -324,7 +328,7 @@ const RegionModel = () => {
       <Row>
         <h6>Found {totalInstances} regions</h6>
       </Row>
-      <Row md={4} className="g-4 p-4">
+      <Row className="g-4 p-4">
         {loaded ? (
           regions.map(region => (
             <Col>
