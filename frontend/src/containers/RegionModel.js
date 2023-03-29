@@ -78,12 +78,8 @@ const RegionModel = () => {
             setSortList(constraintsResponse.data.sorts);
         }
 
-        if (page >= 1 && page <= totalPages) {
-            callApi();
-        } else {
-            setPage(clamp(1, totalPages, page));
-        }
-    }, [totalPages, page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort]);
+        callApi();
+    }, [page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort]);
 
     function handlePagination(pageTarget) {
         setPage(clamp(1, totalPages, pageTarget));

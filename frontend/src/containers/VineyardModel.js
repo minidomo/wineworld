@@ -72,12 +72,8 @@ const VineyardModel = () => {
             setSortList(constraintsResponse.data.sorts);
         }
 
-        if (page >= 1 && page <= totalPages) {
-            callApi();
-        } else {
-            setPage(clamp(1, totalPages, page));
-        }
-    }, [totalPages, page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort]);
+        callApi();
+    }, [page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort]);
 
     function handlePagination(pageTarget) {
         setPage(clamp(1, totalPages, pageTarget));

@@ -80,17 +80,12 @@ const WineModel = () => {
             setSortList(constraintsResponse.data.sorts);
         }
 
-        if (page >= 1 && page <= totalPages) {
-            callApi();
-        } else {
-            setPage(clamp(1, totalPages, page));
-        }
-    }, [totalPages, page, type, country, winery, startReviews, endReviews, startRating, endRating, sort]);
+        callApi();
+    }, [page, type, country, winery, startReviews, endReviews, startRating, endRating, sort]);
 
     function handlePagination(pageTarget) {
         setPage(clamp(1, totalPages, pageTarget));
     }
-
 
     function updateConstraints(category, categoryList, constraint, id) {
         let checkbox = document.getElementById(id);
