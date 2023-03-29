@@ -23,8 +23,7 @@ const Search = () => {
 
     // reformat query with spaces
     const words = query.split('%20');
-    const searchQuery = words.join(' ');
-    console.log(searchQuery);
+    const searchQuery = words.join(" ");
 
     useEffect(() => {
         async function searchWines() {
@@ -60,21 +59,20 @@ const Search = () => {
         searchWines();
         searchVineyards();
         searchRegions();
-        console.log('useEffect');
     }, [searchQuery]);
 
     return (
         <Container>
             <h1> Search Results</h1>
-            <Tabs defaultActiveKey='wines'>
-                <Tab eventKey='wines' title='Wines'>
-                    <h6 class='display-4'>Wine Results</h6>
+            <Tabs defaultActiveKey="wines">
+                <Tab eventKey="wines" title="Wines">
+                    <h6 class="display-4">Wine Results</h6>
                     <p style={{ opacity: 0.65 }} hidden={wines.length > 0}>No wines seem to match your search</p>
-                    <Row className='d-flex g-4 p-4 justify-content-left'>
+                    <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {wineLoaded ? (
                             wines.map(wine => (
                                 <Col>
-                                    <WineCard wine={wine} regex={searchQuery} />
+                                    <WineCard wine={wine} searchQuery={searchQuery} />
                                 </Col>
                             ))) : (
                             <Spinner animation='border' role='status'></Spinner>
@@ -82,16 +80,14 @@ const Search = () => {
                         }
                     </Row>
                 </Tab>
-                <Tab eventKey='vineyards' title='Vineyards'>
-                    <h6 class='display-4'>Vineyard Results</h6>
-                    <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>
-                        No vineyards seem to match your search
-                    </p>
-                    <Row className='d-flex g-4 p-4 justify-content-left'>
+                <Tab eventKey="vineyards" title="Vineyards">
+                    <h6 class="display-4">Vineyard Results</h6>
+                    <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>No vineyards seem to match your search</p>
+                    <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {vineyardLoaded ? (
                             vineyards.map(vineyard => (
                                 <Col>
-                                    <VineyardCard vineyard={ vineyard } regex={ searchQuery } />
+                                    <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
                                 </Col>
                             ))) : (
                             <Spinner animation='border' role='status'></Spinner>
@@ -99,23 +95,23 @@ const Search = () => {
                         }
                     </Row>
                 </Tab>
-                <Tab eventKey='regions' title='Regions'>
-                    <h6 class='display-4'>Region Results</h6>
+                <Tab eventKey="regions" title="Regions">
+                    <h6 class="display-4">Region Results</h6>
                     <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>No regions seem to match your search</p>
-                    <Row className='d-flex g-4 p-4 justify-content-left'>
+                    <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {regionLoaded ? (
                             regions.map(region => (
                                 <Col>
-                                    <RegionCard region={region} regex={searchQuery} />
+                                    <RegionCard region={region} searchQuery={searchQuery} />
                                 </Col>
                             ))) : (
-                            <Spinner animation='border' role='status'></Spinner>
-                            )
+                            <Spinner animation="border" role="status"></Spinner>
+                        )
                         }
                     </Row>
                 </Tab>
-            </Tabs>
-        </Container>
+            </Tabs >
+        </Container >
     );
 };
 

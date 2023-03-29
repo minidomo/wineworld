@@ -26,21 +26,22 @@ const RegionSearch = () => {
         }
 
         searchRegions();
-    }, [searchQuery]);
+    }, [searchQuery])
+
 
     return (
         <Container>
             <h1> Region Search Results</h1>
-            <p style={{ opacity: 0.65 }} hidden = { regions.length > 0 }>No regions seem to match your search</p>
-            <Row className='d-flex g-4 p-4 justify-content-left'>
-                { regionLoaded ? (
+            <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>No regions seem to match your search</p>
+            <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+                {regionLoaded ? (
                     regions.map(region => (
-                    <Col>
-                        <RegionCard region={region} regex={searchQuery}/>
-                    </Col>
+                        <Col>
+                            <RegionCard region={region} searchQuery={searchQuery} />
+                        </Col>
                     ))) : (
-                        <Spinner animation='border' role='status'></Spinner>
-                    )
+                    <Spinner animation="border" role="status"></Spinner>
+                )
                 }
             </Row>
 

@@ -1,19 +1,13 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import ECHighlighter from 'react-ec-highlighter';
-import { Link } from 'react-router-dom';
 import { handleWineImageError } from '../util/handleImageError';
+import { Link } from 'react-router-dom';
+import { highlightText } from '../util/highlightText';
 
 const WineCard = props => {
     const { id, name, country, region, type, winery, rating, reviews, image } = props.wine;
-
-    function highlightText(input) {
-        if (props.regex != null) {
-          return <ECHighlighter searchPhrase={props.regex} text={input} />;
-        }
-        return input;
-      }
+    const { searchQuery } = props;
 
     return (
         <Container>
@@ -29,15 +23,15 @@ const WineCard = props => {
                 <Card.Body>
                     <Card.Title>
                         {' '}
-                        <small> {highlightText(name)}  </small>{' '}
+                        <small> {highlightText(name, searchQuery)}  </small>{' '}
                     </Card.Title>
-                    <Card.Subtitle> {highlightText(type)} Wine </Card.Subtitle>
+                    <Card.Subtitle> {type} Wine </Card.Subtitle>
                     <Card.Text>
-                        Country: {highlightText(country)}
+                        Country: {country}
                         <br />
-                        Region: {highlightText(region)}
+                        Region: {region}
                         <br />
-                        Winery: {highlightText(winery)}
+                        Winery: {winery}
                         <br />
                         Rating: {rating}
                         <br />
