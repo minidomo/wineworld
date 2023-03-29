@@ -84,10 +84,9 @@ const WineModel = () => {
     setPage(clamp(1, totalPages, pageTarget));
   }
 
-  function updateConstraints(category, categoryList, constraint, id) {
-    let checkbox = document.getElementById(id);
+  function updateConstraints(element, constraint, category, categoryList) {
     let listCopy = categoryList.map(x => x);
-    if (checkbox.checked === true) {
+    if (element.checked === true) {
       listCopy.push(constraint);
     } else {
       const index = listCopy.indexOf(constraint);
@@ -149,6 +148,31 @@ const WineModel = () => {
     );
   };
 
+  function createCheckboxDropdownItems(itemNames, callback, callbackArgs) {
+    return (
+      <>
+        {itemNames.map(name => (
+          <Dropdown.Item
+            onClick={e => {
+              e.stopPropagation();
+              const checkbox = e.currentTarget.querySelector('input');
+              checkbox.click();
+            }}
+          >
+            <FormCheck
+              type="checkbox"
+              label={name}
+              onClick={e => {
+                e.stopPropagation();
+                callback(e.currentTarget, name, ...callbackArgs);
+              }}
+            />
+          </Dropdown.Item>
+        ))}
+      </>
+    );
+  }
+
   return (
     <Container>
       <h1 class="display-4">Wines</h1>
@@ -158,55 +182,34 @@ const WineModel = () => {
             <div class="container">
               <Row>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Type">
-                    <Container>
-                      {typeList.map(constraint => (
-                        <FormCheck>
-                          <FormCheck.Input
-                            id={constraint.concat('CheckW')}
-                            onClick={() => {
-                              updateConstraints('type', type, constraint, constraint.concat('CheckW'));
-                            }}
-                          ></FormCheck.Input>
-                          <FormCheck.Label>{constraint}</FormCheck.Label>
-                        </FormCheck>
-                      ))}
-                    </Container>
-                  </DropdownButton>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Type
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(typeList, updateConstraints, ['type', type])}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Country">
-                    <Container>
-                      {countriesList.map(constraint => (
-                        <FormCheck>
-                          <FormCheck.Input
-                            id={constraint.concat('CheckW')}
-                            onClick={() => {
-                              updateConstraints('country', country, constraint, constraint.concat('CheckW'));
-                            }}
-                          ></FormCheck.Input>
-                          <FormCheck.Label>{constraint}</FormCheck.Label>
-                        </FormCheck>
-                      ))}
-                    </Container>
-                  </DropdownButton>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Country
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(countriesList, updateConstraints, ['country', country])}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Winery">
-                    <Container>
-                      {wineryList.map(constraint => (
-                        <FormCheck>
-                          <FormCheck.Input
-                            id={constraint.concat('CheckW')}
-                            onClick={() => {
-                              updateConstraints('winery', winery, constraint, constraint.concat('CheckW'));
-                            }}
-                          ></FormCheck.Input>
-                          <FormCheck.Label>{constraint}</FormCheck.Label>
-                        </FormCheck>
-                      ))}
-                    </Container>
-                  </DropdownButton>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Winery
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(wineryList, updateConstraints, ['winery', winery])}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
@@ -290,18 +293,16 @@ const WineModel = () => {
           </DropdownButton>
         </Col>
         <Col>
-          <DropdownButton
-            id="dropdown-basic-button"
-            variant="secondary"
-            size="sm"
-            menuVariant="dark"
-            title={sortName}
-            className="mt-2"
-          >
-            {sortList.map(constraint => (
-              <SortList constraint={constraint} />
-            ))}
-          </DropdownButton>
+          <Dropdown className="mt-2">
+            <Dropdown.Toggle id="dropdown-basic-button" variant="secondary" size="sm">
+              {sortName}
+            </Dropdown.Toggle>
+            <Dropdown.Menu variant="dark" className="custom">
+              {sortList.map(constraint => (
+                <SortList constraint={constraint} />
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </Col>
         <Col>
           <Form onSubmit={handleSubmit} className="d-flex">
