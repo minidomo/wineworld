@@ -65,48 +65,48 @@ const Search = () => {
         <Container>
             <h1> Search Results</h1>
             <Tabs defaultActiveKey="wines">
-                <Tab eventKey="wines" title ="Wines">
+                <Tab eventKey="wines" title="Wines">
                     <h6 class="display-4">Wine Results</h6>
-                    <p style={{opacity: 0.65}} hidden = {wines.length > 0}>No wines seem to match your search</p>
+                    <p style={{ opacity: 0.65 }} hidden={wines.length > 0}>No wines seem to match your search</p>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
                         {wineLoaded ? (
                             wines.map(wine => (
-                            <Col>
-                                <WineCard wine={wine} regex={searchQuery} />
-                            </Col>
+                                <Col>
+                                    <WineCard wine={wine} searchQuery={searchQuery} />
+                                </Col>
                             ))) : (
                             <Spinner animation="border" role="status"></Spinner>
                         )
                         }
                     </Row>
                 </Tab>
-                <Tab eventKey="vineyards" title ="Vineyards">
+                <Tab eventKey="vineyards" title="Vineyards">
                     <h6 class="display-4">Vineyard Results</h6>
-                    <p style={{opacity: 0.65}} hidden = {vineyards.length > 0}>No vineyards seem to match your search</p>
+                    <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>No vineyards seem to match your search</p>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                        { vineyardLoaded ?  (
+                        {vineyardLoaded ? (
                             vineyards.map(vineyard => (
-                            <Col>
-                                <VineyardCard vineyard={vineyard} regex={searchQuery}/>
-                            </Col>
+                                <Col>
+                                    <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
+                                </Col>
                             ))) : (
                             <Spinner animation="border" role="status"></Spinner>
                         )
                         }
                     </Row>
                 </Tab>
-                <Tab eventKey="regions" title ="Regions">
+                <Tab eventKey="regions" title="Regions">
                     <h6 class="display-4">Region Results</h6>
-                    <p style={{opacity: 0.65}} hidden = {regions.length > 0}>No regions seem to match your search</p>
+                    <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>No regions seem to match your search</p>
                     <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                        { regionLoaded ? (
+                        {regionLoaded ? (
                             regions.map(region => (
-                            <Col>
-                                <RegionCard region={region} regex={searchQuery}/>
-                            </Col>
+                                <Col>
+                                    <RegionCard region={region} searchQuery={searchQuery} />
+                                </Col>
                             ))) : (
-                                <Spinner animation="border" role="status"></Spinner>                                
-                            )
+                            <Spinner animation="border" role="status"></Spinner>
+                        )
                         }
                     </Row>
                 </Tab>
