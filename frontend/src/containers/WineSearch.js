@@ -33,7 +33,7 @@ const WineSearch = () => {
         <Container>
             <h1> Wine Search Results</h1>
             <p style={{ opacity: 0.65 }} hidden = { wines.length > 0 }>No wines seem to match your search</p>
-            <Row md={4} className='d-flex g-4 p-4 justify-content-left'>
+            <Row className='d-flex g-4 p-4 justify-content-left'>
                 {wineLoaded ? (
                     wines.map(wine => (
                     <Col>

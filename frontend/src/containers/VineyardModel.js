@@ -281,7 +281,6 @@ const VineyardModel = () => {
                         {sortList.map(constraint => (
                             <SortList constraint={constraint} />
                         ))}
-                        <Dropdown.Item onClick={() => setSortName('Name')}>Name</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>

@@ -159,7 +159,7 @@ const WineModel = () => {
                         title='Filter'
                         className='mt-2'
                     >
-                        <div class='container' style={{ height: 1000 }}>
+                        <div class='container'>
                             <Row>
                                 <Col>
                                     <DropdownButton
