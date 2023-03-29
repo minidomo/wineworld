@@ -11,8 +11,9 @@ import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import { useNavigate } from 'react-router-dom';
 import WineCard from '../components/WineCard';
+import Spinner from 'react-bootstrap/Spinner';
 import './Cards.css';
-// import Spinner from 'react-bootstrap/Spinner';
+
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
     if (val > maxVal) return maxVal;
@@ -21,6 +22,7 @@ function clamp(minVal, maxVal, val) {
 
 const WineModel = () => {
     const [wines, setWines] = useState([]);
+    const [loaded, setLoaded] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
@@ -67,6 +69,7 @@ const WineModel = () => {
             });
 
             setWines(response.data.list);
+            setLoaded(true);
             setTotalPages(response.data.totalPages);
             setTotalInstances(response.data.totalInstances);
 
@@ -381,12 +384,16 @@ const WineModel = () => {
                 </Col>
             </Row>
 
-            <Row className='g-4 p-4'>
-                {wines.map(wine => (
-                    <Col>
-                        <WineCard wine={wine} />
-                    </Col>
-                ))}
+            <Row md={4} className='d-flex g-4 p-4'>
+                { loaded ? (
+                    wines.map(wine => (
+                        <Col>
+                            <WineCard wine={wine} />
+                        </Col>
+                    ))) : (
+                        <Spinner animation='border' role='status'></Spinner>
+                    )
+                }
             </Row>
         </Container>
     );

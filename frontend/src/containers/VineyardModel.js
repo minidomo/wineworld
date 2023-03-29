@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-// Import { get } from '../api-example/siteapi';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -11,7 +10,7 @@ import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import { useNavigate } from 'react-router-dom';
 import VineyardCard from '../components/VineyardCard';
-// Import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/Spinner';
 
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
@@ -20,7 +19,8 @@ function clamp(minVal, maxVal, val) {
 }
 
 const VineyardModel = () => {
-    const [vineyards, setVineyards] = useState([]);
+    const [vineyards, setVineyards] = useState([]);    
+    const [loaded, setLoaded] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
@@ -63,6 +63,7 @@ const VineyardModel = () => {
                 },
             });
             setVineyards(response.data.list);
+            setLoaded(true);
             setTotalPages(response.data.totalPages);
             setTotalInstances(response.data.totalInstances);
 
@@ -345,12 +346,16 @@ const VineyardModel = () => {
                     </ButtonGroup>
                 </Col>
             </Row>
-            <Row className='g-4 p-4'>
-                {vineyards.map(vineyard => (
-                    <Col>
-                        <VineyardCard vineyard={vineyard} />
-                    </Col>
-                ))}
+            <Row md={4} className='g-4 p-4'>
+                { loaded ? (
+                    vineyards.map(vineyard => (
+                        <Col>
+                            <VineyardCard vineyard={vineyard} />
+                        </Col>
+                    ))) : (
+                        <Spinner animation='border' role='status'></Spinner>
+                    )
+                }
             </Row>
         </Container>
     );

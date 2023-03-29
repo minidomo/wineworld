@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
+
 const Search = () => {
     const [wines, setWines] = useState([]);
     const [vineyards, setVineyards] = useState([]);
@@ -109,7 +110,7 @@ const Search = () => {
                                 </Col>
                             ))) : (
                             <Spinner animation='border' role='status'></Spinner>
-                        )
+                            )
                         }
                     </Row>
                 </Tab>

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// Import { get } from '../api-example/siteapi';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -11,7 +10,8 @@ import FormCheck from 'react-bootstrap/FormCheck';
 import Row from 'react-bootstrap/Row';
 import { useNavigate } from 'react-router-dom';
 import RegionCard from '../components/RegionCard';
-// Import Spinner from 'react-bootstrap/Spinner';
+import Spinner from 'react-bootstrap/Spinner';
+
 function clamp(minVal, maxVal, val) {
     if (val < minVal) return minVal;
     if (val > maxVal) return maxVal;
@@ -20,6 +20,7 @@ function clamp(minVal, maxVal, val) {
 
 const RegionModel = () => {
     const [regions, setRegions] = useState([]);
+    const [loaded, setLoaded] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
@@ -66,6 +67,7 @@ const RegionModel = () => {
             });
 
             setRegions(response.data.list);
+            setLoaded(true);
             setTotalPages(response.data.totalPages);
             setTotalInstances(response.data.totalInstances);
 
@@ -354,12 +356,16 @@ const RegionModel = () => {
                     </ButtonGroup>
                 </Col>
             </Row>
-            <Row className='g-4 p-4'>
-                {regions.map(region => (
-                    <Col>
-                        <RegionCard region={region} />
-                    </Col>
-                ))}
+            <Row md={4} className='g-4 p-4'>
+                { loaded ? (
+                    regions.map(region => (
+                        <Col>
+                            <RegionCard region={region} />
+                        </Col>
+                    ))) : (
+                        <Spinner animation='border' role='status'></Spinner>
+                    )
+                }
             </Row>
         </Container >
     );
