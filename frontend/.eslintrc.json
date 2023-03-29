@@ -2,7 +2,8 @@
 {
     "root": true,
     "plugins": [
-        "import"
+        "import",
+        "simple-import-sort"
     ],
     "extends": [
         "eslint:recommended",
@@ -15,22 +16,8 @@
         "es2022": true
     },
     "rules": {
-        "import/order": [
-            "error",
-            {
-                "groups": [
-                    "builtin",
-                    "external",
-                    "internal",
-                    "index",
-                    "sibling",
-                    "parent"
-                ],
-                "alphabetize": {
-                    "order": "asc"
-                }
-            }
-        ],
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
         "strict": [
             "error",
             "global"
@@ -107,9 +94,6 @@
         "yoda": "error",
         "no-label-var": "error",
         "no-shadow": "off",
-        "@typescript-eslint/no-shadow": [
-            "error"
-        ],
         "no-undef-init": "error",
         "callback-return": "error",
         "getter-return": "off",
