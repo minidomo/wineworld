@@ -1,5 +1,5 @@
 temp*
-/package-lock.json
+/package*.json
 
 # https://github.com/github/gitignore/blob/main/Python.gitignore
 
