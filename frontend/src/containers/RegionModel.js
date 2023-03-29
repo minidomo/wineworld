@@ -25,7 +25,7 @@ const RegionModel = () => {
     const [totalInstances, setTotalInstances] = useState(1);
     const [sortName, setSortName] = useState('Sort By');
     const [orderName, setOrderName] = useState('Order');
-    const [apiLink, setApiLink] = useState('https://api.wineworld.me/regions?');
+    const apiLink = 'https://api.wineworld.me/regions?';
     const [tagsList, setTagsList] = useState([]);
     const [countriesList, setCountriesList] = useState([]);
     const [tripTypesList, setTripTypesList] = useState([]);
@@ -118,9 +118,9 @@ const RegionModel = () => {
             }
         } else if (category === 'endReviews') {
             if (val !== '0' && !isNaN(val)) {
-                setStartRating(val);
+                setEndReviews(val);
             } else {
-                setStartRating(99999);
+                setEndReviews(99999);
             }
         } else if (category === 'startRating') {
             if (val !== '0' && !isNaN(val)) {
@@ -232,6 +232,16 @@ const RegionModel = () => {
                                                     id='minReviews' placeholder='0'
                                                     onChange={() =>
                                                         updateNumConstraints('startReviews', 'minReviews')}>
+                                                </input>
+                                            </div>
+                                            <div class='mb-3'>
+                                                <label for='exampleFormControlInput1' class='form-label'>
+                                                    Maximum Review Count
+                                                </label>
+                                                <input type='text' class='form-control'
+                                                    id='maxReviews' placeholder='max'
+                                                    onChange={() =>
+                                                    updateNumConstraints('endReviews', 'maxReviews')}>
                                                 </input>
                                             </div>
                                         </Container>

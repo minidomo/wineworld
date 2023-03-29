@@ -24,9 +24,7 @@ const WineModel = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
-    const [filters, setFilters] = useState([]);
     const [sortName, setSortName] = useState('Sort By');
-    const [orderName, setOrderName] = useState('Order');
     const apiLink = 'https://api.wineworld.me/wines?';
     const [typeList, setTypeList] = useState([]);
     const [countriesList, setCountriesList] = useState([]);
@@ -35,7 +33,8 @@ const WineModel = () => {
     const [type, setType] = useState([]);
     const [country, setCountry] = useState([]);
     const [winery, setWinery] = useState([]);
-    const [reviews, setReviews] = useState(0);
+    const [startReviews, setStartReviews] = useState(0);
+    const [endReviews, setEndReviews] = useState(99999);
     const [startRating, setStartRating] = useState(0.0);
     const [endRating, setEndRating] = useState(5.0);
     const [sort, setSort] = useState([]);
@@ -56,7 +55,8 @@ const WineModel = () => {
                     type: type,
                     country: country,
                     winery: winery,
-                    startReviews: reviews,
+                    startReviews: startReviews,
+                    endReviews: endReviews,
                     startRating: startRating,
                     endRating: endRating,
                     sort: sort,
@@ -85,7 +85,7 @@ const WineModel = () => {
         } else {
             setPage(clamp(1, totalPages, page));
         }
-    }, [totalPages, page, type, country, winery, reviews, startRating, endRating, sort]);
+    }, [totalPages, page, type, country, winery, startReviews, endReviews, startRating, endRating, sort]);
 
     function updateConstraints(category, categoryList, constraint, id) {
         let checkbox = document.getElementById(id);
@@ -111,11 +111,17 @@ const WineModel = () => {
         var val = document.getElementById(id).value;
         console.log(val);
 
-        if (category === 'reviews') {
+        if (category === 'startReviews') {
             if (val !== '0' && !isNaN(val)) {
-                setReviews(val);
+                setStartReviews(val);
             } else {
-                setReviews(0);
+                setStartReviews(0);
+            }
+        } else if (category === 'endReviews') {
+            if (val !== '0' && !isNaN(val)) {
+                setEndReviews(val);
+            } else {
+                setEndReviews(99999);
             }
         } else if (category === 'startRating') {
             if (val !== '0' && !isNaN(val)) {
@@ -264,7 +270,17 @@ const WineModel = () => {
                                                 <input type='text' class='form-control'
                                                     id='minReviews' placeholder='0'
                                                     onChange={() =>
-                                                    updateNumConstraints('reviews', 'minReviews')}>
+                                                    updateNumConstraints('startReviews', 'minReviews')}>
+                                                </input>
+                                            </div>
+                                            <div class='mb-3'>
+                                                <label for='exampleFormControlInput1' class='form-label'>
+                                                    Maximum Review Count
+                                                </label>
+                                                <input type='text' class='form-control'
+                                                    id='maxReviews' placeholder='max'
+                                                    onChange={() =>
+                                                    updateNumConstraints('endReviews', 'maxReviews')}>
                                                 </input>
                                             </div>
                                         </Container>

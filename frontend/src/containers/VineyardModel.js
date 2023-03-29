@@ -24,7 +24,7 @@ const VineyardModel = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalInstances, setTotalInstances] = useState(1);
-    const [apiLink, setApiLink] = useState('https://api.wineworld.me/vineyards?');
+    const apiLink = 'https://api.wineworld.me/vineyards?';
     const [sortName, setSortName] = useState('Sort By');
     const [countriesList, setCountriesList] = useState([]);
     const [sortList, setSortList] = useState([]);
@@ -106,6 +106,12 @@ const VineyardModel = () => {
                 setStartReviews(val);
             } else {
                 setStartReviews(0);
+            }
+        } else if (category === 'endReviews') {
+            if (val !== '0' && !isNaN(val)) {
+                setEndReviews(val);
+            } else {
+                setEndReviews(99999);
             }
         } else if (category === 'startRating') {
             if (val !== '0' && !isNaN(val)) {
@@ -229,6 +235,16 @@ const VineyardModel = () => {
                                                     id='minReviews' placeholder='0'
                                                     onChange={() =>
                                                         updateNumConstraints('startReviews', 'minReviews')}>
+                                                </input>
+                                            </div>
+                                            <div class='mb-3'>
+                                                <label for='exampleFormControlInput1' class='form-label'>
+                                                    Maximum Review Count
+                                                </label>
+                                                <input type='text' class='form-control'
+                                                    id='maxReviews' placeholder='max'
+                                                    onChange={() =>
+                                                    updateNumConstraints('endReviews', 'maxReviews')}>
                                                 </input>
                                             </div>
                                         </Container>
