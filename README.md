@@ -60,7 +60,7 @@
 | --------------- | :------------------------: | :------------------------: |
 | Austin Barret   |             15             |             24             |
 | JB Ladera       |             15             |             22             |
-| Ryan Parappuram |                            |                            |
+| Ryan Parappuram |             15             |             15             |
 | Saniya Shaju    |             17             |             20             |
 | Joshua Yin      |                            |                            |
 
