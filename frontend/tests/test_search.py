@@ -31,9 +31,9 @@ class TestSearch(unittest.TestCase):
         searchInput.send_keys("red" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="react-aria3065852150-40-tabpane-wines"]/div/div[1]/div/div/div[2]/a'))
+            EC.presence_of_element_located((By.XPATH, '/html/body/div/div/div/div/div/div[1]/div/div[1]/div/div/div[2]/a'))
         )
-        element = self.driver.find_element(By.XPATH, '//*[@id="react-aria3065852150-40-tabpane-wines"]/div/div[1]/div/div/div[2]/a')
+        element = self.driver.find_element(By.XPATH, '/html/body/div/div/div/div/div/div[1]/div/div[1]/div/div/div[2]/a')
         element.click()
 
         self.assertEqual(self.driver.current_url, URL + "wines/266")
