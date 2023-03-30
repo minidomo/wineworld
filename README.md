@@ -25,7 +25,7 @@
 | :---: | -------------- |
 |   1   | JB Ladera      |
 |   2   | Saniya Shaju   |
-|   3   |                |
+|   3   | Austin Barret  |
 |   4   |                |
 
 ## Links
@@ -59,7 +59,7 @@
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
 | Austin Barret   |                            |                            |
-| JB Ladera       |                            |                            |
+| JB Ladera       |             15             |             22             |
 | Ryan Parappuram |                            |                            |
 | Saniya Shaju    |                            |                            |
 | Joshua Yin      |                            |                            |
