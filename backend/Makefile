@@ -57,4 +57,6 @@ scrape-all:
 	make scrape name=wines mode=final
 
 test-api:
-	python3 tests.py
+	coverage run -m unittest
+	coverage report
+

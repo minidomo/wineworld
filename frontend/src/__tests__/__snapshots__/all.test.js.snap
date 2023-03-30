@@ -11,7 +11,7 @@ exports[`Init About 1`] = `
     className="p-4 container"
     style={
       Object {
-        "backgroundColor": "#FFFFFF",
+        "backgroundColor": "#BBB",
       }
     }
   >
@@ -53,7 +53,8 @@ exports[`Init About 1`] = `
         className="d-flex justify-content-center col"
       >
         <h2>
-          Total Tests: 0
+          Total Tests: 
+          0
         </h2>
       </div>
     </div>
@@ -793,7 +794,7 @@ exports[`Init App 1`] = `
             >
               <a
                 class="nav-link"
-                href="/About"
+                href="/about"
                 onClick={[Function]}
               >
                 About
@@ -804,7 +805,7 @@ exports[`Init App 1`] = `
             >
               <a
                 class="nav-link"
-                href="/Wines"
+                href="/wines"
                 onClick={[Function]}
               >
                 Wines
@@ -815,7 +816,7 @@ exports[`Init App 1`] = `
             >
               <a
                 class="nav-link"
-                href="/Vineyards"
+                href="/vineyards"
                 onClick={[Function]}
               >
                 Vineyards
@@ -826,7 +827,7 @@ exports[`Init App 1`] = `
             >
               <a
                 class="nav-link"
-                href="/Regions"
+                href="/regions"
                 onClick={[Function]}
               >
                 Regions
@@ -846,21 +847,15 @@ exports[`Init App 1`] = `
           </ul>
         </div>
         <form
-          class="d-flex"
-          role="search"
+          className="d-flex"
+          onSubmit={[Function]}
         >
           <input
-            aria-label="Search"
-            class="form-control me-2"
-            placeholder="Search"
+            className="form-control"
+            onChange={[Function]}
+            placeholder="search"
             type="search"
           />
-          <button
-            class="btn btn-outline-success"
-            type="submit"
-          >
-            Search
-          </button>
         </form>
       </div>
     </nav>
@@ -911,7 +906,7 @@ exports[`Init App 1`] = `
                 </p>
                 <a
                   class="btn btn-secondary"
-                  href="/Wines"
+                  href="/wines"
                   onClick={[Function]}
                 >
                   Explore
@@ -950,7 +945,7 @@ exports[`Init App 1`] = `
                 </p>
                 <a
                   class="btn btn-secondary"
-                  href="/Vineyards"
+                  href="/vineyards"
                   onClick={[Function]}
                 >
                   Explore
@@ -989,7 +984,7 @@ exports[`Init App 1`] = `
                 </p>
                 <a
                   class="btn btn-secondary"
-                  href="/Regions"
+                  href="/regions"
                   onClick={[Function]}
                 >
                   Explore
@@ -1151,7 +1146,7 @@ exports[`Init NavBar 1`] = `
           >
             <a
               class="nav-link"
-              href="/About"
+              href="/about"
               onClick={[Function]}
             >
               About
@@ -1162,7 +1157,7 @@ exports[`Init NavBar 1`] = `
           >
             <a
               class="nav-link"
-              href="/Wines"
+              href="/wines"
               onClick={[Function]}
             >
               Wines
@@ -1173,7 +1168,7 @@ exports[`Init NavBar 1`] = `
           >
             <a
               class="nav-link"
-              href="/Vineyards"
+              href="/vineyards"
               onClick={[Function]}
             >
               Vineyards
@@ -1184,7 +1179,7 @@ exports[`Init NavBar 1`] = `
           >
             <a
               class="nav-link"
-              href="/Regions"
+              href="/regions"
               onClick={[Function]}
             >
               Regions
@@ -1204,21 +1199,15 @@ exports[`Init NavBar 1`] = `
         </ul>
       </div>
       <form
-        class="d-flex"
-        role="search"
+        className="d-flex"
+        onSubmit={[Function]}
       >
         <input
-          aria-label="Search"
-          class="form-control me-2"
-          placeholder="Search"
+          className="form-control"
+          onChange={[Function]}
+          placeholder="search"
           type="search"
         />
-        <button
-          class="btn btn-outline-success"
-          type="submit"
-        >
-          Search
-        </button>
       </form>
     </div>
   </nav>
@@ -1227,68 +1216,72 @@ exports[`Init NavBar 1`] = `
 
 exports[`Init Region 1`] = `
 <div
-  className="card border-dark"
-  style={
-    Object {
-      "height": "30rem",
-      "width": "18rem",
-    }
-  }
+  className="container"
 >
-  <img
-    className="card-img-top"
-    onError={[Function]}
-    src="https://media-cdn.tripadvisor.com/media/photo-s/19/8b/fb/16/die-neverland-ranch-war.jpg"
+  <div
+    className="card border-dark"
     style={
       Object {
-        "height": "50%",
-        "objectFit": "cover",
-        "width": "100%",
+        "height": "30rem",
+        "width": "18rem",
       }
     }
-  />
-  <div
-    className="card-body"
   >
+    <img
+      className="card-img-top"
+      onError={[Function]}
+      src="https://media-cdn.tripadvisor.com/media/photo-s/19/8b/fb/16/die-neverland-ranch-war.jpg"
+      style={
+        Object {
+          "height": "50%",
+          "objectFit": "cover",
+          "width": "100%",
+        }
+      }
+    />
     <div
-      className="card-title h5"
+      className="card-body"
     >
-       
-      Sta. Rita Hills
-       
+      <div
+        className="card-title h5"
+      >
+         
+        Sta. Rita Hills
+         
+      </div>
+      <div
+        className="card-subtitle h6"
+      >
+         
+        United States
+         
+      </div>
+      <p
+        className="card-text"
+      >
+        <small>
+          Rating: 
+          4.1
+          <br />
+          Review Count: 
+          90
+          <br />
+          Trip Type: 
+          Couples, Friends getaway
+        </small>
+      </p>
     </div>
     <div
-      className="card-subtitle h6"
+      class="card-footer"
     >
-       
-      United States
-       
+      <a
+        class="btn btn-secondary stretched-link"
+        href="/regions/3"
+        onClick={[Function]}
+      >
+        Explore Region
+      </a>
     </div>
-    <p
-      className="card-text"
-    >
-      <small>
-        Rating: 
-        4.1
-        <br />
-        Review Count: 
-        90
-        <br />
-        Trip Type: 
-        Couples, Friends getaway
-      </small>
-    </p>
-  </div>
-  <div
-    class="card-footer"
-  >
-    <a
-      class="btn btn-secondary stretched-link"
-      href="/Regions/3"
-      onClick={[Function]}
-    >
-      Explore Region
-    </a>
   </div>
 </div>
 `;
@@ -1336,143 +1329,151 @@ exports[`Init Tool 1`] = `
 
 exports[`Init Vineyard 1`] = `
 <div
-  className="card border-dark"
-  style={
-    Object {
-      "height": "30rem",
-      "width": "18rem",
-    }
-  }
+  className="container"
 >
-  <img
-    className="card-img-top"
-    onError={[Function]}
-    src="https://s3-media4.fl.yelpcdn.com/bphoto/Sam2Wv5bvNpEtcTLNYeB3g/o.jpg"
+  <div
+    className="card border-dark"
     style={
       Object {
-        "height": "50%",
-        "objectFit": "cover",
-        "width": "100%",
+        "height": "30rem",
+        "width": "18rem",
       }
     }
-  />
-  <div
-    className="card-body"
   >
+    <img
+      className="card-img-top"
+      onError={[Function]}
+      src="https://s3-media4.fl.yelpcdn.com/bphoto/Sam2Wv5bvNpEtcTLNYeB3g/o.jpg"
+      style={
+        Object {
+          "height": "50%",
+          "objectFit": "cover",
+          "width": "100%",
+        }
+      }
+    />
     <div
-      className="card-title h5"
+      className="card-body"
     >
-       
-      Carhartt Family Wines
-       
+      <div
+        className="card-title h5"
+      >
+         
+        Carhartt Family Wines
+         
+      </div>
+      <div
+        className="card-subtitle h6"
+      >
+         
+        United States
+         
+      </div>
+      <p
+        className="card-text"
+      >
+        Price Level: 
+        2
+        <br />
+        Rating: 
+        4.5
+        <br />
+        Review Count: 
+        561
+      </p>
     </div>
     <div
-      className="card-subtitle h6"
+      class="card-footer"
     >
-       
-      United States
-       
+      <a
+        class="btn btn-secondary stretched-link"
+        href="/vineyards/202"
+        onClick={[Function]}
+      >
+        See Vineyard
+      </a>
     </div>
-    <p
-      className="card-text"
-    >
-      Price Level: 
-      2
-      <br />
-      Rating: 
-      4.5
-      <br />
-      Review Count: 
-      561
-    </p>
-  </div>
-  <div
-    class="card-footer"
-  >
-    <a
-      class="btn btn-secondary stretched-link"
-      href="/Vineyards/202"
-      onClick={[Function]}
-    >
-      See Vineyard
-    </a>
   </div>
 </div>
 `;
 
 exports[`Init Wine 1`] = `
 <div
-  className="card border-dark"
-  style={
-    Object {
-      "height": "35rem",
-      "width": "18rem",
-    }
-  }
+  className="container"
 >
-  <img
-    class="img-thumbnail"
-    className="card-img-top"
-    onError={[Function]}
-    src="https://images.vivino.com/thumbs/_IiGnDHSSaOc9u9c9CzVSA_pb_x300.png"
+  <div
+    className="card border-dark"
     style={
       Object {
-        "height": "50%",
-        "objectFit": "contain",
-        "width": "100%",
+        "height": "35rem",
+        "width": "18rem",
       }
     }
-  />
-  <div
-    className="card-body"
   >
+    <img
+      class="img-thumbnail"
+      className="card-img-top"
+      onError={[Function]}
+      src="https://images.vivino.com/thumbs/_IiGnDHSSaOc9u9c9CzVSA_pb_x300.png"
+      style={
+        Object {
+          "height": "50%",
+          "objectFit": "contain",
+          "width": "100%",
+        }
+      }
+    />
     <div
-      className="card-title h5"
+      className="card-body"
     >
-       
-      <small>
+      <div
+        className="card-title h5"
+      >
          
-        Beckstoffer Dr. Crane Vineyard 2012
+        <small>
+           
+          Beckstoffer Dr. Crane Vineyard 2012
+            
+        </small>
          
-      </small>
-       
+      </div>
+      <div
+        className="card-subtitle h6"
+      >
+         
+        Red
+         Wine 
+      </div>
+      <p
+        className="card-text"
+      >
+        Country: 
+        United States
+        <br />
+        Region: 
+        St. Helena
+        <br />
+        Winery: 
+        Realm
+        <br />
+        Rating: 
+        4.9
+        <br />
+        Reviews: 
+        32
+      </p>
     </div>
     <div
-      className="card-subtitle h6"
+      class="card-footer"
     >
-       
-      Red
-       Wine 
+      <a
+        class="btn btn-secondary stretched-link"
+        href="/wines/310"
+        onClick={[Function]}
+      >
+        View Wine
+      </a>
     </div>
-    <p
-      className="card-text"
-    >
-      Country: 
-      United States
-      <br />
-      Region: 
-      St. Helena
-      <br />
-      Winery: 
-      Realm
-      <br />
-      Rating: 
-      4.9
-      <br />
-      Reviews: 
-      32
-    </p>
-  </div>
-  <div
-    class="card-footer"
-  >
-    <a
-      class="btn btn-secondary stretched-link"
-      href="/Wines/310"
-      onClick={[Function]}
-    >
-      View Wine
-    </a>
   </div>
 </div>
 `;

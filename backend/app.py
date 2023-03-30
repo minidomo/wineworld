@@ -1,7 +1,7 @@
 from typing import Iterator
 
 from flask import request
-from sqlalchemy.sql.expression import Select
+from sqlalchemy.sql.expression import Select, or_, text
 
 from models import (
     Region,
@@ -13,18 +13,21 @@ from models import (
     app,
     db,
 )
+from sort_method_data import (
+    region_sort_methods,
+    vineyard_sort_methods,
+    wine_sort_methods,
+)
 from util import (
     PAGE_SIZE,
     RegionParams,
     RegionUtil,
-    UnaryPredicate,
     VineyardParams,
     VineyardUtil,
     WineParams,
     WineUtil,
     clamp,
     determine_total_pages,
-    every,
 )
 
 """
@@ -39,6 +42,16 @@ db.select()
 
 flask sqlalchemy
 - https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/
+
+converting json property to rows
+- https://vladmihalcea.com/mysql-json-table/
+- https://dev.mysql.com/doc/refman/8.0/en/json-table-functions.html
+
+or_(), text()
+- https://docs.sqlalchemy.org/en/14/core/sqlelement.html
+
+JSON MEMBER OF function
+- https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of
 """
 
 
@@ -70,42 +83,23 @@ def get_all_wines():
     if params.end_reviews is not None:
         query = query.filter(Wine.reviews <= params.end_reviews)
 
-    wines: list[Wine] = db.session.execute(query).scalars().all()
-
-    def is_valid_country(e: Wine) -> bool:
-        for country in params.country:
-            if e.country == country:
-                return True
-        return False
-
-    def is_valid_type(e: Wine) -> bool:
-        for type in params.type:
-            if e.type == type:
-                return True
-        return False
-
-    def is_valid_winery(e: Wine) -> bool:
-        for winery in params.winery:
-            if e.winery == winery:
-                return True
-        return False
-
-    filters: list[UnaryPredicate[Wine]] = []
-
     if len(params.country) > 0:
-        filters.append(is_valid_country)
+        clauses = [Wine.country == e for e in params.country]
+        query = query.filter(or_(*clauses))
 
     if len(params.type) > 0:
-        filters.append(is_valid_type)
+        clauses = [Wine.type == e for e in params.type]
+        query = query.filter(or_(*clauses))
 
     if len(params.winery) > 0:
-        filters.append(is_valid_winery)
+        clauses = [Wine.winery == e for e in params.winery]
+        query = query.filter(or_(*clauses))
 
-    wines = list(filter(lambda e: every(e, filters), wines))
+    if params.sort in wine_sort_methods:
+        sort_method = wine_sort_methods[params.sort]
+        query = query.order_by(sort_method.clause)
 
-    if params.name_sort is not None:
-        reverse = not params.name_sort
-        wines.sort(key=lambda e: e.name.lower(), reverse=reverse)
+    wines: list[Wine] = db.session.execute(query).scalars().all()
 
     total_pages = determine_total_pages(len(wines), PAGE_SIZE)
     params.page = clamp(1, total_pages, params.page)
@@ -147,6 +141,40 @@ def get_wine(id: int):
     return data
 
 
+@app.route("/wines/constraints", methods=["GET"])
+def get_wine_constraints():
+    countries_query: Select = db.select(Wine.country)
+    countries_query = countries_query.distinct().order_by(Wine.country.asc())
+    countries: list[str] = db.session.execute(countries_query).scalars().all()
+
+    wineries_query: Select = db.select(Wine.winery)
+    wineries_query = wineries_query.distinct().order_by(Wine.winery.asc())
+    wineries: list[str] = db.session.execute(wineries_query).scalars().all()
+
+    types_query: Select = db.select(Wine.type)
+    types_query = types_query.distinct().order_by(Wine.type.asc())
+    types: list[str] = db.session.execute(types_query).scalars().all()
+
+    sorts = [e.to_json() for e in wine_sort_methods.values()]
+    sorts.sort(key=lambda e: e["id"])
+
+    data = {
+        "rating": {
+            "min": 0.0,
+            "max": 5.0,
+        },
+        "reviews": {
+            "min": 0,
+        },
+        "types": types,
+        "wineries": wineries,
+        "countries": countries,
+        "sorts": sorts,
+    }
+
+    return data
+
+
 @app.route("/vineyards", methods=["GET"])
 def get_all_vineyards():
     params = VineyardParams(request)
@@ -173,24 +201,15 @@ def get_all_vineyards():
     if params.end_reviews is not None:
         query = query.filter(Vineyard.reviews <= params.end_reviews)
 
-    vineyards: list[Vineyard] = db.session.execute(query).scalars().all()
-
-    def is_valid_country(e: Vineyard) -> bool:
-        for country in params.country:
-            if e.country == country:
-                return True
-        return False
-
-    filters: list[UnaryPredicate[Vineyard]] = []
-
     if len(params.country) > 0:
-        filters.append(is_valid_country)
+        clauses = [Vineyard.country == e for e in params.country]
+        query = query.filter(or_(*clauses))
 
-    vineyards = list(filter(lambda e: every(e, filters), vineyards))
+    if params.sort in vineyard_sort_methods:
+        sort_method = vineyard_sort_methods[params.sort]
+        query = query.order_by(sort_method.clause)
 
-    if params.name_sort is not None:
-        reverse = not params.name_sort
-        vineyards.sort(key=lambda e: e.name.lower(), reverse=reverse)
+    vineyards: list[Vineyard] = db.session.execute(query).scalars().all()
 
     total_pages = determine_total_pages(len(vineyards), PAGE_SIZE)
     params.page = clamp(1, total_pages, params.page)
@@ -234,6 +253,34 @@ def get_vineyard(id: int):
     return data
 
 
+@app.route("/vineyards/constraints", methods=["GET"])
+def get_vineyard_constraints():
+    countries_query: Select = db.select(Vineyard.country)
+    countries_query = countries_query.distinct().order_by(Vineyard.country.asc())
+    countries: list[str] = db.session.execute(countries_query).scalars().all()
+
+    sorts = [e.to_json() for e in vineyard_sort_methods.values()]
+    sorts.sort(key=lambda e: e["id"])
+
+    data = {
+        "rating": {
+            "min": 0.0,
+            "max": 5.0,
+        },
+        "reviews": {
+            "min": 0,
+        },
+        "price": {
+            "min": 0,
+            "max": 4,
+        },
+        "countries": countries,
+        "sorts": sorts,
+    }
+
+    return data
+
+
 @app.route("/regions", methods=["GET"])
 def get_all_regions():
     params = RegionParams(request)
@@ -254,44 +301,25 @@ def get_all_regions():
     if params.end_reviews is not None:
         query = query.filter(Region.reviews <= params.end_reviews)
 
-    regions: list[Region] = db.session.execute(query).scalars().all()
-
-    def is_valid_country(e: Region) -> bool:
-        for country in params.country:
-            if e.country == country:
-                return True
-        return False
-
-    def has_all_tags(e: Region) -> bool:
-        tags: set[str] = set(e.tags)
-        for tag in params.tags:
-            if tag not in tags:
-                return False
-        return True
-
-    def has_all_trip_types(e: Region) -> bool:
-        trip_types: set[str] = set(e.trip_types)
-        for trip_type in params.trip_types:
-            if trip_type not in trip_types:
-                return False
-        return True
-
-    filters: list[UnaryPredicate[Region]] = []
-
     if len(params.country) > 0:
-        filters.append(is_valid_country)
+        clauses = [Region.country == e for e in params.country]
+        query = query.filter(or_(*clauses))
 
     if len(params.tags) > 0:
-        filters.append(has_all_tags)
+        for tag in params.tags:
+            clause = text(f"'{tag}' MEMBER OF({Region.tags.key}) = 1")
+            query = query.filter(clause)
 
     if len(params.trip_types) > 0:
-        filters.append(has_all_trip_types)
+        for trip_type in params.trip_types:
+            clause = text(f"'{trip_type}' MEMBER OF({Region.trip_types.key}) = 1")
+            query = query.filter(clause)
 
-    regions = list(filter(lambda e: every(e, filters), regions))
+    if params.sort in region_sort_methods:
+        sort_method = region_sort_methods[params.sort]
+        query = query.order_by(sort_method.clause)
 
-    if params.name_sort is not None:
-        reverse = not params.name_sort
-        regions.sort(key=lambda e: e.name.lower(), reverse=reverse)
+    regions: list[Region] = db.session.execute(query).scalars().all()
 
     total_pages = determine_total_pages(len(regions), PAGE_SIZE)
     params.page = clamp(1, total_pages, params.page)
@@ -330,6 +358,72 @@ def get_region(id: int):
             "wines": [WineUtil.to_json(e, small=True) for e in wines],
             "vineyards": [VineyardUtil.to_json(e, small=True) for e in vineyards],
         },
+    }
+
+    return data
+
+
+@app.route("/regions/constraints", methods=["GET"])
+def get_region_constraints():
+    countries_query: Select = db.select(Region.country)
+    countries_query = countries_query.distinct().order_by(Region.country.asc())
+    countries: list[str] = db.session.execute(countries_query).scalars().all()
+
+    trip_type_val = "trip_type_val"
+    trip_types_query = text(
+        f"""
+        SELECT DISTINCT
+            {trip_type_val}
+        FROM
+            {Region.__tablename__},
+            JSON_TABLE(
+                {Region.trip_types.key},
+                '$[*]' COLUMNS(
+                    {trip_type_val} VARCHAR(100) PATH '$'
+                )
+            ) as _temp
+        ORDER BY
+            {trip_type_val}
+            ASC
+    """
+    )
+    trip_types: list[str] = db.session.execute(trip_types_query).scalars().all()
+
+    tag_val = "tag_val"
+    tags_query = text(
+        f"""
+        SELECT DISTINCT
+            {tag_val}
+        FROM
+            {Region.__tablename__},
+            JSON_TABLE(
+                {Region.tags.key},
+                '$[*]' COLUMNS(
+                    {tag_val} VARCHAR(100) PATH '$'
+                )
+            ) as _temp
+        ORDER BY
+            {tag_val}
+            ASC
+    """
+    )
+    tags: list[str] = db.session.execute(tags_query).scalars().all()
+
+    sorts = [e.to_json() for e in region_sort_methods.values()]
+    sorts.sort(key=lambda e: e["id"])
+
+    data = {
+        "rating": {
+            "min": 0.0,
+            "max": 5.0,
+        },
+        "reviews": {
+            "min": 0,
+        },
+        "tripTypes": trip_types,
+        "tags": tags,
+        "countries": countries,
+        "sorts": sorts,
     }
 
     return data

@@ -39,7 +39,6 @@ class WineParams:
     def __init__(self, request: Request) -> None:
         self.page: int
         self.name = request.args.get("name", type=str)
-        self.name_sort: bool | None = None
         self.country = request.args.getlist("country")
         self.winery = request.args.getlist("winery")
         self.start_rating = request.args.get("startRating", type=float)
@@ -47,6 +46,7 @@ class WineParams:
         self.start_reviews = request.args.get("startReviews", type=int)
         self.end_reviews = request.args.get("endReviews", type=int)
         self.type = request.args.getlist("type")
+        self.sort = request.args.get("sort", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:
@@ -71,6 +71,7 @@ class VineyardParams:
         self.end_rating = request.args.get("endRating", type=float)
         self.start_reviews = request.args.get("startReviews", type=int)
         self.end_reviews = request.args.get("endReviews", type=int)
+        self.sort = request.args.get("sort", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:
@@ -95,6 +96,7 @@ class RegionParams:
         self.end_reviews = request.args.get("endReviews", type=int)
         self.tags = request.args.getlist("tags")
         self.trip_types = request.args.getlist("tripTypes")
+        self.sort = request.args.get("sort", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:

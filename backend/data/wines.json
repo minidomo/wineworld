@@ -61,26 +61,6 @@
             "type": "Red"
         },
         {
-            "winery": "Promise",
-            "image": "https://images.vivino.com/thumbs/ELHDIsL6TOGR9_nfTRjC0w_pb_x300.png",
-            "rating": 4.9,
-            "reviews": 28,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2010",
-            "type": "Red"
-        },
-        {
-            "winery": "Le Pin",
-            "image": "https://images.vivino.com/thumbs/rCirPraNRPy8PHfOlG4E2w_pb_x300.png",
-            "rating": 4.9,
-            "reviews": 27,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 2002",
-            "type": "Red"
-        },
-        {
             "winery": "Benziger",
             "image": "https://images.vivino.com/thumbs/3PfOzi--Qa2d7zPQGH9h6g_pb_x300.png",
             "rating": 4.9,
@@ -108,26 +88,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Grand Vin Pauillac (Premier Grand Cru Classé) 1982",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 820,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 2000",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 744,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1989",
             "type": "Red"
         },
         {
@@ -171,46 +131,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 516,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 1990",
-            "type": "Red"
-        },
-        {
-            "winery": "Frank Family",
-            "image": "https://images.vivino.com/thumbs/BFAcH67rRxyiZskkxTnnJQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 405,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Patriarch N.V.",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 341,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2007",
-            "type": "Red"
-        },
-        {
-            "winery": "Del Dotto",
-            "image": "https://images.vivino.com/thumbs/easjTPIcS-mCQ99XoYOMgQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 344,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "The Beast Cabernet Sauvignon N.V.",
-            "type": "Red"
-        },
-        {
             "winery": "Viña Cobos",
             "image": "https://images.vivino.com/thumbs/IQSL2hitTXi4fypdhZzi4g_pb_x300.png",
             "rating": 4.8,
@@ -221,66 +141,6 @@
             "type": "Red"
         },
         {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 308,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2000",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 298,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2006",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 255,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2004",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 238,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1990",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 201,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2009",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 198,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1999",
-            "type": "Red"
-        },
-        {
             "winery": "Del Dotto",
             "image": "https://images.vivino.com/thumbs/As4eGQeHTdmvXTjpjwne2Q_pb_x300.png",
             "rating": 4.8,
@@ -288,76 +148,6 @@
             "country": "United States",
             "region": "St. Helena",
             "name": "Cabernet Sauvignon Vineyard 887 2012",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 167,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2013",
-            "type": "Red"
-        },
-        {
-            "winery": "Frank Family",
-            "image": "https://images.vivino.com/thumbs/BFAcH67rRxyiZskkxTnnJQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 154,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Patriarch 2013",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 146,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2007",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 145,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1989",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 139,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2008",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 132,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2014",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 130,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2012",
             "type": "Red"
         },
         {
@@ -381,16 +171,6 @@
             "type": "Red"
         },
         {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 117,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 2014",
-            "type": "Red"
-        },
-        {
             "winery": "Château Mouton Rothschild",
             "image": "https://images.vivino.com/thumbs/DNeQQKoHQCyq7BakiBm_zQ_pb_x300.png",
             "rating": 4.8,
@@ -398,26 +178,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Pauillac (Premier Grand Cru Classé) 1961",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 109,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2015",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 108,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1967",
             "type": "Red"
         },
         {
@@ -448,16 +208,6 @@
             "country": "France",
             "region": "Saint-Émilion",
             "name": "La Bergerie Baronat Saint-Émilion 2009",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Ausone",
-            "image": "https://images.vivino.com/thumbs/3qAATur8TrWn_JwIWRVvkw_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 92,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 2003",
             "type": "Red"
         },
         {
@@ -541,46 +291,6 @@
             "type": "Red"
         },
         {
-            "winery": "Le Pin",
-            "image": "https://images.vivino.com/thumbs/rCirPraNRPy8PHfOlG4E2w_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 64,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1990",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 63,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1978",
-            "type": "Red"
-        },
-        {
-            "winery": "Del Dotto",
-            "image": "https://images.vivino.com/thumbs/easjTPIcS-mCQ99XoYOMgQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 63,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "The Beast Cabernet Sauvignon 2015",
-            "type": "Red"
-        },
-        {
-            "winery": "Le Pin",
-            "image": "https://images.vivino.com/thumbs/rCirPraNRPy8PHfOlG4E2w_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 60,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 2001",
-            "type": "Red"
-        },
-        {
             "winery": "Del Dotto",
             "image": "https://images.vivino.com/thumbs/NnvfxpP_S2GycGg7VNkeYQ_375x500.jpg",
             "rating": 4.8,
@@ -631,16 +341,6 @@
             "type": "Red"
         },
         {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 54,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1971",
-            "type": "Red"
-        },
-        {
             "winery": "Domaine Armand Rousseau",
             "image": "https://images.vivino.com/thumbs/0sC_c_PjQsKM1kesmg9zDw_pb_x300.png",
             "rating": 4.8,
@@ -668,16 +368,6 @@
             "country": "United States",
             "region": "St. Helena",
             "name": "Cabernet Sauvignon St. Helena Mountain 2010",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/1S8EQY4xQT-EeeD727cD1A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 47,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "M. Etain 2016",
             "type": "Red"
         },
         {
@@ -751,36 +441,6 @@
             "type": "Red"
         },
         {
-            "winery": "Martin Estate",
-            "image": "https://images.vivino.com/thumbs/gt9rZXKHQTyzXOZNOBn_HA_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 40,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2010",
-            "type": "Red"
-        },
-        {
-            "winery": "Dana",
-            "image": "https://images.vivino.com/thumbs/ahtEVX8nQrOVeBmkYJG12w_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 40,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Helms Vineyard Cabernet Sauvignon 2007",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 40,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1966",
-            "type": "Red"
-        },
-        {
             "winery": "Del Dotto",
             "image": "https://images.vivino.com/thumbs/As4eGQeHTdmvXTjpjwne2Q_pb_x300.png",
             "rating": 4.8,
@@ -798,16 +458,6 @@
             "country": "France",
             "region": "Chambertin-Clos de Bèze Grand Cru",
             "name": "Chambertin Clos de Beze Grand Cru 2005",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 39,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1953",
             "type": "Red"
         },
         {
@@ -831,26 +481,6 @@
             "type": "Red"
         },
         {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 38,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2003",
-            "type": "Red"
-        },
-        {
-            "winery": "Del Dotto",
-            "image": "https://images.vivino.com/thumbs/easjTPIcS-mCQ99XoYOMgQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 38,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "The Beast Cabernet Sauvignon 2014",
-            "type": "Red"
-        },
-        {
             "winery": "Masseto",
             "image": "https://images.vivino.com/thumbs/GPvEr_IUSKS1CDhhsY1ySg_pb_x300.png",
             "rating": 4.8,
@@ -858,26 +488,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Toscana 1992",
-            "type": "Red"
-        },
-        {
-            "winery": "Château La Violette",
-            "image": "https://images.vivino.com/thumbs/eE33gOsgSMqHJrLVxrakSw_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 36,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 2007",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 36,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon 2004",
             "type": "Red"
         },
         {
@@ -898,26 +508,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Case Basse Sangiovese Toscana 2011",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 34,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1962",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/gdpqzl7uQoOcjVIqKVggOg_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 34,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Margaux du Château Margaux 1998",
             "type": "Red"
         },
         {
@@ -961,16 +551,6 @@
             "type": "Red"
         },
         {
-            "winery": "Del Dotto",
-            "image": "https://images.vivino.com/thumbs/easjTPIcS-mCQ99XoYOMgQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 31,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "The Beast Cabernet Sauvignon 2016",
-            "type": "Red"
-        },
-        {
             "winery": "Château la Négly",
             "image": "https://images.vivino.com/thumbs/FOElyk6sSY6_RFFNM-XB2A_pb_x300.png",
             "rating": 4.8,
@@ -978,36 +558,6 @@
             "country": "France",
             "region": "La Clape",
             "name": "La Porte du Ciel Languedoc La Clape 2008",
-            "type": "Red"
-        },
-        {
-            "winery": "Sloan",
-            "image": "https://images.vivino.com/thumbs/GT_l7XICQfmh7KIHymdG0A_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 30,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Proprietary Red 2002",
-            "type": "Red"
-        },
-        {
-            "winery": "Heitz Cellar",
-            "image": "https://images.vivino.com/thumbs/hixqqIskQp6jtJbnDyuclg_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 30,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Trailside Vineyard Cabernet Sauvignon 1999",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/gdpqzl7uQoOcjVIqKVggOg_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 29,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Margaux du Château Margaux 1990",
             "type": "Red"
         },
         {
@@ -1061,16 +611,6 @@
             "type": "Red"
         },
         {
-            "winery": "Del Dotto",
-            "image": "https://images.vivino.com/thumbs/easjTPIcS-mCQ99XoYOMgQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 28,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "The Beast Cabernet Sauvignon 2011",
-            "type": "Red"
-        },
-        {
             "winery": "Lasseter",
             "image": "https://images.vivino.com/thumbs/5L16ZtkyRnSMym3ZZaHfkg_pb_x300.png",
             "rating": 4.8,
@@ -1111,16 +651,6 @@
             "type": "Red"
         },
         {
-            "winery": "Hunnicutt",
-            "image": "https://images.vivino.com/thumbs/jCASOVd4Q7eAAgaKDTUC-w_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 26,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Brinkman Block Cabernet Sauvignon 2015",
-            "type": "Red"
-        },
-        {
             "winery": "Hentley Farm",
             "image": "https://images.vivino.com/thumbs/dc4jgB7HTyqQ0VsrSrnONQ_pb_x300.png",
             "rating": 4.8,
@@ -1131,16 +661,6 @@
             "type": "Red"
         },
         {
-            "winery": "Bruno Rocca",
-            "image": "https://images.vivino.com/thumbs/RjbE1wg8QgKgGU8zmdCQdA_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 26,
-            "country": "Italy",
-            "region": "Barbaresco",
-            "name": "Barbaresco Rabajà 1998",
-            "type": "Red"
-        },
-        {
             "winery": "Finca Moncloa",
             "image": "https://images.vivino.com/thumbs/57yG5N1BSdOlo_8qNfxuAA_pb_x300.png",
             "rating": 4.8,
@@ -1148,36 +668,6 @@
             "country": "Spain",
             "region": "Cádiz",
             "name": "Tintilla de Rota 2016",
-            "type": "Red"
-        },
-        {
-            "winery": "Domaine de La Romanée-Conti",
-            "image": "https://images.vivino.com/thumbs/rUPGZo11SwW6haQta4COqQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 26,
-            "country": "France",
-            "region": "La Tâche Grand Cru",
-            "name": "La Tâche Grand Cru 1973",
-            "type": "Red"
-        },
-        {
-            "winery": "Del Dotto",
-            "image": "https://images.vivino.com/thumbs/easjTPIcS-mCQ99XoYOMgQ_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 26,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "The Beast Cabernet Sauvignon 2010",
-            "type": "Red"
-        },
-        {
-            "winery": "Staglin",
-            "image": "https://images.vivino.com/thumbs/BSTwXsV_Ts-btmOg2SKjyA_pb_x300.png",
-            "rating": 4.8,
-            "reviews": 26,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Estate Cabernet Sauvignon 1998",
             "type": "Red"
         },
         {
@@ -1221,16 +711,6 @@
             "type": "Red"
         },
         {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 21459,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol N.V.",
-            "type": "Red"
-        },
-        {
             "winery": "Masseto",
             "image": "https://images.vivino.com/thumbs/GPvEr_IUSKS1CDhhsY1ySg_pb_x300.png",
             "rating": 4.7,
@@ -1251,36 +731,6 @@
             "type": "Red"
         },
         {
-            "winery": "Almaviva",
-            "image": "https://images.vivino.com/thumbs/VACKmZQ1RvemXT9ViEPFnQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 3464,
-            "country": "Chile",
-            "region": "Puente Alto",
-            "name": "Almaviva 2010",
-            "type": "Red"
-        },
-        {
-            "winery": "Almaviva",
-            "image": "https://images.vivino.com/thumbs/VACKmZQ1RvemXT9ViEPFnQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 3132,
-            "country": "Chile",
-            "region": "Puente Alto",
-            "name": "Almaviva 2009",
-            "type": "Red"
-        },
-        {
-            "winery": "Almaviva",
-            "image": "https://images.vivino.com/thumbs/VACKmZQ1RvemXT9ViEPFnQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 2366,
-            "country": "Chile",
-            "region": "Puente Alto",
-            "name": "Almaviva 2007",
-            "type": "Red"
-        },
-        {
             "winery": "Château Mouton Rothschild",
             "image": "https://images.vivino.com/thumbs/DNeQQKoHQCyq7BakiBm_zQ_pb_x300.png",
             "rating": 4.7,
@@ -1288,16 +738,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Pauillac (Premier Grand Cru Classé) 1986",
-            "type": "Red"
-        },
-        {
-            "winery": "Scarecrow",
-            "image": "https://images.vivino.com/thumbs/pU7uFKR-TAKAOQaf3Hpn2A_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1596,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Cabernet Sauvignon N.V.",
             "type": "Red"
         },
         {
@@ -1331,16 +771,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1527,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1995",
-            "type": "Red"
-        },
-        {
             "winery": "Château Pontet-Canet",
             "image": "https://images.vivino.com/thumbs/zoXYIDxFQzmf8fFpkNNUJQ_pb_x300.png",
             "rating": 4.7,
@@ -1358,26 +788,6 @@
             "country": "Australia",
             "region": "McLaren Vale",
             "name": "Velvet Glove Shiraz N.V.",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1318,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1996",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1248,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1989",
             "type": "Red"
         },
         {
@@ -1411,16 +821,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1199,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1986",
-            "type": "Red"
-        },
-        {
             "winery": "Château Latour",
             "image": "https://images.vivino.com/thumbs/4RHhCzeQTsCeyCScxO0LOw_pb_x300.png",
             "rating": 4.7,
@@ -1428,26 +828,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Grand Vin Pauillac (Premier Grand Cru Classé) 1990",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1189,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1999",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1130,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1982",
             "type": "Red"
         },
         {
@@ -1481,16 +861,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1021,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1990",
-            "type": "Red"
-        },
-        {
             "winery": "Château Latour",
             "image": "https://images.vivino.com/thumbs/4RHhCzeQTsCeyCScxO0LOw_pb_x300.png",
             "rating": 4.7,
@@ -1501,26 +871,6 @@
             "type": "Red"
         },
         {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 1008,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1982",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 999,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1983",
-            "type": "Red"
-        },
-        {
             "winery": "Château Latour",
             "image": "https://images.vivino.com/thumbs/4RHhCzeQTsCeyCScxO0LOw_pb_x300.png",
             "rating": 4.7,
@@ -1528,26 +878,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Grand Vin Pauillac (Premier Grand Cru Classé) 2001",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 962,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 2001",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 959,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 1995",
             "type": "Red"
         },
         {
@@ -1581,26 +911,6 @@
             "type": "Red"
         },
         {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 915,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1990",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 912,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 2006",
-            "type": "Red"
-        },
-        {
             "winery": "Château Lafite Rothschild",
             "image": "https://images.vivino.com/thumbs/uDMfPG10R1efm5H1do--Ow_pb_x300.png",
             "rating": 4.7,
@@ -1608,26 +918,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Pauillac (Premier Grand Cru Classé) 1986",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 890,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 2004",
-            "type": "Red"
-        },
-        {
-            "winery": "Quintessa",
-            "image": "https://images.vivino.com/thumbs/XeOU0ao9Rka3psDMjpkrKQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 848,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Rutherford 2012",
             "type": "Red"
         },
         {
@@ -1681,16 +971,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 763,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 1985",
-            "type": "Red"
-        },
-        {
             "winery": "Paul Hobbs",
             "image": "https://images.vivino.com/thumbs/qmeRPQC1QCaTbAZ2n85ELQ_pb_x300.png",
             "rating": 4.7,
@@ -1701,16 +981,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 727,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 1982",
-            "type": "Red"
-        },
-        {
             "winery": "Château Latour",
             "image": "https://images.vivino.com/thumbs/4RHhCzeQTsCeyCScxO0LOw_pb_x300.png",
             "rating": 4.7,
@@ -1718,26 +988,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Grand Vin Pauillac (Premier Grand Cru Classé) 1999",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 707,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 1998",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 704,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1995",
             "type": "Red"
         },
         {
@@ -1761,16 +1011,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Angelus",
-            "image": "https://images.vivino.com/thumbs/2vBBscbzSx-jqGBK9OPZLw_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 693,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 2005",
-            "type": "Red"
-        },
-        {
             "winery": "Château Latour",
             "image": "https://images.vivino.com/thumbs/4RHhCzeQTsCeyCScxO0LOw_pb_x300.png",
             "rating": 4.7,
@@ -1778,46 +1018,6 @@
             "country": "France",
             "region": "Pauillac",
             "name": "Grand Vin Pauillac (Premier Grand Cru Classé) 1985",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Pavie",
-            "image": "https://images.vivino.com/thumbs/vE5fQpdURMyxnrM0pscSsQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 692,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 2005",
-            "type": "Red"
-        },
-        {
-            "winery": "Hall",
-            "image": "https://images.vivino.com/thumbs/zJZAU8z1S_CNsTj5luKowQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 687,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Kathryn Hall Cabernet Sauvignon 2013",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 683,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1994",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 668,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1996",
             "type": "Red"
         },
         {
@@ -1861,16 +1061,6 @@
             "type": "Red"
         },
         {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 651,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1999",
-            "type": "Red"
-        },
-        {
             "winery": "Antinori",
             "image": "https://images.vivino.com/thumbs/6isg_zaUR3aWks-dEtkTXg_pb_x300.png",
             "rating": 4.7,
@@ -1878,16 +1068,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Tenuta Tignanello 'Solaia' 2015",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 603,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 2000",
             "type": "Red"
         },
         {
@@ -1901,16 +1081,6 @@
             "type": "Red"
         },
         {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 592,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1988",
-            "type": "Red"
-        },
-        {
             "winery": "Masseto",
             "image": "https://images.vivino.com/thumbs/GPvEr_IUSKS1CDhhsY1ySg_pb_x300.png",
             "rating": 4.7,
@@ -1918,26 +1088,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Toscana 2009",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 585,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 2002",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 583,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 1985",
             "type": "Red"
         },
         {
@@ -1951,36 +1101,6 @@
             "type": "Red"
         },
         {
-            "winery": "Château Margaux",
-            "image": "https://images.vivino.com/thumbs/dnqHnd0hSx-t14_V8uynAA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 580,
-            "country": "France",
-            "region": "Margaux",
-            "name": "Château Margaux (Premier Grand Cru Classé) 2003",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Angelus",
-            "image": "https://images.vivino.com/thumbs/2vBBscbzSx-jqGBK9OPZLw_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 579,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 2000",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 578,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 2005",
-            "type": "Red"
-        },
-        {
             "winery": "Masseto",
             "image": "https://images.vivino.com/thumbs/GPvEr_IUSKS1CDhhsY1ySg_pb_x300.png",
             "rating": 4.7,
@@ -1988,36 +1108,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Toscana 2007",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 567,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 1989",
-            "type": "Red"
-        },
-        {
-            "winery": "Pétrus",
-            "image": "https://images.vivino.com/thumbs/RPhc1fBwT0uLKoE6_mteFQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 565,
-            "country": "France",
-            "region": "Pomerol",
-            "name": "Pomerol 2006",
-            "type": "Red"
-        },
-        {
-            "winery": "Gaja",
-            "image": "https://images.vivino.com/thumbs/AXnEJS3XSRy34gIYBtoeKg_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 565,
-            "country": "Italy",
-            "region": "Barbaresco",
-            "name": "Barbaresco 2001",
             "type": "Red"
         },
         {
@@ -2038,16 +1128,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Toscana 2008",
-            "type": "Red"
-        },
-        {
-            "winery": "Château Cheval Blanc",
-            "image": "https://images.vivino.com/thumbs/AIWJqsLoSIyz0HO4de1llA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 546,
-            "country": "France",
-            "region": "Saint-Émilion Grand Cru",
-            "name": "Saint-Émilion Grand Cru (Premier Grand Cru Classé) 1986",
             "type": "Red"
         },
         {
@@ -2441,16 +1521,6 @@
             "type": "White"
         },
         {
-            "winery": "Jean Noël Gagnard",
-            "image": "https://images.vivino.com/thumbs/upj_csvpTCuxQCbIr2lGPg_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 36,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Cailleret'",
-            "name": "Chassagne-Montrachet 1er Cru 'Les Caillerets' Blanc 2014",
-            "type": "White"
-        },
-        {
             "winery": "Olivier Leflaive",
             "image": "https://images.vivino.com/thumbs/AzV_MtQeRMek7hwD4cmdzw_pb_x300.png",
             "rating": 4.7,
@@ -2488,16 +1558,6 @@
             "country": "France",
             "region": "Chablis Grand Cru 'Valmur'",
             "name": "Chablis Grand Cru 'Valmur' 2001",
-            "type": "White"
-        },
-        {
-            "winery": "Amiot Guy",
-            "image": "https://images.vivino.com/thumbs/UGMGQEeZTVKYOLN7etPpag_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 32,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Cailleret'",
-            "name": "Chassagne-Montrachet 1er Cru 'Cailleret' 2005",
             "type": "White"
         },
         {
@@ -2588,16 +1648,6 @@
             "country": "France",
             "region": "Chablis Grand Cru 'Valmur'",
             "name": "Chablis Grand Cru 'Valmur' 2002",
-            "type": "White"
-        },
-        {
-            "winery": "Jean-Claude Ramonet",
-            "image": "https://images.vivino.com/thumbs/E-_IMe1XTVS0xExB7uo9aw_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 26,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Les Vergers'",
-            "name": "Chassagne-Montrachet Premier Cru 'Les Vergers' 2016",
             "type": "White"
         },
         {
@@ -2821,16 +1871,6 @@
             "type": "White"
         },
         {
-            "winery": "René Lequin-Colin",
-            "image": "https://images.vivino.com/highlights/icon/top_ranked.svg",
-            "rating": 4.6,
-            "reviews": 71,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Les Vergers'",
-            "name": "Chassagne-Montrachet Premier Cru 'Les Vergers' 2013",
-            "type": "White"
-        },
-        {
             "winery": "Domaine Jacques Prieur",
             "image": "https://images.vivino.com/thumbs/S9AYHXMaT7mXIVdpxB-juA_pb_x300.png",
             "rating": 4.6,
@@ -2961,16 +2001,6 @@
             "type": "White"
         },
         {
-            "winery": "Jean-Claude Ramonet",
-            "image": "https://images.vivino.com/thumbs/9JPBS8OPR36TY_irugF98w_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 49,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Morgeot'",
-            "name": "Chassagne-Montrachet Premier Cru 'Morgeot' Blanc 2010",
-            "type": "White"
-        },
-        {
             "winery": "Fantesca Estate",
             "image": "https://images.vivino.com/thumbs/M8fSzJv6QMORODa6KeyP3g_pb_x300.png",
             "rating": 4.6,
@@ -2988,16 +2018,6 @@
             "country": "France",
             "region": "Montrachet Grand Cru",
             "name": "Montrachet Grand Cru 2001",
-            "type": "White"
-        },
-        {
-            "winery": "Jean-Claude Ramonet",
-            "image": "https://images.vivino.com/thumbs/XvOxHjgLR5CVqIstKpxT3w_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 47,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Les Grandes Ruchottes'",
-            "name": "Chassagne-Montrachet Premier Cru 'Les Ruchottes' Blanc 2015",
             "type": "White"
         },
         {
@@ -3071,26 +2091,6 @@
             "type": "White"
         },
         {
-            "winery": "Olivier Leflaive",
-            "image": "https://images.vivino.com/thumbs/5FWFCIFoTy-BXHrf5DFMag_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 41,
-            "country": "France",
-            "region": "Chassagne-Montrachet Premier Cru",
-            "name": "Chassagne-Montrachet 1er Cru 'Clos Saint-Marc' 2008",
-            "type": "White"
-        },
-        {
-            "winery": "Lucien le Moine",
-            "image": "https://images.vivino.com/thumbs/sAuKIO1FTqC5q5yGxvzMUA_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 41,
-            "country": "France",
-            "region": "Chassagne-Montrachet Premier Cru",
-            "name": "Chassagne-Montrachet 1er Cru Morgeot 2013",
-            "type": "White"
-        },
-        {
             "winery": "Pierre-Yves Colin-Morey",
             "image": "https://images.vivino.com/thumbs/1aUROYhHSAet6_x7wS7Fdg_pb_x300.png",
             "rating": 4.6,
@@ -3138,26 +2138,6 @@
             "country": "United States",
             "region": "Russian River Valley",
             "name": "Chardonnay Ma Princesse 2012",
-            "type": "White"
-        },
-        {
-            "winery": "Domaine Fernand & Laurent Pillot",
-            "image": "https://images.vivino.com/thumbs/5DI7Ti1ZTX6kG7NuDzAf9A_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 39,
-            "country": "France",
-            "region": "Chassagne-Montrachet Premier Cru",
-            "name": "Chassagne-Montrachet 1er Cru Les Champgains 2015",
-            "type": "White"
-        },
-        {
-            "winery": "Roux Père & Fils",
-            "image": "https://images.vivino.com/thumbs/IrzjmlE2S-yghC2DTo45Ag_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 37,
-            "country": "France",
-            "region": "Chassagne-Montrachet Premier Cru",
-            "name": "Chassagne-Montrachet Premier Cru Les Macherelles 2015",
             "type": "White"
         },
         {
@@ -3321,16 +2301,6 @@
             "type": "White"
         },
         {
-            "winery": "Marc Brédif",
-            "image": "https://images.vivino.com/thumbs/cJoirtVARV6BwTOD3nXU7Q_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 29,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Vouvray Classic 1989",
-            "type": "White"
-        },
-        {
             "winery": "Hanzell",
             "image": "https://images.vivino.com/thumbs/M3egNRrUSt6B2mr9rp0woQ_pb_x300.png",
             "rating": 4.6,
@@ -3358,16 +2328,6 @@
             "country": "France",
             "region": "Corton-Charlemagne Grand Cru",
             "name": "Corton Charlemagne Grand Cru 2014",
-            "type": "White"
-        },
-        {
-            "winery": "Jean Noël Gagnard",
-            "image": "https://images.vivino.com/thumbs/upj_csvpTCuxQCbIr2lGPg_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 28,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Cailleret'",
-            "name": "Chassagne-Montrachet 1er Cru 'Les Caillerets' Blanc 2012",
             "type": "White"
         },
         {
@@ -3481,26 +2441,6 @@
             "type": "White"
         },
         {
-            "winery": "Pierre-Yves Colin-Morey",
-            "image": "https://images.vivino.com/thumbs/lj7yTJRLQoWN2vtdyaxcGQ_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 27,
-            "country": "France",
-            "region": "Chassagne-Montrachet 1er Cru 'Abbaye de Morgeot'",
-            "name": "Chassagne-Montrachet Premier Cru Abbaye de Morgeot 2014",
-            "type": "White"
-        },
-        {
-            "winery": "Jacques Selosse",
-            "image": "https://images.vivino.com/thumbs/UOIohsiJRVOwUxC6u3sJOg_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 317,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Lieux-dits La Cote Faron Extra Brut Champagne Grand Cru 'Aÿ' N.V.",
-            "type": "Sparkling"
-        },
-        {
             "winery": "Rockford",
             "image": "https://images.vivino.com/thumbs/Y5yfC3QRRVKRKXJN-bHeGQ_pb_x300.png",
             "rating": 4.7,
@@ -3508,66 +2448,6 @@
             "country": "Australia",
             "region": "Barossa Valley",
             "name": "Black Shiraz 2018",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Alexandrie Cellars",
-            "image": "https://images.vivino.com/thumbs/uc3qkd0HQHaTGIG7AJ1UPA_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 28,
-            "country": "United States",
-            "region": "Rutherford",
-            "name": "Alexandrie Brut N.V.",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Roger Brun",
-            "image": "https://images.vivino.com/thumbs/Gaq3aB1bTme4-cUYEpA1IQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 25,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Réserve Familiale Extra Brut Champagne Grand Cru 'Aÿ' 2004",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/vP4bj-HpSXirORyJAcf5pQ_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 380,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Argonne Brut Champagne Grand Cru 'Aÿ' N.V.",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/YdjjMzrZS9WbzKJwC5cb2w_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 123,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Fût de Chêne Brut Collection Champagne Grand Cru 'Aÿ' 2009",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/vP4bj-HpSXirORyJAcf5pQ_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 114,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Argonne Brut Champagne Grand Cru 'Aÿ' 2002",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/vP4bj-HpSXirORyJAcf5pQ_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 58,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Argonne Brut Champagne Grand Cru 'Aÿ' 2008",
             "type": "Sparkling"
         },
         {
@@ -3581,16 +2461,6 @@
             "type": "Sparkling"
         },
         {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/YdjjMzrZS9WbzKJwC5cb2w_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 28,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Fût de Chêne Brut Collection Champagne Grand Cru 'Aÿ' 2012",
-            "type": "Sparkling"
-        },
-        {
             "winery": "Rockford",
             "image": "https://images.vivino.com/thumbs/Y5yfC3QRRVKRKXJN-bHeGQ_pb_x300.png",
             "rating": 4.6,
@@ -3598,56 +2468,6 @@
             "country": "Australia",
             "region": "Barossa Valley",
             "name": "Black Shiraz 2016",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/-OnZDbhqQiesshhN5ORbAw_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 691,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "MV Fût de Chêne Brut Champagne Grand Cru 'Aÿ' N.V.",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/YdjjMzrZS9WbzKJwC5cb2w_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 294,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Fût de Chêne Brut Collection Champagne Grand Cru 'Aÿ' 2000",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/vP4bj-HpSXirORyJAcf5pQ_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 179,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Argonne Brut Champagne Grand Cru 'Aÿ' 2004",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/YdjjMzrZS9WbzKJwC5cb2w_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 113,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Fût de Chêne Brut Collection Champagne Grand Cru 'Aÿ' 1999",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Roger Brun",
-            "image": "https://images.vivino.com/thumbs/Gaq3aB1bTme4-cUYEpA1IQ_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 80,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Réserve Familiale Extra Brut Champagne Grand Cru 'Aÿ' 2000",
             "type": "Sparkling"
         },
         {
@@ -3668,26 +2488,6 @@
             "country": "Brazil",
             "region": "Serra Gaúcha",
             "name": "Terroir Nature 2015",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Roger Brun",
-            "image": "https://images.vivino.com/thumbs/Gaq3aB1bTme4-cUYEpA1IQ_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 35,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Réserve Familiale Extra Brut Champagne Grand Cru 'Aÿ' 2006",
-            "type": "Sparkling"
-        },
-        {
-            "winery": "Henri Giraud",
-            "image": "https://images.vivino.com/thumbs/YdjjMzrZS9WbzKJwC5cb2w_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 33,
-            "country": "France",
-            "region": "Champagne Grand Cru 'Aÿ'",
-            "name": "Fût de Chêne Brut Collection Champagne Grand Cru 'Aÿ' 1996",
             "type": "Sparkling"
         },
         {
@@ -3731,16 +2531,6 @@
             "type": "Rose"
         },
         {
-            "winery": "Bartenura",
-            "image": "https://images.vivino.com/thumbs/bx6znn-kQJ-hQ7GQWXlDuw_pb_x300.png",
-            "rating": 4.4,
-            "reviews": 30,
-            "country": "Italy",
-            "region": "Malvasia di Castelnuovo don Bosco",
-            "name": "Malvasia Castelnuovo Don Bosco Rosé 2008",
-            "type": "Rose"
-        },
-        {
             "winery": "Commanderie de la Bargemone",
             "image": "https://images.vivino.com/thumbs/WAF5yEazROuzWMyspVSnVg_pb_x300.png",
             "rating": 4.3,
@@ -3758,16 +2548,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Rosato di Toscana Brancato 2016",
-            "type": "Rose"
-        },
-        {
-            "winery": "Venâncio da Costa Lima",
-            "image": "https://images.vivino.com/highlights/icon/most_user_rated.svg",
-            "rating": 4.3,
-            "reviews": 146,
-            "country": "Portugal",
-            "region": "Setúbal",
-            "name": "Moscatel Roxo 2013",
             "type": "Rose"
         },
         {
@@ -4001,16 +2781,6 @@
             "type": "Rose"
         },
         {
-            "winery": "Bartenura",
-            "image": "https://images.vivino.com/thumbs/bx6znn-kQJ-hQ7GQWXlDuw_pb_x300.png",
-            "rating": 4.2,
-            "reviews": 213,
-            "country": "Italy",
-            "region": "Malvasia di Castelnuovo don Bosco",
-            "name": "Malvasia Castelnuovo Don Bosco Rosé N.V.",
-            "type": "Rose"
-        },
-        {
             "winery": "Tenuta Il Poggione",
             "image": "https://images.vivino.com/thumbs/UlzJZw2ZSViSGaTrZd3Few_pb_x300.png",
             "rating": 4.2,
@@ -4018,16 +2788,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Rosato di Toscana Brancato 2015",
-            "type": "Rose"
-        },
-        {
-            "winery": "L'Anglore - Eric Pfifferling",
-            "image": "https://images.vivino.com/thumbs/QlIar-lNTGO4UWMhuNE7gQ_pb_x300.png",
-            "rating": 4.2,
-            "reviews": 164,
-            "country": "France",
-            "region": "Tavel",
-            "name": "Tavel 2015",
             "type": "Rose"
         },
         {
@@ -4068,16 +2828,6 @@
             "country": "United States",
             "region": "Russian River Valley",
             "name": "Syrah of Rosé N.V.",
-            "type": "Rose"
-        },
-        {
-            "winery": "L'Anglore - Eric Pfifferling",
-            "image": "https://images.vivino.com/thumbs/QlIar-lNTGO4UWMhuNE7gQ_pb_x300.png",
-            "rating": 4.2,
-            "reviews": 72,
-            "country": "France",
-            "region": "Tavel",
-            "name": "Tavel 2017",
             "type": "Rose"
         },
         {
@@ -4341,16 +3091,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "Bacalhôa",
-            "image": "https://images.vivino.com/thumbs/0ssL66zES4S4dSg-08ermQ_pb_x300.png",
-            "rating": 4.7,
-            "reviews": 29,
-            "country": "Portugal",
-            "region": "Setúbal",
-            "name": "Setúbal Moscatel Roxo Superior 1985",
-            "type": "Dessert"
-        },
-        {
             "winery": "Ornellaia",
             "image": "https://images.vivino.com/thumbs/YJiN_11fQRS1kzfHxY_BVA_pb_x300.png",
             "rating": 4.7,
@@ -4381,16 +3121,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "Philippe Foreau",
-            "image": "https://images.vivino.com/thumbs/LYZcds4uQfSbTEqCmRRPPw_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 91,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Reserve Vouvray Moelleux 2009",
-            "type": "Dessert"
-        },
-        {
             "winery": "Donnafugata",
             "image": "https://images.vivino.com/thumbs/tWuXrj0nRZCum1ezynysLA_pb_x300.png",
             "rating": 4.6,
@@ -4411,16 +3141,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "Philippe Foreau",
-            "image": "https://images.vivino.com/thumbs/fyC0Tl7AQdCawr4nQpe48g_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 56,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Vouvray Moelleux 1989",
-            "type": "Dessert"
-        },
-        {
             "winery": "Ornellaia",
             "image": "https://images.vivino.com/thumbs/YJiN_11fQRS1kzfHxY_BVA_pb_x300.png",
             "rating": 4.6,
@@ -4428,16 +3148,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Ornus 2010",
-            "type": "Dessert"
-        },
-        {
-            "winery": "Domaine Huet",
-            "image": "https://images.vivino.com/thumbs/9qINoCs9Q6eb71IODLVmMg_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 51,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Vouvray Le Mont Moelleux Première Trie 1989",
             "type": "Dessert"
         },
         {
@@ -4461,16 +3171,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "Domaine Huet",
-            "image": "https://images.vivino.com/thumbs/pLoGLWBfRsyCatlhnr_smg_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 47,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Cuvée Constance 2003",
-            "type": "Dessert"
-        },
-        {
             "winery": "Donnafugata",
             "image": "https://images.vivino.com/thumbs/tWuXrj0nRZCum1ezynysLA_pb_x300.png",
             "rating": 4.6,
@@ -4478,26 +3178,6 @@
             "country": "Italy",
             "region": "Passito di Pantelleria",
             "name": "Ben Ryé Passito di Pantelleria 2003",
-            "type": "Dessert"
-        },
-        {
-            "winery": "Domaine Huet",
-            "image": "https://images.vivino.com/thumbs/pLoGLWBfRsyCatlhnr_smg_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 32,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Cuvée Constance 1997",
-            "type": "Dessert"
-        },
-        {
-            "winery": "Domaine Huet",
-            "image": "https://images.vivino.com/thumbs/9qINoCs9Q6eb71IODLVmMg_pb_x300.png",
-            "rating": 4.6,
-            "reviews": 29,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Vouvray Le Mont Moelleux Première Trie 2005",
             "type": "Dessert"
         },
         {
@@ -4618,16 +3298,6 @@
             "country": "Italy",
             "region": "Toscana",
             "name": "Ornus N.V.",
-            "type": "Dessert"
-        },
-        {
-            "winery": "Philippe Foreau",
-            "image": "https://images.vivino.com/thumbs/LYZcds4uQfSbTEqCmRRPPw_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 219,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Reserve Vouvray Moelleux N.V.",
             "type": "Dessert"
         },
         {
@@ -4781,16 +3451,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "François Chidaine",
-            "image": "https://images.vivino.com/thumbs/bn0uRauvTSiuy_AjN7WUwA_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 35,
-            "country": "France",
-            "region": "Montlouis-sur-Loire",
-            "name": "Les Tuffeaux Montlouis Sur Loire 2011",
-            "type": "Dessert"
-        },
-        {
             "winery": "Fritz Haag",
             "image": "https://images.vivino.com/thumbs/a8C228AUSz-EQAgvUcKfhw_pb_x300.png",
             "rating": 4.5,
@@ -4798,16 +3458,6 @@
             "country": "Germany",
             "region": "Brauneberg",
             "name": "Brauneberger Juffer Sonnenuhr Riesling Auslese 2001",
-            "type": "Dessert"
-        },
-        {
-            "winery": "Château Moncontour",
-            "image": "https://images.vivino.com/thumbs/ol2tEz07S7Oj8R1c0p9TNQ_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 34,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Nectar N.V.",
             "type": "Dessert"
         },
         {
@@ -4851,16 +3501,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "Domaine Huet",
-            "image": "https://images.vivino.com/thumbs/5xNP9flyQ2OtgPl9ykLu4A_pb_x300.png",
-            "rating": 4.5,
-            "reviews": 25,
-            "country": "France",
-            "region": "Vouvray",
-            "name": "Vouvray Clos du Bourg Moelleux Première Trie 1989",
-            "type": "Dessert"
-        },
-        {
             "winery": "Marco de Bartoli",
             "image": "https://images.vivino.com/thumbs/dqlB8OnYTN2zxb-VUCc1cQ_pb_x300.png",
             "rating": 4.4,
@@ -4901,16 +3541,6 @@
             "type": "Dessert"
         },
         {
-            "winery": "Bacalhôa",
-            "image": "https://images.vivino.com/thumbs/0ssL66zES4S4dSg-08ermQ_pb_x300.png",
-            "rating": 4.4,
-            "reviews": 265,
-            "country": "Portugal",
-            "region": "Setúbal",
-            "name": "Setúbal Moscatel Roxo Superior 2003",
-            "type": "Dessert"
-        },
-        {
             "winery": "Marco de Bartoli",
             "image": "https://images.vivino.com/thumbs/dqlB8OnYTN2zxb-VUCc1cQ_pb_x300.png",
             "rating": 4.4,
@@ -4928,16 +3558,6 @@
             "country": "Italy",
             "region": "Passito di Pantelleria",
             "name": "Bukkuram Padre della Vigna Passito di Pantelleria 2008",
-            "type": "Dessert"
-        },
-        {
-            "winery": "José Maria da Fonseca",
-            "image": "https://images.vivino.com/thumbs/nDUiH7SnSImO-aBC1XcSNg_pb_x300.png",
-            "rating": 4.4,
-            "reviews": 226,
-            "country": "Portugal",
-            "region": "Setúbal",
-            "name": "Setúbal 20 Anos Moscatel Roxo N.V.",
             "type": "Dessert"
         },
         {
@@ -5158,16 +3778,6 @@
             "country": "Portugal",
             "region": "Porto",
             "name": "Porto Aged Tawny 40 Years Old N.V.",
-            "type": "Port"
-        },
-        {
-            "winery": "José Maria da Fonseca",
-            "image": "https://images.vivino.com/highlights/icon/top_ranked.svg",
-            "rating": 4.4,
-            "reviews": 129,
-            "country": "Portugal",
-            "region": "Setúbal",
-            "name": "Domingos Soares Franco Colecção Privada Moscatel de Setúbal 2002",
             "type": "Port"
         },
         {
