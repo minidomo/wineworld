@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 URL = "https://www.wineworld.me/"
 
 
-class TestInstances(unittest.TestCase):
+class TestElement(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.driver = create_driver()

@@ -7,7 +7,6 @@ from selenium.webdriver.chrome.service import Service
 
 driver_paths = {
     "linux": "./chromedriver/linux64/chromedriver",
-    "win32": "./chromedriver/win32/chromedriver",
 }
 
 

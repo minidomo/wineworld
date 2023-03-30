@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 URL = "https://www.wineworld.me/"
 
 
-class TestInstances(unittest.TestCase):
+class TestHome(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.driver = create_driver()
@@ -30,7 +30,7 @@ class TestInstances(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[1]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "About")
+        self.assertEqual(self.driver.current_url, URL + "about")
 
     def test_HomeWinesLink(self):
         WebDriverWait(self.driver, 10).until(
@@ -44,7 +44,7 @@ class TestInstances(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[2]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "Wines")
+        self.assertEqual(self.driver.current_url, URL + "wines")
 
     def test_HomeVineyardsLink(self):
         WebDriverWait(self.driver, 10).until(
@@ -58,7 +58,7 @@ class TestInstances(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[3]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "Vineyards")
+        self.assertEqual(self.driver.current_url, URL + "vineyards")
 
     def test_HomeRegionsLink(self):
         WebDriverWait(self.driver, 10).until(
@@ -72,7 +72,7 @@ class TestInstances(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[4]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "Regions")
+        self.assertEqual(self.driver.current_url, URL + "regions")
 
 
 if __name__ == "__main__":
