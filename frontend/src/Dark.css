@@ -2,6 +2,7 @@
   background-color: #121212;
   color: #eee;
 }
+
 .light {
   background-color: #fff;
   color: #02111B;
@@ -35,7 +36,7 @@
   border-color: #352b43;
 }
 
-.light .btn.custom1{
+.light .btn.custom1 {
   border-width: 1px;
   background-color: #676E79;
   color: #eee
@@ -46,7 +47,8 @@
   background-color: #5E646E;
   color: #fff
 }
-.dark .btn.custom1{
+
+.dark .btn.custom1 {
   background-color: rgb(104, 171, 152);
 }
 
@@ -63,16 +65,26 @@
   color: #ddd;
 }
 
-.dark .form-control{
+.light .form-control {
+  border-width: 1px;
+  background-color: #fff;
+}
+
+.light .form-control:focus {
+  border-color: white;
+  box-shadow: 0px 0px 8px rgb(177, 177, 177);
+}
+
+.dark .form-control {
+  border-width: 1px;
   background-color: #e4e3e3;
+}
+
+.dark .form-control:focus {
+  border-color: #e4e3e3;
   box-shadow: 0px 0px 8px rgb(102, 212, 181);
-  border: rgb(0, 255, 183);
 }
 
 .dark .navbar-brand {
   color: aquamarine
 }
-
-
-
-

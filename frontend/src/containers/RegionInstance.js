@@ -81,20 +81,25 @@ const RegionInstance = () => {
               </div>
             </span>
           </Row>
+          <br></br>
           <Row className="p-5">
             <h5 align="left">Location</h5>
             <Map lat={latitude} lng={longitude} />
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <Row>
             <h5 align="left">Related Wines</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {wines.map(wine => (
               <Col>
                 <WineCard wine={wine} />
               </Col>
             ))}
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <Row>
             <h5 align="left">Related Vineyards</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {vineyards.map(vineyard => (
               <Col>
                 <VineyardCard vineyard={vineyard} />

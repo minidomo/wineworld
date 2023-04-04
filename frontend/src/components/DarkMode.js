@@ -1,6 +1,7 @@
 import '../Dark.css';
 
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { ColorTheme } from '../App';
 let my_theme = { ColorTheme };
@@ -21,9 +22,9 @@ export default function DarkMode(job) {
 
   if (job === 'toggle') {
     return (
-      <button type="button" class={`btn btn-${theme}`} onClick={ModeSwitch}>
+      <Link class="nav-link" onClick={ModeSwitch}>
         Light/Dark
-      </button>
+      </Link>
     );
   }
   if (my_theme === undefined) {

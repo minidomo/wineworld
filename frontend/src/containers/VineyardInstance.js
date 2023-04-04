@@ -77,16 +77,21 @@ const VineyardInstance = () => {
               </div>
             </span>
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <br></br>
+          <Row>
             <h5 align="left">Related Wines</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {wines.map(wine => (
               <Col>
                 <WineCard wine={wine} />
               </Col>
             ))}
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <Row>
             <h5 align="left">Related Regions</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {regions.map(region => (
               <Col>
                 <RegionCard region={region} />
