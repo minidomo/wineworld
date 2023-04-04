@@ -17,6 +17,10 @@
   overflow: hidden;
 }
 
+.light .card:hover {
+  border-color: #C2C2C2
+}
+
 .dark .card {
   background-color: #1f1b24;
   border-width: 3px;
@@ -25,6 +29,10 @@
   border-top-right-radius: 8px;
   border-color: #2c2437;
   overflow: hidden;
+}
+
+.dark .card:hover {
+  border-color: #352b43;
 }
 
 .light .btn.custom1{
