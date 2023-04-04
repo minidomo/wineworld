@@ -343,7 +343,7 @@ const VineyardModel = () => {
       <Row>
         <h6>Found {totalInstances} vineyards</h6>
       </Row>
-      <Row className="g-4 p-4">
+      <Row md={4} className="g-4 p-4">
         {loaded ? (
           vineyards.map(vineyard => (
             <Col>

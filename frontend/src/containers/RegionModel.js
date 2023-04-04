@@ -328,7 +328,7 @@ const RegionModel = () => {
       <Row>
         <h6>Found {totalInstances} regions</h6>
       </Row>
-      <Row className="g-4 p-4">
+      <Row md={4} className="g-4 p-4">
         {loaded ? (
           regions.map(region => (
             <Col>

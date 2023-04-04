@@ -328,7 +328,7 @@ const WineModel = () => {
       <Row>
         <h6>Found {totalInstances} wines</h6>
       </Row>
-      <Row className="d-flex g-4 p-4">
+      <Row md={4} className="d-flex g-4 p-4">
         {loaded ? (
           wines.map(wine => (
             <Col>
