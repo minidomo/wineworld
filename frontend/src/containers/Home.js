@@ -7,6 +7,7 @@ import HomeCard from '../components/HomeCard';
 const Home = () => (
   <div>
     <img src={homeimage} class="img-fluid w-100" alt="..."></img>
+    <p></p>
     <div class="container text-center">
       <div class="row">
         <div class="col">
@@ -20,6 +21,7 @@ const Home = () => (
         </div>
       </div>
     </div>
+    <p></p>
   </div>
 );
 export default Home;

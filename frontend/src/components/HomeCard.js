@@ -6,7 +6,7 @@ const HomeCard = ({ title, text, link, image }) => (
     <div class="card-body">
       <h5 class="card-title">{title}</h5>
       <p class="card-text">{text}</p>
-      <Link to={link} class={'btn btn-secondary'}>
+      <Link to={link} class={'btn custom1 stretched-link'}>
         Explore
       </Link>
     </div>

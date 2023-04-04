@@ -12,7 +12,7 @@ const ApiCard = props => {
         <Card.Title>{name}</Card.Title>
         <Card.Text>{text}</Card.Text>
         <a href={url}>
-          <Button variant="primary">Learn More</Button>
+          <Button class="btn custom1 stretched-link">Learn More</Button>
         </a>
       </Card.Body>
     </Card>

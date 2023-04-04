@@ -12,7 +12,7 @@ const VineyardCard = props => {
 
   return (
     <Container>
-      <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
+      <Card style={{ height: '30rem', width: '18rem' }}>
         <Card.Img
           variant="top"
           src={image}
@@ -31,7 +31,7 @@ const VineyardCard = props => {
           </Card.Text>
         </Card.Body>
         <div class="card-footer">
-          <Link to={`/vineyards/${id}`} class="btn btn-secondary stretched-link">
+          <Link to={`/vineyards/${id}`} class="btn custom1 stretched-link">
             See Vineyard
           </Link>
         </div>

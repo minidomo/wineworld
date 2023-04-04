@@ -1,18 +1,49 @@
 .dark {
-  background-color: #000;
-  color: #fff;
+  background-color: #121212;
+  color: #eee;
 }
 .light {
   background-color: #fff;
-  color: #000;
+  color: #02111B;
 }
 
 .light .card {
   background-color: #fff;
+  border-width: 3px;
+  border-radius: 100px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #CCCCCC;
+  overflow: hidden;
 }
 
 .dark .card {
-  background-color: #111;
+  background-color: #1f1b24;
+  border-width: 3px;
+  border-radius: 100px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #2c2437;
+  overflow: hidden;
+}
+
+.light .btn.custom1{
+  border-width: 1px;
+  background-color: #676E79;
+  color: #eee
+}
+
+.light .btn.custom1:hover {
+  border-width: 1px;
+  background-color: #5E646E;
+  color: #fff
+}
+.dark .btn.custom1{
+  background-color: rgb(104, 171, 152);
+}
+
+.dark .btn.custom1:hover {
+  background-color: rgb(111, 160, 146);
 }
 
 .light .list-group-item {
@@ -23,3 +54,15 @@
   background: #111;
   color: #ddd;
 }
+
+.dark .form-control {
+  background-color: #ddd;
+}
+
+.dark .navbar-brand {
+  color: aquamarine
+}
+
+
+
+

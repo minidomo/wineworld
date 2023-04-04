@@ -12,7 +12,7 @@ const RegionCard = props => {
 
   return (
     <Container>
-      <Card border="dark" style={{ height: '30rem', width: '18rem' }}>
+      <Card style={{ height: '30rem', width: '18rem' }}>
         <Card.Img
           variant="top"
           src={image.url}
@@ -33,7 +33,7 @@ const RegionCard = props => {
           </Card.Text>
         </Card.Body>
         <div class="card-footer">
-          <Link to={`/regions/${id}`} class="btn btn-secondary stretched-link">
+          <Link to={`/regions/${id}`} class="btn custom1 stretched-link">
             Explore Region
           </Link>
         </div>
