@@ -1,7 +1,16 @@
-import './LineGraph.css';
+import './style.css';
 
 import * as d3 from 'd3';
 import React, { useState } from 'react';
+
+// d3 documentation https://github.com/d3/d3/blob/main/API.md
+
+const uniqueClassName = 'line-graph';
+const dotTextYOffset = 20;
+const dotActiveRadius = 6;
+const dotInactiveRadius = 4;
+const dotActiveStrokeRadius = 2;
+const dotInactiveStrokeRadius = 0;
 
 export default function LineGraph(props) {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -89,28 +98,23 @@ export default function LineGraph(props) {
   const linePath = d3
     .line()
     .x(d => getX(d.date))
-    .y(d => getY(d.value))
-    .curve(d3.curveMonotoneX)(data);
+    .y(d => getY(d.value))(data);
 
-  // const areaPath = d3
-  //     .area()
-  //     .x((d) => getX(d.date))
-  //     .y0((d) => getY(d.price))
-  //     .y1(() => getY(yMinValue - 1))
-  //     .curve(d3.curveMonotoneX)(data);
+  const areaPath = d3
+    .area()
+    .x(d => getX(d.date))
+    .y0(d => getY(d.value))
+    .y1(() => getY(yMinValue - 1))(data);
 
-  // const handleMouseMove = (e) => {
-  //     const bisect = d3.bisector((d) => d.date).left;
-  //     const x0 = getX.invert(d3.pointer(e, this)[0]);
-  //     const index = bisect(data, x0, 1);
-  //     setActiveIndex(index);
-  // };
+  const handleMouseMove = e => {
+    const coords = d3.pointer(e, this);
+    const date = getX.invert(coords[0]);
+    const index = d3.bisector(d => d.date).center(data, date);
+    setActiveIndex(index);
+  };
 
-  // const handleMouseLeave = () => {
-  //     setActiveIndex(null);
-  // };
+  const handleMouseLeave = () => setActiveIndex(null);
 
-  const uniqueClassName = 'line-graph';
   let lineGraphClassName = `${uniqueClassName} wrapper`;
   if (className) {
     lineGraphClassName += ` ${className}`.trimEnd();
@@ -122,18 +126,19 @@ export default function LineGraph(props) {
         className={`${uniqueClassName} svg-wrapper`}
         width={targetWidth}
         height={targetHeight}
-      // onMouseMove={handleMouseMove}
-      // onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
       >
         <g className={`${uniqueClassName} g-wrapper`} transform={`translate(${margin.left},${margin.top})`}>
           <g className={`${uniqueClassName} x-axis`} transform={`translate(0,${height})`} ref={initXAxis} />
           <g className={`${uniqueClassName} y-axis`} ref={initYAxis} />
           <path className={`${uniqueClassName} line`} fill="none" strokeWidth={3} stroke={color} d={linePath} />
-          <text className={`${uniqueClassName} x-axis-label`} x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
+          <path className={`${uniqueClassName} area`} fill={color} d={areaPath} opacity={0.3} />
+          <text className={`${uniqueClassName} x-axis-text`} x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
             {xAxisLabel}
           </text>
           <text
-            className={`${uniqueClassName} y-axis-label`}
+            className={`${uniqueClassName} y-axis-text`}
             y={height / 2}
             transform="rotate(-90)"
             textAnchor="middle"
@@ -144,31 +149,27 @@ export default function LineGraph(props) {
           <text className={`${uniqueClassName} title`} x={width / 2} textAnchor="middle" ref={initTitleLabel}>
             {title}
           </text>
-          {/* {
-            data.map((item, index) => {
-              return (
-                <g key={index}>
-                  <text
-                    fill="#666"
-                    x={getX(item.date)}
-                    y={getY(item.value) - 20}
-                    textAnchor="middle"
-                  >
-                    {index === activeIndex ? item.value : ""}
-                  </text>
-                  <circle
-                    cx={getX(item.date)}
-                    cy={getY(item.value)}
-                    r={index === activeIndex ? 6 : 4}
-                    fill={color}
-                    strokeWidth={index === activeIndex ? 2 : 0}
-                    stroke="#fff"
-                    style={{ transition: "ease-out .1s" }}
-                  />
-                </g>
-              );
-            })
-          } */}
+          {data.map((item, index) => (
+            <g className={`${uniqueClassName} dot-wrapper`} key={index}>
+              <text
+                className={`${uniqueClassName} dot-text`}
+                x={getX(item.date)}
+                y={getY(item.value) - dotTextYOffset}
+                textAnchor="middle"
+              >
+                {index === activeIndex ? item.value : ''}
+              </text>
+              <circle
+                className={`${uniqueClassName} dot-circle`}
+                cx={getX(item.date)}
+                cy={getY(item.value)}
+                r={index === activeIndex ? dotActiveRadius : dotInactiveRadius}
+                fill={color}
+                strokeWidth={index === activeIndex ? dotActiveStrokeRadius : dotInactiveStrokeRadius}
+                style={{ transition: 'ease-out .1s' }}
+              />
+            </g>
+          ))}
         </g>
       </svg>
     </div>
