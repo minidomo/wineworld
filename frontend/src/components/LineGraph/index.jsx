@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 
 // d3 documentation https://github.com/d3/d3/blob/main/API.md
 
-const uniqueClassName = 'line-graph';
 const dotTextYOffset = 20;
 const dotActiveRadius = 6;
 const dotInactiveRadius = 4;
@@ -115,7 +114,7 @@ export default function LineGraph(props) {
 
   const handleMouseLeave = () => setActiveIndex(null);
 
-  let lineGraphClassName = `${uniqueClassName} wrapper`;
+  let lineGraphClassName = 'line-graph wrapper';
   if (className) {
     lineGraphClassName += ` ${className}`.trimEnd();
   }
@@ -123,22 +122,22 @@ export default function LineGraph(props) {
   return (
     <div className={`${lineGraphClassName}`}>
       <svg
-        className={`${uniqueClassName} svg-wrapper`}
+        className='svg-wrapper'
         width={targetWidth}
         height={targetHeight}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <g className={`${uniqueClassName} g-wrapper`} transform={`translate(${margin.left},${margin.top})`}>
-          <g className={`${uniqueClassName} x-axis`} transform={`translate(0,${height})`} ref={initXAxis} />
-          <g className={`${uniqueClassName} y-axis`} ref={initYAxis} />
-          <path className={`${uniqueClassName} line`} fill="none" strokeWidth={3} stroke={color} d={linePath} />
-          <path className={`${uniqueClassName} area`} fill={color} d={areaPath} opacity={0.3} />
-          <text className={`${uniqueClassName} x-axis-text`} x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
+        <g className='g-wrapper' transform={`translate(${margin.left},${margin.top})`}>
+          <g className='x-axis' transform={`translate(0,${height})`} ref={initXAxis} />
+          <g className='y-axis' ref={initYAxis} />
+          <path className='line' fill="none" strokeWidth={3} stroke={color} d={linePath} />
+          <path className='area' fill={color} d={areaPath} opacity={0.3} />
+          <text className='x-axis-text' x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
             {xAxisLabel}
           </text>
           <text
-            className={`${uniqueClassName} y-axis-text`}
+            className='y-axis-text'
             y={height / 2}
             transform="rotate(-90)"
             textAnchor="middle"
@@ -146,13 +145,13 @@ export default function LineGraph(props) {
           >
             {yAxisLabel}
           </text>
-          <text className={`${uniqueClassName} title`} x={width / 2} textAnchor="middle" ref={initTitleLabel}>
+          <text className='title' x={width / 2} textAnchor="middle" ref={initTitleLabel}>
             {title}
           </text>
           {data.map((item, index) => (
-            <g className={`${uniqueClassName} dot-wrapper`} key={index}>
+            <g className='dot-wrapper' key={index}>
               <text
-                className={`${uniqueClassName} dot-text`}
+                className='dot-text'
                 x={getX(item.date)}
                 y={getY(item.value) - dotTextYOffset}
                 textAnchor="middle"
@@ -160,7 +159,7 @@ export default function LineGraph(props) {
                 {index === activeIndex ? item.value : ''}
               </text>
               <circle
-                className={`${uniqueClassName} dot-circle`}
+                className='dot-circle'
                 cx={getX(item.date)}
                 cy={getY(item.value)}
                 r={index === activeIndex ? dotActiveRadius : dotInactiveRadius}
