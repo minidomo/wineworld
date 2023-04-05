@@ -1,9 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const Visualizations = () => {
-  return (
-    <div>Visualizations</div>
-  )
-}
+const Visualizations = () => <div>Visualizations</div>;
 
-export default Visualizations
+export default Visualizations;

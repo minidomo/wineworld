@@ -6,18 +6,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import About from './containers/About';
 import Home from './containers/Home';
-import Search from './containers/Search';
-import Wines from './containers/WineModel';
-import WineInstance from './containers/WineInstance';
-import WineSearch from './containers/WineSearch';
-import Vineyards from './containers/VineyardModel';
-import VineyardInstance from './containers/VineyardInstance';
-import VineyardSearch from './containers/VineyardSearch';
-import Regions from './containers/RegionModel';
-import RegionInstance from './containers/RegionInstance';
-import RegionSearch from './containers/RegionSearch';
-import Visualizations from './containers/Visualizations';
 import ProviderVisualizations from './containers/Provider';
+import RegionInstance from './containers/RegionInstance';
+import Regions from './containers/RegionModel';
+import RegionSearch from './containers/RegionSearch';
+import Search from './containers/Search';
+import VineyardInstance from './containers/VineyardInstance';
+import Vineyards from './containers/VineyardModel';
+import VineyardSearch from './containers/VineyardSearch';
+import Visualizations from './containers/Visualizations';
+import WineInstance from './containers/WineInstance';
+import Wines from './containers/WineModel';
+import WineSearch from './containers/WineSearch';
 
 const App = () => (
   <Router>

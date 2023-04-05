@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import * as d3 from 'd3';
 import './LineGraph.css';
+
+import * as d3 from 'd3';
+import React, { useState } from 'react';
 
 export default function LineGraph(props) {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -15,18 +16,8 @@ export default function LineGraph(props) {
     loaded: false,
   });
 
-  const {
-    targetWidth,
-    targetHeight,
-    margin,
-    color,
-    yAxisLabel,
-    xAxisLabel,
-    timeFormat,
-    title,
-    data,
-    className,
-  } = props;
+  const { targetWidth, targetHeight, margin, color, yAxisLabel, xAxisLabel, timeFormat, title, data, className } =
+    props;
 
   const width = targetWidth - margin.left - margin.right;
   const height = targetHeight - margin.top - margin.bottom;
@@ -48,7 +39,7 @@ export default function LineGraph(props) {
     if (!ref) return;
 
     const xAxis = d3.axisBottom(getX);
-    xAxis.tickValues(getX.ticks(d3.timeHour.every(2)))
+    xAxis.tickValues(getX.ticks(d3.timeHour.every(2)));
     d3.select(ref).call(xAxis.tickFormat(d3.timeFormat(timeFormat)));
 
     if (!xAxisData.loaded) {
@@ -87,13 +78,13 @@ export default function LineGraph(props) {
     const botBound = height + margin.bottom;
     const midpoint = (topBound + botBound) / 2;
     ref.setAttribute('y', midpoint);
-  }
+  };
 
   const initTitleLabel = ref => {
     if (!ref) return;
     const textHeight = ref.getBBox().height;
     ref.setAttribute('y', -textHeight / 2);
-  }
+  };
 
   const linePath = d3
     .line()
@@ -119,7 +110,7 @@ export default function LineGraph(props) {
   //     setActiveIndex(null);
   // };
 
-  const uniqueClassName = 'line-graph'
+  const uniqueClassName = 'line-graph';
   let lineGraphClassName = `${uniqueClassName} wrapper`;
   if (className) {
     lineGraphClassName += ` ${className}`.trimEnd();
@@ -137,30 +128,20 @@ export default function LineGraph(props) {
         <g className={`${uniqueClassName} g-wrapper`} transform={`translate(${margin.left},${margin.top})`}>
           <g className={`${uniqueClassName} x-axis`} transform={`translate(0,${height})`} ref={initXAxis} />
           <g className={`${uniqueClassName} y-axis`} ref={initYAxis} />
-          <path className={`${uniqueClassName} line`} fill='none' strokeWidth={3} stroke={color} d={linePath} />
-          <text
-            className={`${uniqueClassName} x-axis-label`}
-            x={width / 2}
-            textAnchor='middle'
-            ref={initXAxisLabel}
-          >
+          <path className={`${uniqueClassName} line`} fill="none" strokeWidth={3} stroke={color} d={linePath} />
+          <text className={`${uniqueClassName} x-axis-label`} x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
             {xAxisLabel}
           </text>
           <text
             className={`${uniqueClassName} y-axis-label`}
             y={height / 2}
-            transform='rotate(-90)'
-            textAnchor='middle'
+            transform="rotate(-90)"
+            textAnchor="middle"
             ref={initYAxisLabel}
           >
             {yAxisLabel}
           </text>
-          <text
-            className={`${uniqueClassName} title`}
-            x={width / 2}
-            textAnchor="middle"
-            ref={initTitleLabel}
-          >
+          <text className={`${uniqueClassName} title`} x={width / 2} textAnchor="middle" ref={initTitleLabel}>
             {title}
           </text>
           {/* {
