@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import * as d3 from 'd3';
 import './LineGraph.css';
 
 export default function LineGraph(props) {
   // const [activeIndex, setActiveIndex] = useState(null);
+  const [temp, setTemp] = useState({
+    x: '0',
+    dx: '0em',
+    loaded: false,
+  });
 
   const {
     targetWidth,
@@ -40,8 +45,22 @@ export default function LineGraph(props) {
 
   const yAxis = ref => {
     // const yAxis = d3.axisLeft(getY).tickSize(-width).tickPadding(7);
+    if (!ref) return;
+
     const yAxis = d3.axisLeft(getY);
     d3.select(ref).call(yAxis);
+
+    if (!temp.loaded) {
+      console.log('getting attributes');
+      const text = ref.querySelector('.tick text');
+      setTemp({
+        x: text.getAttribute('x'),
+        dx: text.getAttribute('dy'),
+        loaded: true,
+      });
+    }
+
+    console.log('y axis ref', ref);
   };
 
   const linePath = d3
@@ -77,11 +96,11 @@ export default function LineGraph(props) {
       // onMouseLeave={handleMouseLeave}
       >
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <g transform={`translate(0,${height})`} ref={xAxis} />
-          <g ref={yAxis} />
+          <g className='x-axis' transform={`translate(0,${height})`} ref={xAxis} />
+          <g className='y-axis' ref={yAxis} />
           <path fill='none' strokeWidth={3} stroke={color} d={linePath} />
           <text
-            className="x-axis label"
+            className="axis-label"
             x={width / 2}
             y={height + margin.bottom}
             textAnchor='middle'
@@ -89,10 +108,10 @@ export default function LineGraph(props) {
             {xAxisLabel}
           </text>
           <text
-            className='y-axis label'
+            className='axis-label'
             x={-margin.left}
             y={height / 2}
-            dx='1em'
+            dx={temp.dx}
             transform='rotate(-90)'
             textAnchor='middle'
           >

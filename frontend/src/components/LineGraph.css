@@ -4,7 +4,7 @@
   height: max-content;
 }
 
-.y-axis.label {
+.axis-label {
   transform-box: fill-box;
   transform-origin: center;
 }
