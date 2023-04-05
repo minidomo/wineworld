@@ -185,15 +185,15 @@ const VineyardModel = () => {
             <div class="container">
               <Row>
                 <Col>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="secondary" size="sm">
-                        Country
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu variant="dark" className="custom">
-                            {createCheckboxDropdownItems(countriesList, updateConstraints, ['country', country])}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    </Col>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="secondary" size="sm">
+                      Country
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu variant="dark" className="custom">
+                      {createCheckboxDropdownItems(countriesList, updateConstraints, ['country', country])}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Price Level">
                     <Container>
@@ -285,7 +285,7 @@ const VineyardModel = () => {
           </DropdownButton>
         </Col>
         <Col>
-        <Dropdown className="mt-2">
+          <Dropdown className="mt-2">
             <Dropdown.Toggle id="dropdown-basic-button" variant="secondary" size="sm">
               {sortName}
             </Dropdown.Toggle>

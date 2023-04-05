@@ -1,6 +1,7 @@
 from typing import Iterator
 
 from flask import request
+from sqlalchemy.engine import Row
 from sqlalchemy.sql.expression import Select, or_, text
 
 from models import (
@@ -20,13 +21,13 @@ from sort_method_data import (
 )
 from util import (
     PAGE_SIZE,
+    JsonObject,
     RegionParams,
     RegionUtil,
     VineyardParams,
     VineyardUtil,
     WineParams,
     WineUtil,
-    clamp,
     determine_total_pages,
 )
 
@@ -66,7 +67,7 @@ def hello_world():
 @app.route("/wines", methods=["GET"])
 def get_all_wines():
     params = WineParams(request)
-    query: Select = db.select(Wine)
+    query: Select = db.select(Wine, text("COUNT(*) OVER() as total_count"))
 
     if params.name is not None:
         query = query.filter(Wine.name.contains(params.name))
@@ -99,18 +100,19 @@ def get_all_wines():
         sort_method = wine_sort_methods[params.sort]
         query = query.order_by(sort_method.clause)
 
-    wines: list[Wine] = db.session.execute(query).scalars().all()
+    query = query.limit(PAGE_SIZE)
+    query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    total_pages = determine_total_pages(len(wines), PAGE_SIZE)
-    params.page = clamp(1, total_pages, params.page)
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
 
-    indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    wine_list = [WineUtil.to_json(e, small=True) for e in wines[indices]]
+    wine_list: list[JsonObject] = [WineUtil.to_json(e, small=True) for e, _ in rows]
+    _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
+    total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
     data = {
         "page": params.page,
         "totalPages": total_pages,
-        "totalInstances": len(wines),
+        "totalInstances": total_instances,
         "length": len(wine_list),
         "list": wine_list,
     }
@@ -178,7 +180,7 @@ def get_wine_constraints():
 @app.route("/vineyards", methods=["GET"])
 def get_all_vineyards():
     params = VineyardParams(request)
-    query: Select = db.select(Vineyard)
+    query: Select = db.select(Vineyard, text("COUNT(*) OVER() as total_count"))
 
     if params.name is not None:
         query = query.filter(Vineyard.name.contains(params.name))
@@ -209,18 +211,19 @@ def get_all_vineyards():
         sort_method = vineyard_sort_methods[params.sort]
         query = query.order_by(sort_method.clause)
 
-    vineyards: list[Vineyard] = db.session.execute(query).scalars().all()
+    query = query.limit(PAGE_SIZE)
+    query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    total_pages = determine_total_pages(len(vineyards), PAGE_SIZE)
-    params.page = clamp(1, total_pages, params.page)
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
 
-    indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    vineyard_list = [VineyardUtil.to_json(e, small=True) for e in vineyards[indices]]
+    vineyard_list: list[JsonObject] = [VineyardUtil.to_json(e, small=True) for e, _ in rows]
+    _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
+    total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
     data = {
         "page": params.page,
         "totalPages": total_pages,
-        "totalInstances": len(vineyards),
+        "totalInstances": total_instances,
         "length": len(vineyard_list),
         "list": vineyard_list,
     }
@@ -284,7 +287,7 @@ def get_vineyard_constraints():
 @app.route("/regions", methods=["GET"])
 def get_all_regions():
     params = RegionParams(request)
-    query: Select = db.select(Region)
+    query: Select = db.select(Region, text("COUNT(*) OVER() as total_count"))
 
     if params.name is not None:
         query = query.filter(Region.name.contains(params.name))
@@ -319,18 +322,19 @@ def get_all_regions():
         sort_method = region_sort_methods[params.sort]
         query = query.order_by(sort_method.clause)
 
-    regions: list[Region] = db.session.execute(query).scalars().all()
+    query = query.limit(PAGE_SIZE)
+    query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    total_pages = determine_total_pages(len(regions), PAGE_SIZE)
-    params.page = clamp(1, total_pages, params.page)
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
 
-    indices = slice((params.page - 1) * PAGE_SIZE, params.page * PAGE_SIZE)
-    region_list = [RegionUtil.to_json(e, small=True) for e in regions[indices]]
+    region_list: list[JsonObject] = [RegionUtil.to_json(e, small=True) for e, _ in rows]
+    _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
+    total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
     data = {
         "page": params.page,
         "totalPages": total_pages,
-        "totalInstances": len(regions),
+        "totalInstances": total_instances,
         "length": len(region_list),
         "list": region_list,
     }

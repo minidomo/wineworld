@@ -260,7 +260,7 @@ const RegionModel = () => {
                   </Dropdown>
                 </Col>
                 <Col>
-                <Dropdown>
+                  <Dropdown>
                     <Dropdown.Toggle variant="secondary" size="sm">
                       Trip Type
                     </Dropdown.Toggle>
@@ -274,7 +274,7 @@ const RegionModel = () => {
           </DropdownButton>
         </Col>
         <Col>
-        <Dropdown className="mt-2">
+          <Dropdown className="mt-2">
             <Dropdown.Toggle id="dropdown-basic-button" variant="secondary" size="sm">
               {sortName}
             </Dropdown.Toggle>

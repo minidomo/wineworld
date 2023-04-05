@@ -16,7 +16,7 @@
 | :---: | :--------------------------------------: |
 |   1   | e807eedc3a72e6cf686c10ed2f606094ec2b5612 |
 |   2   | 73dc3f3c02eb60e667220bc3a147ab14826378aa |
-|   3   |                                          |
+|   3   | c1492c0ab6ff4eb41375f91706fe29aa333595bf |
 |   4   |                                          |
 
 ## Project leader
@@ -25,7 +25,7 @@
 | :---: | -------------- |
 |   1   | JB Ladera      |
 |   2   | Saniya Shaju   |
-|   3   |                |
+|   3   | Austin Barret  |
 |   4   |                |
 
 ## Links
@@ -58,11 +58,11 @@
 
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
-| Austin Barret   |                            |                            |
-| JB Ladera       |                            |                            |
-| Ryan Parappuram |                            |                            |
-| Saniya Shaju    |                            |                            |
-| Joshua Yin      |                            |                            |
+| Austin Barret   |             15             |             24             |
+| JB Ladera       |             15             |             22             |
+| Ryan Parappuram |             15             |             15             |
+| Saniya Shaju    |             17             |             20             |
+| Joshua Yin      |             15             |             15             |
 
 **Phase 4**
 

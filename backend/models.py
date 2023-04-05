@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import JSON, Column, Float, ForeignKey, Integer, String
+from sqlalchemy import DECIMAL, JSON, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 load_dotenv()
@@ -24,7 +24,7 @@ class Wine(db.Model):
     country = Column(String(100))
     region = Column(String(100))
     winery = Column(String(100))
-    rating = Column(Float)
+    rating = Column(DECIMAL(2, 1))
     reviews = Column(Integer)
     type = Column(String(100))
     image = Column(String(100))
@@ -40,12 +40,12 @@ class Vineyard(db.Model):
     name = Column(String(100))
     country = Column(String(100))
     price = Column(Integer)
-    rating = Column(Float)
+    rating = Column(DECIMAL(2, 1))
     reviews = Column(Integer)
     image = Column(String(100))
     url = Column(String(100))
-    longitude = Column(Float)
-    latitude = Column(Float)
+    longitude = Column(DECIMAL(9, 6))
+    latitude = Column(DECIMAL(9, 6))
     region_names = Column(JSON)
     wine_list = relationship("WineVineyardAssociation", back_populates="vineyard")
     region_list = relationship("VineyardRegionAssociation", back_populates="vineyard")
@@ -56,12 +56,12 @@ class Region(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
     country = Column(String(100))
-    rating = Column(Float)
+    rating = Column(DECIMAL(2, 1))
     reviews = Column(Integer)
     tags = Column(JSON)
     trip_types = Column(JSON)
-    longitude = Column(Float)
-    latitude = Column(Float)
+    longitude = Column(DECIMAL(9, 6))
+    latitude = Column(DECIMAL(9, 6))
     url = Column(String(150))
     image = Column(String(100))
     image_width = Column(Integer)

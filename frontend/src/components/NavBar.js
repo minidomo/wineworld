@@ -53,6 +53,16 @@ const NavBar = () => {
                   Regions
                 </Link>
               </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/visualizations">
+                  Visualizations
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/provider">
+                  Provider Visualizations
+                </Link>
+              </li>
               <li class="nav-item">{DarkMode('toggle')}</li>
             </ul>
           </div>

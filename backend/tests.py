@@ -40,14 +40,17 @@ class WineAllTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by Ryan"""
         res = self.client.get(WineAllTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_unspecified_param(self):
+        """Written by Ryan"""
         res = self.client.get(create_url(WineAllTests.endpoint, {"this_is_not_defined": 0}))
         self.assertEqual(res.status_code, 200)
 
     def test_invalid_formatted_param(self):
+        """Written by Ryan"""
         res = self.client.get(
             create_url(
                 WineAllTests.endpoint,
@@ -61,6 +64,7 @@ class WineAllTests(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
+        """Written by Ryan"""
         res = self.client.get(WineAllTests.endpoint).get_json()
 
         self.assertEqual(type(res["length"]), int)
@@ -72,23 +76,29 @@ class WineAllTests(unittest.TestCase):
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
 
-    def test_min_clamp_page(self):
+    def test_page_out_of_bounds_1(self):
+        """Written by Ryan"""
         page_num = -1
         res = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], 1)
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
-    def test_max_clamp_page(self):
+    def test_page_out_of_bounds_2(self):
+        """Written by Ryan"""
         page_num = 39485
         res = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], res["totalPages"])
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
     def test_length(self):
+        """Written by Ryan"""
         res = self.client.get(WineAllTests.endpoint).get_json()
         self.assertEqual(res["length"], len(res["list"]))
 
     def test_page(self):
+        """Written by Ryan"""
         page_num = 2
         res_1 = self.client.get(WineAllTests.endpoint).get_json()
         res_2 = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
@@ -97,6 +107,7 @@ class WineAllTests(unittest.TestCase):
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
     def test_name(self):
+        """Written by Ryan"""
         name_query = "os"
         res = self.client.get(create_url(WineAllTests.endpoint, {"name": name_query})).get_json()
 
@@ -108,6 +119,7 @@ class WineAllTests(unittest.TestCase):
             self.assertTrue(name_query in name)
 
     def test_country(self):
+        """Written by Ryan"""
         country_query = ["United States", "Portugal"]
         res = self.client.get(create_url(WineAllTests.endpoint, {"country": country_query})).get_json()
 
@@ -120,6 +132,7 @@ class WineAllTests(unittest.TestCase):
             self.assertTrue(country in country_set)
 
     def test_sort(self):
+        """Written by Ryan"""
         res = self.client.get(create_url(WineAllTests.endpoint, {"sort": "name_asc"})).get_json()
 
         wines: list[JsonObject] = res["list"]
@@ -131,6 +144,7 @@ class WineAllTests(unittest.TestCase):
             self.assertTrue(is_alphabetical_order(False, cur_name, next_name))
 
     def test_sort_reverse(self):
+        """Written by Ryan"""
         res = self.client.get(create_url(WineAllTests.endpoint, {"sort": "name_desc"})).get_json()
 
         wines: list[JsonObject] = res["list"]
@@ -140,6 +154,32 @@ class WineAllTests(unittest.TestCase):
             cur_name: str = wines[i]["name"].lower()
             next_name: str = wines[i + 1]["name"].lower()
             self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
+
+    def test_floating_point_rating(self):
+        """Written by JB"""
+        res1 = self.client.get(create_url(WineAllTests.endpoint)).get_json()
+        original: JsonObject = res1["list"][0]
+        rating: float = original["rating"]
+
+        res2 = self.client.get(
+            create_url(
+                WineAllTests.endpoint,
+                {
+                    "startRating": rating,
+                    "endRating": rating,
+                },
+            )
+        ).get_json()
+
+        wines: list[JsonObject] = res2["list"]
+        self.assertGreater(len(wines), 0)
+        found_original = False
+
+        for wine in wines:
+            self.assertAlmostEqual(wine["rating"], rating)
+            found_original |= wine["id"] == original["id"]
+
+        self.assertTrue(found_original)
 
 
 class WineIdTests(unittest.TestCase):
@@ -154,14 +194,17 @@ class WineIdTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by Ryan"""
         res = self.client.get(f"{WineIdTests.endpoint}/1")
         self.assertEqual(res.status_code, 200)
 
     def test_status_code_404(self):
+        """Written by Ryan"""
         res = self.client.get(f"{WineIdTests.endpoint}/0")
         self.assertEqual(res.status_code, 404)
 
     def test_format(self):
+        """Written by Ryan"""
         res = self.client.get(f"{WineIdTests.endpoint}/1").get_json()
 
         self.assertEqual(type(res["country"]), str)
@@ -196,10 +239,12 @@ class WineConstraintTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by Ryan"""
         res = self.client.get(WineConstraintTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
+        """Written by Ryan"""
         res: JsonObject = self.client.get(WineConstraintTests.endpoint).get_json()
 
         self.assertEqual(type(res["rating"]), dict)
@@ -234,6 +279,7 @@ class WineConstraintTests(unittest.TestCase):
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):
+        """Written by Ryan"""
         res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
 
         self.assertEqual(res["rating"]["min"], 0.0)
@@ -257,14 +303,17 @@ class VineyardAllTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by Ryan"""
         res = self.client.get(VineyardAllTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_unspecified_param(self):
+        """Written by Ryan"""
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"this_is_not_defined": 0}))
         self.assertEqual(res.status_code, 200)
 
     def test_invalid_formatted_param(self):
+        """Written by Ryan"""
         res = self.client.get(
             create_url(
                 VineyardAllTests.endpoint,
@@ -278,6 +327,7 @@ class VineyardAllTests(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
+        """Written by Ryan"""
         res = self.client.get(VineyardAllTests.endpoint).get_json()
 
         self.assertEqual(type(res["length"]), int)
@@ -289,23 +339,29 @@ class VineyardAllTests(unittest.TestCase):
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
 
-    def test_min_clamp_page(self):
+    def test_page_out_of_bounds_1(self):
+        """Written by Ryan"""
         page_num = -1
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], 1)
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
-    def test_max_clamp_page(self):
+    def test_page_out_of_bounds_2(self):
+        """Written by Ryan"""
         page_num = 39485
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], res["totalPages"])
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
     def test_length(self):
+        """Written by Ryan"""
         res = self.client.get(VineyardAllTests.endpoint).get_json()
         self.assertEqual(res["length"], len(res["list"]))
 
     def test_page(self):
+        """Written by Ryan"""
         page_num = 2
         res_1 = self.client.get(VineyardAllTests.endpoint).get_json()
         res_2 = self.client.get(create_url(VineyardAllTests.endpoint, {"page": page_num})).get_json()
@@ -314,6 +370,7 @@ class VineyardAllTests(unittest.TestCase):
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
     def test_name(self):
+        """Written by Ryan"""
         name_query = "os"
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"name": name_query})).get_json()
 
@@ -325,6 +382,7 @@ class VineyardAllTests(unittest.TestCase):
             self.assertTrue(name_query in name)
 
     def test_country(self):
+        """Written by Ryan"""
         country_query = ["United States", "Portugal"]
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"country": country_query})).get_json()
 
@@ -337,6 +395,7 @@ class VineyardAllTests(unittest.TestCase):
             self.assertTrue(country in country_set)
 
     def test_sort(self):
+        """Written by Ryan"""
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"sort": "name_asc"})).get_json()
 
         vineyards: list[JsonObject] = res["list"]
@@ -348,6 +407,7 @@ class VineyardAllTests(unittest.TestCase):
             self.assertTrue(is_alphabetical_order(False, cur_name, next_name))
 
     def test_sort_reverse(self):
+        """Written by Ryan"""
         res = self.client.get(create_url(VineyardAllTests.endpoint, {"sort": "name_desc"})).get_json()
 
         vineyards: list[JsonObject] = res["list"]
@@ -357,6 +417,32 @@ class VineyardAllTests(unittest.TestCase):
             cur_name: str = vineyards[i]["name"].lower()
             next_name: str = vineyards[i + 1]["name"].lower()
             self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
+
+    def test_floating_point_rating(self):
+        """Written by JB"""
+        res1 = self.client.get(create_url(VineyardAllTests.endpoint)).get_json()
+        original: JsonObject = res1["list"][0]
+        rating: float = original["rating"]
+
+        res2 = self.client.get(
+            create_url(
+                VineyardAllTests.endpoint,
+                {
+                    "startRating": rating,
+                    "endRating": rating,
+                },
+            )
+        ).get_json()
+
+        vineyards: list[JsonObject] = res2["list"]
+        self.assertGreater(len(vineyards), 0)
+        found_original = False
+
+        for vineyard in vineyards:
+            self.assertAlmostEqual(vineyard["rating"], rating)
+            found_original |= vineyard["id"] == original["id"]
+
+        self.assertTrue(found_original)
 
 
 class VineyardIdTests(unittest.TestCase):
@@ -371,14 +457,17 @@ class VineyardIdTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by JB"""
         res = self.client.get(f"{VineyardIdTests.endpoint}/1")
         self.assertEqual(res.status_code, 200)
 
     def test_status_code_404(self):
+        """Written by JB"""
         res = self.client.get(f"{VineyardIdTests.endpoint}/0")
         self.assertEqual(res.status_code, 404)
 
     def test_format(self):
+        """Written by JB"""
         res = self.client.get(f"{VineyardIdTests.endpoint}/1").get_json()
 
         self.assertEqual(type(res["coordinates"]), dict)
@@ -413,10 +502,12 @@ class VineyardConstraintTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by Ryan"""
         res = self.client.get(VineyardConstraintTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
+        """Written by Ryan"""
         res: JsonObject = self.client.get(VineyardConstraintTests.endpoint).get_json()
 
         self.assertEqual(type(res["rating"]), dict)
@@ -440,6 +531,7 @@ class VineyardConstraintTests(unittest.TestCase):
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):
+        """Written by Ryan"""
         res: JsonObject = self.client.get(VineyardConstraintTests.endpoint).get_json()
 
         self.assertEqual(res["rating"]["min"], 0.0)
@@ -463,14 +555,17 @@ class RegionAllTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by JB"""
         res = self.client.get(RegionAllTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_unspecified_param(self):
+        """Written by JB"""
         res = self.client.get(create_url(RegionAllTests.endpoint, {"this_is_not_defined": 0}))
         self.assertEqual(res.status_code, 200)
 
     def test_invalid_formatted_param(self):
+        """Written by JB"""
         res = self.client.get(
             create_url(
                 RegionAllTests.endpoint,
@@ -484,6 +579,7 @@ class RegionAllTests(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
+        """Written by JB"""
         res = self.client.get(RegionAllTests.endpoint).get_json()
 
         self.assertEqual(type(res["length"]), int)
@@ -495,23 +591,29 @@ class RegionAllTests(unittest.TestCase):
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)
 
-    def test_min_clamp_page(self):
+    def test_page_out_of_bounds_1(self):
+        """Written by JB"""
         page_num = -1
         res = self.client.get(create_url(RegionAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], 1)
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
-    def test_max_clamp_page(self):
+    def test_page_out_of_bounds_2(self):
+        """Written by JB"""
         page_num = 39485
         res = self.client.get(create_url(RegionAllTests.endpoint, {"page": page_num})).get_json()
-        self.assertNotEqual(res["page"], page_num)
-        self.assertEqual(res["page"], res["totalPages"])
+        self.assertEqual(res["page"], page_num)
+        self.assertEqual(res["totalPages"], 1)
+        self.assertEqual(res["totalInstances"], 0)
 
     def test_length(self):
+        """Written by JB"""
         res = self.client.get(RegionAllTests.endpoint).get_json()
         self.assertEqual(res["length"], len(res["list"]))
 
     def test_page(self):
+        """Written by JB"""
         page_num = 2
         res_1 = self.client.get(RegionAllTests.endpoint).get_json()
         res_2 = self.client.get(create_url(RegionAllTests.endpoint, {"page": page_num})).get_json()
@@ -520,6 +622,7 @@ class RegionAllTests(unittest.TestCase):
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
     def test_name(self):
+        """Written by JB"""
         name_query = "os"
         res = self.client.get(create_url(RegionAllTests.endpoint, {"name": name_query})).get_json()
 
@@ -531,6 +634,7 @@ class RegionAllTests(unittest.TestCase):
             self.assertTrue(name_query in name)
 
     def test_country(self):
+        """Written by JB"""
         country_query = ["United States", "Portugal"]
         res = self.client.get(create_url(RegionAllTests.endpoint, {"country": country_query})).get_json()
 
@@ -543,6 +647,7 @@ class RegionAllTests(unittest.TestCase):
             self.assertTrue(country in country_set)
 
     def test_rating(self):
+        """Written by JB"""
         start_rating = 4.5
         end_rating = 4.9
 
@@ -564,6 +669,7 @@ class RegionAllTests(unittest.TestCase):
             self.assertTrue(start_rating <= rating <= end_rating)
 
     def test_reviews(self):
+        """Written by JB"""
         start_reviews = 2
         end_reviews = 50
 
@@ -585,6 +691,7 @@ class RegionAllTests(unittest.TestCase):
             self.assertTrue(start_reviews <= reviews <= end_reviews)
 
     def test_tags(self):
+        """Written by JB"""
         tags_query = ["Sights & Landmarks", "Spas & Wellness"]
         res = self.client.get(create_url(RegionAllTests.endpoint, {"tags": tags_query})).get_json()
 
@@ -598,6 +705,7 @@ class RegionAllTests(unittest.TestCase):
                 self.assertTrue(tag in tags)
 
     def test_trip_types(self):
+        """Written by JB"""
         trip_types_query = ["Solo travel", "Couples"]
         res = self.client.get(create_url(RegionAllTests.endpoint, {"tripTypes": trip_types_query})).get_json()
 
@@ -611,6 +719,7 @@ class RegionAllTests(unittest.TestCase):
                 self.assertTrue(trip_type in trip_types)
 
     def test_sort(self):
+        """Written by JB"""
         res = self.client.get(create_url(RegionAllTests.endpoint, {"sort": "name_asc"})).get_json()
 
         regions: list[JsonObject] = res["list"]
@@ -622,6 +731,7 @@ class RegionAllTests(unittest.TestCase):
             self.assertTrue(is_alphabetical_order(False, cur_name, next_name))
 
     def test_sort_reverse(self):
+        """Written by JB"""
         res = self.client.get(create_url(RegionAllTests.endpoint, {"sort": "name_desc"})).get_json()
 
         regions: list[JsonObject] = res["list"]
@@ -633,6 +743,7 @@ class RegionAllTests(unittest.TestCase):
             self.assertTrue(is_alphabetical_order(True, cur_name, next_name))
 
     def test_mix_1(self):
+        """Written by JB"""
         country_query = ["United States", "Portugal"]
         trip_types_query = ["Couples"]
         tags_query = ["Tours"]
@@ -677,6 +788,32 @@ class RegionAllTests(unittest.TestCase):
             next_rating: float = regions[i + 1]["rating"]
             self.assertTrue(cur_rating >= next_rating)
 
+    def test_floating_point_rating(self):
+        """Written by JB"""
+        res1 = self.client.get(create_url(RegionAllTests.endpoint)).get_json()
+        original: JsonObject = res1["list"][0]
+        rating: float = original["rating"]
+
+        res2 = self.client.get(
+            create_url(
+                RegionAllTests.endpoint,
+                {
+                    "startRating": rating,
+                    "endRating": rating,
+                },
+            )
+        ).get_json()
+
+        regions: list[JsonObject] = res2["list"]
+        self.assertGreater(len(regions), 0)
+        found_original = False
+
+        for region in regions:
+            self.assertAlmostEqual(region["rating"], rating)
+            found_original |= region["id"] == original["id"]
+
+        self.assertTrue(found_original)
+
 
 class RegionIdTests(unittest.TestCase):
     endpoint = "/regions"
@@ -690,14 +827,17 @@ class RegionIdTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by JB"""
         res = self.client.get(f"{RegionIdTests.endpoint}/1")
         self.assertEqual(res.status_code, 200)
 
     def test_status_code_404(self):
+        """Written by JB"""
         res = self.client.get(f"{RegionIdTests.endpoint}/0")
         self.assertEqual(res.status_code, 404)
 
     def test_format(self):
+        """Written by JB"""
         res = self.client.get(f"{RegionIdTests.endpoint}/1").get_json()
 
         self.assertEqual(type(res["coordinates"]), dict)
@@ -746,10 +886,12 @@ class RegionConstraintTests(unittest.TestCase):
         self.ctx.pop()
 
     def test_status_code_200(self):
+        """Written by JB"""
         res = self.client.get(RegionConstraintTests.endpoint)
         self.assertEqual(res.status_code, 200)
 
     def test_format(self):
+        """Written by JB"""
         res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
 
         self.assertEqual(type(res["rating"]), dict)
@@ -784,6 +926,7 @@ class RegionConstraintTests(unittest.TestCase):
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):
+        """Written by JB"""
         res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
 
         self.assertEqual(res["rating"]["min"], 0.0)
