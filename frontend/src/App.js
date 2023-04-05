@@ -6,16 +6,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import About from './containers/About';
 import Home from './containers/Home';
-import RegionInstance from './containers/RegionInstance';
-import Regions from './containers/RegionModel';
-import RegionSearch from './containers/RegionSearch';
 import Search from './containers/Search';
-import VineyardInstance from './containers/VineyardInstance';
-import Vineyards from './containers/VineyardModel';
-import VineyardSearch from './containers/VineyardSearch';
-import WineInstance from './containers/WineInstance';
 import Wines from './containers/WineModel';
+import WineInstance from './containers/WineInstance';
 import WineSearch from './containers/WineSearch';
+import Vineyards from './containers/VineyardModel';
+import VineyardInstance from './containers/VineyardInstance';
+import VineyardSearch from './containers/VineyardSearch';
+import Regions from './containers/RegionModel';
+import RegionInstance from './containers/RegionInstance';
+import RegionSearch from './containers/RegionSearch';
+import Visualizations from './containers/Visualizations';
+import ProviderVisualizations from './containers/Provider';
 
 const App = () => (
   <Router>
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/regions" element={<Regions />}></Route>
           <Route path="/regions/:id" element={<RegionInstance />}></Route>
           <Route path="/about" element={<About />}></Route>
+          <Route path="/visualizations" element={<Visualizations />}></Route>
+          <Route path="/provider" element={<ProviderVisualizations />}></Route>
 
           <Route path="/search/:query" element={<Search />}></Route>
           <Route path="/wines/search/:query" element={<WineSearch />}></Route>
