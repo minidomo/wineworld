@@ -1,10 +1,10 @@
-.wrapper {
+.line-graph.wrapper {
   background: gray;
   width: max-content;
   height: max-content;
 }
 
-.axis-label {
+.line-graph.y-axis-label {
   transform-box: fill-box;
   transform-origin: center;
 }

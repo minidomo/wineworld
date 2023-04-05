@@ -7,7 +7,7 @@ const Provider = () => {
       <div>Provider</div>
       <LineGraph
         margin={{
-          top: 10,
+          top: 30,
           right: 30,
           bottom: 60,
           left: 60,
@@ -18,6 +18,7 @@ const Provider = () => {
         yAxisLabel='Count'
         xAxisLabel='Time'
         timeFormat='%-I %p'
+        title='Title'
         data={
           [
             {

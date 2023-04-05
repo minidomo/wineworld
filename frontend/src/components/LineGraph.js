@@ -3,7 +3,8 @@ import * as d3 from 'd3';
 import './LineGraph.css';
 
 export default function LineGraph(props) {
-  // const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+
   const [yAxisData, setYAxisData] = useState({
     width: 0.0,
     loaded: false,
@@ -22,7 +23,9 @@ export default function LineGraph(props) {
     yAxisLabel,
     xAxisLabel,
     timeFormat,
+    title,
     data,
+    className,
   } = props;
 
   const width = targetWidth - margin.left - margin.right;
@@ -86,6 +89,12 @@ export default function LineGraph(props) {
     ref.setAttribute('y', midpoint);
   }
 
+  const initTitleLabel = ref => {
+    if (!ref) return;
+    const textHeight = ref.getBBox().height;
+    ref.setAttribute('y', -textHeight / 2);
+  }
+
   const linePath = d3
     .line()
     .x(d => getX(d.date))
@@ -110,20 +119,27 @@ export default function LineGraph(props) {
   //     setActiveIndex(null);
   // };
 
+  const uniqueClassName = 'line-graph'
+  let lineGraphClassName = `${uniqueClassName} wrapper`;
+  if (className) {
+    lineGraphClassName += ` ${className}`.trimEnd();
+  }
+
   return (
-    <div className="wrapper">
+    <div className={`${lineGraphClassName}`}>
       <svg
+        className={`${uniqueClassName} svg-wrapper`}
         width={targetWidth}
         height={targetHeight}
       // onMouseMove={handleMouseMove}
       // onMouseLeave={handleMouseLeave}
       >
-        <g transform={`translate(${margin.left},${margin.top})`}>
-          <g className='x-axis' transform={`translate(0,${height})`} ref={initXAxis} />
-          <g className='y-axis' ref={initYAxis} />
-          <path fill='none' strokeWidth={3} stroke={color} d={linePath} />
+        <g className={`${uniqueClassName} g-wrapper`} transform={`translate(${margin.left},${margin.top})`}>
+          <g className={`${uniqueClassName} x-axis`} transform={`translate(0,${height})`} ref={initXAxis} />
+          <g className={`${uniqueClassName} y-axis`} ref={initYAxis} />
+          <path className={`${uniqueClassName} line`} fill='none' strokeWidth={3} stroke={color} d={linePath} />
           <text
-            className="axis-label"
+            className={`${uniqueClassName} x-axis-label`}
             x={width / 2}
             textAnchor='middle'
             ref={initXAxisLabel}
@@ -131,13 +147,21 @@ export default function LineGraph(props) {
             {xAxisLabel}
           </text>
           <text
-            className='axis-label'
+            className={`${uniqueClassName} y-axis-label`}
             y={height / 2}
             transform='rotate(-90)'
             textAnchor='middle'
             ref={initYAxisLabel}
           >
             {yAxisLabel}
+          </text>
+          <text
+            className={`${uniqueClassName} title`}
+            x={width / 2}
+            textAnchor="middle"
+            ref={initTitleLabel}
+          >
+            {title}
           </text>
           {/* {
             data.map((item, index) => {
