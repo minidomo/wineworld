@@ -122,44 +122,33 @@ export default function LineGraph(props) {
   return (
     <div className={`${lineGraphClassName}`}>
       <svg
-        className='svg-wrapper'
+        className="svg-wrapper"
         width={targetWidth}
         height={targetHeight}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <g className='g-wrapper' transform={`translate(${margin.left},${margin.top})`}>
-          <g className='x-axis' transform={`translate(0,${height})`} ref={initXAxis} />
-          <g className='y-axis' ref={initYAxis} />
-          <path className='line' fill="none" strokeWidth={3} stroke={color} d={linePath} />
-          <path className='area' fill={color} d={areaPath} opacity={0.3} />
-          <text className='x-axis-text' x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
+        <g className="g-wrapper" transform={`translate(${margin.left},${margin.top})`}>
+          <g className="x-axis" transform={`translate(0,${height})`} ref={initXAxis} />
+          <g className="y-axis" ref={initYAxis} />
+          <path className="line" fill="none" strokeWidth={3} stroke={color} d={linePath} />
+          <path className="area" fill={color} d={areaPath} opacity={0.3} />
+          <text className="x-axis-text" x={width / 2} textAnchor="middle" ref={initXAxisLabel}>
             {xAxisLabel}
           </text>
-          <text
-            className='y-axis-text'
-            y={height / 2}
-            transform="rotate(-90)"
-            textAnchor="middle"
-            ref={initYAxisLabel}
-          >
+          <text className="y-axis-text" y={height / 2} transform="rotate(-90)" textAnchor="middle" ref={initYAxisLabel}>
             {yAxisLabel}
           </text>
-          <text className='title' x={width / 2} textAnchor="middle" ref={initTitleLabel}>
+          <text className="title" x={width / 2} textAnchor="middle" ref={initTitleLabel}>
             {title}
           </text>
           {data.map((item, index) => (
-            <g className='dot-wrapper' key={index}>
-              <text
-                className='dot-text'
-                x={getX(item.date)}
-                y={getY(item.value) - dotTextYOffset}
-                textAnchor="middle"
-              >
+            <g className="dot-wrapper" key={index}>
+              <text className="dot-text" x={getX(item.date)} y={getY(item.value) - dotTextYOffset} textAnchor="middle">
                 {index === activeIndex ? item.value : ''}
               </text>
               <circle
-                className='dot-circle'
+                className="dot-circle"
                 cx={getX(item.date)}
                 cy={getY(item.value)}
                 r={index === activeIndex ? dotActiveRadius : dotInactiveRadius}
