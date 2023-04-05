@@ -58,35 +58,35 @@ const WineInstance = () => {
     <Container>
       {loaded ? (
         <div>
-          <br></br>
-          <img src={image} class="img-fluid" alt="..." onError={handleWineImageError}></img>
           <br />
-          <br />
-          <h3>{name}</h3>
-          <h5>{type} Wine</h5>
-          <Row>
-            <span class="border-bottom border-secondary">
-              <div className="p-5">
-                <p align="center">
-                  <h6>
-                    Country: {country}
-                    <br />
-                    <br />
-                    Region: {region}
-                    <br />
-                    <br />
-                    Winery: {winery}
-                    <br />
-                    <br />
-                    Rating: {rating}
-                    <br />
-                    <br />
-                    Reviews: {reviews}
-                  </h6>
-                </p>
-              </div>
-            </span>
-          </Row>
+            <img src={image} onError={handleWineImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{type} Wine</h5>
+            <Row>
+              <span class="border-bottom border-secondary">
+                <div className="p-5">
+                  <p align="center">
+                    <h6>
+                      Country: {country}
+                      <br />
+                      <br />
+                      Region: {region}
+                      <br />
+                      <br />
+                      Winery: {winery}
+                      <br />
+                      <br />
+                      Rating: {rating}
+                      <br />
+                      <br />
+                      Reviews: {reviews}
+                    </h6>
+                  </p>
+                </div>
+              </span>
+            </Row>
           <br></br>
           <Row>
             <h5 align="left">Related Vineyards</h5>

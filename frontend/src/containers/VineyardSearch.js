@@ -36,7 +36,7 @@ const VineyardSearch = () => {
       <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>
         No vineyards seem to match your search
       </p>
-      <Row className="d-flex g-4 p-4 justify-content-left">
+      <Row md={4} className="d-flex g-4 p-4 justify-content-left">
         {vineyardLoaded ? (
           vineyards.map(vineyard => (
             <Col>

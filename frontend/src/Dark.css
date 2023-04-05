@@ -78,6 +78,7 @@
 .dark .form-control {
   border-width: 1px;
   background-color: #e4e3e3;
+  color: #121212;
 }
 
 .dark .form-control:focus {
