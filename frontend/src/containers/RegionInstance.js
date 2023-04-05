@@ -56,13 +56,19 @@ const RegionInstance = () => {
     <Container>
       {loaded ? (
         <div>
-          <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
           <br />
-          <br />
-          <h3>{name}</h3>
-          <h5>{country}</h5>
-          <Row>
-            <span class="border-bottom border-secondary">
+          <Container className="custom2">
+            <br />
+            <img src={image} style={{
+              height: '10%', width: '20%', objectFit: 'contain',
+              borderStyle: 'solid', borderWidth: '3px',
+            }}
+              onError={handleRegionImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{country}</h5>
+            <Row>
               <div className="p-5">
                 <h6>
                   <p align="center">
@@ -79,8 +85,8 @@ const RegionInstance = () => {
                   </p>
                 </h6>
               </div>
-            </span>
-          </Row>
+            </Row>
+          </Container>
           <br></br>
           <Row className="p-5">
             <h5 align="left">Location</h5>

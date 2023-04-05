@@ -55,13 +55,19 @@ const VineyardInstance = () => {
     <Container>
       {loaded ? (
         <div>
-          <img src={image} class="img-fluid" alt="..." onError={handleVineyardImageError}></img>
           <br />
-          <br />
-          <h3>{name}</h3>
-          <h5>{country}</h5>
-          <Row>
-            <span class="border-bottom border-secondary">
+          <Container className="custom2">
+            <br />
+            <img src={image} style={{
+              height: '20%', width: '20%', objectFit: 'contain',
+              borderStyle: 'solid', borderWidth: '3px',
+            }}
+              onError={handleVineyardImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{country}</h5>
+            <Row>
               <div className="p-5">
                 <p align="center">
                   <h6>
@@ -75,8 +81,8 @@ const VineyardInstance = () => {
                   </h6>
                 </p>
               </div>
-            </span>
-          </Row>
+            </Row>
+          </Container>
           <br></br>
           <Row>
             <h5 align="left">Related Wines</h5>
@@ -99,6 +105,7 @@ const VineyardInstance = () => {
             ))}
           </Row>
           <Row>
+            <h5 align="left">Location</h5>
             <Map lat={latitude} lng={longitude} />
           </Row>
         </div>

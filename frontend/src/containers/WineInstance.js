@@ -59,34 +59,36 @@ const WineInstance = () => {
       {loaded ? (
         <div>
           <br />
-            <img src={image} onError={handleWineImageError}></img>
+          <Container className="custom2">
+            <br />
+            <img src={image} style={{ height: '12%', width: '6%', objectFit: 'contain' }}
+              onError={handleWineImageError}></img>
             <br />
             <br />
             <h3>{name}</h3>
             <h5>{type} Wine</h5>
             <Row>
-              <span class="border-bottom border-secondary">
-                <div className="p-5">
-                  <p align="center">
-                    <h6>
-                      Country: {country}
-                      <br />
-                      <br />
-                      Region: {region}
-                      <br />
-                      <br />
-                      Winery: {winery}
-                      <br />
-                      <br />
-                      Rating: {rating}
-                      <br />
-                      <br />
-                      Reviews: {reviews}
-                    </h6>
-                  </p>
-                </div>
-              </span>
+              <div className="p-5">
+                <p align="center">
+                  <h6>
+                    Country: {country}
+                    <br />
+                    <br />
+                    Region: {region}
+                    <br />
+                    <br />
+                    Winery: {winery}
+                    <br />
+                    <br />
+                    Rating: {rating}
+                    <br />
+                    <br />
+                    Reviews: {reviews}
+                  </h6>
+                </p>
+              </div>
             </Row>
+          </Container>
           <br></br>
           <Row>
             <h5 align="left">Related Vineyards</h5>
@@ -113,6 +115,7 @@ const WineInstance = () => {
 
           <div id="learn-more-section" className="p-4 g-4">
             <h5>Learn more about {type} wine</h5>
+            <br />
             <RedditCarousel redditUrls={reddit} />
           </div>
         </div>
