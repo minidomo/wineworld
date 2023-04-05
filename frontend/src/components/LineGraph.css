@@ -1,0 +1,10 @@
+.wrapper {
+  background: gray;
+  width: max-content;
+  height: max-content;
+}
+
+.y-axis.label {
+  transform-box: fill-box;
+  transform-origin: center;
+}
