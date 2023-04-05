@@ -4,9 +4,13 @@ import './LineGraph.css';
 
 export default function LineGraph(props) {
   // const [activeIndex, setActiveIndex] = useState(null);
-  const [temp, setTemp] = useState({
-    x: '0',
-    dx: '0em',
+  const [yAxisData, setYAxisData] = useState({
+    width: 0.0,
+    loaded: false,
+  });
+
+  const [xAxisData, setXAxisData] = useState({
+    height: 0.0,
     loaded: false,
   });
 
@@ -37,31 +41,50 @@ export default function LineGraph(props) {
     .domain([yMinValue - 1, yMaxValue + 2])
     .range([height, 0]);
 
-  const xAxis = ref => {
+  const initXAxis = ref => {
+    if (!ref) return;
+
     const xAxis = d3.axisBottom(getX);
     xAxis.tickValues(getX.ticks(d3.timeHour.every(2)))
     d3.select(ref).call(xAxis.tickFormat(d3.timeFormat(timeFormat)));
+
+    if (!xAxisData.loaded) {
+      setXAxisData({
+        height: ref.getBBox().height,
+        loaded: true,
+      });
+    }
   };
 
-  const yAxis = ref => {
-    // const yAxis = d3.axisLeft(getY).tickSize(-width).tickPadding(7);
+  const initYAxis = ref => {
     if (!ref) return;
 
     const yAxis = d3.axisLeft(getY);
     d3.select(ref).call(yAxis);
 
-    if (!temp.loaded) {
-      console.log('getting attributes');
-      const text = ref.querySelector('.tick text');
-      setTemp({
-        x: text.getAttribute('x'),
-        dx: text.getAttribute('dy'),
+    if (!yAxisData.loaded) {
+      setYAxisData({
+        width: ref.getBBox().width,
         loaded: true,
       });
     }
-
-    console.log('y axis ref', ref);
   };
+
+  const initYAxisLabel = ref => {
+    if (!ref) return;
+    const leftBound = -margin.left;
+    const rightBound = -yAxisData.width;
+    const midpoint = (leftBound + rightBound) / 2;
+    ref.setAttribute('x', midpoint);
+  };
+
+  const initXAxisLabel = ref => {
+    if (!ref) return;
+    const topBound = height + xAxisData.height;
+    const botBound = height + margin.bottom;
+    const midpoint = (topBound + botBound) / 2;
+    ref.setAttribute('y', midpoint);
+  }
 
   const linePath = d3
     .line()
@@ -96,24 +119,23 @@ export default function LineGraph(props) {
       // onMouseLeave={handleMouseLeave}
       >
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <g className='x-axis' transform={`translate(0,${height})`} ref={xAxis} />
-          <g className='y-axis' ref={yAxis} />
+          <g className='x-axis' transform={`translate(0,${height})`} ref={initXAxis} />
+          <g className='y-axis' ref={initYAxis} />
           <path fill='none' strokeWidth={3} stroke={color} d={linePath} />
           <text
             className="axis-label"
             x={width / 2}
-            y={height + margin.bottom}
             textAnchor='middle'
+            ref={initXAxisLabel}
           >
             {xAxisLabel}
           </text>
           <text
             className='axis-label'
-            x={-margin.left}
             y={height / 2}
-            dx={temp.dx}
             transform='rotate(-90)'
             textAnchor='middle'
+            ref={initYAxisLabel}
           >
             {yAxisLabel}
           </text>

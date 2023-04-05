@@ -3,13 +3,13 @@ import LineGraph from '../components/LineGraph'
 
 const Provider = () => {
   return (
-    <>
+    <div style={{ padding: '100px 50px 100px 50px', }}>
       <div>Provider</div>
       <LineGraph
         margin={{
           top: 10,
           right: 30,
-          bottom: 30,
+          bottom: 60,
           left: 60,
         }}
         targetWidth={960}
@@ -21,21 +21,21 @@ const Provider = () => {
         data={
           [
             {
-              date: new Date(2000, 0, 1, 0),
+              date: new Date(new Date(2000, 0, 1, 0).toISOString()),
               value: 10,
             },
             {
-              date: new Date(2000, 0, 1, 15),
+              date: new Date(new Date(2000, 0, 1, 15).toISOString()),
               value: 5,
             },
             {
-              date: new Date(2000, 0, 1, 23),
+              date: new Date(new Date(2000, 0, 1, 23).toISOString()),
               value: 6,
             },
           ]
         }
       />
-    </>
+    </div>
   )
 }
 
