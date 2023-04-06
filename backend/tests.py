@@ -106,6 +106,7 @@ class WineAllTests(unittest.TestCase):
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
+    # TODO remove this
     def test_name(self):
         """Written by Ryan"""
         name_query = "os"
@@ -369,6 +370,7 @@ class VineyardAllTests(unittest.TestCase):
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
+    # TODO remove this
     def test_name(self):
         """Written by Ryan"""
         name_query = "os"
@@ -621,6 +623,7 @@ class RegionAllTests(unittest.TestCase):
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
+    # TODO remove this
     def test_name(self):
         """Written by JB"""
         name_query = "os"
