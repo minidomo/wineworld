@@ -69,6 +69,17 @@ def get_all_wines():
     params = WineParams(request)
     query: Select = db.select(Wine, text("COUNT(*) OVER() as total_count"))
 
+    if params.search is not None:
+        clauses = [
+            Wine.name.contains(params.search),
+            Wine.country.contains(params.search),
+            Wine.region.contains(params.search),
+            Wine.winery.contains(params.search),
+            Wine.type.contains(params.search),
+        ]
+        query = query.filter(or_(*clauses))
+
+    # TODO remove this
     if params.name is not None:
         query = query.filter(Wine.name.contains(params.name))
 
@@ -182,6 +193,14 @@ def get_all_vineyards():
     params = VineyardParams(request)
     query: Select = db.select(Vineyard, text("COUNT(*) OVER() as total_count"))
 
+    if params.search is not None:
+        clauses = [
+            Vineyard.name.contains(params.search),
+            Vineyard.country.contains(params.search),
+        ]
+        query = query.filter(or_(*clauses))
+
+    # TODO remove this
     if params.name is not None:
         query = query.filter(Vineyard.name.contains(params.name))
 
@@ -289,6 +308,15 @@ def get_all_regions():
     params = RegionParams(request)
     query: Select = db.select(Region, text("COUNT(*) OVER() as total_count"))
 
+    if params.search is not None:
+        clauses = [
+            Region.name.contains(params.search),
+            Region.country.contains(params.search),
+            text(f"REGEXP_LIKE(`{Region.trip_types.key}`, '.*{params.search}.*', 'i')"),
+        ]
+        query = query.filter(or_(*clauses))
+
+    # TODO remove this
     if params.name is not None:
         query = query.filter(Region.name.contains(params.name))
 
@@ -310,12 +338,12 @@ def get_all_regions():
 
     if len(params.tags) > 0:
         for tag in params.tags:
-            clause = text(f"'{tag}' MEMBER OF({Region.tags.key}) = 1")
+            clause = text(f"'{tag}' MEMBER OF({Region.tags.key})")
             query = query.filter(clause)
 
     if len(params.trip_types) > 0:
         for trip_type in params.trip_types:
-            clause = text(f"'{trip_type}' MEMBER OF({Region.trip_types.key}) = 1")
+            clause = text(f"'{trip_type}' MEMBER OF({Region.trip_types.key})")
             query = query.filter(clause)
 
     if params.sort in region_sort_methods:

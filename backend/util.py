@@ -38,7 +38,7 @@ def determine_total_pages(elements: int, page_size: int) -> int:
 class WineParams:
     def __init__(self, request: Request) -> None:
         self.page: int
-        self.name = request.args.get("name", type=str)
+        self.name = request.args.get("name", type=str)  # TODO remove this
         self.country = request.args.getlist("country")
         self.winery = request.args.getlist("winery")
         self.start_rating = request.args.get("startRating", type=float)
@@ -47,6 +47,7 @@ class WineParams:
         self.end_reviews = request.args.get("endReviews", type=int)
         self.type = request.args.getlist("type")
         self.sort = request.args.get("sort", type=str)
+        self.search = request.args.get("search", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:
@@ -54,16 +55,11 @@ class WineParams:
         else:
             self.page = tmp_page
 
-        tmp_name_sort = request.args.get("nameSort", type=str)
-        if tmp_name_sort is not None:
-            self.name_sort = tmp_name_sort == "true"
-
 
 class VineyardParams:
     def __init__(self, request: Request) -> None:
         self.page: int
-        self.name = request.args.get("name", type=str)
-        self.name_sort: bool | None = None
+        self.name = request.args.get("name", type=str)  # TODO remove this
         self.country = request.args.getlist("country")
         self.start_price = request.args.get("startPrice", type=int)
         self.end_price = request.args.get("endPrice", type=int)
@@ -72,6 +68,7 @@ class VineyardParams:
         self.start_reviews = request.args.get("startReviews", type=int)
         self.end_reviews = request.args.get("endReviews", type=int)
         self.sort = request.args.get("sort", type=str)
+        self.search = request.args.get("search", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:
@@ -79,16 +76,11 @@ class VineyardParams:
         else:
             self.page = tmp_page
 
-        tmp_name_sort = request.args.get("nameSort", type=str)
-        if tmp_name_sort is not None:
-            self.name_sort = tmp_name_sort == "true"
-
 
 class RegionParams:
     def __init__(self, request: Request) -> None:
         self.page: int
-        self.name = request.args.get("name", type=str)
-        self.name_sort: bool | None = None
+        self.name = request.args.get("name", type=str)  # TODO remove this
         self.country = request.args.getlist("country")
         self.start_rating = request.args.get("startRating", type=float)
         self.end_rating = request.args.get("endRating", type=float)
@@ -97,16 +89,13 @@ class RegionParams:
         self.tags = request.args.getlist("tags")
         self.trip_types = request.args.getlist("tripTypes")
         self.sort = request.args.get("sort", type=str)
+        self.search = request.args.get("search", type=str)
 
         tmp_page = request.args.get("page", type=int)
         if tmp_page is None:
             self.page = 1
         else:
             self.page = tmp_page
-
-        tmp_name_sort = request.args.get("nameSort", type=str)
-        if tmp_name_sort is not None:
-            self.name_sort = tmp_name_sort == "true"
 
 
 class RegionUtil:

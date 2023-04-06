@@ -3,6 +3,7 @@ from typing import Any
 from urllib.parse import urlencode
 
 from pyuca import Collator
+from unidecode import unidecode
 
 from app import app
 from sort_method_data import (
@@ -106,6 +107,7 @@ class WineAllTests(unittest.TestCase):
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
+    # TODO remove this
     def test_name(self):
         """Written by Ryan"""
         name_query = "os"
@@ -117,6 +119,39 @@ class WineAllTests(unittest.TestCase):
         for wine in wines:
             name: str = wine["name"].lower()
             self.assertTrue(name_query in name)
+
+    def test_search(self):
+        """Written by JB"""
+        search_query = "or"
+        res = self.client.get(create_url(WineAllTests.endpoint, {"search": search_query})).get_json()
+
+        wines: list[JsonObject] = res["list"]
+        self.assertGreater(len(wines), 0)
+
+        found_dict: dict[str, bool] = {
+            "name": False,
+            "country": False,
+            "region": False,
+            "winery": False,
+            "type": False,
+        }
+
+        for wine in wines:
+            found = False
+
+            for key in found_dict.keys():
+                val: str = unidecode(wine[key]).lower()
+
+                is_match = search_query in val
+                found |= is_match
+
+                if is_match:
+                    found_dict[key] = True
+
+            self.assertTrue(found)
+
+        for key in found_dict.keys():
+            self.assertTrue(found_dict[key], key)
 
     def test_country(self):
         """Written by Ryan"""
@@ -369,6 +404,7 @@ class VineyardAllTests(unittest.TestCase):
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
+    # TODO remove this
     def test_name(self):
         """Written by Ryan"""
         name_query = "os"
@@ -380,6 +416,36 @@ class VineyardAllTests(unittest.TestCase):
         for vineyard in vineyards:
             name: str = vineyard["name"].lower()
             self.assertTrue(name_query in name)
+
+    def test_search(self):
+        """Written by JB"""
+        search_query = "st"
+        res = self.client.get(create_url(VineyardAllTests.endpoint, {"search": search_query})).get_json()
+
+        vineyards: list[JsonObject] = res["list"]
+        self.assertGreater(len(vineyards), 0)
+
+        found_dict: dict[str, bool] = {
+            "name": False,
+            "country": False,
+        }
+
+        for vineyard in vineyards:
+            found = False
+
+            for key in found_dict.keys():
+                val: str = unidecode(vineyard[key]).lower()
+
+                is_match = search_query in val
+                found |= is_match
+
+                if is_match:
+                    found_dict[key] = True
+
+            self.assertTrue(found)
+
+        for key in found_dict.keys():
+            self.assertTrue(found_dict[key], key)
 
     def test_country(self):
         """Written by Ryan"""
@@ -621,6 +687,7 @@ class RegionAllTests(unittest.TestCase):
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
 
+    # TODO remove this
     def test_name(self):
         """Written by JB"""
         name_query = "os"
@@ -632,6 +699,43 @@ class RegionAllTests(unittest.TestCase):
         for region in regions:
             name: str = region["name"].lower()
             self.assertTrue(name_query in name)
+
+    def test_search(self):
+        """Written by JB"""
+        search_query = "ta"
+        res = self.client.get(create_url(RegionAllTests.endpoint, {"search": search_query})).get_json()
+
+        regions: list[JsonObject] = res["list"]
+        self.assertGreater(len(regions), 0)
+
+        found_dict: dict[str, bool] = {
+            "name": False,
+            "country": False,
+            "tripTypes": False,
+        }
+
+        for region in regions:
+            found = False
+
+            for key in found_dict.keys():
+                is_match = False
+
+                if isinstance(region[key], str):
+                    val: str = unidecode(region[key]).lower()
+                    is_match = search_query in val
+                else:
+                    for trip_type in region[key]:
+                        val = unidecode(trip_type).lower()
+                        is_match |= search_query in val
+
+                found |= is_match
+                if is_match:
+                    found_dict[key] = True
+
+            self.assertTrue(found)
+
+        for key in found_dict.keys():
+            self.assertTrue(found_dict[key], key)
 
     def test_country(self):
         """Written by JB"""
