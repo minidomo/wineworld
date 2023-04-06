@@ -11,6 +11,7 @@ from sort_method_data import (
     vineyard_sort_methods,
     wine_sort_methods,
 )
+from util import PAGE_SIZE
 
 collator = Collator()
 
@@ -83,7 +84,6 @@ class WineAllTests(unittest.TestCase):
         res = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
         self.assertEqual(res["page"], page_num)
         self.assertEqual(res["totalPages"], 1)
-        self.assertEqual(res["totalInstances"], 0)
 
     def test_page_out_of_bounds_2(self):
         """Written by Ryan"""
@@ -104,8 +104,11 @@ class WineAllTests(unittest.TestCase):
         res_1 = self.client.get(WineAllTests.endpoint).get_json()
         res_2 = self.client.get(create_url(WineAllTests.endpoint, {"page": page_num})).get_json()
 
+        self.assertGreaterEqual(res_1["totalInstances"], PAGE_SIZE)
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
+        self.assertEqual(res_2["length"], PAGE_SIZE)
+        self.assertGreaterEqual(res_2["totalInstances"], PAGE_SIZE)
 
     # TODO remove this
     def test_name(self):
@@ -401,8 +404,11 @@ class VineyardAllTests(unittest.TestCase):
         res_1 = self.client.get(VineyardAllTests.endpoint).get_json()
         res_2 = self.client.get(create_url(VineyardAllTests.endpoint, {"page": page_num})).get_json()
 
+        self.assertGreaterEqual(res_1["totalInstances"], PAGE_SIZE)
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
+        self.assertEqual(res_2["length"], PAGE_SIZE)
+        self.assertGreaterEqual(res_2["totalInstances"], PAGE_SIZE)
 
     # TODO remove this
     def test_name(self):
@@ -684,8 +690,11 @@ class RegionAllTests(unittest.TestCase):
         res_1 = self.client.get(RegionAllTests.endpoint).get_json()
         res_2 = self.client.get(create_url(RegionAllTests.endpoint, {"page": page_num})).get_json()
 
+        self.assertGreaterEqual(res_1["totalInstances"], PAGE_SIZE)
         self.assertEqual(res_2["page"], page_num)
         self.assertNotEqual(res_1["list"][0]["id"], res_2["list"][0]["id"])
+        self.assertEqual(res_2["length"], PAGE_SIZE)
+        self.assertGreaterEqual(res_2["totalInstances"], PAGE_SIZE)
 
     # TODO remove this
     def test_name(self):

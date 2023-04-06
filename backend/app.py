@@ -111,17 +111,24 @@ def get_all_wines():
         sort_method = wine_sort_methods[params.sort]
         query = query.order_by(sort_method.clause)
 
-    query = query.limit(PAGE_SIZE)
-    query = query.offset((params.page - 1) * PAGE_SIZE)
+    if params.page is not None:
+        query = query.limit(PAGE_SIZE)
+        query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page is None or params.page >= 1 else []
 
     wine_list: list[JsonObject] = [WineUtil.to_json(e, small=True) for e, _ in rows]
     _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
-    total_pages = determine_total_pages(total_instances, PAGE_SIZE)
+
+    cur_page = 1
+    total_pages = 1
+
+    if params.page is not None:
+        cur_page = params.page
+        total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
     data = {
-        "page": params.page,
+        "page": cur_page,
         "totalPages": total_pages,
         "totalInstances": total_instances,
         "length": len(wine_list),
@@ -230,17 +237,24 @@ def get_all_vineyards():
         sort_method = vineyard_sort_methods[params.sort]
         query = query.order_by(sort_method.clause)
 
-    query = query.limit(PAGE_SIZE)
-    query = query.offset((params.page - 1) * PAGE_SIZE)
+    if params.page is not None:
+        query = query.limit(PAGE_SIZE)
+        query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page is None or params.page >= 1 else []
 
     vineyard_list: list[JsonObject] = [VineyardUtil.to_json(e, small=True) for e, _ in rows]
     _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
-    total_pages = determine_total_pages(total_instances, PAGE_SIZE)
+
+    cur_page = 1
+    total_pages = 1
+
+    if params.page is not None:
+        cur_page = params.page
+        total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
     data = {
-        "page": params.page,
+        "page": cur_page,
         "totalPages": total_pages,
         "totalInstances": total_instances,
         "length": len(vineyard_list),
@@ -350,17 +364,25 @@ def get_all_regions():
         sort_method = region_sort_methods[params.sort]
         query = query.order_by(sort_method.clause)
 
-    query = query.limit(PAGE_SIZE)
-    query = query.offset((params.page - 1) * PAGE_SIZE)
+    if params.page is not None:
+        query = query.limit(PAGE_SIZE)
+        query = query.offset((params.page - 1) * PAGE_SIZE)
 
-    rows: list[Row] = db.session.execute(query).fetchall() if params.page >= 1 else []
+    rows: list[Row] = db.session.execute(query).fetchall() if params.page is None or params.page >= 1 else []
 
     region_list: list[JsonObject] = [RegionUtil.to_json(e, small=True) for e, _ in rows]
     _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
     total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
+    cur_page = 1
+    total_pages = 1
+
+    if params.page is not None:
+        cur_page = params.page
+        total_pages = determine_total_pages(total_instances, PAGE_SIZE)
+
     data = {
-        "page": params.page,
+        "page": cur_page,
         "totalPages": total_pages,
         "totalInstances": total_instances,
         "length": len(region_list),

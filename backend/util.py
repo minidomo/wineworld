@@ -37,7 +37,7 @@ def determine_total_pages(elements: int, page_size: int) -> int:
 
 class WineParams:
     def __init__(self, request: Request) -> None:
-        self.page: int
+        self.page = request.args.get("page", type=int)
         self.name = request.args.get("name", type=str)  # TODO remove this
         self.country = request.args.getlist("country")
         self.winery = request.args.getlist("winery")
@@ -49,16 +49,10 @@ class WineParams:
         self.sort = request.args.get("sort", type=str)
         self.search = request.args.get("search", type=str)
 
-        tmp_page = request.args.get("page", type=int)
-        if tmp_page is None:
-            self.page = 1
-        else:
-            self.page = tmp_page
-
 
 class VineyardParams:
     def __init__(self, request: Request) -> None:
-        self.page: int
+        self.page = request.args.get("page", type=int)
         self.name = request.args.get("name", type=str)  # TODO remove this
         self.country = request.args.getlist("country")
         self.start_price = request.args.get("startPrice", type=int)
@@ -70,16 +64,10 @@ class VineyardParams:
         self.sort = request.args.get("sort", type=str)
         self.search = request.args.get("search", type=str)
 
-        tmp_page = request.args.get("page", type=int)
-        if tmp_page is None:
-            self.page = 1
-        else:
-            self.page = tmp_page
-
 
 class RegionParams:
     def __init__(self, request: Request) -> None:
-        self.page: int
+        self.page = request.args.get("page", type=int)
         self.name = request.args.get("name", type=str)  # TODO remove this
         self.country = request.args.getlist("country")
         self.start_rating = request.args.get("startRating", type=float)
@@ -90,12 +78,6 @@ class RegionParams:
         self.trip_types = request.args.getlist("tripTypes")
         self.sort = request.args.get("sort", type=str)
         self.search = request.args.get("search", type=str)
-
-        tmp_page = request.args.get("page", type=int)
-        if tmp_page is None:
-            self.page = 1
-        else:
-            self.page = tmp_page
 
 
 class RegionUtil:
