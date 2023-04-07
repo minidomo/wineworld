@@ -1,5 +1,12 @@
 import React from 'react';
 
-const Visualizations = () => <div>Visualizations</div>;
+import BarGraph from '../components/BarGraph';
+
+const Visualizations = () => (
+  <div>
+    Visualizations
+    <BarGraph />
+  </div>
+);
 
 export default Visualizations;
