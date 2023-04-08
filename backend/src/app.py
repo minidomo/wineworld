@@ -4,22 +4,15 @@ from flask import request
 from sqlalchemy.engine import Row
 from sqlalchemy.sql.expression import Select, or_, text
 
-from models import (
-    Region,
-    Vineyard,
-    VineyardRegionAssociation,
-    Wine,
-    WineRegionAssociation,
-    WineVineyardAssociation,
-    app,
-    db,
-)
-from sort_method_data import (
+import __init__  # type: ignore
+from src import routes
+from src.common.core import api, app, db
+from src.common.sort_method_data import (
     region_sort_methods,
     vineyard_sort_methods,
     wine_sort_methods,
 )
-from util import (
+from src.common.util import (
     PAGE_SIZE,
     JsonObject,
     RegionParams,
@@ -29,6 +22,14 @@ from util import (
     WineParams,
     WineUtil,
     determine_total_pages,
+)
+from src.models import (
+    Region,
+    Vineyard,
+    VineyardRegionAssociation,
+    Wine,
+    WineRegionAssociation,
+    WineVineyardAssociation,
 )
 
 """
@@ -54,6 +55,8 @@ or_(), text()
 JSON MEMBER OF function
 - https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of
 """
+
+api.add_resource(routes.RegionsAll, "/test")
 
 
 @app.route("/")

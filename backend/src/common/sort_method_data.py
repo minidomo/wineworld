@@ -1,5 +1,6 @@
-from models import Region, Vineyard, Wine
-from sort_method import SortMethod
+from src.models import Region, Vineyard, Wine
+
+from .sort_method import SortMethod
 
 wine_sort_methods: dict[str, SortMethod] = {
     e.id: e

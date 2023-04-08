@@ -1,11 +1,20 @@
 [tool.ruff]
 line-length = 120
+ignore-init-module-imports = true
+ignore = ['F401']
 
 [tool.mypy]
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ['praw', 'sqlalchemy', 'sqlalchemy.*', 'flask_marshmallow', 'pyuca']
+module = [
+    'praw',
+    'sqlalchemy',
+    'sqlalchemy.*',
+    'flask_marshmallow',
+    'pyuca',
+    "flask_restful",
+]
 ignore_missing_imports = true
 
 [tool.isort]

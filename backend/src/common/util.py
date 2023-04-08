@@ -5,7 +5,9 @@ from typing import Any, Callable, TypeVar
 from flask import Request
 from sqlalchemy.sql.expression import Select
 
-from models import RedditPost, Region, Vineyard, Wine, db
+from src.models import RedditPost, Region, Vineyard, Wine
+
+from .core import db
 
 T = TypeVar("T")
 UnaryPredicate = Callable[[T], bool]
