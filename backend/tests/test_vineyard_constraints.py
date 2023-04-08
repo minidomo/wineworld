@@ -1,11 +1,12 @@
 import unittest
 
-from unidecode import unidecode
+from jsonschema import validate
 
 import __init__  # type: ignore
 from src.routes.vineyards.all import sort_methods
 from tests.common.flask_testcase import FlaskTestCase
-from tests.common.util import JsonObject, create_url, is_alphabetical_order
+from tests.common.schemas.responses.vineyard import constraints_response_schema
+from tests.common.util import JsonObject, is_alphabetical_order
 
 
 class VineyardConstraintTests(FlaskTestCase):
@@ -20,24 +21,14 @@ class VineyardConstraintTests(FlaskTestCase):
         """Written by Ryan"""
         res: JsonObject = self.client.get(VineyardConstraintTests.endpoint).get_json()
 
-        self.assertEqual(type(res["rating"]), dict)
-        self.assertEqual(type(res["reviews"]), dict)
-        self.assertEqual(type(res["price"]), dict)
-        self.assertEqual(type(res["countries"]), list)
-        self.assertEqual(type(res["sorts"]), list)
-
-        self.assertEqual(type(res["rating"]["min"]), float)
-        self.assertEqual(type(res["rating"]["max"]), float)
-        self.assertEqual(type(res["reviews"]["min"]), int)
+        validate(res, constraints_response_schema)
 
         countries: list[str] = res["countries"]
         self.assertGreater(len(countries), 0)
-        self.assertEqual(type(countries[0]), str)
         self.assertTrue(is_alphabetical_order(False, *countries))
 
         sort_methods: list[dict] = res["sorts"]
         self.assertGreater(len(sort_methods), 0)
-        self.assertEqual(type(sort_methods[0]), dict)
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):

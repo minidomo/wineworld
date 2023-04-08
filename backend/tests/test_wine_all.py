@@ -1,10 +1,12 @@
 import unittest
 
+from jsonschema import validate
 from unidecode import unidecode
 
 import __init__  # type: ignore
 from src.util.general import PAGE_SIZE
 from tests.common.flask_testcase import FlaskTestCase
+from tests.common.schemas.responses.wine import all_response_schema
 from tests.common.util import JsonObject, create_url, is_alphabetical_order
 
 
@@ -39,11 +41,7 @@ class WineAllTests(FlaskTestCase):
         """Written by Ryan"""
         res = self.client.get(WineAllTests.endpoint).get_json()
 
-        self.assertEqual(type(res["length"]), int)
-        self.assertEqual(type(res["list"]), list)
-        self.assertEqual(type(res["page"]), int)
-        self.assertEqual(type(res["totalPages"]), int)
-        self.assertEqual(type(res["totalInstances"]), int)
+        validate(res, all_response_schema)
 
         regions: list = res["list"]
         self.assertGreater(len(regions), 0)

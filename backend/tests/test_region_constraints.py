@@ -1,11 +1,12 @@
 import unittest
 
-from unidecode import unidecode
+from jsonschema import validate
 
 import __init__  # type: ignore
 from src.routes.regions.all import sort_methods
 from tests.common.flask_testcase import FlaskTestCase
-from tests.common.util import JsonObject, create_url, is_alphabetical_order
+from tests.common.schemas.responses.region import constraints_response_schema
+from tests.common.util import JsonObject, is_alphabetical_order
 
 
 class RegionConstraintTests(FlaskTestCase):
@@ -20,35 +21,22 @@ class RegionConstraintTests(FlaskTestCase):
         """Written by JB"""
         res: JsonObject = self.client.get(RegionConstraintTests.endpoint).get_json()
 
-        self.assertEqual(type(res["rating"]), dict)
-        self.assertEqual(type(res["reviews"]), dict)
-        self.assertEqual(type(res["tripTypes"]), list)
-        self.assertEqual(type(res["tags"]), list)
-        self.assertEqual(type(res["countries"]), list)
-        self.assertEqual(type(res["sorts"]), list)
-
-        self.assertEqual(type(res["rating"]["min"]), float)
-        self.assertEqual(type(res["rating"]["max"]), float)
-        self.assertEqual(type(res["reviews"]["min"]), int)
+        validate(res, constraints_response_schema)
 
         trip_types: list[str] = res["tripTypes"]
         self.assertGreater(len(trip_types), 0)
-        self.assertEqual(type(trip_types[0]), str)
         self.assertTrue(is_alphabetical_order(False, *trip_types))
 
         tags: list[str] = res["tags"]
         self.assertGreater(len(tags), 0)
-        self.assertEqual(type(tags[0]), str)
         self.assertTrue(is_alphabetical_order(False, *tags))
 
         countries: list[str] = res["countries"]
         self.assertGreater(len(countries), 0)
-        self.assertEqual(type(countries[0]), str)
         self.assertTrue(is_alphabetical_order(False, *countries))
 
         sort_methods: list[dict] = res["sorts"]
         self.assertGreater(len(sort_methods), 0)
-        self.assertEqual(type(sort_methods[0]), dict)
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):

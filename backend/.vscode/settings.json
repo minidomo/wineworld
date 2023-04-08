@@ -9,5 +9,11 @@
     "python.analysis.extraPaths": [
         "./src",
         "./tests"
-    ]
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.coverage": true,
+        "**/.mypy_cache": true,
+        "**/.ruff_cache": true
+    }
 }

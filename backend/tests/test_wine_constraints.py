@@ -1,8 +1,11 @@
 import unittest
 
+from jsonschema import validate
+
 import __init__  # type: ignore
 from src.routes.wines.all import sort_methods
 from tests.common.flask_testcase import FlaskTestCase
+from tests.common.schemas.responses.wine import constraints_response_schema
 from tests.common.util import JsonObject, is_alphabetical_order
 
 
@@ -18,35 +21,22 @@ class WineConstraintTests(FlaskTestCase):
         """Written by Ryan"""
         res: JsonObject = self.client.get(WineConstraintTests.endpoint).get_json()
 
-        self.assertEqual(type(res["rating"]), dict)
-        self.assertEqual(type(res["reviews"]), dict)
-        self.assertEqual(type(res["wineries"]), list)
-        self.assertEqual(type(res["types"]), list)
-        self.assertEqual(type(res["countries"]), list)
-        self.assertEqual(type(res["sorts"]), list)
-
-        self.assertEqual(type(res["rating"]["min"]), float)
-        self.assertEqual(type(res["rating"]["max"]), float)
-        self.assertEqual(type(res["reviews"]["min"]), int)
+        validate(res, constraints_response_schema)
 
         wineries: list[str] = res["wineries"]
         self.assertGreater(len(wineries), 0)
-        self.assertEqual(type(wineries[0]), str)
         self.assertTrue(is_alphabetical_order(False, *wineries))
 
         types: list[str] = res["types"]
         self.assertGreater(len(types), 0)
-        self.assertEqual(type(types[0]), str)
         self.assertTrue(is_alphabetical_order(False, *types))
 
         countries: list[str] = res["countries"]
         self.assertGreater(len(countries), 0)
-        self.assertEqual(type(countries[0]), str)
         self.assertTrue(is_alphabetical_order(False, *countries))
 
         sort_methods: list[dict] = res["sorts"]
         self.assertGreater(len(sort_methods), 0)
-        self.assertEqual(type(sort_methods[0]), dict)
         self.assertTrue(is_alphabetical_order(False, *[e["id"] for e in sort_methods]))
 
     def test_values(self):
