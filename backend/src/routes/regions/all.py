@@ -3,7 +3,7 @@ from sqlalchemy.engine import Row
 from sqlalchemy.sql.expression import Select, or_, text
 
 from src.common.core import db
-from src.common.sort_method_data import region_sort_methods
+from src.common.sort_method import region_sort_methods
 from src.models import Region
 from src.schemas import regions_schema
 from src.util.general import PAGE_SIZE, JsonObject, determine_total_pages

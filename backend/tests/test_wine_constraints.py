@@ -1,7 +1,7 @@
 import unittest
 
 import __init__  # type: ignore
-from src.common.sort_method_data import wine_sort_methods
+from src.common.sort_method import wine_sort_methods
 from tests.common.flask_testcase import FlaskTestCase
 from tests.common.util import JsonObject, is_alphabetical_order
 

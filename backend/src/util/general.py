@@ -1,6 +1,6 @@
 import math
 import re
-from typing import Any, Callable, TypeVar
+from typing import Any, TypeVar
 
 from flask import Request
 from sqlalchemy.sql.expression import Select
@@ -9,25 +9,9 @@ from src.common.core import db
 from src.models import RedditPost, Region, Vineyard, Wine
 
 T = TypeVar("T")
-UnaryPredicate = Callable[[T], bool]
 JsonObject = dict[str, Any]
 
 PAGE_SIZE = 20
-
-
-def every(element: Any, predicates: list[UnaryPredicate[T]]) -> bool:
-    for predicate in predicates:
-        if not predicate(element):
-            return False
-    return True
-
-
-def clamp(min_val: int, max_val: int, val: int) -> int:
-    if val < min_val:
-        return min_val
-    if val > max_val:
-        return max_val
-    return val
 
 
 def determine_total_pages(elements: int, page_size: int) -> int:
@@ -62,21 +46,6 @@ class VineyardParams:
         self.end_rating = request.args.get("endRating", type=float)
         self.start_reviews = request.args.get("startReviews", type=int)
         self.end_reviews = request.args.get("endReviews", type=int)
-        self.sort = request.args.get("sort", type=str)
-        self.search = request.args.get("search", type=str)
-
-
-class RegionParams:
-    def __init__(self, request: Request) -> None:
-        self.page = request.args.get("page", type=int)
-        self.name = request.args.get("name", type=str)  # TODO remove this
-        self.country = request.args.getlist("country")
-        self.start_rating = request.args.get("startRating", type=float)
-        self.end_rating = request.args.get("endRating", type=float)
-        self.start_reviews = request.args.get("startReviews", type=int)
-        self.end_reviews = request.args.get("endReviews", type=int)
-        self.tags = request.args.getlist("tags")
-        self.trip_types = request.args.getlist("tripTypes")
         self.sort = request.args.get("sort", type=str)
         self.search = request.args.get("search", type=str)
 
