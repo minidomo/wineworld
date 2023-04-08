@@ -3,7 +3,7 @@
 from sqlalchemy import DECIMAL, JSON, Column, Integer, String
 from sqlalchemy.orm import relationship
 
-from src.common.core import db
+from src.common.core import db, ma
 
 
 class Region(db.Model):

@@ -12,8 +12,10 @@ module = [
     'sqlalchemy',
     'sqlalchemy.*',
     'flask_marshmallow',
+    'flask_marshmallow.*',
     'pyuca',
     "flask_restful",
+    "pendulum",
 ]
 ignore_missing_imports = true
 

@@ -12,7 +12,15 @@ from src.common.sort_method_data import (
     vineyard_sort_methods,
     wine_sort_methods,
 )
-from src.common.util import (
+from src.models import (
+    Region,
+    Vineyard,
+    VineyardRegionAssociation,
+    Wine,
+    WineRegionAssociation,
+    WineVineyardAssociation,
+)
+from src.util.general import (
     PAGE_SIZE,
     JsonObject,
     RegionParams,
@@ -22,14 +30,6 @@ from src.common.util import (
     WineParams,
     WineUtil,
     determine_total_pages,
-)
-from src.models import (
-    Region,
-    Vineyard,
-    VineyardRegionAssociation,
-    Wine,
-    WineRegionAssociation,
-    WineVineyardAssociation,
 )
 
 """
@@ -56,7 +56,8 @@ JSON MEMBER OF function
 - https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of
 """
 
-api.add_resource(routes.RegionsAll, "/test")
+api.add_resource(routes.RegionsAll, "/regions")
+api.add_resource(routes.RegionsId, "/regions/<int:id>")
 
 
 @app.route("/")
@@ -315,106 +316,6 @@ def get_vineyard_constraints():
         },
         "countries": countries,
         "sorts": sorts,
-    }
-
-    return data
-
-
-@app.route("/regions", methods=["GET"])
-def get_all_regions():
-    params = RegionParams(request)
-    query: Select = db.select(Region, text("COUNT(*) OVER() as total_count"))
-
-    if params.search is not None:
-        clauses = [
-            Region.name.contains(params.search),
-            Region.country.contains(params.search),
-            text(f"REGEXP_LIKE(`{Region.trip_types.key}`, '.*{params.search}.*', 'i')"),
-        ]
-        query = query.filter(or_(*clauses))
-
-    # TODO remove this
-    if params.name is not None:
-        query = query.filter(Region.name.contains(params.name))
-
-    if params.start_rating is not None:
-        query = query.filter(Region.rating >= params.start_rating)
-
-    if params.end_rating is not None:
-        query = query.filter(Region.rating <= params.end_rating)
-
-    if params.start_reviews is not None:
-        query = query.filter(Region.reviews >= params.start_reviews)
-
-    if params.end_reviews is not None:
-        query = query.filter(Region.reviews <= params.end_reviews)
-
-    if len(params.country) > 0:
-        clauses = [Region.country == e for e in params.country]
-        query = query.filter(or_(*clauses))
-
-    if len(params.tags) > 0:
-        for tag in params.tags:
-            clause = text(f"'{tag}' MEMBER OF({Region.tags.key})")
-            query = query.filter(clause)
-
-    if len(params.trip_types) > 0:
-        for trip_type in params.trip_types:
-            clause = text(f"'{trip_type}' MEMBER OF({Region.trip_types.key})")
-            query = query.filter(clause)
-
-    if params.sort in region_sort_methods:
-        sort_method = region_sort_methods[params.sort]
-        query = query.order_by(sort_method.clause)
-
-    if params.page is not None:
-        query = query.limit(PAGE_SIZE)
-        query = query.offset((params.page - 1) * PAGE_SIZE)
-
-    rows: list[Row] = db.session.execute(query).fetchall() if params.page is None or params.page >= 1 else []
-
-    region_list: list[JsonObject] = [RegionUtil.to_json(e, small=True) for e, _ in rows]
-    _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
-    total_pages = determine_total_pages(total_instances, PAGE_SIZE)
-
-    cur_page = 1
-    total_pages = 1
-
-    if params.page is not None:
-        cur_page = params.page
-        total_pages = determine_total_pages(total_instances, PAGE_SIZE)
-
-    data = {
-        "page": cur_page,
-        "totalPages": total_pages,
-        "totalInstances": total_instances,
-        "length": len(region_list),
-        "list": region_list,
-    }
-
-    return data
-
-
-@app.route("/regions/<int:id>", methods=["GET"])
-def get_region(id: int):
-    region: Region = db.get_or_404(Region, id)
-
-    wine_query: Select = db.select(WineRegionAssociation).where(WineRegionAssociation.region_id == region.id)
-    wine_region_pairs: Iterator[WineRegionAssociation] = db.session.execute(wine_query).scalars()
-    wines: list[Wine] = [db.session.get(Wine, e.wine_id) for e in wine_region_pairs]
-
-    vineyard_query: Select = db.select(VineyardRegionAssociation).where(
-        VineyardRegionAssociation.region_id == region.id
-    )
-    vineyard_region_pairs: Iterator[VineyardRegionAssociation] = db.session.execute(vineyard_query).scalars()
-    vineyards: list[Vineyard] = [db.session.get(Vineyard, e.vineyard_id) for e in vineyard_region_pairs]
-
-    data = {
-        **RegionUtil.to_json(region),
-        "related": {
-            "wines": [WineUtil.to_json(e, small=True) for e in wines],
-            "vineyards": [VineyardUtil.to_json(e, small=True) for e in vineyards],
-        },
     }
 
     return data

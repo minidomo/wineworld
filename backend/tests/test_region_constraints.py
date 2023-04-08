@@ -4,7 +4,7 @@ from unidecode import unidecode
 
 import __init__  # type: ignore
 from src.common.sort_method_data import region_sort_methods
-from src.common.util import PAGE_SIZE
+from src.util.general import PAGE_SIZE
 from tests.common.flask_testcase import FlaskTestCase
 from tests.common.util import JsonObject, create_url, is_alphabetical_order
 
