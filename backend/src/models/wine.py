@@ -1,5 +1,7 @@
 # mypy: disable-error-code="name-defined"
 
+from typing import Any
+
 from sqlalchemy import DECIMAL, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 

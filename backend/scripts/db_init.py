@@ -1,7 +1,8 @@
 import json
 
 import __init__  # type: ignore
-from src.app import app, db
+from src.app import app
+from src.common.core import db
 from src.models import (
     RedditPost,
     Region,

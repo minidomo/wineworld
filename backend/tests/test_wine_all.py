@@ -33,7 +33,7 @@ class WineAllTests(FlaskTestCase):
             )
         )
 
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.status_code, 400)
 
     def test_format(self):
         """Written by Ryan"""

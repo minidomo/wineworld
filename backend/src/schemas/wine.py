@@ -49,3 +49,7 @@ class WineSchema(ma.SQLAlchemySchema):
                 ret.append(f"{REDDIT_MEDIA_URL}{stub}")
 
         return ret
+
+
+wine_partial_schema = WineSchema(exclude=["redditPosts"])
+wines_partial_schema = WineSchema(exclude=["redditPosts"], many=True)
