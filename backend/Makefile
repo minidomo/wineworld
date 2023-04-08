@@ -19,6 +19,9 @@ test-style:
 run:
 	python3 src/app.py
 
+db-init:
+	python3 scripts/db_init.py
+
 build-server:
 	docker build -t wineworld-backend-dev -f docker/server/Dockerfile .
 
