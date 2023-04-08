@@ -3,8 +3,7 @@ import unittest
 from unidecode import unidecode
 
 import __init__  # type: ignore
-from src.common.sort_method import vineyard_sort_methods
-from src.util.general import PAGE_SIZE
+from src.routes.vineyards.all import sort_methods
 from tests.common.flask_testcase import FlaskTestCase
 from tests.common.util import JsonObject, create_url, is_alphabetical_order
 
@@ -49,9 +48,9 @@ class VineyardConstraintTests(FlaskTestCase):
         self.assertEqual(res["rating"]["max"], 5.0)
         self.assertEqual(res["reviews"]["min"], 0)
 
-        sort_methods: list[JsonObject] = res["sorts"]
-        for sort_method in sort_methods:
-            self.assertTrue(sort_method["id"] in vineyard_sort_methods)
+        all_sorts: list[JsonObject] = res["sorts"]
+        for sort_obj in all_sorts:
+            self.assertTrue(sort_obj["id"] in sort_methods)
 
 
 if __name__ == "__main__":

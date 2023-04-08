@@ -2,8 +2,8 @@ from flask_restful import Resource
 from sqlalchemy.sql.expression import Select, text
 
 from src.common.core import db
-from src.common.sort_method import region_sort_methods
 from src.models import Region
+from src.routes.regions.all import sort_methods
 
 
 class RegionsConstraints(Resource):
@@ -52,7 +52,7 @@ class RegionsConstraints(Resource):
         )
         tags: list[str] = db.session.execute(tags_query).scalars().all()
 
-        sorts = [e.to_json() for e in region_sort_methods.values()]
+        sorts = [e.to_json() for e in sort_methods.values()]
         sorts.sort(key=lambda e: e["id"])
 
         data = {

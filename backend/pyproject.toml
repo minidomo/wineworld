@@ -15,6 +15,7 @@ module = [
     'flask_marshmallow.*',
     'pyuca',
     "flask_restful",
+    "flask_restful.*",
     "pendulum",
 ]
 ignore_missing_imports = true

@@ -3,23 +3,169 @@ from sqlalchemy.engine import Row
 from sqlalchemy.sql.expression import Select, or_, text
 
 from src.common.core import db
-from src.common.sort_method import region_sort_methods
+from src.common.query_argument import QueryArgument
+from src.common.sort_method import SortMethod
 from src.models import Region
 from src.schemas import regions_schema
 from src.util.general import PAGE_SIZE, JsonObject, determine_total_pages
 
+sort_methods: dict[str, SortMethod] = {
+    e.id: e
+    for e in [
+        SortMethod(
+            column=Region.name,
+            ascending=True,
+            name="Name",
+            group="Name",
+        ),
+        SortMethod(
+            column=Region.name,
+            ascending=False,
+            name="Name (Reverse)",
+            group="Name",
+        ),
+        SortMethod(
+            column=Region.rating,
+            ascending=True,
+            name="Rating (Low to High)",
+            group="Rating",
+        ),
+        SortMethod(
+            column=Region.rating,
+            ascending=False,
+            name="Rating (High to Low)",
+            group="Rating",
+        ),
+        SortMethod(
+            column=Region.reviews,
+            ascending=True,
+            name="Review Count (Low to High)",
+            group="Review Count",
+        ),
+        SortMethod(
+            column=Region.reviews,
+            ascending=False,
+            name="Review Count (High to Low)",
+            group="Review Count",
+        ),
+        SortMethod(
+            column=Region.country,
+            ascending=True,
+            name="Country",
+            group="Country",
+        ),
+        SortMethod(
+            column=Region.country,
+            ascending=False,
+            name="Country (Reverse)",
+            group="Country",
+        ),
+    ]
+}
+
+
+def process_tags(query: Select, tags: list[str]) -> Select:
+    for tag in tags:
+        query = query.filter(text(f"'{tag}' MEMBER OF({Region.tags.key})"))
+    return query
+
+
+def process_trip_types(query: Select, trip_types: list[str]) -> Select:
+    for trip_type in trip_types:
+        query = query.filter(text(f"'{trip_type}' MEMBER OF({Region.trip_types.key})"))
+    return query
+
+
+def process_sort(query: Select, id: str) -> Select:
+    if id not in sort_methods:
+        return query
+    return query.order_by(sort_methods[id].clause)
+
+
+arguments: dict[str, QueryArgument] = {
+    e.name: e
+    for e in [
+        QueryArgument(
+            "page",
+            lambda query, value: query.limit(PAGE_SIZE).offset((value - 1) * PAGE_SIZE),
+            type=int,
+            location="values",
+        ),
+        QueryArgument(
+            "name",  # TODO deprecated
+            lambda query, value: query.filter(Region.name.contains(value)),
+            type=str,
+            location="values",
+        ),
+        QueryArgument(
+            "country",
+            lambda query, value: query.filter(or_(Region.country == e for e in value)),
+            type=str,
+            location="values",
+            action="append",
+        ),
+        QueryArgument(
+            "startRating",
+            lambda query, value: query.filter(Region.rating >= value),
+            type=float,
+            location="values",
+        ),
+        QueryArgument(
+            "endRating",
+            lambda query, value: query.filter(Region.rating <= value),
+            type=float,
+            location="values",
+        ),
+        QueryArgument(
+            "startReviews",
+            lambda query, value: query.filter(Region.reviews >= value),
+            type=int,
+            location="values",
+        ),
+        QueryArgument(
+            "endReviews",
+            lambda query, value: query.filter(Region.reviews <= value),
+            type=int,
+            location="values",
+        ),
+        QueryArgument(
+            "tags",
+            process_tags,
+            type=str,
+            location="values",
+            action="append",
+        ),
+        QueryArgument(
+            "tripTypes",
+            process_trip_types,
+            type=str,
+            location="values",
+            action="append",
+        ),
+        QueryArgument(
+            "sort",
+            process_sort,
+            type=str,
+            location="values",
+        ),
+        QueryArgument(
+            "search",
+            lambda query, value: query.filter(
+                or_(
+                    Region.name.contains(value),
+                    Region.country.contains(value),
+                    text(f"REGEXP_LIKE(`{Region.trip_types.key}`, '.*{value}.*', 'i')"),
+                )
+            ),
+            type=str,
+            location="values",
+        ),
+    ]
+}
+
 parser = reqparse.RequestParser()
-parser.add_argument("page", type=int, location="values")
-parser.add_argument("name", type=str, location="values")  # deprecated
-parser.add_argument("country", type=str, location="values", action="append")
-parser.add_argument("startRating", type=float, location="values")
-parser.add_argument("endRating", type=float, location="values")
-parser.add_argument("startReviews", type=int, location="values")
-parser.add_argument("endReviews", type=int, location="values")
-parser.add_argument("tags", type=str, location="values", action="append")
-parser.add_argument("tripTypes", type=str, location="values", action="append")
-parser.add_argument("sort", type=str, location="values")
-parser.add_argument("search", type=str, location="values")
+for argument in arguments.values():
+    argument.add_to_parser(parser)
 
 
 class RegionsAll(Resource):
@@ -27,57 +173,14 @@ class RegionsAll(Resource):
         args = parser.parse_args()
         query: Select = db.select(Region, text("COUNT(*) OVER() as total_count"))
 
-        if args["search"] is not None:
-            clauses = [
-                Region.name.contains(args["search"]),
-                Region.country.contains(args["search"]),
-                text(f"REGEXP_LIKE(`{Region.trip_types.key}`, '.*{args['search']}.*', 'i')"),
-            ]
-            query = query.filter(or_(*clauses))
-
-        # TODO remove this
-        if args["name"] is not None:
-            query = query.filter(Region.name.contains(args["name"]))
-
-        if args["startRating"] is not None:
-            query = query.filter(Region.rating >= args["startRating"])
-
-        if args["endRating"] is not None:
-            query = query.filter(Region.rating <= args["endRating"])
-
-        if args["startReviews"] is not None:
-            query = query.filter(Region.reviews >= args["startReviews"])
-
-        if args["endReviews"] is not None:
-            query = query.filter(Region.reviews <= args["endReviews"])
-
-        if args["country"] is not None:
-            clauses = [Region.country == e for e in args["country"]]
-            query = query.filter(or_(*clauses))
-
-        if args["tags"] is not None:
-            for tag in args["tags"]:
-                clause = text(f"'{tag}' MEMBER OF({Region.tags.key})")
-                query = query.filter(clause)
-
-        if args["tripTypes"] is not None:
-            for trip_type in args["tripTypes"]:
-                clause = text(f"'{trip_type}' MEMBER OF({Region.trip_types.key})")
-                query = query.filter(clause)
-
-        if args["sort"] in region_sort_methods:
-            sort_method = region_sort_methods[args["sort"]]
-            query = query.order_by(sort_method.clause)
-
-        if args["page"] is not None:
-            query = query.limit(PAGE_SIZE)
-            query = query.offset((args["page"] - 1) * PAGE_SIZE)
+        for name in args:
+            if args[name] is not None:
+                query = arguments[name].callback(query, args[name])
 
         rows: list[Row] = db.session.execute(query).fetchall() if args["page"] is None or args["page"] >= 1 else []
 
         region_list: list[JsonObject] = regions_schema.dump(e for e, _ in rows)
         _, total_instances = rows[0] if len(rows) > 0 else (0, 0)
-        total_pages = determine_total_pages(total_instances, PAGE_SIZE)
 
         cur_page = 1
         total_pages = 1

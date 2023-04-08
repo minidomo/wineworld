@@ -2,8 +2,8 @@ from flask_restful import Resource
 from sqlalchemy.sql.expression import Select
 
 from src.common.core import db
-from src.common.sort_method import vineyard_sort_methods
 from src.models import Vineyard
+from src.routes.vineyards.all import sort_methods
 
 
 class VineyardsConstraints(Resource):
@@ -12,7 +12,7 @@ class VineyardsConstraints(Resource):
         countries_query = countries_query.distinct().order_by(Vineyard.country.asc())
         countries: list[str] = db.session.execute(countries_query).scalars().all()
 
-        sorts = [e.to_json() for e in vineyard_sort_methods.values()]
+        sorts = [e.to_json() for e in sort_methods.values()]
         sorts.sort(key=lambda e: e["id"])
 
         data = {

@@ -2,8 +2,8 @@ from flask_restful import Resource
 from sqlalchemy.sql.expression import Select
 
 from src.common.core import db
-from src.common.sort_method import wine_sort_methods
 from src.models import Wine
+from src.routes.wines.all import sort_methods
 
 
 class WinesConstraints(Resource):
@@ -20,7 +20,7 @@ class WinesConstraints(Resource):
         types_query = types_query.distinct().order_by(Wine.type.asc())
         types: list[str] = db.session.execute(types_query).scalars().all()
 
-        sorts = [e.to_json() for e in wine_sort_methods.values()]
+        sorts = [e.to_json() for e in sort_methods.values()]
         sorts.sort(key=lambda e: e["id"])
 
         data = {
