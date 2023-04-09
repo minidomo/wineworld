@@ -4,7 +4,7 @@ from jsonschema import validate
 
 import __init__  # type: ignore
 from tests.common.flask_testcase import FlaskTestCase
-from tests.common.schemas.responses.wine import id_response_schema
+from tests.schemas.responses.wine import id_response_schema
 
 
 class WineIdTests(FlaskTestCase):

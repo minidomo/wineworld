@@ -6,21 +6,28 @@ from ..wine import wine_schema
 id_response_schema = {
     "type": "object",
     "properties": {
-        **wine_schema["properties"],  # type: ignore
+        **vineyard_schema["properties"],  # type: ignore
         "related": {
             "type": "object",
             "properties": {
                 "regions": {
                     "type": "array",
-                    "items": {**region_schema},
+                    "items": region_schema,
                 },
-                "vineyards": {
+                "wines": {
                     "type": "array",
-                    "items": {**vineyard_schema},
+                    "items": wine_schema,
                 },
             },
+            "required": ["regions", "wines"],
+            "additionalProperties": False,
         },
     },
+    "required": [
+        *vineyard_schema["required"],  # type: ignore
+        "related",
+    ],
+    "additionalProperties": False,
 }
 
 constraints_response_schema = {
@@ -30,13 +37,14 @@ constraints_response_schema = {
             "type": "array",
             "items": {"type": "string"},
         },
-        "types": {
-            "type": "array",
-            "items": {"type": "string"},
-        },
-        "wineries": {
-            "type": "array",
-            "items": {"type": "string"},
+        "price": {
+            "type": "object",
+            "properties": {
+                "max": {"type": "number"},
+                "min": {"type": "number"},
+            },
+            "required": ["max", "min"],
+            "additionalProperties": False,
         },
         "rating": {
             "type": "object",
@@ -44,18 +52,30 @@ constraints_response_schema = {
                 "max": {"type": "number"},
                 "min": {"type": "number"},
             },
+            "required": ["max", "min"],
+            "additionalProperties": False,
         },
         "reviews": {
             "type": "object",
             "properties": {
                 "min": {"type": "number"},
             },
+            "required": ["min"],
+            "additionalProperties": False,
         },
         "sorts": {
             "type": "array",
-            "items": {**sort_method_schema},
+            "items": sort_method_schema,
         },
     },
+    "required": [
+        "countries",
+        "price",
+        "rating",
+        "reviews",
+        "sorts",
+    ],
+    "additionalProperties": False,
 }
 
 all_response_schema = {
@@ -67,7 +87,15 @@ all_response_schema = {
         "totalPages": {"type": "number"},
         "list": {
             "type": "array",
-            "items": {**wine_schema},
+            "items": vineyard_schema,
         },
     },
+    "required": [
+        "length",
+        "page",
+        "totalInstances",
+        "totalPages",
+        "list",
+    ],
+    "additionalProperties": False,
 }

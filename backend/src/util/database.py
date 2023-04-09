@@ -1,4 +1,4 @@
-from typing import Any, Type, TypeVar
+from typing import TypeVar
 
 from sqlalchemy.engine import Row
 from sqlalchemy.sql.expression import Select
@@ -6,7 +6,8 @@ from sqlalchemy.sql.expression import Select
 from src.common.core import db
 from src.models import RedditPost, Wine
 
-JsonObject = dict[str, Any]
+from .general import JsonObject
+
 T = TypeVar("T")
 
 WINES_REDDIT_QUERY: Select = db.select(Wine, RedditPost).join_from(

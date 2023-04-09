@@ -6,4 +6,6 @@ sort_method_schema = {
         "id": {"type": "string"},
         "name": {"type": "string"},
     },
+    "required": ["ascending", "group", "id", "name"],
+    "additionalProperties": False,
 }

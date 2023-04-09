@@ -5,8 +5,8 @@ from jsonschema import validate
 import __init__  # type: ignore
 from src.routes.regions.all import sort_methods
 from tests.common.flask_testcase import FlaskTestCase
-from tests.common.schemas.responses.region import constraints_response_schema
 from tests.common.util import JsonObject, is_alphabetical_order
+from tests.schemas.responses.region import constraints_response_schema
 
 
 class RegionConstraintTests(FlaskTestCase):

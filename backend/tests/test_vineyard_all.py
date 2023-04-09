@@ -6,8 +6,8 @@ from unidecode import unidecode
 import __init__  # type: ignore
 from src.util.general import PAGE_SIZE
 from tests.common.flask_testcase import FlaskTestCase
-from tests.common.schemas.responses.vineyard import all_response_schema
 from tests.common.util import JsonObject, create_url, is_alphabetical_order
+from tests.schemas.responses.vineyard import all_response_schema
 
 
 class VineyardAllTests(FlaskTestCase):

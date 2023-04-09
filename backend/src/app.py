@@ -27,15 +27,20 @@ JSON MEMBER OF function
 """
 
 api.add_resource(routes.Welcome, "/")
+
 api.add_resource(routes.RegionsAll, "/regions")
 api.add_resource(routes.RegionsId, "/regions/<int:id>")
 api.add_resource(routes.RegionsConstraints, "/regions/constraints")
+
 api.add_resource(routes.WinesAll, "/wines")
 api.add_resource(routes.WinesId, "/wines/<int:id>")
 api.add_resource(routes.WinesConstraints, "/wines/constraints")
+
 api.add_resource(routes.VineyardsAll, "/vineyards")
 api.add_resource(routes.VineyardsId, "/vineyards/<int:id>")
 api.add_resource(routes.VineyardsConstraints, "/vineyards/constraints")
+
+api.add_resource(routes.VisualizationLine, "/visualizations/provider/line")
 
 
 if __name__ == "__main__":
