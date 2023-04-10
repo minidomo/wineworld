@@ -20,7 +20,8 @@ const WineSearch = () => {
     async function searchWines() {
       const response = await axios.get('https://api.wineworld.me/wines', {
         params: {
-          name: searchQuery,
+          search: searchQuery,
+          // name: searchQuery,
         },
       });
       setWines(response.data.list);

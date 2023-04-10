@@ -30,7 +30,8 @@ const Search = () => {
     async function searchWines() {
       const response = await axios.get('https://api.wineworld.me/wines', {
         params: {
-          name: searchQuery,
+          search: searchQuery,
+          // name: searchQuery,
         },
       });
       setWines(response.data.list);
@@ -40,7 +41,8 @@ const Search = () => {
     async function searchVineyards() {
       const response = await axios.get('https://api.wineworld.me/vineyards', {
         params: {
-          name: searchQuery,
+          search: searchQuery,
+          // name: searchQuery,
         },
       });
       setVineyards(response.data.list);
@@ -50,7 +52,8 @@ const Search = () => {
     async function searchRegions() {
       const response = await axios.get('https://api.wineworld.me/regions', {
         params: {
-          name: searchQuery,
+          search: searchQuery,
+          // name: searchQuery,
         },
       });
       setRegions(response.data.list);
