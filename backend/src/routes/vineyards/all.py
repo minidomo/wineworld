@@ -15,13 +15,13 @@ sort_methods: dict[str, SortMethod] = {
         SortMethod(
             column=Vineyard.name,
             ascending=True,
-            name="Name",
+            name="Name (A-Z)",
             group="Name",
         ),
         SortMethod(
             column=Vineyard.name,
             ascending=False,
-            name="Name (Reverse)",
+            name="Name (Z-A)",
             group="Name",
         ),
         SortMethod(
@@ -63,13 +63,13 @@ sort_methods: dict[str, SortMethod] = {
         SortMethod(
             column=Vineyard.country,
             ascending=True,
-            name="Country",
+            name="Country (A-Z)",
             group="Country",
         ),
         SortMethod(
             column=Vineyard.country,
             ascending=False,
-            name="Country (Reverse)",
+            name="Country (Z-A)",
             group="Country",
         ),
     ]
