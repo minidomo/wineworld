@@ -1,6 +1,9 @@
 import json
 
-from models import (
+import __init__  # type: ignore
+from src.app import app
+from src.common.core import db
+from src.models import (
     RedditPost,
     Region,
     Vineyard,
@@ -8,8 +11,6 @@ from models import (
     Wine,
     WineRegionAssociation,
     WineVineyardAssociation,
-    app,
-    db,
 )
 
 
@@ -87,11 +88,6 @@ def populate_db(lists: list[list]):
     db.session.commit()
 
 
-# https://stackoverflow.com/a/1778993
-def get_string_length(var):
-    return var.property.columns[0].type.length
-
-
 def create_reddit_posts() -> list[RedditPost]:
     with open("data/wine_reddit.json") as jsn:
         wine_types = json.load(jsn)["data"]
@@ -102,8 +98,6 @@ def create_reddit_posts() -> list[RedditPost]:
                 "wine_type": wine_type,
                 "urls": wine_types[wine_type],
             }
-
-            assert len(args["wine_type"]) <= get_string_length(RedditPost.wine_type)
 
             ret.append(RedditPost(**args))
 
@@ -128,13 +122,6 @@ def create_wines() -> list[Wine]:
                 "type": wine["type"],
                 "image": wine["image"],
             }
-
-            assert len(args["name"]) <= get_string_length(Wine.name)
-            assert len(args["country"]) <= get_string_length(Wine.country)
-            assert len(args["region"]) <= get_string_length(Wine.region)
-            assert len(args["winery"]) <= get_string_length(Wine.winery)
-            assert len(args["type"]) <= get_string_length(Wine.type)
-            assert len(args["image"]) <= get_string_length(Wine.image)
 
             ret.append(Wine(**args))
 
@@ -162,11 +149,6 @@ def create_vineyards() -> list[Vineyard]:
                 "region_names": vineyard["regions"],
             }
 
-            assert len(args["name"]) <= get_string_length(Vineyard.name)
-            assert len(args["country"]) <= get_string_length(Vineyard.country)
-            assert len(args["image"]) <= get_string_length(Vineyard.image)
-            assert len(args["url"]) <= get_string_length(Vineyard.url)
-
             ret.append(Vineyard(**args))
 
         return ret
@@ -193,11 +175,6 @@ def create_regions() -> list[Region]:
                 "tags": region["tags"],
                 "trip_types": region["tripTypes"],
             }
-
-            assert len(args["name"]) <= get_string_length(Region.name)
-            assert len(args["country"]) <= get_string_length(Region.country)
-            assert len(args["url"]) <= get_string_length(Region.url)
-            assert len(args["image"]) <= get_string_length(Region.image)
 
             ret.append(Region(**args))
 

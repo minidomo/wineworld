@@ -7,7 +7,7 @@ To develop on on VS Code, install the [Dev Containers](https://marketplace.visua
 To start the development server while on this container, run the following:
 
 ```console
-python3 app.py
+make run
 ```
 
 ## Server
@@ -54,6 +54,7 @@ make server-background # runs the server in the background
    ```
 
 4. Starting the server with the new changes.
+   
    ```console
    cd backend
    make build-server
@@ -76,15 +77,9 @@ make server-background # runs the server in the background
 
 3. Starting the server with the new changes.
    
-   **If the server is currently running**
-
    ```console
-   make stop-server
-   ```
-
-   **If the server is not running**
-
-   ```console
+   cd backend
+   make build-server
    systemctl restart wineworld
    ```
 
@@ -99,14 +94,6 @@ systemctl daemon-reload
 ```
 
 Start the server with the new changes.
-
-**If the server is currently running**
-
-```console
-make stop-server
-```
-
-**If the server is not running**
 
 ```console
 systemctl restart wineworld

@@ -19,7 +19,8 @@ const RegionSearch = () => {
     async function searchRegions() {
       const response = await axios.get('https://api.wineworld.me/regions', {
         params: {
-          name: searchQuery,
+          search: searchQuery,
+          // name: searchQuery,
         },
       });
       setRegions(response.data.list);
