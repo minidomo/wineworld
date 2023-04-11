@@ -56,13 +56,19 @@ const RegionInstance = () => {
     <Container>
       {loaded ? (
         <div>
-          <img src={image} class="img-fluid" alt="..." onError={handleRegionImageError}></img>
           <br />
-          <br />
-          <h3>{name}</h3>
-          <h5>{country}</h5>
-          <Row>
-            <span class="border-bottom border-secondary">
+          <Container className="custom2">
+            <br />
+            <img src={image} style={{
+              height: '10%', width: '20%', objectFit: 'contain',
+              borderStyle: 'solid', borderWidth: '3px',
+            }}
+              onError={handleRegionImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{country}</h5>
+            <Row>
               <div className="p-5">
                 <h6>
                   <p align="center">
@@ -79,22 +85,27 @@ const RegionInstance = () => {
                   </p>
                 </h6>
               </div>
-            </span>
-          </Row>
+            </Row>
+          </Container>
+          <br></br>
           <Row className="p-5">
             <h5 align="left">Location</h5>
             <Map lat={latitude} lng={longitude} />
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <Row>
             <h5 align="left">Related Wines</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {wines.map(wine => (
               <Col>
                 <WineCard wine={wine} />
               </Col>
             ))}
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <Row>
             <h5 align="left">Related Vineyards</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {vineyards.map(vineyard => (
               <Col>
                 <VineyardCard vineyard={vineyard} />

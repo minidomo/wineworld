@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 const ToolCard = props => {
   const { name, image, text, url } = props.tool;
@@ -11,9 +12,8 @@ const ToolCard = props => {
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{text}</Card.Text>
-        <a href={url}>
-          <Button variant="primary">Learn More</Button>
-        </a>
+        <Link to={url} class={'btn stretched-link'}>
+        </Link>
       </Card.Body>
     </Card>
   );

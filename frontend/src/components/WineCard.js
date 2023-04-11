@@ -12,13 +12,12 @@ const WineCard = props => {
 
   return (
     <Container>
-      {/* <Card border='dark' style={{ width: '80%', height: '50%' }}> */}
-      <Card border="dark" style={{ height: '35rem', width: '18rem' }}>
+      <Card style={{ height: '35rem' }}>
         <Card.Img
           class="img-thumbnail"
           variant="top"
           src={image}
-          style={{ height: '50%', width: '100%', objectFit: 'contain' }}
+          style={{ height: '40%', width: '100%', objectFit: 'contain' }}
           onError={handleWineImageError}
         />
         <Card.Body>
@@ -40,7 +39,7 @@ const WineCard = props => {
           </Card.Text>
         </Card.Body>
         <div class="card-footer">
-          <Link to={`/wines/${id}`} class="btn btn-secondary stretched-link">
+          <Link to={`/wines/${id}`} class="btn custom1 stretched-link btn-sm">
             View Wine
           </Link>
         </div>

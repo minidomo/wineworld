@@ -58,13 +58,16 @@ const WineInstance = () => {
     <Container>
       {loaded ? (
         <div>
-          <img src={image} class="img-fluid" alt="..." onError={handleWineImageError}></img>
           <br />
-          <br />
-          <h3>{name}</h3>
-          <h5>{type} Wine</h5>
-          <Row>
-            <span class="border-bottom border-secondary">
+          <Container className="custom2">
+            <br />
+            <img src={image} style={{ height: '12%', width: '6%', objectFit: 'contain' }}
+              onError={handleWineImageError}></img>
+            <br />
+            <br />
+            <h3>{name}</h3>
+            <h5>{type} Wine</h5>
+            <Row>
               <div className="p-5">
                 <p align="center">
                   <h6>
@@ -84,19 +87,24 @@ const WineInstance = () => {
                   </h6>
                 </p>
               </div>
-            </span>
-          </Row>
-          <Row md={10} className="p-4 g-4">
+            </Row>
+          </Container>
+          <br></br>
+          <Row>
             <h5 align="left">Related Vineyards</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             {vineyards.map(vineyard => (
               <Col>
                 <VineyardCard vineyard={vineyard} />
               </Col>
             ))}
           </Row>
-          <Row md={10} className="p-4 g-4">
+          <Row>
+            <h5 align="left">Related Regions</h5>
+          </Row>
+          <Row md={4} className="p-4 g-4">
             <Col>
-              <h5 align="left">Related Regions</h5>
               {regions.map(region_data => (
                 <Col>
                   <RegionCard region={region_data} />
@@ -107,6 +115,7 @@ const WineInstance = () => {
 
           <div id="learn-more-section" className="p-4 g-4">
             <h5>Learn more about {type} wine</h5>
+            <br />
             <RedditCarousel redditUrls={reddit} />
           </div>
         </div>

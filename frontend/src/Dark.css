@@ -1,18 +1,59 @@
 .dark {
-  background-color: #000;
-  color: #fff;
+  background-color: #121212;
+  color: #eee;
 }
+
 .light {
   background-color: #fff;
-  color: #000;
+  color: #02111B;
 }
 
 .light .card {
   background-color: #fff;
+  border-width: 3px;
+  border-radius: 90px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #CCCCCC;
+  overflow: hidden;
+}
+
+.light .card:hover {
+  border-color: #C2C2C2
 }
 
 .dark .card {
-  background-color: #111;
+  background-color: #1f1b24;
+  border-width: 3px;
+  border-radius: 90px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #2c2437;
+  overflow: hidden;
+}
+
+.dark .card:hover {
+  border-color: #352b43;
+}
+
+.light .btn.custom1 {
+  border-width: 1px;
+  background-color: #676E79;
+  color: #eee
+}
+
+.light .btn.custom1:hover {
+  border-width: 1px;
+  background-color: #5E646E;
+  color: #fff
+}
+
+.dark .btn.custom1 {
+  background-color: rgb(104, 171, 152);
+}
+
+.dark .btn.custom1:hover {
+  background-color: #6fa092;
 }
 
 .light .list-group-item {
@@ -22,4 +63,48 @@
 .dark .list-group-item {
   background: #111;
   color: #ddd;
+}
+
+.light .form-control {
+  border-width: 1px;
+  background-color: #fff;
+}
+
+.light .form-control:focus {
+  border-color: white;
+  box-shadow: 0px 0px 8px rgb(177, 177, 177);
+}
+
+.dark .form-control {
+  border-width: 1px;
+  background-color: #e4e3e3;
+  color: #121212;
+}
+
+.dark .form-control:focus {
+  border-color: #e4e3e3;
+  box-shadow: 0px 0px 8px rgb(102, 212, 181);
+}
+
+.dark .navbar-brand {
+  color: aquamarine
+}
+
+.light .container.custom2 {
+  background-color: #fff;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 40px;
+  border-color: #CCCCCC;
+  overflow: hidden;
+}
+
+.dark .container.custom2 {
+  color: #e4e3e3;
+  background-color: #221d28;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 40px;
+  border-color: #352b43;
+  overflow: hidden;
 }

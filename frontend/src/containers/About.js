@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Stack from 'react-bootstrap/Stack';
+import { Link } from 'react-router-dom';
 
 import ApiCard from '../components/ApiCard';
 import { ApiData } from '../components/ApiData.js';
@@ -86,32 +88,44 @@ const About = () => {
 
   return (
     <Stack>
-      <Container className="p-4"></Container>
-
-      <Container className="p-4" style={{ backgroundColor: '#BBB' }}>
-        <h1 className="d-flex justify-content-center p-4 ">Welcome to WineWorld!</h1>
-        <p className="mx-auto">
-          WineWorld is an innovative platform that provides a comprehensive guide to the world of wine, vineyards, and
-          wine regions. Our goal is to empower wine enthusiasts, from beginners to experts, to explore and deepen their
-          understanding of this fascinating industry.
-        </p>
-
-        <h1 className="d-flex justify-content-center p-3 ">Repository Statistics</h1>
-        <Row className="p-4">
-          <Col className="d-flex justify-content-center">
-            <h2>Total Commits: {totalCommits}</h2>
-          </Col>
-          <Col className="d-flex justify-content-center">
-            <h2>Total Issues: {totalIssues}</h2>
-          </Col>
-          <Col className="d-flex justify-content-center">
-            <h2>Total Tests: {totalTotalTests}</h2>
+      <Container className="d-flex justify-content-center p-4">
+        <Row>
+          <Col>
+            <Card style={{ width: '70rem' }}>
+              <Card.Body>
+                <Card.Title>
+                  <h1>
+                    Welcome to WineWorld!
+                  </h1>
+                </Card.Title>
+                <Card.Text>
+                  <p className="mx-auto">
+                    WineWorld is an innovative platform that provides a comprehensive guide to the world of
+                    wine, vineyards, and wine regions. Our goal is to empower wine enthusiasts, from
+                    beginners to experts, to explore and deepen their
+                    understanding of this fascinating industry.
+                  </p>
+                  <h1 className="d-flex justify-content-center p-3 ">Repository Statistics</h1>
+                  <Row className="p-4">
+                    <Col className="d-flex justify-content-center">
+                      <h2>Total Commits: {totalCommits}</h2>
+                    </Col>
+                    <Col className="d-flex justify-content-center">
+                      <h2>Total Issues: {totalIssues}</h2>
+                    </Col>
+                    <Col className="d-flex justify-content-center">
+                      <h2>Total Tests: {totalTotalTests}</h2>
+                    </Col>
+                  </Row>
+                  <Link to={'https://documenter.getpostman.com/view/21507814/2s93CEvGRv'}
+                    class={'btn custom1 stretched-link'}>
+                    <h2>API Documentation</h2>
+                  </Link>
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
-
-        <a href={'https://documenter.getpostman.com/view/21507814/2s93CEvGRv'}>
-          <h2>API Documentation</h2>
-        </a>
       </Container>
 
       <Container className="p-4">
