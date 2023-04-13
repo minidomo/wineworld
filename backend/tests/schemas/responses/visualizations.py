@@ -29,14 +29,14 @@ provider_line_response_schema = {
 }
 
 state_schema = {
-                "type": "object",
-                "properties": {
-                    "state": {"type": "string"},
-                    "value": {"type": "number"},
-                },
-                "required": ["state", "value"],
-                "additionalProperties": False,
-            }
+    "type": "object",
+    "properties": {
+        "state": {"type": "string"},
+        "value": {"type": "number"},
+    },
+    "required": ["state", "value"],
+    "additionalProperties": False,
+}
 
 provider_choropleth_response_schema = {
     "type": "object",

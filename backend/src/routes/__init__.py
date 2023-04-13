@@ -4,8 +4,8 @@ from .regions.id import RegionsId
 from .vineyards.all import VineyardsAll
 from .vineyards.constraints import VineyardsConstraints
 from .vineyards.id import VineyardsId
-from .visualizations.provider.line.index import VisualizationLine
 from .visualizations.provider.choropleth.index import VisualizationChoropleth
+from .visualizations.provider.line.index import VisualizationLine
 from .welcome import Welcome
 from .wines.all import WinesAll
 from .wines.constraints import WinesConstraints
