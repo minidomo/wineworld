@@ -1,23 +1,14 @@
 import unittest
 
-from driver import create_driver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-URL = "https://www.wineworld.me/"
+from tests.common.driver import URL
+from tests.common.gui_testcase import GuiTestcase
 
 
-class TestHome(unittest.TestCase):
-    @classmethod
-    def setUpClass(self):
-        self.driver = create_driver()
-        self.driver.get(URL)
-
-    @classmethod
-    def tearDownClass(self):
-        self.driver.quit()
-
+class TestHome(GuiTestcase):
     def test_HomeAboutLink(self):
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.CLASS_NAME, "navbar-brand"))
@@ -30,7 +21,7 @@ class TestHome(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[1]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "about")
+        self.assertEqual(self.driver.current_url, f"{URL}/about")
 
     def test_HomeWinesLink(self):
         WebDriverWait(self.driver, 10).until(
@@ -44,7 +35,7 @@ class TestHome(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[2]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "wines")
+        self.assertEqual(self.driver.current_url, f"{URL}/wines")
 
     def test_HomeVineyardsLink(self):
         WebDriverWait(self.driver, 10).until(
@@ -58,7 +49,7 @@ class TestHome(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[3]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "vineyards")
+        self.assertEqual(self.driver.current_url, f"{URL}/vineyards")
 
     def test_HomeRegionsLink(self):
         WebDriverWait(self.driver, 10).until(
@@ -72,7 +63,7 @@ class TestHome(unittest.TestCase):
         element = self.driver.find_element(By.XPATH, '//*[@id="navbarText"]/ul/li[4]/a')
         self.driver.execute_script("arguments[0].click();", element)
 
-        self.assertEqual(self.driver.current_url, URL + "regions")
+        self.assertEqual(self.driver.current_url, f"{URL}/regions")
 
 
 if __name__ == "__main__":

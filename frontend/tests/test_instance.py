@@ -1,35 +1,29 @@
 import unittest
 
-from driver import create_driver
+from tests.common.driver import URL
+from tests.common.gui_testcase import GuiTestcase
 
-URL = "https://www.wineworld.me/"
 
-
-class TestInstances(unittest.TestCase):
-    @classmethod
-    def setUpClass(self):
-        self.driver = create_driver()
-        self.driver.get(URL)
-
-    @classmethod
-    def tearDownClass(self):
-        self.driver.quit()
-
+class TestInstances(GuiTestcase):
     def test_wines(self):
-        self.driver.get(URL + "wines")
-        self.assertEqual(self.driver.current_url, URL + "wines")
+        url = f"{URL}/wines"
+        self.driver.get(url)
+        self.assertEqual(self.driver.current_url, url)
 
     def test_vineyards(self):
-        self.driver.get(URL + "vineyards")
-        self.assertEqual(self.driver.current_url, URL + "vineyards")
+        url = f"{URL}/vineyards"
+        self.driver.get(url)
+        self.assertEqual(self.driver.current_url, url)
 
     def test_regions(self):
-        self.driver.get(URL + "regions")
-        self.assertEqual(self.driver.current_url, URL + "regions")
+        url = f"{URL}/regions"
+        self.driver.get(url)
+        self.assertEqual(self.driver.current_url, url)
 
     def test_search(self):
-        self.driver.get(URL + "search")
-        self.assertEqual(self.driver.current_url, URL + "search")
+        url = f"{URL}/search"
+        self.driver.get(url)
+        self.assertEqual(self.driver.current_url, url)
 
 
 if __name__ == "__main__":

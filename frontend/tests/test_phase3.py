@@ -1,24 +1,15 @@
 import unittest
 
-from driver import create_driver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
 
-URL = "https://www.wineworld.me/"
+from tests.common.driver import URL
+from tests.common.gui_testcase import GuiTestcase
 
 
-class TestPhase3(unittest.TestCase):
-    @classmethod
-    def setUpClass(self):
-        self.driver = create_driver()
-        self.driver.get(URL)
-
-    @classmethod
-    def tearDownClass(self):
-        self.driver.quit()
-
+class TestPhase3(GuiTestcase):
     # search tests
     def test_SitewideSearch(self):
         WebDriverWait(self.driver, 10).until(
@@ -27,96 +18,137 @@ class TestPhase3(unittest.TestCase):
         element = self.driver.find_element(By.CLASS_NAME, "navbar-brand")
         element.click()
 
-        searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/nav/nav/div/form/input')
+        searchInput = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/nav/nav/div/form/input'
+        )
         searchInput.send_keys("red" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '/html/body/div/div/div/div/div/div[1]/div/div[1]/div/div/div[2]/a'))
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    "/html/body/div/div/div/div/div/div[1]/div/div[1]/div/div/div[2]/a",
+                )
+            )
         )
-        element = self.driver.find_element(By.XPATH, '/html/body/div/div/div/div/div/div[1]/div/div[1]/div/div/div[2]/a')
+        element = self.driver.find_element(
+            By.XPATH,
+            "/html/body/div/div/div/div/div/div[1]/div/div[1]/div/div/div[2]/a",
+        )
         element.click()
 
-        self.assertEqual(self.driver.current_url, URL + "wines/266")
-    
+        self.assertEqual(self.driver.current_url, f"{URL}/wines/266")
+
     def test_WineModelSearch(self):
-        self.driver.get(URL + "wines")
+        self.driver.get(f"{URL}/wines")
 
-        searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input')
+        searchInput = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input'
+        )
         searchInput.send_keys("red" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'))
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
+            )
         )
-        element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
+        element = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'
+        )
         element.click()
-        
-        self.assertEqual(self.driver.current_url, URL + "wines/266")
+
+        self.assertEqual(self.driver.current_url, f"{URL}/wines/266")
 
     def test_VineyardModelSearch(self):
-        self.driver.get(URL + "vineyards")
+        self.driver.get(f"{URL}/vineyards")
 
-        searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input')
+        searchInput = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input'
+        )
         searchInput.send_keys("port" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div/div[2]/a'))
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div/div[2]/a')
+            )
         )
-        element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div/div[2]/a')
+        element = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div/div[2]/a'
+        )
         element.click()
-        
-        self.assertEqual(self.driver.current_url, URL + "vineyards/2")
+
+        self.assertEqual(self.driver.current_url, f"{URL}/vineyards/2")
 
     def test_RegionModelSearch(self):
-        self.driver.get(URL + "regions")
+        self.driver.get(f"{URL}/regions")
 
-        searchInput = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input')
+        searchInput = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input'
+        )
         searchInput.send_keys("mon" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'))
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
+            )
         )
-        element = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
+        element = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'
+        )
         element.click()
-        
-        self.assertEqual(self.driver.current_url, URL + "regions/4")
+
+        self.assertEqual(self.driver.current_url, f"{URL}/regions/4")
 
     # filtering tests
     def test_WineFilter(self):
-        self.driver.get(URL + "wines")
+        self.driver.get(f"{URL}/wines")
 
-        filterText = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button').text
+        filterText = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button'
+        ).text
         self.assertEqual(filterText, "Filter")
 
     def test_VineyardFilter(self):
-        self.driver.get(URL + "vineyards")
+        self.driver.get(f"{URL}/vineyards")
 
-        filterText = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button').text
+        filterText = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button'
+        ).text
         self.assertEqual(filterText, "Filter")
 
     def test_RegionFilter(self):
-        self.driver.get(URL + "regions")
+        self.driver.get(f"{URL}/regions")
 
-        filterText = self.driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button').text
+        filterText = self.driver.find_element(
+            By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button'
+        ).text
         self.assertEqual(filterText, "Filter")
 
     # sorting tests
     def test_WineSort(self):
-        self.driver.get(URL + "wines")
+        self.driver.get(f"{URL}/wines")
 
-        sortText = self.driver.find_element(By.XPATH, '//*[@id="dropdown-basic-button"]').text
+        sortText = self.driver.find_element(
+            By.XPATH, '//*[@id="dropdown-basic-button"]'
+        ).text
         self.assertEqual(sortText, "Sort By")
 
     def test_VineyardSort(self):
-        self.driver.get(URL + "vineyards")
+        self.driver.get(f"{URL}/vineyards")
 
-        sortText = self.driver.find_element(By.XPATH, '//*[@id="dropdown-basic-button"]').text
+        sortText = self.driver.find_element(
+            By.XPATH, '//*[@id="dropdown-basic-button"]'
+        ).text
         self.assertEqual(sortText, "Sort By")
 
     def test_regionSort(self):
-        self.driver.get(URL + "regions")
+        self.driver.get(f"{URL}/regions")
 
-        sortText = self.driver.find_element(By.XPATH, '//*[@id="dropdown-basic-button"]').text
+        sortText = self.driver.find_element(
+            By.XPATH, '//*[@id="dropdown-basic-button"]'
+        ).text
         self.assertEqual(sortText, "Sort By")
-    
+
+
 if __name__ == "__main__":
     unittest.main()
