@@ -51,3 +51,28 @@ provider_choropleth_response_schema = {
     "required": ["min", "max", "data"],
     "additionalProperties": False,
 }
+
+city_schema = {
+    "type": "object",
+    "properties": {
+        "city": {"type": "string"},
+        "state": {"type": "string"},
+        "population": {"type": "number"},
+        "longitude": {"type": "number"},
+        "latitude": {"type": "number"},
+    },
+    "required": ["city", "state", "population", "longitude", "latitude"],
+    "additionalProperties": False,
+}
+
+provider_bubble_response_schema = {
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": city_schema,
+        },
+    },
+    "required": ["data"],
+    "additionalProperties": False,
+}

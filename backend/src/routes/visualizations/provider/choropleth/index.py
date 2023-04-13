@@ -3,8 +3,7 @@ from typing import Any
 import requests
 from flask_restful import Resource
 
-from src.util.general import JsonObject
-from util import state_names
+from src.util.general import JsonObject, state_names
 
 
 def get_response() -> JsonObject:
