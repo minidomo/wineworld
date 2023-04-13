@@ -41,6 +41,8 @@ api.add_resource(routes.VineyardsId, "/vineyards/<int:id>")
 api.add_resource(routes.VineyardsConstraints, "/vineyards/constraints")
 
 api.add_resource(routes.VisualizationLine, "/visualizations/provider/line")
+api.add_resource(routes.VisualizationChoropleth, "/visualizations/provider/choropleth")
+api.add_resource(routes.VisualizationBubble, "/visualizations/provider/bubble")
 
 
 if __name__ == "__main__":
