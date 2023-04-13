@@ -1,7 +1,7 @@
+import re
 from typing import Any
 
 import requests
-import re
 from flask_restful import Resource
 
 from src.util.general import JsonObject, state_names
@@ -12,9 +12,9 @@ def get_response() -> JsonObject:
 
 
 def count_population(response: JsonObject) -> list[JsonObject]:
-    cities : list[JsonObject] = []
+    cities: list[JsonObject] = []
     for obj in response["data"]:
-        city : JsonObject = {}
+        city: JsonObject = {}
         city["city"] = obj["short_name"]
         city["state"] = re.split(", ", obj["long_name"])[1]
         if city["state"] not in state_names:
@@ -24,6 +24,7 @@ def count_population(response: JsonObject) -> list[JsonObject]:
         city["latitude"] = obj["latitude"]
         cities.append(city)
     return cities
+
 
 def create_response(cities: list[JsonObject]) -> JsonObject:
     return {"data": cities}
