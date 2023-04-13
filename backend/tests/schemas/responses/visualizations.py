@@ -32,9 +32,9 @@ state_schema = {
     "type": "object",
     "properties": {
         "state": {"type": "string"},
-        "value": {"type": "number"},
+        "num_airports": {"type": "number"},
     },
-    "required": ["state", "value"],
+    "required": ["state", "num_airports"],
     "additionalProperties": False,
 }
 

@@ -10,26 +10,36 @@ def get_response() -> JsonObject:
     return requests.get("https://api4.parkscape.me/airports").json()
 
 
-def count_airports(response: JsonObject) -> JsonObject:
-    states: JsonObject = {}
+def count_airports(response: JsonObject) -> list[JsonObject]:
+    counts: JsonObject = {}
     for airport in response["data"]:
         state = airport["state"]
         if state in state_names:
-            if state in states:
-                states[state] += 1
+            if state in counts:
+                counts[state] += 1
             else:
-                states[state] = 1
+                counts[state] = 1
+
+    states: list[JsonObject] = []
+    for state in counts:
+        states.append(
+            {
+                "state": state,
+                "num_airports": counts[state],
+            }
+        )
     return states
 
 
-def create_response(states: JsonObject) -> JsonObject:
-    key_min = min(states.keys(), key=(lambda k: states[k]))
-    key_max = max(states.keys(), key=(lambda k: states[k]))
+def create_response(states: list[JsonObject]) -> JsonObject:
+    min_num_airports = min([state["num_airports"] for state in states])
+    max_num_airports = max([state["num_airports"] for state in states])
 
-    data: list[JsonObject] = []
-    data.append(states)
-
-    return {"min": states[key_min], "max": states[key_max], "data": data}
+    return {
+        "min": min_num_airports,
+        "max": max_num_airports,
+        "data": states,
+    }
 
 
 class VisualizationChoropleth(Resource):
