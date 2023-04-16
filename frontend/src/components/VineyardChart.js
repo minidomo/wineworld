@@ -1,56 +1,56 @@
 import React from 'react';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const data = [
     {
-        country: "Argentina",
+        country: 'Argentina',
         count: 1,
     },
     {
-        country: "Australia",
+        country: 'Australia',
         count: 33,
     },
     {
-        country: "Austria",
+        country: 'Austria',
         count: 6,
     },
     {
-        country: "Brazil",
+        country: 'Brazil',
         count: 2,
     },
     {
-        country: "France",
+        country: 'France',
         count: 25,
     },
     {
-        country: "Germany",
+        country: 'Germany',
         count: 3,
     },
     {
-        country: "Italy",
+        country: 'Italy',
         count: 21,
     },
     {
-        country: "New Zealand",
+        country: 'New Zealand',
         count: 13,
     },
     {
-        country: "Portugal",
+        country: 'Portugal',
         count: 7,
     },
     {
-        country: "Spain",
+        country: 'Spain',
         count: 6,
     },
     {
-        country: "Switzerland",
+        country: 'Switzerland',
         count: 2,
     },
     {
-        country: "United States",
+        country: 'United States',
         count: 96,
     },
 
@@ -58,21 +58,23 @@ const data = [
 
 
 const VineyardChart = () => (
-    <Container fluid="md">
-        <Row>
+    <Container fluid='md'>
+        <Row style={{ height: 400 }}>
             <h6> Number of Vineyards in a Country </h6>
             <Col>
-                <BarChart width={1200} height={350} data={data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="country" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="count" fill="#ba4547" />
-                </BarChart>
+                <ResponsiveContainer width='100%' height='100%'>
+                    <BarChart width={600} height={200} data={data}>
+                        <CartesianGrid strokeDasharray='3 3' />
+                        <XAxis dataKey='country' />
+                        <YAxis />
+                        <Tooltip labelStyle={{ color: '#000' }} />
+                        <Legend />
+                        <Bar dataKey='count' fill='#ba4547' />
+                    </BarChart>
+                </ResponsiveContainer>
             </Col>
         </Row>
     </Container>
-  );
+);
 
 export default VineyardChart;

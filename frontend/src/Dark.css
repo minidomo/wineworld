@@ -83,7 +83,7 @@
 
 .dark .form-control:focus {
   border-color: #e4e3e3;
-  box-shadow: 0px 0px 8px rgb(102, 212, 181);
+  box-shadow: 0px 0px 8px #66d4b5;
 }
 
 .dark .navbar-brand {

@@ -76,9 +76,9 @@ const BarGraph = () => (
                         <CartesianGrid strokeDasharray='5 5' />
                         <XAxis dataKey='country' />
                         <YAxis />
-                        <Tooltip />
+                        <Tooltip labelStyle={{ color: '#000' }}/>
                         <Legend />
-                        <Bar dataKey='vineyard_count' fill='#6fa092' />
+                        <Bar dataKey='vineyard_count' fill='#ba4547' />
                     </BarChart>
                 </ResponsiveContainer>
             </Col>
