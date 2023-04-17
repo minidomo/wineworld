@@ -9,87 +9,66 @@ import { wineworld } from '../api';
 
 const date = dayjs();
 const ticks = (() => {
-    const ret = [];
+  const ret = [];
 
-    for (let hour = 0; hour <= 23; hour += 3) {
-        ret.push(
-            date.clone()
-                .set('hour', hour)
-                .set('minute', 0)
-                .unix()
-        );
-    }
+  for (let hour = 0; hour <= 23; hour += 3) {
+    ret.push(date.clone().set('hour', hour).set('minute', 0)
+.unix());
+  }
 
-    ret.push(
-        date.clone()
-            .set('hour', 23)
-            .set('minute', 59)
-            .unix()
-    );
+  ret.push(date.clone().set('hour', 23).set('minute', 59)
+.unix());
 
-    return ret;
+  return ret;
 })();
 
 function formatUnix(value) {
-    return dayjs.unix(value).format('h:mm A');
+  return dayjs.unix(value).format('h:mm A');
 }
 
 function createLineData(data) {
-    return data.map(e => (
-        {
-            time: date.clone()
-                .set('hour', e.time.hour)
-                .set('minute', e.time.minute)
-                .unix(),
-            days: e.value,
-        }
-    ));
+  return data.map(e => ({
+    time: date.clone().set('hour', e.time.hour).set('minute', e.time.minute)
+.unix(),
+    days: e.value,
+  }));
 }
 
 const LineGraph = () => {
-    const [graphData, setGraphData] = useState([]);
+  const [graphData, setGraphData] = useState([]);
 
-    useEffect(() => {
-        wineworld.get('/visualizations/provider/line')
-            .then(res => setGraphData(res.data.data))
-            .catch(console.error);
-    }, []);
+  useEffect(() => {
+    wineworld
+      .get('/visualizations/provider/line')
+      .then(res => setGraphData(res.data.data))
+      .catch(console.error);
+  }, []);
 
-
-    return (
-        <Container fluid='md'>
-            <Row style={{ height: 400 }}>
-                <h6> Number of Days Found where a Park is Open at a Specific Time </h6>
-                <Col>
-                    <ResponsiveContainer width='100%' height='100%'>
-                        <LineChart
-                            width={600}
-                            height={300}
-                            data={createLineData(graphData)}
-                        >
-                            <CartesianGrid strokeDasharray='3 3' />
-                            <XAxis
-                                dataKey='time'
-                                type='number'
-                                domain={['dataMin', 'dataMax']}
-                                ticks={ticks}
-                                tickFormatter={formatUnix}
-                            />
-                            <YAxis
-                                domain={['auto', 'auto']}
-                            />
-                            <Tooltip
-                                labelFormatter={formatUnix}
-                                labelStyle={{ color: '#000' }}
-                            />
-                            <Legend />
-                            <Line type='monotone' dataKey='days' stroke='#ba4547' />
-                        </LineChart>
-                    </ResponsiveContainer>
-                </Col>
-            </Row>
-        </Container>
-    );
+  return (
+    <Container fluid="md">
+      <Row style={{ height: 400 }}>
+        <h6> Number of Days Found where a Park is Open at a Specific Time </h6>
+        <Col>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart width={600} height={300} data={createLineData(graphData)}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="time"
+                type="number"
+                domain={['dataMin', 'dataMax']}
+                ticks={ticks}
+                tickFormatter={formatUnix}
+              />
+              <YAxis domain={['auto', 'auto']} />
+              <Tooltip labelFormatter={formatUnix} labelStyle={{ color: '#000' }} />
+              <Legend />
+              <Line type="monotone" dataKey="days" stroke="#ba4547" />
+            </LineChart>
+          </ResponsiveContainer>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default LineGraph;

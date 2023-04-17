@@ -11,8 +11,7 @@ const ToolCard = props => {
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{text}</Card.Text>
-        <Link to={url} class={'btn stretched-link'}>
-        </Link>
+        <Link to={url} class={'btn stretched-link'}></Link>
       </Card.Body>
     </Card>
   );

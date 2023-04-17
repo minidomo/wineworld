@@ -29,23 +29,11 @@ export function FilterInput(props) {
 }
 
 export function FilterIntegerInput(props) {
-  return (
-    <FilterInput
-      check={isDigits}
-      parse={parseInt}
-      setFilter={props.setFilter}
-      placeholder={props.placeholder}
-    />
-  );
+  return <FilterInput check={isDigits} parse={parseInt} setFilter={props.setFilter} placeholder={props.placeholder} />;
 }
 
 export function FilterNumberInput(props) {
   return (
-    <FilterInput
-      check={isNumber}
-      parse={parseFloat}
-      setFilter={props.setFilter}
-      placeholder={props.placeholder}
-    />
+    <FilterInput check={isNumber} parse={parseFloat} setFilter={props.setFilter} placeholder={props.placeholder} />
   );
 }

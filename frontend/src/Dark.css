@@ -5,7 +5,7 @@
 
 .light {
   background-color: #fff;
-  color: #02111B;
+  color: #02111b;
 }
 
 .light .card {
@@ -14,12 +14,12 @@
   border-radius: 90px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  border-color: #CCCCCC;
+  border-color: #cccccc;
   overflow: hidden;
 }
 
 .light .card:hover {
-  border-color: #C2C2C2
+  border-color: #c2c2c2;
 }
 
 .dark .card {
@@ -38,14 +38,14 @@
 
 .light .btn.custom1 {
   border-width: 1px;
-  background-color: #676E79;
-  color: #eee
+  background-color: #676e79;
+  color: #eee;
 }
 
 .light .btn.custom1:hover {
   border-width: 1px;
-  background-color: #5E646E;
-  color: #fff
+  background-color: #5e646e;
+  color: #fff;
 }
 
 .dark .btn.custom1 {
@@ -66,9 +66,9 @@
 }
 
 .dark .dropdown-toggle {
-  background-color:#121212;
-  border-color: #AEAFAA;
-  color:#AEAFAA;
+  background-color: #121212;
+  border-color: #aeafaa;
+  color: #aeafaa;
 }
 /* 
 .dark .dropdown-toggle:active {
@@ -104,16 +104,16 @@
 
 .dark .form-control.custom {
   background-color: #121212;
-  border-color:#AEAFAA;
-  color:#AEAFAA;
+  border-color: #aeafaa;
+  color: #aeafaa;
 }
 
 .dark .form-control.custom::placeholder {
-  color:#AEAFAA;
+  color: #aeafaa;
 }
 
 .dark .navbar-brand {
-  color: aquamarine
+  color: aquamarine;
 }
 
 .light .container.custom2 {
@@ -121,7 +121,7 @@
   border-style: solid;
   border-width: 5px;
   border-radius: 40px;
-  border-color: #CCCCCC;
+  border-color: #cccccc;
   overflow: hidden;
 }
 
@@ -136,7 +136,7 @@
 }
 
 .dark .navbar {
-  background-color: #2B3034;
+  background-color: #2b3034;
 }
 
 .dark .navbar .custom {
@@ -144,7 +144,7 @@
 }
 
 .dark .nav-link {
-  color: #AEAFAA;
+  color: #aeafaa;
 }
 
 .light .navbar {
@@ -152,5 +152,5 @@
 }
 
 .dark .navbar-toggler {
-  background-color: #AEAFAA
+  background-color: #aeafaa;
 }
