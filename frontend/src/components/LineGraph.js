@@ -13,14 +13,18 @@ const ticks = (() => {
 
   for (let hour = 0; hour <= 23; hour += 3) {
     ret.push(date.clone().set('hour', hour).set('minute', 0)
-.unix());
+      .unix());
   }
 
   ret.push(date.clone().set('hour', 23).set('minute', 59)
-.unix());
+    .unix());
 
   return ret;
 })();
+
+function formatValue(value, name, props) {
+  return `${value.toFixed(3)}%`;
+}
 
 function formatUnix(value) {
   return dayjs.unix(value).format('h:mm A');
@@ -29,8 +33,8 @@ function formatUnix(value) {
 function createLineData(data) {
   return data.map(e => ({
     time: date.clone().set('hour', e.time.hour).set('minute', e.time.minute)
-.unix(),
-    days: e.value,
+      .unix(),
+    value: e.percent * 100,
   }));
 }
 
@@ -47,7 +51,7 @@ const LineGraph = () => {
   return (
     <Container fluid="md">
       <Row style={{ height: 400 }}>
-        <h6> Number of Days Found where a Park is Open at a Specific Time </h6>
+        <h6> Percentage of Parks Open at a Specific Time </h6>
         <Col>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart width={600} height={300} data={createLineData(graphData)}>
@@ -60,9 +64,9 @@ const LineGraph = () => {
                 tickFormatter={formatUnix}
               />
               <YAxis domain={['auto', 'auto']} />
-              <Tooltip labelFormatter={formatUnix} labelStyle={{ color: '#000' }} />
+              <Tooltip labelFormatter={formatUnix} labelStyle={{ color: '#000' }} formatter={formatValue} />
               <Legend />
-              <Line type="monotone" dataKey="days" stroke="#ba4547" />
+              <Line type="monotone" dataKey="value" stroke="#ba4547" />
             </LineChart>
           </ResponsiveContainer>
         </Col>
