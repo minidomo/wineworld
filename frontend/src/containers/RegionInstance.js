@@ -63,7 +63,9 @@ const RegionInstance = () => {
               height: '10%', width: '20%', objectFit: 'contain',
               borderStyle: 'solid', borderWidth: '3px',
             }}
-              onError={handleRegionImageError}></img>
+              onError={handleRegionImageError}
+              alt=''
+            />
             <br />
             <br />
             <h3>{name}</h3>

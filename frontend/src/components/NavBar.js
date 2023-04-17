@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -60,7 +59,7 @@ const NavBar = () => {
               </Nav.Item>
             </Nav>
             <Form onSubmit={handleSubmit} className="d-flex">
-              <Form.Control className="custom" type="search" placeholder="search"
+              <Form.Control className="custom" type="search" placeholder="Search"
                 onChange={event => setQuery(event.target.value)} />
             </Form>
           </Navbar.Collapse>

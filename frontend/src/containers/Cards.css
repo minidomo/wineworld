@@ -3,6 +3,17 @@
   overflow-y: auto;
 }
 
-.dropdown-menu.custom label {
-  cursor: pointer;
+.dropdown .input-row {
+  padding: 4px 16px 4px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.dropdown .input-row .label {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 100%;
 }

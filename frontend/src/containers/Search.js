@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -8,6 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useLocation } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
@@ -19,50 +19,44 @@ const Search = () => {
   const [wineLoaded, setWineLoaded] = useState(false);
   const [vineyardLoaded, setVineyardLoaded] = useState(false);
   const [regionLoaded, setRegionLoaded] = useState(false);
+
   const location = useLocation();
   const query = location.pathname.split('/search/').at(-1);
-
-  // reformat query with spaces
-  const words = query.split('%20');
-  const searchQuery = words.join(' ');
+  const searchQuery = decodeURI(query);
 
   useEffect(() => {
-    async function searchWines() {
-      const response = await axios.get('https://api.wineworld.me/wines', {
-        params: {
-          search: searchQuery,
-          // name: searchQuery,
-        },
-      });
-      setWines(response.data.list);
-      setWineLoaded(true);
-    }
+    wineworld.get('/wines', {
+      params: {
+        search: searchQuery,
+      },
+    })
+      .then(res => {
+        setWines(res.data.list);
+        setWineLoaded(true);
+      })
+      .catch(console.error);
 
-    async function searchVineyards() {
-      const response = await axios.get('https://api.wineworld.me/vineyards', {
-        params: {
-          search: searchQuery,
-          // name: searchQuery,
-        },
-      });
-      setVineyards(response.data.list);
-      setVineyardLoaded(true);
-    }
+    wineworld.get('/vineyards', {
+      params: {
+        search: searchQuery,
+      },
+    })
+      .then(res => {
+        setVineyards(res.data.list);
+        setVineyardLoaded(true);
+      })
+      .catch(console.error);
 
-    async function searchRegions() {
-      const response = await axios.get('https://api.wineworld.me/regions', {
-        params: {
-          search: searchQuery,
-          // name: searchQuery,
-        },
-      });
-      setRegions(response.data.list);
-      setRegionLoaded(true);
-    }
-
-    searchWines();
-    searchVineyards();
-    searchRegions();
+    wineworld.get('/regions', {
+      params: {
+        search: searchQuery,
+      },
+    })
+      .then(res => {
+        setRegions(res.data.list);
+        setRegionLoaded(true);
+      })
+      .catch(console.error);
   }, [searchQuery]);
 
   return (
