@@ -13,7 +13,7 @@ const hoverText = [];
 const scale = 50000;
 
 const BubbleMap = () => {
-  const [cityData, setCityData] = useState([]);;
+  const [cityData, setCityData] = useState([]);
 
   useEffect(() => {
     wineworld
