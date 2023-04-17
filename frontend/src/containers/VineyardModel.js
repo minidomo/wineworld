@@ -31,6 +31,9 @@ const VineyardModel = () => {
   // constraints
   const [countryConstraints, setCountryConstraints] = useState([]);
   const [sortConstraints, setSortConstraints] = useState([]);
+  const [ratingConstraints, setRatingConstraints] = useState({});
+  const [reviewConstraints, setReviewConstraints] = useState({});
+  const [priceConstraints, setPriceConstraints] = useState({});
 
   // params
   const [page, setPage] = useState(1);
@@ -55,6 +58,9 @@ const VineyardModel = () => {
       .then(res => {
         setCountryConstraints(res.data.countries);
         setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
+        setPriceConstraints(res.data.price);
       })
       .catch(console.error);
   }, []);
@@ -116,11 +122,11 @@ const VineyardModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Price">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartPrice} placeholder='min' />
+                      <FilterIntegerInput setFilter={setStartPrice} placeholder={`${priceConstraints.min}`} />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndPrice} placeholder='max' />
+                      <FilterIntegerInput setFilter={setEndPrice} placeholder={`${priceConstraints.max}`} />
                     </div>
                   </DropdownButton>
                 </Col>
@@ -128,7 +134,7 @@ const VineyardModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                      <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
@@ -140,11 +146,11 @@ const VineyardModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                      <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
-                      <FilterNumberInput setFilter={setEndRating} placeholder='max' />
+                      <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
                     </div>
                   </DropdownButton>
                 </Col>

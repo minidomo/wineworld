@@ -33,6 +33,8 @@ const RegionModel = () => {
   const [countryConstraints, setCountryConstraints] = useState([]);
   const [tripTypeConstraints, setTripTypeConstraints] = useState([]);
   const [sortConstraints, setSortConstraints] = useState([]);
+  const [ratingConstraints, setRatingConstraints] = useState({});
+  const [reviewConstraints, setReviewConstraints] = useState({});
 
   // params
   const [page, setPage] = useState(1);
@@ -59,6 +61,8 @@ const RegionModel = () => {
         setTagConstraints(res.data.tags);
         setTripTypeConstraints(res.data.tripTypes);
         setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
       })
       .catch(console.error);
   }, []);
@@ -120,7 +124,7 @@ const RegionModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                      <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
@@ -132,11 +136,11 @@ const RegionModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                      <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
-                      <FilterNumberInput setFilter={setEndRating} placeholder='max' />
+                      <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
                     </div>
                   </DropdownButton>
                 </Col>
