@@ -159,7 +159,7 @@ const WineModel = () => {
                     <Dropdown.Menu variant="dark">
                       <div className='input-row'>
                         <div className='label'>Minimum:</div>
-                        <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                        <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
                       </div>
                       <div className='input-row'>
                         <div className='label'>Maximum:</div>
@@ -178,11 +178,11 @@ const WineModel = () => {
                     <Dropdown.Menu variant="dark">
                       <div className='input-row'>
                         <div className='label'>Minimum:</div>
-                        <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                        <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
                       </div>
                       <div className='input-row'>
                         <div className='label'>Maximum:</div>
-                        <FilterNumberInput setFilter={setEndRating} placeholder='max' />
+                        <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
                       </div>
                     </Dropdown.Menu>
                   </Dropdown>

@@ -118,40 +118,61 @@ const VineyardModel = () => {
                   </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Price">
-                    <div className="input-row">
-                      <div className="label">Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartPrice} placeholder={`${priceConstraints.min}`} />
+                  <Dropdown>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Reviews
+                      </Dropdown.Toggle>
                     </div>
-                    <div className="input-row">
-                      <div className="label">Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndPrice} placeholder={`${priceConstraints.max}`} />
-                    </div>
-                  </DropdownButton>
+                    <Dropdown.Menu variant="dark">
+                      <div className='input-row'>
+                        <div className='label'>Minimum:</div>
+                        <FilterIntegerInput setFilter={setStartPrice} placeholder={`${priceConstraints.min}`} />
+                      </div>
+                      <div className='input-row'>
+                        <div className='label'>Maximum:</div>
+                        <FilterIntegerInput setFilter={setEndPrice} placeholder={`${priceConstraints.max}`} />
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
-                    <div className="input-row">
-                      <div className="label">Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
+                  <Dropdown>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Reviews
+                      </Dropdown.Toggle>
                     </div>
-                    <div className="input-row">
-                      <div className="label">Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndReviews} placeholder="max" />
-                    </div>
-                  </DropdownButton>
+                    <Dropdown.Menu variant="dark">
+                      <div className='input-row'>
+                        <div className='label'>Minimum:</div>
+                        <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
+                      </div>
+                      <div className='input-row'>
+                        <div className='label'>Maximum:</div>
+                        <FilterIntegerInput setFilter={setEndReviews} placeholder='max' />
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
-                    <div className="input-row">
-                      <div className="label">Minimum:</div>
-                      <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
+                  <Dropdown>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Ratings
+                      </Dropdown.Toggle>
                     </div>
-                    <div className="input-row">
-                      <div className="label">Maximum:</div>
-                      <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
-                    </div>
-                  </DropdownButton>
+                    <Dropdown.Menu variant="dark">
+                      <div className='input-row'>
+                        <div className='label'>Minimum:</div>
+                        <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
+                      </div>
+                      <div className='input-row'>
+                        <div className='label'>Maximum:</div>
+                        <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
               </Row>
             </div>
