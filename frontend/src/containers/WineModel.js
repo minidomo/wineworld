@@ -180,7 +180,7 @@ const WineModel = () => {
         <Col>
           <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Filter" className="mt-2">
             <div class="container">
-              <Row>
+              <Row className="g-1">
                 <Col>
                   <Dropdown>
                     <Dropdown.Toggle variant="secondary" size="sm">
@@ -274,7 +274,7 @@ const WineModel = () => {
           </DropdownButton>
         </Col>
         <Col>
-          <Dropdown className="mt-2">
+          <Dropdown className="mt-2" >
             <Dropdown.Toggle id="dropdown-basic-button" variant="secondary" size="sm">
               {sortName}
             </Dropdown.Toggle>
@@ -286,8 +286,13 @@ const WineModel = () => {
           </Dropdown>
         </Col>
         <Col>
-          <Form onSubmit={handleSubmit} className="d-flex">
-            <Form.Control type="search" placeholder="search wines" onChange={event => setQuery(event.target.value)} />
+          <Form onSubmit={handleSubmit} className="d-flex mt-2">
+            <Form.Control
+              className="custom"
+              type="search"
+              placeholder="search wines"
+              onChange={event => setQuery(event.target.value)}
+              size="sm" />
           </Form>
         </Col>
       </Row>

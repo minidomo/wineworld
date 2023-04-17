@@ -180,7 +180,7 @@ const RegionModel = () => {
         <Col>
           <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Filter" className="mt-2">
             <div class="container">
-              <Row>
+              <Row className="g-1">
                 <Col>
                   <Dropdown>
                     <Dropdown.Toggle variant="secondary" size="sm">
@@ -286,8 +286,14 @@ const RegionModel = () => {
           </Dropdown>
         </Col>
         <Col>
-          <Form onSubmit={handleSubmit} className="d-flex">
-            <Form.Control type="search" placeholder="search regions" onChange={event => setQuery(event.target.value)} />
+          <Form onSubmit={handleSubmit} className="d-flex mt-2">
+            <Form.Control
+              className="custom"
+              type="search"
+              placeholder="search regions"
+              onChange={event => setQuery(event.target.value)}
+              size="sm"
+            />
           </Form>
         </Col>
       </Row>
