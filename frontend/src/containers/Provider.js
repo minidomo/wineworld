@@ -1,8 +1,8 @@
 import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
 
-import LineGraph from '../components/LineGraph';
 import BubbleMap from '../components/BubbleMap';
+import LineGraph from '../components/LineGraph';
 
 const Provider = () => (
   <Container>

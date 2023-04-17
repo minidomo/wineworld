@@ -101,13 +101,15 @@ const WineModel = () => {
       <Row>
         <Col>
           <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Filter" className="mt-2">
-            <div className="container">
+            <Container>
               <Row className="g-1">
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Type
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Type
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {
                         typeConstraints.map(e => (
@@ -119,9 +121,11 @@ const WineModel = () => {
                 </Col>
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Country
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Country
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {
                         countryConstraints.map(e => (
@@ -133,9 +137,11 @@ const WineModel = () => {
                 </Col>
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Winery
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Winery
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {
                         wineryConstraints.map(e => (
@@ -146,31 +152,45 @@ const WineModel = () => {
                   </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                  <Dropdown>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Reviews
+                      </Dropdown.Toggle>
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndReviews} placeholder='max' />
-                    </div>
-                  </DropdownButton>
+                    <Dropdown.Menu variant="dark">
+                      <div className='input-row'>
+                        <div className='label'>Minimum:</div>
+                        <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                      </div>
+                      <div className='input-row'>
+                        <div className='label'>Maximum:</div>
+                        <FilterIntegerInput setFilter={setEndReviews} placeholder='max' />
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
                 <Col>
-                  <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                  <Dropdown>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Ratings
+                      </Dropdown.Toggle>
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterNumberInput setFilter={setEndRating} placeholder='max' />
-                    </div>
-                  </DropdownButton>
+                    <Dropdown.Menu variant="dark">
+                      <div className='input-row'>
+                        <div className='label'>Minimum:</div>
+                        <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                      </div>
+                      <div className='input-row'>
+                        <div className='label'>Maximum:</div>
+                        <FilterNumberInput setFilter={setEndRating} placeholder='max' />
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Col>
               </Row>
-            </div>
+            </Container>
           </DropdownButton>
         </Col>
         <Col>
