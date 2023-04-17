@@ -1,9 +1,0 @@
-.line-graph.wrapper {
-  width: max-content;
-  height: max-content;
-}
-
-.line-graph.y-axis-text {
-  transform-box: fill-box;
-  transform-origin: center;
-}
