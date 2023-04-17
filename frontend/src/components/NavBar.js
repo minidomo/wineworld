@@ -60,7 +60,7 @@ const NavBar = () => {
             </li>
           </Nav>
           <Form onSubmit={handleSubmit} className="d-flex">
-            <Form.Control className="custom" type="search" placeholder="search"
+            <Form.Control className="custom" type="search" placeholder="Search"
               onChange={event => setQuery(event.target.value)} />
           </Form>
         </Navbar.Collapse>

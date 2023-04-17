@@ -7,21 +7,20 @@ import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
-import FormCheck from 'react-bootstrap/FormCheck';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom';
 
 import { wineworld } from '../api';
+import { FilterCheckboxDropdownItem } from '../components/models/FilterCheckboxDropdownItem';
+import { FilterIntegerInput, FilterNumberInput } from '../components/models/FilterInput';
+import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import WineCard from '../components/WineCard';
 import { clamp } from '../util/clamp';
-import { isDigits, isNumber } from '../util/number';
-
-const sortByPrefix = 'Sort By:';
 
 const WineModel = () => {
-  const [sortName, setSortName] = useState(`${sortByPrefix} Name (A-Z)`);
+  const [sortName, setSortName] = useState('Sort By: Name (A-Z)');
   const [loaded, setLoaded] = useState(false);
 
   // data from main api call
@@ -96,90 +95,6 @@ const WineModel = () => {
     setPage(clamp(1, totalPages, pageTarget));
   }
 
-  const SortList = props => {
-    const { name, id } = props.constraint;
-
-    function sortOperations() {
-      setSort(id);
-      setSortName(`${sortByPrefix} ${name}`);
-    }
-
-    return (
-      <Dropdown.Item onClick={() => sortOperations()}>
-        {name}
-      </Dropdown.Item>
-    );
-  };
-
-  function updateFilterList(append, value, filters, setFilters) {
-    let copy = filters.slice();
-
-    if (append) {
-      copy.push(value);
-    } else {
-      copy = copy.filter(e => e !== value);
-    }
-
-    setFilters(copy);
-  }
-
-  function createCheckboxDropdownItems(itemNames, filters, setFilters) {
-    return (
-      <>
-        {itemNames.map(name => (
-          <Dropdown.Item
-            onClick={e => {
-              e.stopPropagation();
-              const checkbox = e.currentTarget.querySelector('input');
-              checkbox.click();
-            }}
-          >
-            <FormCheck
-              type="checkbox"
-              label={name}
-              onClick={e => {
-                e.stopPropagation();
-                updateFilterList(e.currentTarget.checked, name, filters, setFilters);
-              }}
-            />
-          </Dropdown.Item>
-        ))}
-      </>
-    );
-  }
-
-  function createFilterIntegerInput(setFilter, placeholder = '') {
-    return createFilterInput(isDigits, parseInt, setFilter, placeholder);
-  }
-
-  function createFilterNumberInput(setFilter, placeholder = '') {
-    return createFilterInput(isNumber, parseFloat, setFilter, placeholder);
-  }
-
-  function createFilterInput(check, parse, setFilter, placeholder) {
-    return (
-      <input
-        type="text"
-        className="form-control"
-        placeholder={placeholder}
-        onChange={e => {
-          const classList = e.currentTarget.classList;
-          const inputValue = e.currentTarget.value.trim();
-          if (check(inputValue)) {
-            setFilter(parse(inputValue));
-            classList.remove('invalid');
-          } else if (inputValue === '') {
-            setFilter(undefined);
-            classList.remove('invalid');
-          } else {
-            setFilter(undefined);
-            classList.add('invalid');
-          }
-        }}
-      />
-    );
-  }
-
   return (
     <Container>
       <h1 className="display-4">Wines</h1>
@@ -194,7 +109,11 @@ const WineModel = () => {
                       Type
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {createCheckboxDropdownItems(typeConstraints, type, setType)}
+                      {
+                        typeConstraints.map(e => (
+                          <FilterCheckboxDropdownItem value={e} filters={type} setFilters={setType} />
+                        ))
+                      }
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -204,7 +123,11 @@ const WineModel = () => {
                       Country
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {createCheckboxDropdownItems(countryConstraints, country, setCountry)}
+                      {
+                        countryConstraints.map(e => (
+                          <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
+                        ))
+                      }
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -214,7 +137,11 @@ const WineModel = () => {
                       Winery
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {createCheckboxDropdownItems(wineryConstraints, winery, setWinery)}
+                      {
+                        wineryConstraints.map(e => (
+                          <FilterCheckboxDropdownItem value={e} filters={winery} setFilters={setWinery} />
+                        ))
+                      }
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -222,11 +149,11 @@ const WineModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      {createFilterIntegerInput(setStartReviews, 'min')}
+                      <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
-                      {createFilterIntegerInput(setEndReviews, 'max')}
+                      <FilterIntegerInput setFilter={setEndReviews} placeholder='max' />
                     </div>
                   </DropdownButton>
                 </Col>
@@ -234,11 +161,11 @@ const WineModel = () => {
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
                     <div className='input-row'>
                       <div className='label'>Minimum:</div>
-                      {createFilterNumberInput(setStartRating, 'min')}
+                      <FilterNumberInput setFilter={setStartRating} placeholder='min' />
                     </div>
                     <div className='input-row'>
                       <div className='label'>Maximum:</div>
-                      {createFilterNumberInput(setEndRating, 'max')}
+                      <FilterNumberInput setFilter={setEndRating} placeholder='max' />
                     </div>
                   </DropdownButton>
                 </Col>
@@ -252,9 +179,11 @@ const WineModel = () => {
               {sortName}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark" className="custom">
-              {sortConstraints.map(constraint => (
-                <SortList constraint={constraint} />
-              ))}
+              {
+                sortConstraints.map(constraint => (
+                  <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
+                ))
+              }
             </Dropdown.Menu>
           </Dropdown>
         </Col>
