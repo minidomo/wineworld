@@ -1,13 +1,13 @@
-import AwsImage from '../assets/aws.png';
-import BootstrapImage from '../assets/bootstrap.png';
-import GitLabImage from '../assets/gitlab.png';
-import ReactImage from '../assets/logo512.png';
-import TeamsImage from '../assets/mteams.png';
-import NamecheapImage from '../assets/namecheap.png';
-import NpmImage from '../assets/npm.png';
-import PostmanImage from '../assets/postman.png';
-import Route53Image from '../assets/route53.png';
-import VSCodeImage from '../assets/vscode.png';
+import AwsImage from '../assets/logos/aws.png';
+import BootstrapImage from '../assets/logos/bootstrap.png';
+import GitLabImage from '../assets/logos/gitlab.png';
+import NamecheapImage from '../assets/logos/namecheap.png';
+import NpmImage from '../assets/logos/npm.png';
+import PostmanImage from '../assets/logos/postman.png';
+import ReactImage from '../assets/logos/react.png';
+import Route53Image from '../assets/logos/route53.png';
+import TeamsImage from '../assets/logos/teams.png';
+import VSCodeImage from '../assets/logos/vscode.png';
 
 const toolData = [
   {

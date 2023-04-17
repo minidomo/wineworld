@@ -1,8 +1,8 @@
-import AustinImage from '../assets/austin.jpg';
-import JBImage from '../assets/jbladera.jpg';
-import RayImage from '../assets/rayPic.jpg';
-import RyanImage from '../assets/ryan.jpg';
-import SaniyaImage from '../assets/saniya.jpg';
+import AustinImage from '../assets/devs/austin.jpg';
+import JBImage from '../assets/devs/jb.jpg';
+import RayImage from '../assets/devs/ray.jpg';
+import RyanImage from '../assets/devs/ryan.jpg';
+import SaniyaImage from '../assets/devs/saniya.jpg';
 
 const teamData = [
   {
