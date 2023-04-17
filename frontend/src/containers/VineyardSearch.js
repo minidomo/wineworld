@@ -17,11 +17,12 @@ const VineyardSearch = () => {
   const searchQuery = decodeURI(query);
 
   useEffect(() => {
-    wineworld.get('/vineyards', {
-      params: {
-        search: searchQuery,
-      },
-    })
+    wineworld
+      .get('/vineyards', {
+        params: {
+          search: searchQuery,
+        },
+      })
       .then(res => {
         setVineyards(res.data.list);
         setVineyardLoaded(true);

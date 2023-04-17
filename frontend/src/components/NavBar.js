@@ -15,8 +15,8 @@ const NavBar = () => {
     navigate(`/search/${query}`);
   };
   return (
-    <Navbar variant={`navbar bg-${DarkMode()}`} expand='lg' data-bs-theme={DarkMode()}>
-      <Navbar variant="custom fixed-top bg-body-tertiary" expand='lg'>
+    <Navbar variant={`navbar bg-${DarkMode()}`} expand="lg" data-bs-theme={DarkMode()}>
+      <Navbar variant="custom fixed-top bg-body-tertiary" expand="lg">
         <div class="container-fluid">
           <Link class="navbar-brand" to="/">
             WineWorld
@@ -54,13 +54,15 @@ const NavBar = () => {
                   Provider Visualizations
                 </Link>
               </Nav.Item>
-              <Nav.Item>
-                {DarkMode('toggle')}
-              </Nav.Item>
+              <Nav.Item>{DarkMode('toggle')}</Nav.Item>
             </Nav>
             <Form onSubmit={handleSubmit} className="d-flex">
-              <Form.Control className="custom" type="search" placeholder="Search"
-                onChange={event => setQuery(event.target.value)} />
+              <Form.Control
+                className="custom"
+                type="search"
+                placeholder="Search"
+                onChange={event => setQuery(event.target.value)}
+              />
             </Form>
           </Navbar.Collapse>
         </div>

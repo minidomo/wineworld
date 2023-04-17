@@ -58,12 +58,17 @@ const VineyardInstance = () => {
           <br />
           <Container className="custom2">
             <br />
-            <img src={image} style={{
-              height: '20%', width: '20%', objectFit: 'contain',
-              borderStyle: 'solid', borderWidth: '3px',
-            }}
+            <img
+              src={image}
+              style={{
+                height: '20%',
+                width: '20%',
+                objectFit: 'contain',
+                borderStyle: 'solid',
+                borderWidth: '3px',
+              }}
               onError={handleVineyardImageError}
-              alt=''
+              alt=""
             />
             <br />
             <br />

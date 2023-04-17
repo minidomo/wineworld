@@ -2,7 +2,6 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
-
 const ApiCard = props => {
   const { name, image, text, url } = props.api;
 
@@ -12,8 +11,7 @@ const ApiCard = props => {
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{text}</Card.Text>
-        <Link to={url} class={'btn stretched-link'}>
-        </Link>
+        <Link to={url} class={'btn stretched-link'}></Link>
       </Card.Body>
     </Card>
   );

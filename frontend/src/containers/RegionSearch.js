@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom';
 import { wineworld } from '../api';
 import RegionCard from '../components/RegionCard';
 
-
 const RegionSearch = () => {
   const [regions, setRegions] = useState([]);
   const [regionLoaded, setRegionLoaded] = useState(false);
@@ -18,11 +17,12 @@ const RegionSearch = () => {
   const searchQuery = decodeURI(query);
 
   useEffect(() => {
-    wineworld.get('/regions', {
-      params: {
-        search: searchQuery,
-      },
-    })
+    wineworld
+      .get('/regions', {
+        params: {
+          search: searchQuery,
+        },
+      })
       .then(res => {
         setRegions(res.data.list);
         setRegionLoaded(true);

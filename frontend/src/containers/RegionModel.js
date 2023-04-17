@@ -33,6 +33,8 @@ const RegionModel = () => {
   const [countryConstraints, setCountryConstraints] = useState([]);
   const [tripTypeConstraints, setTripTypeConstraints] = useState([]);
   const [sortConstraints, setSortConstraints] = useState([]);
+  const [ratingConstraints, setRatingConstraints] = useState({});
+  const [reviewConstraints, setReviewConstraints] = useState({});
 
   // params
   const [page, setPage] = useState(1);
@@ -53,19 +55,22 @@ const RegionModel = () => {
   };
 
   useEffect(() => {
-    wineworld.get('/regions/constraints')
+    wineworld
+      .get('/regions/constraints')
       .then(res => {
         setCountryConstraints(res.data.countries);
         setTagConstraints(res.data.tags);
         setTripTypeConstraints(res.data.tripTypes);
         setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
       })
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    wineworld.get('/regions',
-      {
+    wineworld
+      .get('/regions', {
         params: {
           page: page,
           country: country,
@@ -108,35 +113,33 @@ const RegionModel = () => {
                       Country
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        countryConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
-                        ))
-                      }
+                      {countryConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                    <div className="input-row">
+                      <div className="label">Minimum:</div>
+                      <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndReviews} placeholder='max' />
+                    <div className="input-row">
+                      <div className="label">Maximum:</div>
+                      <FilterIntegerInput setFilter={setEndReviews} placeholder="max" />
                     </div>
                   </DropdownButton>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                    <div className="input-row">
+                      <div className="label">Minimum:</div>
+                      <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterNumberInput setFilter={setEndRating} placeholder='max' />
+                    <div className="input-row">
+                      <div className="label">Maximum:</div>
+                      <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
                     </div>
                   </DropdownButton>
                 </Col>
@@ -146,11 +149,9 @@ const RegionModel = () => {
                       Tags
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        tagConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={tags} setFilters={setTags} />
-                        ))
-                      }
+                      {tagConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={tags} setFilters={setTags} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -160,11 +161,9 @@ const RegionModel = () => {
                       Trip Type
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        tripTypeConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={tripTypes} setFilters={setTripTypes} />
-                        ))
-                      }
+                      {tripTypeConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={tripTypes} setFilters={setTripTypes} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -178,11 +177,9 @@ const RegionModel = () => {
               {sortName}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark" className="custom">
-              {
-                sortConstraints.map(constraint => (
-                  <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
-                ))
-              }
+              {sortConstraints.map(constraint => (
+                <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Col>
@@ -199,62 +196,55 @@ const RegionModel = () => {
         </Col>
       </Row>
       <br></br>
-      {
-        loaded ?
-          (
-            <>
-              <Pagination className="justify-content-center">
-                <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
-                <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
-                {page > 3 && (
-                  <Pagination.Item onClick={() => handlePagination(1)} active={page === 1}>
-                    {' '}
-                    1{' '}
-                  </Pagination.Item>
-                )}
-                {page > 4 && <Pagination.Ellipsis />}
-                <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>
-                  {page - 2}
-                </Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>
-                  {page - 1}
-                </Pagination.Item>
-                <Pagination.Item active>{page}</Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>
-                  {page + 1}
-                </Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>
-                  {page + 2}
-                </Pagination.Item>
-                {page < totalPages - 3 && <Pagination.Ellipsis />}
-                {page < totalPages - 2 && (
-                  <Pagination.Item onClick={() => handlePagination(totalPages)} active={page === totalPages}>
-                    {' '}
-                    {totalPages}{' '}
-                  </Pagination.Item>
-                )}
-                <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
-                <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
-              </Pagination>
-              <Row>
-                <h6>Found {totalInstances} regions</h6>
-              </Row>
-              <Row md={4} className="g-4 p-4">
-                {
-                  regions.map(region => (
-                    <Col>
-                      <RegionCard region={region} />
-                    </Col>
-                  ))
-                }
-              </Row>
-            </>
-          )
-          :
-          (
-            <Spinner animation="border" role="status" />
-          )
-      }
+      {loaded ? (
+        <>
+          <Pagination className="justify-content-center">
+            <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
+            <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
+            {page > 3 && (
+              <Pagination.Item onClick={() => handlePagination(1)} active={page === 1}>
+                {' '}
+                1{' '}
+              </Pagination.Item>
+            )}
+            {page > 4 && <Pagination.Ellipsis />}
+            <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>
+              {page - 2}
+            </Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>
+              {page - 1}
+            </Pagination.Item>
+            <Pagination.Item active>{page}</Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>
+              {page + 1}
+            </Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>
+              {page + 2}
+            </Pagination.Item>
+            {page < totalPages - 3 && <Pagination.Ellipsis />}
+            {page < totalPages - 2 && (
+              <Pagination.Item onClick={() => handlePagination(totalPages)} active={page === totalPages}>
+                {' '}
+                {totalPages}{' '}
+              </Pagination.Item>
+            )}
+            <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
+            <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
+          </Pagination>
+          <Row>
+            <h6>Found {totalInstances} regions</h6>
+          </Row>
+          <Row md={4} className="g-4 p-4">
+            {regions.map(region => (
+              <Col>
+                <RegionCard region={region} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      ) : (
+        <Spinner animation="border" role="status" />
+      )}
     </Container>
   );
 };

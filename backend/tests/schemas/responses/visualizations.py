@@ -11,20 +11,22 @@ time_schema = {
             "additionalProperties": False,
         },
         "value": {"type": "number"},
+        "percent": {"type": "number"},
     },
-    "required": ["time", "value"],
+    "required": ["time", "value", "percent"],
     "additionalProperties": False,
 }
 
 provider_line_response_schema = {
     "type": "object",
     "properties": {
+        "sample_size": {"type": "number"},
         "data": {
             "type": "array",
             "items": time_schema,
-        }
+        },
     },
-    "required": ["data"],
+    "required": ["data", "sample_size"],
     "additionalProperties": False,
 }
 

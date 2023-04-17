@@ -7,6 +7,8 @@ from src.util.general import JsonObject
 from .availability import parse
 
 MINUTES_PER_DAY = 24 * 60
+WEEKDAYS = 7
+ValueType = int
 
 
 def get_response() -> JsonObject:
@@ -23,11 +25,11 @@ def minutes_to_time(minutes: int) -> pendulum.Time:
     return pendulum.time(hour, r_minutes)
 
 
-def count_availability(response: JsonObject) -> list[int]:
+def count_availability(data: list[JsonObject]) -> list[ValueType]:
     # prefix sum array
-    count = [0 for _ in range(MINUTES_PER_DAY)]
+    count: list[ValueType] = [0 for _ in range(MINUTES_PER_DAY)]
 
-    for park in response["data"]:
+    for park in data:
         for availability in park["weekdays"]:
             opening, closing = parse(availability)
 
@@ -46,14 +48,14 @@ def count_availability(response: JsonObject) -> list[int]:
     return count
 
 
-def get_points(arr: list[int]) -> list[tuple[int, int]]:
+def get_points(arr: list[ValueType]) -> list[tuple[int, ValueType]]:
     data = arr.copy()
 
     # ensure min value is 0
     for i in range(len(data)):
         data[i] = max(data[i], 0)
 
-    ret: list[tuple[int, int]] = []
+    ret: list[tuple[int, ValueType]] = []
 
     for i in range(1, len(data)):
         if data[i] != data[i - 1]:
@@ -77,27 +79,34 @@ def get_points(arr: list[int]) -> list[tuple[int, int]]:
     return ret
 
 
-def create_response(points: list[tuple[int, int]]) -> JsonObject:
-    data: list[JsonObject] = []
+def create_response(data: list[JsonObject], points: list[tuple[int, ValueType]]) -> JsonObject:
+    ret: list[JsonObject] = []
+
+    sample_size = len(data) * WEEKDAYS
 
     for minutes, count in points:
         time = minutes_to_time(minutes)
-        data.append(
+        ret.append(
             {
                 "time": {
                     "hour": time.hour,
                     "minute": time.minute,
                 },
                 "value": count,
+                "percent": count / sample_size,
             }
         )
 
-    return {"data": data}
+    return {
+        "sample_size": sample_size,
+        "data": ret,
+    }
 
 
 class VisualizationLine(Resource):
     def get(self):
         response = get_response()
-        counts = count_availability(response)
+        data: list[JsonObject] = response["data"]
+        counts = count_availability(data)
         points = get_points(counts)
-        return create_response(points)
+        return create_response(data, points)

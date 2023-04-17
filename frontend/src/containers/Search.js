@@ -25,33 +25,36 @@ const Search = () => {
   const searchQuery = decodeURI(query);
 
   useEffect(() => {
-    wineworld.get('/wines', {
-      params: {
-        search: searchQuery,
-      },
-    })
+    wineworld
+      .get('/wines', {
+        params: {
+          search: searchQuery,
+        },
+      })
       .then(res => {
         setWines(res.data.list);
         setWineLoaded(true);
       })
       .catch(console.error);
 
-    wineworld.get('/vineyards', {
-      params: {
-        search: searchQuery,
-      },
-    })
+    wineworld
+      .get('/vineyards', {
+        params: {
+          search: searchQuery,
+        },
+      })
       .then(res => {
         setVineyards(res.data.list);
         setVineyardLoaded(true);
       })
       .catch(console.error);
 
-    wineworld.get('/regions', {
-      params: {
-        search: searchQuery,
-      },
-    })
+    wineworld
+      .get('/regions', {
+        params: {
+          search: searchQuery,
+        },
+      })
       .then(res => {
         setRegions(res.data.list);
         setRegionLoaded(true);

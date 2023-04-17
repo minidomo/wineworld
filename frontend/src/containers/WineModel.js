@@ -33,6 +33,8 @@ const WineModel = () => {
   const [countryConstraints, setCountryConstraints] = useState([]);
   const [wineryConstraints, setWineryConstraints] = useState([]);
   const [sortConstraints, setSortConstraints] = useState([]);
+  const [ratingConstraints, setRatingConstraints] = useState({});
+  const [reviewConstraints, setReviewConstraints] = useState({});
 
   // params
   const [page, setPage] = useState(1);
@@ -45,7 +47,6 @@ const WineModel = () => {
   const [endRating, setEndRating] = useState();
   const [sort, setSort] = useState('name_asc');
 
-
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
   const handleSubmit = event => {
@@ -54,19 +55,22 @@ const WineModel = () => {
   };
 
   useEffect(() => {
-    wineworld.get('/wines/constraints')
+    wineworld
+      .get('/wines/constraints')
       .then(res => {
         setTypeConstraints(res.data.types);
         setCountryConstraints(res.data.countries);
         setWineryConstraints(res.data.wineries);
         setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
       })
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    wineworld.get('/wines',
-      {
+    wineworld
+      .get('/wines', {
         params: {
           page: page,
           type: type,
@@ -111,11 +115,9 @@ const WineModel = () => {
                       </Dropdown.Toggle>
                     </div>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        typeConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={type} setFilters={setType} />
-                        ))
-                      }
+                      {typeConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={type} setFilters={setType} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -127,11 +129,9 @@ const WineModel = () => {
                       </Dropdown.Toggle>
                     </div>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        countryConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
-                        ))
-                      }
+                      {countryConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -143,11 +143,9 @@ const WineModel = () => {
                       </Dropdown.Toggle>
                     </div>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        wineryConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={winery} setFilters={setWinery} />
-                        ))
-                      }
+                      {wineryConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={winery} setFilters={setWinery} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
@@ -194,16 +192,14 @@ const WineModel = () => {
           </DropdownButton>
         </Col>
         <Col>
-          <Dropdown className="mt-2" >
+          <Dropdown className="mt-2">
             <Dropdown.Toggle id="dropdown-basic-button" variant="secondary" size="sm">
               {sortName}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark" className="custom">
-              {
-                sortConstraints.map(constraint => (
-                  <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
-                ))
-              }
+              {sortConstraints.map(constraint => (
+                <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Col>
@@ -214,67 +210,61 @@ const WineModel = () => {
               type="search"
               placeholder="Search wines"
               onChange={event => setQuery(event.target.value)}
-              size="sm" />
+              size="sm"
+            />
           </Form>
         </Col>
       </Row>
       <br></br>
-      {
-        loaded ?
-          (
-            <>
-              <Pagination className="justify-content-center">
-                <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
-                <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
-                {page > 3 && (
-                  <Pagination.Item onClick={() => handlePagination(1)} active={page === 1}>
-                    {' '}
-                    1{' '}
-                  </Pagination.Item>
-                )}
-                {page > 4 && <Pagination.Ellipsis />}
-                <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>
-                  {page - 2}
-                </Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>
-                  {page - 1}
-                </Pagination.Item>
-                <Pagination.Item active>{page}</Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>
-                  {page + 1}
-                </Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>
-                  {page + 2}
-                </Pagination.Item>
-                {page < totalPages - 3 && <Pagination.Ellipsis />}
-                {page < totalPages - 2 && (
-                  <Pagination.Item onClick={() => handlePagination(totalPages)} active={page === totalPages}>
-                    {' '}
-                    {totalPages}{' '}
-                  </Pagination.Item>
-                )}
-                <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
-                <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
-              </Pagination>
-              <Row>
-                <h6>Found {totalInstances} wines</h6>
-              </Row>
-              <Row md={4} className="d-flex g-4 p-4">
-                {
-                  wines.map(wine => (
-                    <Col>
-                      <WineCard wine={wine} />
-                    </Col>
-                  ))
-                }
-              </Row>
-            </>
-          )
-          :
-          (
-            <Spinner animation="border" role="status" />
-          )
-      }
+      {loaded ? (
+        <>
+          <Pagination className="justify-content-center">
+            <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
+            <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
+            {page > 3 && (
+              <Pagination.Item onClick={() => handlePagination(1)} active={page === 1}>
+                {' '}
+                1{' '}
+              </Pagination.Item>
+            )}
+            {page > 4 && <Pagination.Ellipsis />}
+            <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>
+              {page - 2}
+            </Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>
+              {page - 1}
+            </Pagination.Item>
+            <Pagination.Item active>{page}</Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>
+              {page + 1}
+            </Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>
+              {page + 2}
+            </Pagination.Item>
+            {page < totalPages - 3 && <Pagination.Ellipsis />}
+            {page < totalPages - 2 && (
+              <Pagination.Item onClick={() => handlePagination(totalPages)} active={page === totalPages}>
+                {' '}
+                {totalPages}{' '}
+              </Pagination.Item>
+            )}
+            <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
+            <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
+          </Pagination>
+          <Row>
+            <h6>Found {totalInstances} wines</h6>
+          </Row>
+          <Row md={4} className="d-flex g-4 p-4">
+            {wines.map(wine => (
+              <Col>
+                <WineCard wine={wine} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      ) : (
+        <Spinner animation="border" role="status" />
+      )}
     </Container>
   );
 };

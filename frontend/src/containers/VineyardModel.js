@@ -31,6 +31,9 @@ const VineyardModel = () => {
   // constraints
   const [countryConstraints, setCountryConstraints] = useState([]);
   const [sortConstraints, setSortConstraints] = useState([]);
+  const [ratingConstraints, setRatingConstraints] = useState({});
+  const [reviewConstraints, setReviewConstraints] = useState({});
+  const [priceConstraints, setPriceConstraints] = useState({});
 
   // params
   const [page, setPage] = useState(1);
@@ -51,17 +54,21 @@ const VineyardModel = () => {
   };
 
   useEffect(() => {
-    wineworld.get('/vineyards/constraints')
+    wineworld
+      .get('/vineyards/constraints')
       .then(res => {
         setCountryConstraints(res.data.countries);
         setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
+        setPriceConstraints(res.data.price);
       })
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    wineworld.get('/vineyards',
-      {
+    wineworld
+      .get('/vineyards', {
         params: {
           page: page,
           country: country,
@@ -104,47 +111,45 @@ const VineyardModel = () => {
                       Country
                     </Dropdown.Toggle>
                     <Dropdown.Menu variant="dark" className="custom">
-                      {
-                        countryConstraints.map(e => (
-                          <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
-                        ))
-                      }
+                      {countryConstraints.map(e => (
+                        <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
+                      ))}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Price">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartPrice} placeholder='min' />
+                    <div className="input-row">
+                      <div className="label">Minimum:</div>
+                      <FilterIntegerInput setFilter={setStartPrice} placeholder={`${priceConstraints.min}`} />
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndPrice} placeholder='max' />
+                    <div className="input-row">
+                      <div className="label">Maximum:</div>
+                      <FilterIntegerInput setFilter={setEndPrice} placeholder={`${priceConstraints.max}`} />
                     </div>
                   </DropdownButton>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Reviews">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterIntegerInput setFilter={setStartReviews} placeholder='min' />
+                    <div className="input-row">
+                      <div className="label">Minimum:</div>
+                      <FilterIntegerInput setFilter={setStartReviews} placeholder={`${reviewConstraints.min}`} />
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterIntegerInput setFilter={setEndReviews} placeholder='max' />
+                    <div className="input-row">
+                      <div className="label">Maximum:</div>
+                      <FilterIntegerInput setFilter={setEndReviews} placeholder="max" />
                     </div>
                   </DropdownButton>
                 </Col>
                 <Col>
                   <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Ratings">
-                    <div className='input-row'>
-                      <div className='label'>Minimum:</div>
-                      <FilterNumberInput setFilter={setStartRating} placeholder='min' />
+                    <div className="input-row">
+                      <div className="label">Minimum:</div>
+                      <FilterNumberInput setFilter={setStartRating} placeholder={`${ratingConstraints.min}`} />
                     </div>
-                    <div className='input-row'>
-                      <div className='label'>Maximum:</div>
-                      <FilterNumberInput setFilter={setEndRating} placeholder='max' />
+                    <div className="input-row">
+                      <div className="label">Maximum:</div>
+                      <FilterNumberInput setFilter={setEndRating} placeholder={`${ratingConstraints.max}`} />
                     </div>
                   </DropdownButton>
                 </Col>
@@ -158,11 +163,9 @@ const VineyardModel = () => {
               {sortName}
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark" className="custom">
-              {
-                sortConstraints.map(constraint => (
-                  <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
-                ))
-              }
+              {sortConstraints.map(constraint => (
+                <SortDropdownItem name={constraint.name} id={constraint.id} setName={setSortName} setId={setSort} />
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Col>
@@ -179,62 +182,55 @@ const VineyardModel = () => {
         </Col>
       </Row>
       <br></br>
-      {
-        loaded ?
-          (
-            <>
-              <Pagination className="justify-content-center">
-                <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
-                <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
-                {page > 3 && (
-                  <Pagination.Item onClick={() => handlePagination(1)} active={page === 1}>
-                    {' '}
-                    1{' '}
-                  </Pagination.Item>
-                )}
-                {page > 4 && <Pagination.Ellipsis />}
-                <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>
-                  {page - 2}
-                </Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>
-                  {page - 1}
-                </Pagination.Item>
-                <Pagination.Item active>{page}</Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>
-                  {page + 1}
-                </Pagination.Item>
-                <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>
-                  {page + 2}
-                </Pagination.Item>
-                {page < totalPages - 3 && <Pagination.Ellipsis />}
-                {page < totalPages - 2 && (
-                  <Pagination.Item onClick={() => handlePagination(totalPages)} active={page === totalPages}>
-                    {' '}
-                    {totalPages}{' '}
-                  </Pagination.Item>
-                )}
-                <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
-                <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
-              </Pagination>
-              <Row>
-                <h6>Found {totalInstances} vineyards</h6>
-              </Row>
-              <Row md={4} className="g-4 p-4">
-                {
-                  vineyards.map(vineyard => (
-                    <Col>
-                      <VineyardCard vineyard={vineyard} />
-                    </Col>
-                  ))
-                }
-              </Row>
-            </>
-          )
-          :
-          (
-            <Spinner animation="border" role="status" />
-          )
-      }
+      {loaded ? (
+        <>
+          <Pagination className="justify-content-center">
+            <Pagination.First onClick={() => handlePagination(page - 4)} disabled={page === 1} />
+            <Pagination.Prev onClick={() => handlePagination(page - 1)} disabled={page === 1} />
+            {page > 3 && (
+              <Pagination.Item onClick={() => handlePagination(1)} active={page === 1}>
+                {' '}
+                1{' '}
+              </Pagination.Item>
+            )}
+            {page > 4 && <Pagination.Ellipsis />}
+            <Pagination.Item onClick={() => handlePagination(page - 2)} hidden={page < 3}>
+              {page - 2}
+            </Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page - 1)} hidden={page < 2}>
+              {page - 1}
+            </Pagination.Item>
+            <Pagination.Item active>{page}</Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page + 1)} hidden={page > totalPages - 1}>
+              {page + 1}
+            </Pagination.Item>
+            <Pagination.Item onClick={() => handlePagination(page + 2)} hidden={page > totalPages - 2}>
+              {page + 2}
+            </Pagination.Item>
+            {page < totalPages - 3 && <Pagination.Ellipsis />}
+            {page < totalPages - 2 && (
+              <Pagination.Item onClick={() => handlePagination(totalPages)} active={page === totalPages}>
+                {' '}
+                {totalPages}{' '}
+              </Pagination.Item>
+            )}
+            <Pagination.Next onClick={() => handlePagination(page + 1)} disabled={page === totalPages} />
+            <Pagination.Last onClick={() => handlePagination(page + 4)} disabled={page === totalPages} />
+          </Pagination>
+          <Row>
+            <h6>Found {totalInstances} vineyards</h6>
+          </Row>
+          <Row md={4} className="g-4 p-4">
+            {vineyards.map(vineyard => (
+              <Col>
+                <VineyardCard vineyard={vineyard} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      ) : (
+        <Spinner animation="border" role="status" />
+      )}
     </Container>
   );
 };

@@ -61,9 +61,11 @@ const WineInstance = () => {
           <br />
           <Container className="custom2">
             <br />
-            <img src={image} style={{ height: '12%', width: '6%', objectFit: 'contain' }}
+            <img
+              src={image}
+              style={{ height: '12%', width: '6%', objectFit: 'contain' }}
               onError={handleWineImageError}
-              alt=''
+              alt=""
             />
             <br />
             <br />

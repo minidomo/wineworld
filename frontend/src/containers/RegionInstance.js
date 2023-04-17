@@ -59,12 +59,17 @@ const RegionInstance = () => {
           <br />
           <Container className="custom2">
             <br />
-            <img src={image} style={{
-              height: '10%', width: '20%', objectFit: 'contain',
-              borderStyle: 'solid', borderWidth: '3px',
-            }}
+            <img
+              src={image}
+              style={{
+                height: '10%',
+                width: '20%',
+                objectFit: 'contain',
+                borderStyle: 'solid',
+                borderWidth: '3px',
+              }}
               onError={handleRegionImageError}
-              alt=''
+              alt=""
             />
             <br />
             <br />

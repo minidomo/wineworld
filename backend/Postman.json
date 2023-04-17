@@ -45,6 +45,26 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url.query.clear();\r",
+									"\r",
+									"const params = [ \r",
+									"    'sort=name_asc',\r",
+									"    'startRating=0.0',\r",
+									"    'startReviews=50',\r",
+									"    'type=Red',\r",
+									"    'search=or',\r",
+									"];\r",
+									"\r",
+									"pm.request.addQueryParams(params);\r",
+									"console.log(pm.request.url);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -236,6 +256,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url.path[1] = '1';\r",
+									"console.log(pm.request.url);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -267,12 +298,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.wineworld.me/wines/:wineId",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/wines/:wineId",
 									"host": [
-										"api",
-										"wineworld",
-										"me"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"wines",
@@ -439,6 +467,27 @@
 									"pm.test(\"Response totalPages is a number\", function() {",
 									"    pm.expect(response.totalPages).to.be.a(\"number\");",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url.query.clear();\r",
+									"\r",
+									"const params = [\r",
+									"    'sort=name_asc',\r",
+									"    'startPrice=2',\r",
+									"    'endPrice=4',\r",
+									"    'startRating=4.5',\r",
+									"    'endReviews=300',\r",
+									"    'search=st',\r",
+									"];\r",
+									"\r",
+									"pm.request.addQueryParams(params);\r",
+									"console.log(pm.request.url);"
 								],
 								"type": "text/javascript"
 							}
@@ -650,6 +699,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url.path[1] = '1';\r",
+									"console.log(pm.request.url);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -850,6 +910,27 @@
 									"pm.test(\"Response totalPages is a number\", function() {",
 									"    pm.expect(response.totalPages).to.be.a(\"number\");",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url.query.clear();\r",
+									"\r",
+									"const params = [\r",
+									"    'sort=rating_desc',\r",
+									"    'startRating=4.8',\r",
+									"    'country=Italy',\r",
+									"    'country=Australia',\r",
+									"    'tags=Shopping',\r",
+									"    'search=ta',\r",
+									"];\r",
+									"\r",
+									"pm.request.addQueryParams(params);\r",
+									"console.log(pm.request.url);"
 								],
 								"type": "text/javascript"
 							}
@@ -1062,6 +1143,17 @@
 									"pm.test(\"Response tripTypes is an array\", function() {",
 									"    pm.expect(response.tripTypes).to.be.an(\"array\");",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url.path[1] = '1';\r",
+									"console.log(pm.request.url);\r",
+									""
 								],
 								"type": "text/javascript"
 							}

@@ -97,16 +97,13 @@ const About = () => {
             <Card style={{ width: '70rem' }}>
               <Card.Body>
                 <Card.Title>
-                  <h1>
-                    Welcome to WineWorld!
-                  </h1>
+                  <h1>Welcome to WineWorld!</h1>
                 </Card.Title>
                 <Card.Text>
                   <p className="mx-auto">
-                    WineWorld is an innovative platform that provides a comprehensive guide to the world of
-                    wine, vineyards, and wine regions. Our goal is to empower wine enthusiasts, from
-                    beginners to experts, to explore and deepen their
-                    understanding of this fascinating industry.
+                    WineWorld is an innovative platform that provides a comprehensive guide to the world of wine,
+                    vineyards, and wine regions. Our goal is to empower wine enthusiasts, from beginners to experts, to
+                    explore and deepen their understanding of this fascinating industry.
                   </p>
                   <h1 className="d-flex justify-content-center p-3 ">Repository Statistics</h1>
                   <Row className="p-4">
@@ -120,8 +117,10 @@ const About = () => {
                       <h2>Total Tests: {totalTotalTests}</h2>
                     </Col>
                   </Row>
-                  <Link to={'https://documenter.getpostman.com/view/21507814/2s93CEvGRv'}
-                    class={'btn custom1 stretched-link'}>
+                  <Link
+                    to={'https://documenter.getpostman.com/view/21507814/2s93CEvGRv'}
+                    class={'btn custom1 stretched-link'}
+                  >
                     <h2>API Documentation</h2>
                   </Link>
                 </Card.Text>

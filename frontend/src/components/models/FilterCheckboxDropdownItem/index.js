@@ -29,7 +29,7 @@ export function FilterCheckboxDropdownItem(props) {
       <FormCheck
         type="checkbox"
         label={value}
-        className='filter-checkbox'
+        className="filter-checkbox"
         onClick={e => {
           e.stopPropagation();
           updateFilterList(e.currentTarget.checked, value, filters, setFilters);

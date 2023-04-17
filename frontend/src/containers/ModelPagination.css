@@ -3,13 +3,13 @@
 }
 
 .light .pagination .page-link {
-  color: #02111B;
+  color: #02111b;
 }
 
-.light .pagination .page-item.active .page-link{
+.light .pagination .page-item.active .page-link {
   color: white;
   background-color: #717884;
-  border-color: #02111B;
+  border-color: #02111b;
 }
 
 .dark .pagination .page-link {
@@ -17,9 +17,8 @@
   background-color: #e4e3e3;
 }
 
-.dark .pagination .page-item.active .page-link{
+.dark .pagination .page-item.active .page-link {
   color: white;
   background-color: rgb(111, 160, 146);
   border-color: rgb(111, 160, 146);
-
 }
