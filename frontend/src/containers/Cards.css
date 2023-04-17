@@ -6,3 +6,28 @@
 .dropdown-menu.custom label {
   cursor: pointer;
 }
+
+.dropdown .input-row {
+  padding: 4px 16px 4px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.dropdown .input-row .label {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dropdown .input-row input {
+  width: 108px;
+}
+
+.dropdown .input-row .invalid {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px #f5c2c7 solid;
+}
