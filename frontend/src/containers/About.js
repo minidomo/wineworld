@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -8,6 +7,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
 
+import { gitlab } from '../api';
 import ApiCard from '../components/ApiCard';
 import { ApiData } from '../components/ApiData.js';
 import DeveloperCard from '../components/DeveloperCard';
@@ -15,16 +15,12 @@ import { teamData } from '../components/TeamData.js';
 import ToolCard from '../components/ToolCard';
 import { toolData } from '../components/ToolData.js';
 
-const client = axios.create({
-  baseURL: 'https://gitlab.com/api/v4/',
-});
-
 const fetchGitLabData = async () => {
   let totalCommits = 0,
     totalIssues = 0,
     totalUnitTests = 0;
 
-  await client.get('projects/43416454/repository/contributors').then(response => {
+  await gitlab.get('projects/43416454/repository/contributors').then(response => {
     teamData.forEach(member => {
       member.commits = 0;
       member.issues = 0;
@@ -33,17 +29,24 @@ const fetchGitLabData = async () => {
 
     response.data.forEach(element => {
       const { name, commits } = element;
+
+      let found = false;
       teamData.forEach(member => {
         if (member.name === name || member.alt_names.has(name)) {
           member.commits += commits;
           totalCommits += commits;
+          found = true;
         }
       });
+
+      if (!found) {
+        console.log(`No member found with name: ${name}`);
+      }
     });
   });
 
   const issueStatisticsPromises = teamData.map(member =>
-    client.get('projects/43416454/issues_statistics', {
+    gitlab.get('projects/43416454/issues_statistics', {
       params: {
         author_username: member.gitlab_id,
       },

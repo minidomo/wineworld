@@ -1,7 +1,6 @@
 import './Cards.css';
 import './ModelPagination.css';
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -14,6 +13,7 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import RegionCard from '../components/RegionCard';
 import { clamp } from '../util/clamp';
 
@@ -24,7 +24,6 @@ const RegionModel = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalInstances, setTotalInstances] = useState(1);
   const [sortName, setSortName] = useState('Sort By');
-  const apiLink = 'https://api.wineworld.me/regions?';
   const [tagsList, setTagsList] = useState([]);
   const [countriesList, setCountriesList] = useState([]);
   const [tripTypesList, setTripTypesList] = useState([]);
@@ -46,8 +45,19 @@ const RegionModel = () => {
   };
 
   useEffect(() => {
-    async function callApi() {
-      const response = await axios.get(apiLink, {
+    wineworld.get('/regions/constraints')
+      .then(res => {
+        setCountriesList(res.data.countries);
+        setTagsList(res.data.tags);
+        setTripTypesList(res.data.tripTypes);
+        setSortList(res.data.sorts);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    wineworld.get('/regions',
+      {
         params: {
           page: page,
           country: country,
@@ -62,22 +72,14 @@ const RegionModel = () => {
         paramsSerializer: {
           indexes: null,
         },
-      });
-
-      setRegions(response.data.list);
-      setLoaded(true);
-      setTotalPages(response.data.totalPages);
-      setTotalInstances(response.data.totalInstances);
-
-      const constraintsResponse = await axios.get('https://api.wineworld.me/regions/constraints', {});
-
-      setCountriesList(constraintsResponse.data.countries);
-      setTagsList(constraintsResponse.data.tags);
-      setTripTypesList(constraintsResponse.data.tripTypes);
-      setSortList(constraintsResponse.data.sorts);
-    }
-
-    callApi();
+      })
+      .then(res => {
+        setRegions(res.data.list);
+        setTotalPages(res.data.totalPages);
+        setTotalInstances(res.data.totalInstances);
+        setLoaded(true);
+      })
+      .catch(console.error);
   }, [page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort]);
 
   function handlePagination(pageTarget) {

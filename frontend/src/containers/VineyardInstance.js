@@ -62,7 +62,9 @@ const VineyardInstance = () => {
               height: '20%', width: '20%', objectFit: 'contain',
               borderStyle: 'solid', borderWidth: '3px',
             }}
-              onError={handleVineyardImageError}></img>
+              onError={handleVineyardImageError}
+              alt=''
+            />
             <br />
             <br />
             <h3>{name}</h3>

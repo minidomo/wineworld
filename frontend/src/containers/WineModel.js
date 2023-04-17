@@ -1,7 +1,6 @@
 import './Cards.css';
 import './ModelPagination.css';
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -14,6 +13,7 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import WineCard from '../components/WineCard';
 import { clamp } from '../util/clamp';
 
@@ -24,7 +24,6 @@ const WineModel = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalInstances, setTotalInstances] = useState(1);
   const [sortName, setSortName] = useState('Sort By');
-  const apiLink = 'https://api.wineworld.me/wines?';
   const [typeList, setTypeList] = useState([]);
   const [countriesList, setCountriesList] = useState([]);
   const [wineryList, setWineryList] = useState([]);
@@ -46,8 +45,19 @@ const WineModel = () => {
   };
 
   useEffect(() => {
-    async function callApi() {
-      const response = await axios.get(apiLink, {
+    wineworld.get('/wines/constraints')
+      .then(res => {
+        setTypeList(res.data.types);
+        setCountriesList(res.data.countries);
+        setWineryList(res.data.wineries);
+        setSortList(res.data.sorts);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    wineworld.get('/wines',
+      {
         params: {
           page: page,
           type: type,
@@ -62,22 +72,14 @@ const WineModel = () => {
         paramsSerializer: {
           indexes: null,
         },
-      });
-
-      setWines(response.data.list);
-      setLoaded(true);
-      setTotalPages(response.data.totalPages);
-      setTotalInstances(response.data.totalInstances);
-
-      const constraintsResponse = await axios.get('https://api.wineworld.me/wines/constraints', {});
-
-      setTypeList(constraintsResponse.data.types);
-      setCountriesList(constraintsResponse.data.countries);
-      setWineryList(constraintsResponse.data.wineries);
-      setSortList(constraintsResponse.data.sorts);
-    }
-
-    callApi();
+      })
+      .then(res => {
+        setWines(res.data.list);
+        setTotalPages(res.data.totalPages);
+        setTotalInstances(res.data.totalInstances);
+        setLoaded(true);
+      })
+      .catch(console.error);
   }, [page, type, country, winery, startReviews, endReviews, startRating, endRating, sort]);
 
   function handlePagination(pageTarget) {

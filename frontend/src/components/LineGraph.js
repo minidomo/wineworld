@@ -1,10 +1,11 @@
-import axios from 'axios';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+
+import { wineworld } from '../api';
 
 const date = dayjs();
 const ticks = (() => {
@@ -49,11 +50,9 @@ const LineGraph = () => {
     const [graphData, setGraphData] = useState([]);
 
     useEffect(() => {
-        async function callApi() {
-            const response = await axios.get('https://api.wineworld.me/visualizations/provider/line');
-            setGraphData(response.data.data);
-        }
-        callApi();
+        wineworld.get('/visualizations/provider/line')
+            .then(res => setGraphData(res.data.data))
+            .catch(console.error);
     }, []);
 
 

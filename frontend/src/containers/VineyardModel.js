@@ -1,7 +1,6 @@
 import './Cards.css';
 import './ModelPagination.css';
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -14,6 +13,7 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import VineyardCard from '../components/VineyardCard';
 import { clamp } from '../util/clamp';
 
@@ -23,7 +23,6 @@ const VineyardModel = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalInstances, setTotalInstances] = useState(1);
-  const apiLink = 'https://api.wineworld.me/vineyards?';
   const [sortName, setSortName] = useState('Sort By');
   const [countriesList, setCountriesList] = useState([]);
   const [sortList, setSortList] = useState([]);
@@ -44,8 +43,17 @@ const VineyardModel = () => {
   };
 
   useEffect(() => {
-    async function callApi() {
-      const response = await axios.get(apiLink, {
+    wineworld.get('/vineyards/constraints')
+      .then(res => {
+        setCountriesList(res.data.countries);
+        setSortList(res.data.sorts);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    wineworld.get('/vineyards',
+      {
         params: {
           page: page,
           country: country,
@@ -60,19 +68,14 @@ const VineyardModel = () => {
         paramsSerializer: {
           indexes: null,
         },
-      });
-      setVineyards(response.data.list);
-      setLoaded(true);
-      setTotalPages(response.data.totalPages);
-      setTotalInstances(response.data.totalInstances);
-
-      const constraintsResponse = await axios.get('https://api.wineworld.me/vineyards/constraints', {});
-
-      setCountriesList(constraintsResponse.data.countries);
-      setSortList(constraintsResponse.data.sorts);
-    }
-
-    callApi();
+      })
+      .then(res => {
+        setVineyards(res.data.list);
+        setTotalPages(res.data.totalPages);
+        setTotalInstances(res.data.totalInstances);
+        setLoaded(true);
+      })
+      .catch(console.error);
   }, [page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort]);
 
   function handlePagination(pageTarget) {
