@@ -3,8 +3,17 @@ import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { CartesianGrid, Legend, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis }
-from 'recharts';
+import {
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Scatter,
+  ScatterChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+  ZAxis,
+} from 'recharts';
 
 const Scatterplot = () => {
   const [regions, setRegions] = useState([]);
@@ -36,7 +45,7 @@ const Scatterplot = () => {
               <YAxis type="number" domain={['auto', 'auto']} dataKey="rating" name="Rating" />
               <XAxis type="number" domain={['auto', 'auto']} dataKey="reviews" name="Reviews" />
               <ZAxis dataKey="name" name="Region" />
-              <Legend/>
+              <Legend />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
               <Scatter name="Region" data={regions} fill="#0E79B2" />
             </ScatterChart>

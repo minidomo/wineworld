@@ -28,7 +28,7 @@ const RegionCard = props => {
               <br />
               Review Count: {reviews}
               <br />
-              Trip Type: {tripTypes.join(', ')}
+              Trip Type: {highlightText(tripTypes.join(', '), searchQuery)}
             </small>
           </Card.Text>
         </Card.Body>
