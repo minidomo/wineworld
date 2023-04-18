@@ -196,7 +196,13 @@ const WineModel = () => {
       <br></br>
       {loaded ? (
         <>
-          <CustomPagination firstPage={1} lastPage={totalPages} setPage={setPage} getCurrentPage={() => page} />
+          <CustomPagination
+            firstPage={1}
+            lastPage={totalPages}
+            setPage={setPage}
+            getCurrentPage={() => page}
+            maxVisiblePages={5}
+          />
           <Row>
             <h6>Found {totalInstances} wines</h6>
           </Row>

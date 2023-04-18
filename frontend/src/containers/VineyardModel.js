@@ -185,7 +185,13 @@ const VineyardModel = () => {
       <br></br>
       {loaded ? (
         <>
-          <CustomPagination firstPage={1} lastPage={totalPages} setPage={setPage} getCurrentPage={() => page} />
+          <CustomPagination
+            firstPage={1}
+            lastPage={totalPages}
+            setPage={setPage}
+            getCurrentPage={() => page}
+            maxVisiblePages={5}
+          />
           <Row>
             <h6>Found {totalInstances} vineyards</h6>
           </Row>
