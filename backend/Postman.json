@@ -4,7 +4,8 @@
 		"name": "WineWorld API Documentation",
 		"description": "Find information about wines, vineyards, and wine regions",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25836915"
+		"_exporter_id": "25836915",
+		"_collection_link": "https://www.postman.com/cs373-idb-12/workspace/wineworld-api/collection/21507814-6a263cde-2717-434c-b91a-20e308a7258b?action=share&creator=25836915&source=collection_link"
 	},
 	"item": [
 		{
@@ -71,7 +72,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/wines?name=&country=&winery=&startRating=&endRating=&startReviews=&endReviews=&type=&page=&sort=&search=",
+							"raw": "{{baseUrl}}/wines?country=&winery=&startRating=&endRating=&startReviews=&endReviews=&type=&page=&sort=&search=",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -79,11 +80,6 @@
 								"wines"
 							],
 							"query": [
-								{
-									"key": "name",
-									"value": "",
-									"description": "(Deprecated) A string. A substring that can be found in a wine's name (case-insensitive)."
-								},
 								{
 									"key": "country",
 									"value": "",
@@ -497,7 +493,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/vineyards?name=&country=&startPrice=&endPrice=&startRating=&endRating=&startReviews=&endReviews=&page=&sort=&search=",
+							"raw": "{{baseUrl}}/vineyards?country=&startPrice=&endPrice=&startRating=&endRating=&startReviews=&endReviews=&page=&sort=&search=",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -505,11 +501,6 @@
 								"vineyards"
 							],
 							"query": [
-								{
-									"key": "name",
-									"value": "",
-									"description": "(Deprecated) A string. A substring that can be found in a vineyard's name (case-insensitive)."
-								},
 								{
 									"key": "country",
 									"value": "",
@@ -940,7 +931,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/regions?name=&country=&startRating=&endRating=&startReviews=&endReviews=&tags=&tripTypes=&page=&sort=&search=",
+							"raw": "{{baseUrl}}/regions?country=&startRating=&endRating=&startReviews=&endReviews=&tags=&tripTypes=&page=&sort=&search=",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -948,11 +939,6 @@
 								"regions"
 							],
 							"query": [
-								{
-									"key": "name",
-									"value": "",
-									"description": "(Deprecated) A string. A substring that can be found in a region's name (case-insensitive)."
-								},
 								{
 									"key": "country",
 									"value": "",
