@@ -2,7 +2,6 @@ import axios from 'axios';
 import { CategoryScale, Chart, Legend, Title, Tooltip } from 'chart.js/auto';
 import * as ChartGeo from 'chartjs-chart-geo';
 import React, { useEffect, useState } from 'react';
-import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
@@ -102,11 +101,9 @@ const Choropleth = () => {
 
   return (
     <Container>
-      <Row style={{ height: 600 }}>
-        <h3 className="p-5 text-center">Number of Airports per State</h3>
-        <Col>
-          <div id="choropleth-wrapper" style={{ height: 1000 }}></div>
-        </Col>
+      <Row style={{ height: '100%' }}>
+        <h4 className="text-center">Number of Airports per State</h4>
+        <div id="choropleth-wrapper" style={{ height: '800px' }}></div>
       </Row>
     </Container>
   );
