@@ -187,7 +187,7 @@ const VineyardModel = () => {
           <SearchBar placeholder="Search vineyards" setValue={setSearchQuery} valueIfEmpty={undefined} />
         </Col>
       </Row>
-      <br></br>
+      <br />
       {loaded ? (
         <>
           <Pagination className="justify-content-center">

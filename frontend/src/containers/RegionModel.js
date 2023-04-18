@@ -198,7 +198,7 @@ const RegionModel = () => {
           <SearchBar placeholder="Search regions" setValue={setSearchQuery} valueIfEmpty={undefined} />
         </Col>
       </Row>
-      <br></br>
+      <br />
       {loaded ? (
         <>
           <Pagination className="justify-content-center">

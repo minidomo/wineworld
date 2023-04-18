@@ -20,13 +20,18 @@ const Map = ({ lat, lng }) => {
     lng: lng,
   };
 
-  return (
-    // <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+  console.log(myPos);
+  console.log(window.google === undefined);
+  return window.google === undefined ? (
     <LoadScript googleMapsApiKey="AIzaSyCsaB0ULoGPak8Jov3prGhtpnlCvRugJig">
       <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={myPos}>
         <MarkerF position={myPos} />
       </GoogleMap>
     </LoadScript>
+  ) : (
+    <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={myPos}>
+      <MarkerF position={myPos} />
+    </GoogleMap>
   );
 };
 export default Map;

@@ -198,7 +198,7 @@ const WineModel = () => {
           <SearchBar placeholder="Search wines" setValue={setSearchQuery} valueIfEmpty={undefined} />
         </Col>
       </Row>
-      <br></br>
+      <br />
       {loaded ? (
         <>
           <Pagination className="justify-content-center">

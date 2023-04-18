@@ -89,7 +89,7 @@ const WineInstance = () => {
               </div>
             </Row>
           </Container>
-          <br></br>
+          <br />
           <Row>
             <h5 align="left">Related Vineyards</h5>
           </Row>
