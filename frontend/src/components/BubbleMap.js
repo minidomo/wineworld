@@ -70,7 +70,9 @@ const BubbleMap = () => {
                 countrycolor: 'rgb(255,255,255)',
               },
             }}
-            config = {{scrollZoom: false}}
+            config={{
+                scrollZoom: false,
+            }}
           />
         </Col>
       </Row>
