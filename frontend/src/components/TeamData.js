@@ -63,7 +63,8 @@ const teamData = [
     alt_names: new Set(['austin25coding']),
     gitlab_id: 'acbarret',
     role: 'Front-end',
-    bio: "I'm a sophomore CS major at UT Austin. My hobbies include cooking, windsurfing, and reading books.",
+    bio: "I'm a sophomore frontend developer at UT Austin. " +
+    'I love to go windsurfing, play the piano, and write my own music.',
     commits: 0,
     issues: 0,
     unit_tests: 0,

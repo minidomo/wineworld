@@ -9,14 +9,12 @@ const Visualizations = () => (
   <Container>
     <h1> Visualizations </h1>
 
-    <h4> Pie Chart </h4>
     <WineChart />
-
-    <h4> Bar Chart </h4>
+    <div class="border-top my-3"></div>
     <VineyardChart />
-
-    <h4> Scatterplot </h4>
+    <div class="border-top my-3"></div>
     <Scatterplot />
+    <br/>
   </Container>
 );
 

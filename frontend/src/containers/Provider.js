@@ -8,15 +8,12 @@ import LineGraph from '../components/LineGraph';
 const Provider = () => (
   <Container>
     <h1> Provider Visualizations </h1>
-
-    <h4> Line Chart </h4>
     <LineGraph />
-
-    <h4> Bubble Map </h4>
+    <div class="border-top my-3"></div>
     <BubbleMap />
-
-    <h4> Choropleth </h4>
+    <div class="border-top my-3"></div>
     <Choropleth />
+    <br/>
   </Container>
 );
 

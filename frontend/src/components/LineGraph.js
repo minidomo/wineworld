@@ -48,7 +48,7 @@ const LineGraph = () => {
   return (
     <Container fluid="md">
       <Row style={{ height: 400 }}>
-        <h6> Percentage of Parks Open at a Specific Time </h6>
+      <h3 className="p-5 text-center">Percentage of Parks Open at a Specific Time</h3>
         <Col>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart width={600} height={300} data={createLineData(graphData)}>
