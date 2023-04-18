@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +13,7 @@ import DeveloperCard from '../components/DeveloperCard';
 import { teamData } from '../components/TeamData.js';
 import ToolCard from '../components/ToolCard';
 import { toolData } from '../components/ToolData.js';
+import { loading } from '../util/loadingAnimation';
 
 const fetchGitLabData = async () => {
   let totalCommits = 0,
@@ -132,22 +132,18 @@ const About = () => {
 
       <Container className="p-4">
         <h1 className="d-flex justify-content-center p-4 ">Meet the WineWorld Team!</h1>
-
-        {loaded ? (
-          <Row xs={1} sm={2} md={3} xl={5} className="g-4 p-4 justify-content-center">
-            {teamList.map((member, i) => (
-              <Col className="d-flex align-self-stretch" key={i}>
-                <DeveloperCard devCard={member} key={i} />
-              </Col>
-            ))}
-          </Row>
-        ) : (
-          <Row>
-            <Col className="d-flex justify-content-center">
-              <Spinner animation="grow" />
-            </Col>
-          </Row>
-        )}
+        {loading({
+          loaded: loaded,
+          element: (
+            <Row xs={1} sm={2} md={3} xl={5} className="g-4 p-4 justify-content-center">
+              {teamList.map((member, i) => (
+                <Col className="d-flex align-self-stretch" key={i}>
+                  <DeveloperCard devCard={member} key={i} />
+                </Col>
+              ))}
+            </Row>
+          ),
+        })}
       </Container>
 
       <Container className="p-4">

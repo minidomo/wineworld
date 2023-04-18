@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useParams } from 'react-router-dom';
@@ -12,6 +11,7 @@ import { CustomPagination } from '../components/models/CustomPagination';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
+import { loading } from '../util/loadingAnimation';
 
 const Search = () => {
   const [wines, setWines] = useState([]);
@@ -85,81 +85,84 @@ const Search = () => {
       <Tabs defaultActiveKey="wines">
         <Tab eventKey="wines" title="Wines">
           <h6 class="display-4">Wine Results</h6>
-          {wineLoaded ? (
-            <>
-              <CustomPagination
-                firstPage={1}
-                lastPage={wineTotalPages}
-                setPage={setWinePage}
-                getCurrentPage={() => winePage}
-                maxVisiblePages={5}
-              />
-              <p style={{ opacity: 0.65 }} hidden={wines.length > 0}>
-                No wines seem to match your search
-              </p>
-              <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                {wines.map(wine => (
-                  <Col>
-                    <WineCard wine={wine} searchQuery={query} />
-                  </Col>
-                ))}
-              </Row>
-            </>
-          ) : (
-            <Spinner animation="border" role="status" />
-          )}
+          {loading({
+            loaded: wineLoaded,
+            element: (
+              <>
+                <CustomPagination
+                  firstPage={1}
+                  lastPage={wineTotalPages}
+                  setPage={setWinePage}
+                  getCurrentPage={() => winePage}
+                  maxVisiblePages={5}
+                />
+                <p style={{ opacity: 0.65 }} hidden={wines.length > 0}>
+                  No wines seem to match your search
+                </p>
+                <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+                  {wines.map(wine => (
+                    <Col>
+                      <WineCard wine={wine} searchQuery={query} />
+                    </Col>
+                  ))}
+                </Row>
+              </>
+            ),
+          })}
         </Tab>
         <Tab eventKey="vineyards" title="Vineyards">
           <h6 class="display-4">Vineyard Results</h6>
-          {vineyardLoaded ? (
-            <>
-              <CustomPagination
-                firstPage={1}
-                lastPage={vineyardTotalPages}
-                setPage={setVineyardPage}
-                getCurrentPage={() => vineyardPage}
-                maxVisiblePages={5}
-              />
-              <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>
-                No vineyards seem to match your search
-              </p>
-              <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                {vineyards.map(vineyard => (
-                  <Col>
-                    <VineyardCard vineyard={vineyard} searchQuery={query} />
-                  </Col>
-                ))}
-              </Row>
-            </>
-          ) : (
-            <Spinner animation="border" role="status" />
-          )}
+          {loading({
+            loaded: vineyardLoaded,
+            element: (
+              <>
+                <CustomPagination
+                  firstPage={1}
+                  lastPage={vineyardTotalPages}
+                  setPage={setVineyardPage}
+                  getCurrentPage={() => vineyardPage}
+                  maxVisiblePages={5}
+                />
+                <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>
+                  No vineyards seem to match your search
+                </p>
+                <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+                  {vineyards.map(vineyard => (
+                    <Col>
+                      <VineyardCard vineyard={vineyard} searchQuery={query} />
+                    </Col>
+                  ))}
+                </Row>
+              </>
+            ),
+          })}
         </Tab>
         <Tab eventKey="regions" title="Regions">
           <h6 class="display-4">Region Results</h6>
-          {regionLoaded ? (
-            <>
-              <CustomPagination
-                firstPage={1}
-                lastPage={regionTotalPages}
-                setPage={setRegionPage}
-                getCurrentPage={() => regionPage}
-                maxVisiblePages={5}
-              />
-              <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>
-                No regions seem to match your search
-              </p>
-              <Row md={4} className="d-flex g-4 p-4 justify-content-left">
-                {regions.map(region => (
-                  <Col>
-                    <RegionCard region={region} searchQuery={query} />
-                  </Col>
-                ))}
-              </Row>
-            </>
-          ) : (
-            <Spinner animation="border" role="status" />
-          )}
+          {loading({
+            loaded: regionLoaded,
+            element: (
+              <>
+                <CustomPagination
+                  firstPage={1}
+                  lastPage={regionTotalPages}
+                  setPage={setRegionPage}
+                  getCurrentPage={() => regionPage}
+                  maxVisiblePages={5}
+                />
+                <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>
+                  No regions seem to match your search
+                </p>
+                <Row md={4} className="d-flex g-4 p-4 justify-content-left">
+                  {regions.map(region => (
+                    <Col>
+                      <RegionCard region={region} searchQuery={query} />
+                    </Col>
+                  ))}
+                </Row>
+              </>
+            ),
+          })}
         </Tab>
       </Tabs>
     </Container>

@@ -15,9 +15,6 @@ import Vineyards from './containers/VineyardModel';
 import Visualizations from './containers/Visualizations';
 import WineInstance from './containers/WineInstance';
 import Wines from './containers/WineModel';
-// import RegionSearch from './containers/RegionSearch';
-// import VineyardSearch from './containers/VineyardSearch';
-// import WineSearch from './containers/WineSearch';
 
 const App = () => (
   <Router>
@@ -37,9 +34,6 @@ const App = () => (
           <Route path="/provider" element={<ProviderVisualizations />} />
 
           <Route path="/search/:query" element={<Search />} />
-          {/* <Route path="/wines/search/:query" element={<WineSearch />}/>
-          <Route path="/vineyards/search/:query" element={<VineyardSearch />}/>
-          <Route path="/regions/search/:query" element={<RegionSearch />}/> */}
         </Routes>
       </div>
     </div>

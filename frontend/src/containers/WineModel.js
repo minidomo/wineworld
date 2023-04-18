@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
 
 import { wineworld } from '../api';
 import { CustomPagination } from '../components/models/CustomPagination';
@@ -15,6 +14,7 @@ import { FilterIntegerInput, FilterNumberInput } from '../components/models/Filt
 import { SearchBar } from '../components/models/SearchBar';
 import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import WineCard from '../components/WineCard';
+import { loading } from '../util/loadingAnimation';
 
 const WineModel = () => {
   const [sortName, setSortName] = useState('Sort By: Name (A-Z)');
@@ -193,29 +193,30 @@ const WineModel = () => {
         </Col>
       </Row>
       <br />
-      {loaded ? (
-        <>
-          <CustomPagination
-            firstPage={1}
-            lastPage={totalPages}
-            setPage={setPage}
-            getCurrentPage={() => page}
-            maxVisiblePages={5}
-          />
-          <Row>
-            <h6>Found {totalInstances} wines</h6>
-          </Row>
-          <Row md={4} className="d-flex g-4 p-4">
-            {wines.map(wine => (
-              <Col>
-                <WineCard wine={wine} searchQuery={searchQuery} />
-              </Col>
-            ))}
-          </Row>
-        </>
-      ) : (
-        <Spinner animation="border" role="status" />
-      )}
+      {loading({
+        loaded: loaded,
+        element: (
+          <>
+            <CustomPagination
+              firstPage={1}
+              lastPage={totalPages}
+              setPage={setPage}
+              getCurrentPage={() => page}
+              maxVisiblePages={5}
+            />
+            <Row>
+              <h6>Found {totalInstances} wines</h6>
+            </Row>
+            <Row md={4} className="d-flex g-4 p-4">
+              {wines.map(wine => (
+                <Col>
+                  <WineCard wine={wine} searchQuery={searchQuery} />
+                </Col>
+              ))}
+            </Row>
+          </>
+        ),
+      })}
     </Container>
   );
 };

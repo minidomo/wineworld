@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
 
 import { wineworld } from '../api';
 import { CustomPagination } from '../components/models/CustomPagination';
@@ -15,6 +14,7 @@ import { FilterIntegerInput, FilterNumberInput } from '../components/models/Filt
 import { SearchBar } from '../components/models/SearchBar';
 import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import VineyardCard from '../components/VineyardCard';
+import { loading } from '../util/loadingAnimation';
 
 const VineyardModel = () => {
   const [sortName, setSortName] = useState('Sort By: Name (A-Z)');
@@ -182,29 +182,30 @@ const VineyardModel = () => {
         </Col>
       </Row>
       <br />
-      {loaded ? (
-        <>
-          <CustomPagination
-            firstPage={1}
-            lastPage={totalPages}
-            setPage={setPage}
-            getCurrentPage={() => page}
-            maxVisiblePages={5}
-          />
-          <Row>
-            <h6>Found {totalInstances} vineyards</h6>
-          </Row>
-          <Row md={4} className="g-4 p-4">
-            {vineyards.map(vineyard => (
-              <Col>
-                <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
-              </Col>
-            ))}
-          </Row>
-        </>
-      ) : (
-        <Spinner animation="border" role="status" />
-      )}
+      {loading({
+        loaded: loaded,
+        element: (
+          <>
+            <CustomPagination
+              firstPage={1}
+              lastPage={totalPages}
+              setPage={setPage}
+              getCurrentPage={() => page}
+              maxVisiblePages={5}
+            />
+            <Row>
+              <h6>Found {totalInstances} vineyards</h6>
+            </Row>
+            <Row md={4} className="g-4 p-4">
+              {vineyards.map(vineyard => (
+                <Col>
+                  <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
+                </Col>
+              ))}
+            </Row>
+          </>
+        ),
+      })}
     </Container>
   );
 };

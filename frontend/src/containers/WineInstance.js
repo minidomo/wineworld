@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
-import Spinner from 'react-bootstrap/Spinner';
 import { useParams } from 'react-router-dom';
 
 import { wineworld } from '../api';
@@ -12,6 +11,7 @@ import RedditCarousel from '../components/RedditCarousel';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import { handleWineImageError } from '../util/handleImageError';
+import { loading } from '../util/loadingAnimation';
 
 const WineInstance = () => {
   let { id } = useParams();
@@ -52,76 +52,77 @@ const WineInstance = () => {
 
   return (
     <Container>
-      {loaded ? (
-        <div>
-          <br />
-          <Container className="custom2">
+      {loading({
+        loaded: loaded,
+        element: (
+          <div>
             <br />
-            <img
-              src={image}
-              style={{ height: '12%', width: '6%', objectFit: 'contain' }}
-              onError={handleWineImageError}
-              alt=""
-            />
+            <Container className="custom2">
+              <br />
+              <img
+                src={image}
+                style={{ height: '12%', width: '6%', objectFit: 'contain' }}
+                onError={handleWineImageError}
+                alt=""
+              />
+              <br />
+              <br />
+              <h3>{name}</h3>
+              <h5>{type} Wine</h5>
+              <Row>
+                <div className="p-5">
+                  <p align="center">
+                    <h6>
+                      Country: {country}
+                      <br />
+                      <br />
+                      Region: {region}
+                      <br />
+                      <br />
+                      Winery: {winery}
+                      <br />
+                      <br />
+                      Rating: {rating}
+                      <br />
+                      <br />
+                      Reviews: {reviews}
+                    </h6>
+                  </p>
+                </div>
+              </Row>
+            </Container>
             <br />
-            <br />
-            <h3>{name}</h3>
-            <h5>{type} Wine</h5>
             <Row>
-              <div className="p-5">
-                <p align="center">
-                  <h6>
-                    Country: {country}
-                    <br />
-                    <br />
-                    Region: {region}
-                    <br />
-                    <br />
-                    Winery: {winery}
-                    <br />
-                    <br />
-                    Rating: {rating}
-                    <br />
-                    <br />
-                    Reviews: {reviews}
-                  </h6>
-                </p>
-              </div>
+              <h5 align="left">Related Vineyards</h5>
             </Row>
-          </Container>
-          <br />
-          <Row>
-            <h5 align="left">Related Vineyards</h5>
-          </Row>
-          <Row md={4} className="p-4 g-4">
-            {vineyards.map(vineyard => (
-              <Col>
-                <VineyardCard vineyard={vineyard} />
-              </Col>
-            ))}
-          </Row>
-          <Row>
-            <h5 align="left">Related Regions</h5>
-          </Row>
-          <Row md={4} className="p-4 g-4">
-            <Col>
-              {regions.map(region_data => (
+            <Row md={4} className="p-4 g-4">
+              {vineyards.map(vineyard => (
                 <Col>
-                  <RegionCard region={region_data} />
+                  <VineyardCard vineyard={vineyard} />
                 </Col>
               ))}
-            </Col>
-          </Row>
+            </Row>
+            <Row>
+              <h5 align="left">Related Regions</h5>
+            </Row>
+            <Row md={4} className="p-4 g-4">
+              <Col>
+                {regions.map(region_data => (
+                  <Col>
+                    <RegionCard region={region_data} />
+                  </Col>
+                ))}
+              </Col>
+            </Row>
 
-          <div id="learn-more-section" className="p-4 g-4">
-            <h5>Learn more about {type} wine</h5>
-            <br />
-            <RedditCarousel redditUrls={reddit} />
+            <div id="learn-more-section" className="p-4 g-4">
+              <h5>Learn more about {type} wine</h5>
+              <br />
+              <RedditCarousel redditUrls={reddit} />
+            </div>
           </div>
-        </div>
-      ) : (
-        <Spinner animation="border" role="status"></Spinner>
-      )}
+        ),
+      })}
     </Container>
   );
 };
