@@ -6,15 +6,14 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-import { useNavigate } from 'react-router-dom';
 
 import { wineworld } from '../api';
 import { FilterCheckboxDropdownItem } from '../components/models/FilterCheckboxDropdownItem';
 import { FilterIntegerInput, FilterNumberInput } from '../components/models/FilterInput';
+import { SearchBar } from '../components/models/SearchBar';
 import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import VineyardCard from '../components/VineyardCard';
 import { clamp } from '../util/clamp';
@@ -45,13 +44,7 @@ const VineyardModel = () => {
   const [startRating, setStartRating] = useState();
   const [endRating, setEndRating] = useState();
   const [sort, setSort] = useState('name_asc');
-
-  const [query, setQuery] = useState('');
-  const navigate = useNavigate();
-  const handleSubmit = event => {
-    event.preventDefault();
-    navigate(`/vineyards/search/${query}`);
-  };
+  const [searchQuery, setSearchQuery] = useState();
 
   useEffect(() => {
     wineworld
@@ -79,9 +72,7 @@ const VineyardModel = () => {
           startRating: startRating,
           endRating: endRating,
           sort: sort,
-        },
-        paramsSerializer: {
-          indexes: null,
+          search: searchQuery,
         },
       })
       .then(res => {
@@ -91,7 +82,7 @@ const VineyardModel = () => {
         setLoaded(true);
       })
       .catch(console.error);
-  }, [page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort]);
+  }, [page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort, searchQuery]);
 
   function handlePagination(pageTarget) {
     setPage(clamp(1, totalPages, pageTarget));
@@ -193,15 +184,7 @@ const VineyardModel = () => {
           </Dropdown>
         </Col>
         <Col>
-          <Form onSubmit={handleSubmit} className="d-flex mt-2">
-            <Form.Control
-              className="custom"
-              type="search"
-              placeholder="Search vineyards"
-              onChange={event => setQuery(event.target.value)}
-              size="sm"
-            />
-          </Form>
+          <SearchBar placeholder="Search vineyards" setValue={setSearchQuery} valueIfEmpty={undefined} />
         </Col>
       </Row>
       <br></br>
@@ -246,7 +229,7 @@ const VineyardModel = () => {
           <Row md={4} className="g-4 p-4">
             {vineyards.map(vineyard => (
               <Col>
-                <VineyardCard vineyard={vineyard} />
+                <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
               </Col>
             ))}
           </Row>

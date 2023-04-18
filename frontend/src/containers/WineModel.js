@@ -6,15 +6,14 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-import { useNavigate } from 'react-router-dom';
 
 import { wineworld } from '../api';
 import { FilterCheckboxDropdownItem } from '../components/models/FilterCheckboxDropdownItem';
 import { FilterIntegerInput, FilterNumberInput } from '../components/models/FilterInput';
+import { SearchBar } from '../components/models/SearchBar';
 import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import WineCard from '../components/WineCard';
 import { clamp } from '../util/clamp';
@@ -46,13 +45,7 @@ const WineModel = () => {
   const [startRating, setStartRating] = useState();
   const [endRating, setEndRating] = useState();
   const [sort, setSort] = useState('name_asc');
-
-  const [query, setQuery] = useState('');
-  const navigate = useNavigate();
-  const handleSubmit = event => {
-    event.preventDefault();
-    navigate(`/wines/search/${query}`);
-  };
+  const [searchQuery, setSearchQuery] = useState();
 
   useEffect(() => {
     wineworld
@@ -81,9 +74,7 @@ const WineModel = () => {
           startRating: startRating,
           endRating: endRating,
           sort: sort,
-        },
-        paramsSerializer: {
-          indexes: null,
+          search: searchQuery,
         },
       })
       .then(res => {
@@ -93,7 +84,7 @@ const WineModel = () => {
         setLoaded(true);
       })
       .catch(console.error);
-  }, [page, type, country, winery, startReviews, endReviews, startRating, endRating, sort]);
+  }, [page, type, country, winery, startReviews, endReviews, startRating, endRating, sort, searchQuery]);
 
   function handlePagination(pageTarget) {
     setPage(clamp(1, totalPages, pageTarget));
@@ -204,15 +195,7 @@ const WineModel = () => {
           </Dropdown>
         </Col>
         <Col>
-          <Form onSubmit={handleSubmit} className="d-flex mt-2">
-            <Form.Control
-              className="custom"
-              type="search"
-              placeholder="Search wines"
-              onChange={event => setQuery(event.target.value)}
-              size="sm"
-            />
-          </Form>
+          <SearchBar placeholder="Search wines" setValue={setSearchQuery} valueIfEmpty={undefined} />
         </Col>
       </Row>
       <br></br>
@@ -257,7 +240,7 @@ const WineModel = () => {
           <Row md={4} className="d-flex g-4 p-4">
             {wines.map(wine => (
               <Col>
-                <WineCard wine={wine} />
+                <WineCard wine={wine} searchQuery={searchQuery} />
               </Col>
             ))}
           </Row>
