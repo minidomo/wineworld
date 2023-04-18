@@ -6,8 +6,8 @@ const Map = ({ lat, lng }) => {
     height: '80vh',
     width: '80%',
     padding: '10px',
-    top: '10vh',
-    left: '10%',
+    top: '5vh',
+    left: '5%',
     border: '10vh',
   };
 
