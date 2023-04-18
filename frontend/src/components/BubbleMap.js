@@ -27,11 +27,7 @@ const BubbleMap = () => {
   return (
     <Container fluid="md">
       {
-        // console.log(cityData)
         cityData.forEach(cityInfo => {
-          // console.log(cityInfo);
-          // city.push(cityInfo.city);
-          // state.push(cityInfo.state);
           population.push(cityInfo.population / scale);
           cityLat.push(cityInfo.latitude);
           cityLon.push(cityInfo.longitude);
@@ -60,8 +56,6 @@ const BubbleMap = () => {
               },
             ]}
             layout={{
-              // width: 800,
-              // height: 800,
               showlegend: false,
               geo: {
                 scope: 'usa',
@@ -76,6 +70,7 @@ const BubbleMap = () => {
                 countrycolor: 'rgb(255,255,255)',
               },
             }}
+            config = {{scrollZoom: false}}
           />
         </Col>
       </Row>
