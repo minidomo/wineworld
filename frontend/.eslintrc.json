@@ -152,12 +152,6 @@
             }
         ],
         "new-cap": "off",
-        "newline-per-chained-call": [
-            "error",
-            {
-                "ignoreChainWithDepth": 3
-            }
-        ],
         "no-array-constructor": "error",
         "no-inline-comments": "error",
         "no-lonely-if": "error",
