@@ -13,7 +13,7 @@ const Provider = () => (
     <BubbleMap />
     <div class="border-top my-3"></div>
     <Choropleth />
-    <br/>
+    <br />
   </Container>
 );
 

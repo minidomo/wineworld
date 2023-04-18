@@ -90,13 +90,13 @@ const RegionInstance = () => {
               </div>
             </Row>
           </Container>
-          <br/>
+          <br />
           <Row>
             <h5 align="left">Location</h5>
             <Map lat={latitude} lng={longitude} />
           </Row>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <Row>
             <h5 align="left">Related Wines</h5>
           </Row>
