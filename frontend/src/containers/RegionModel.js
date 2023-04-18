@@ -196,7 +196,13 @@ const RegionModel = () => {
       <br />
       {loaded ? (
         <>
-          <CustomPagination firstPage={1} lastPage={totalPages} setPage={setPage} getCurrentPage={() => page} />
+          <CustomPagination
+            firstPage={1}
+            lastPage={totalPages}
+            setPage={setPage}
+            getCurrentPage={() => page}
+            maxVisiblePages={5}
+          />
           <Row>
             <h6>Found {totalInstances} regions</h6>
           </Row>
