@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
@@ -6,6 +5,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useParams } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import Map from '../components/Map';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
@@ -13,6 +13,9 @@ import { handleRegionImageError } from '../util/handleImageError';
 
 const RegionInstance = () => {
   let { id } = useParams();
+
+  const [loaded, setLoaded] = useState(false);
+
   const [name, setName] = useState('');
   const [country, setCountry] = useState('');
   const [rating, setRating] = useState(0);
@@ -24,32 +27,25 @@ const RegionInstance = () => {
   const [longitude, setLongitude] = useState(0);
   const [wines, setWines] = useState([]);
   const [vineyards, setVineyards] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    let mounted = true;
-    axios
-      .get(`https://api.wineworld.me/regions/${id}`)
-      .then(response => {
-        if (mounted) {
-          setName(response.data.name);
-          setCountry(response.data.country);
-          setRating(response.data.rating);
-          setReviews(response.data.reviews);
-          setTags(response.data.tags);
-          setTripTypes(response.data.tripTypes);
-          setImage(response.data.image.url);
-          setLatitude(response.data.coordinates.latitude);
-          setLongitude(response.data.coordinates.longitude);
-          setWines(response.data.related.wines);
-          setVineyards(response.data.related.vineyards);
-          setLoaded(true);
-        }
+    wineworld
+      .get(`/regions/${id}`)
+      .then(res => {
+        setName(res.data.name);
+        setCountry(res.data.country);
+        setRating(res.data.rating);
+        setReviews(res.data.reviews);
+        setTags(res.data.tags);
+        setTripTypes(res.data.tripTypes);
+        setImage(res.data.image.url);
+        setLatitude(res.data.coordinates.latitude);
+        setLongitude(res.data.coordinates.longitude);
+        setWines(res.data.related.wines);
+        setVineyards(res.data.related.vineyards);
+        setLoaded(true);
       })
-      .catch(errRes => {
-        console.error(errRes);
-      });
-    return () => (mounted = false);
+      .catch(console.error);
   }, [id]);
 
   return (

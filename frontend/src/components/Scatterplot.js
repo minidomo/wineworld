@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -15,16 +14,18 @@ import {
   ZAxis,
 } from 'recharts';
 
+import { wineworld } from '../api';
+
 const Scatterplot = () => {
   const [regions, setRegions] = useState([]);
-  const apiLink = 'https://api.wineworld.me/regions?';
 
   useEffect(() => {
-    async function callApi() {
-      const response = await axios.get(apiLink, {});
-      setRegions(response.data.list);
-    }
-    callApi();
+    wineworld
+      .get('/regions')
+      .then(res => {
+        setRegions(res.data.list);
+      })
+      .catch(console.error);
   }, []);
 
   return (

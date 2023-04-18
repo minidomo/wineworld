@@ -1,6 +1,5 @@
 import './WineInstance.css';
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
@@ -8,6 +7,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useParams } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import RedditCarousel from '../components/RedditCarousel';
 import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
@@ -15,6 +15,9 @@ import { handleWineImageError } from '../util/handleImageError';
 
 const WineInstance = () => {
   let { id } = useParams();
+
+  const [loaded, setLoaded] = useState(false);
+
   const [name, setName] = useState('');
   const [country, setCountry] = useState('');
   const [region, setRegion] = useState('');
@@ -26,32 +29,25 @@ const WineInstance = () => {
   const [reddit, setReddit] = useState([]);
   const [vineyards, setVineyards] = useState([]);
   const [regions, setRegions] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    let mounted = true;
-    axios
-      .get(`https://api.wineworld.me/wines/${id}`)
-      .then(response => {
-        if (mounted) {
-          setName(response.data.name);
-          setCountry(response.data.country);
-          setRegion(response.data.region);
-          setType(response.data.type);
-          setWinery(response.data.winery);
-          setRating(response.data.rating);
-          setReviews(response.data.reviews);
-          setImage(response.data.image);
-          setReddit(response.data.redditPosts);
-          setVineyards(response.data.related.vineyards);
-          setRegions(response.data.related.regions);
-          setLoaded(true);
-        }
+    wineworld
+      .get(`/wines/${id}`)
+      .then(res => {
+        setName(res.data.name);
+        setCountry(res.data.country);
+        setRegion(res.data.region);
+        setType(res.data.type);
+        setWinery(res.data.winery);
+        setRating(res.data.rating);
+        setReviews(res.data.reviews);
+        setImage(res.data.image);
+        setReddit(res.data.redditPosts);
+        setVineyards(res.data.related.vineyards);
+        setRegions(res.data.related.regions);
+        setLoaded(true);
       })
-      .catch(errRes => {
-        console.error(errRes);
-      });
-    return () => (mounted = false);
+      .catch(console.error);
   }, [id]);
 
   return (

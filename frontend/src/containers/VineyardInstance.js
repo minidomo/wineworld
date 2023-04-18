@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
@@ -6,6 +5,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useParams } from 'react-router-dom';
 
+import { wineworld } from '../api';
 import Map from '../components/Map';
 import RegionCard from '../components/RegionCard';
 import WineCard from '../components/WineCard';
@@ -13,6 +13,9 @@ import { handleVineyardImageError } from '../util/handleImageError';
 
 const VineyardInstance = () => {
   let { id } = useParams();
+
+  const [loaded, setLoaded] = useState(false);
+
   const [name, setName] = useState('');
   const [country, setCountry] = useState('');
   const [price, setPrice] = useState(0);
@@ -23,32 +26,24 @@ const VineyardInstance = () => {
   const [longitude, setLongitude] = useState(0);
   const [wines, setWines] = useState([]);
   const [regions, setRegions] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    let mounted = true;
-    axios
-      .get(`https://api.wineworld.me/vineyards/${id}`)
-      .then(response => {
-        if (mounted) {
-          setName(response.data.name);
-          setCountry(response.data.country);
-          setPrice(response.data.price);
-          setRating(response.data.rating);
-          setReviews(response.data.reviews);
-          setImage(response.data.image);
-          setLatitude(response.data.coordinates.latitude);
-          setLongitude(response.data.coordinates.longitude);
-          setWines(response.data.related.wines);
-          setRegions(response.data.related.regions);
-          setLoaded(true);
-        }
+    wineworld
+      .get(`/vineyards/${id}`)
+      .then(res => {
+        setName(res.data.name);
+        setCountry(res.data.country);
+        setPrice(res.data.price);
+        setRating(res.data.rating);
+        setReviews(res.data.reviews);
+        setImage(res.data.image);
+        setLatitude(res.data.coordinates.latitude);
+        setLongitude(res.data.coordinates.longitude);
+        setWines(res.data.related.wines);
+        setRegions(res.data.related.regions);
+        setLoaded(true);
       })
-      .catch(errRes => {
-        console.error(errRes);
-      });
-
-    return () => (mounted = false);
+      .catch(console.error);
   }, [id]);
 
   return (
