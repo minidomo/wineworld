@@ -6,15 +6,14 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
-import { useNavigate } from 'react-router-dom';
 
 import { wineworld } from '../api';
 import { FilterCheckboxDropdownItem } from '../components/models/FilterCheckboxDropdownItem';
 import { FilterIntegerInput, FilterNumberInput } from '../components/models/FilterInput';
+import { SearchBar } from '../components/models/SearchBar';
 import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import RegionCard from '../components/RegionCard';
 import { clamp } from '../util/clamp';
@@ -46,13 +45,7 @@ const RegionModel = () => {
   const [tripTypes, setTripTypes] = useState([]);
   const [tags, setTags] = useState([]);
   const [sort, setSort] = useState('name_asc');
-
-  const [query, setQuery] = useState('');
-  const navigate = useNavigate();
-  const handleSubmit = event => {
-    event.preventDefault();
-    navigate(`/regions/search/${query}`);
-  };
+  const [searchQuery, setSearchQuery] = useState();
 
   useEffect(() => {
     wineworld
@@ -81,6 +74,7 @@ const RegionModel = () => {
           tripTypes: tripTypes,
           tags: tags,
           sort: sort,
+          search: searchQuery,
         },
       })
       .then(res => {
@@ -90,7 +84,7 @@ const RegionModel = () => {
         setLoaded(true);
       })
       .catch(console.error);
-  }, [page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort]);
+  }, [page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort, searchQuery]);
 
   function handlePagination(pageTarget) {
     setPage(clamp(1, totalPages, pageTarget));
@@ -201,15 +195,7 @@ const RegionModel = () => {
           </Dropdown>
         </Col>
         <Col>
-          <Form onSubmit={handleSubmit} className="d-flex mt-2">
-            <Form.Control
-              className="custom"
-              type="search"
-              placeholder="Search regions"
-              onChange={event => setQuery(event.target.value)}
-              size="sm"
-            />
-          </Form>
+          <SearchBar placeholder="Search regions" setValue={setSearchQuery} valueIfEmpty={undefined} />
         </Col>
       </Row>
       <br></br>
@@ -254,7 +240,7 @@ const RegionModel = () => {
           <Row md={4} className="g-4 p-4">
             {regions.map(region => (
               <Col>
-                <RegionCard region={region} />
+                <RegionCard region={region} searchQuery={searchQuery} />
               </Col>
             ))}
           </Row>
