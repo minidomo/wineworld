@@ -1,21 +1,36 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { CartesianGrid, Legend, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis }
-from 'recharts';
+import {
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Scatter,
+  ScatterChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+  ZAxis,
+} from 'recharts';
+
+import { wineworld } from '../api';
 
 const Scatterplot = () => {
   const [regions, setRegions] = useState([]);
-  const apiLink = 'https://api.wineworld.me/regions?';
 
   useEffect(() => {
-    async function callApi() {
-      const response = await axios.get(apiLink, {});
-      setRegions(response.data.list);
-    }
-    callApi();
+    wineworld
+      .get('/regions')
+      .then(res => {
+        const arr = res.data.list.map(e => ({
+          name: e.name,
+          rating: e.rating,
+          reviews: e.reviews,
+        }));
+        setRegions(arr);
+      })
+      .catch(console.error);
   }, []);
 
   return (
@@ -36,7 +51,7 @@ const Scatterplot = () => {
               <YAxis type="number" domain={['auto', 'auto']} dataKey="rating" name="Rating" />
               <XAxis type="number" domain={['auto', 'auto']} dataKey="reviews" name="Reviews" />
               <ZAxis dataKey="name" name="Region" />
-              <Legend/>
+              <Legend />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} />
               <Scatter name="Region" data={regions} fill="#0E79B2" />
             </ScatterChart>

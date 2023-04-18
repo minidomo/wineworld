@@ -63,6 +63,7 @@
 .dark .list-group-item {
   background: #111;
   color: #ddd;
+  border-color: #2c2437;
 }
 
 .dark .dropdown-toggle {
@@ -70,6 +71,7 @@
   border-color: #aeafaa;
   color: #aeafaa;
 }
+
 /* 
 .dark .dropdown-toggle:active {
   background-color: #121212;

@@ -9,7 +9,7 @@ const teamData = [
     name: 'Ray Yin',
     alt_names: new Set(['jrayyin']),
     gitlab_id: 'jrayyin',
-    role: 'Front-end',
+    role: 'Frontend',
     bio:
       "I'm a junior studying CS at UT Austin. In my free time I enjoy playing volleyball and " +
       'trying new restaurants.',
@@ -22,34 +22,34 @@ const teamData = [
     name: 'Ryan Parappuram',
     alt_names: new Set(['rparappuram']),
     gitlab_id: 'rparappuram',
-    role: 'Full-Stack',
+    role: 'Backend',
     bio:
       "I'm a sophomore learning full-stack software engineering. I love to play basketball, eat tasty food, " +
       'and drive cars!',
     commits: 0,
     issues: 0,
-    // 33 backend, 54 postman
-    unit_tests: 87,
+    // 35 backend, 54 postman
+    unit_tests: 89,
     image: RyanImage,
   },
   {
     name: 'JB Ladera',
     alt_names: new Set(),
     gitlab_id: 'minidomo',
-    role: 'Full-Stack',
+    role: 'Full Stack',
     bio:
       "I'm a third year CS student studying at UT Austin. I enjoy watching anime and playing video games in " +
       'my spare time.',
     commits: 0,
     issues: 0,
-    unit_tests: 29,
+    unit_tests: 33,
     image: JBImage,
   },
   {
     name: 'Saniya Shaju',
     alt_names: new Set(['saniyashaju-admin']),
     gitlab_id: 'saniyashaju',
-    role: 'Front-end',
+    role: 'Frontend',
     bio:
       "I'm a sophomore CS major at UT Austin. I enjoy reading " +
       'novels, crocheting, and writing short stories and poetry.',
@@ -70,6 +70,6 @@ const teamData = [
     unit_tests: 0,
     image: AustinImage,
   },
-];
+].sort((a, b) => (a.name < b.name ? -1 : 1));
 
 export { teamData };
