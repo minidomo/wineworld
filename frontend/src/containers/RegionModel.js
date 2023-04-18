@@ -109,9 +109,11 @@ const RegionModel = () => {
               <Row className="g-1">
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Country
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Country
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {countryConstraints.map(e => (
                         <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />
@@ -159,9 +161,11 @@ const RegionModel = () => {
                 </Col>
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Tags
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Tags
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {tagConstraints.map(e => (
                         <FilterCheckboxDropdownItem value={e} filters={tags} setFilters={setTags} />
@@ -171,9 +175,11 @@ const RegionModel = () => {
                 </Col>
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Trip Type
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Trip Type
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {tripTypeConstraints.map(e => (
                         <FilterCheckboxDropdownItem value={e} filters={tripTypes} setFilters={setTripTypes} />

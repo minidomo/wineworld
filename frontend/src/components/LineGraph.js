@@ -31,7 +31,7 @@ function formatUnix(value) {
 function createLineData(data) {
   return data.map(e => ({
     time: date.clone().set('hour', e.time.hour).set('minute', e.time.minute).unix(),
-    value: e.percent * 100,
+    percentage: e.percent * 100,
   }));
 }
 
@@ -63,7 +63,7 @@ const LineGraph = () => {
               <YAxis domain={['auto', 'auto']} />
               <Tooltip labelFormatter={formatUnix} labelStyle={{ color: '#000' }} formatter={formatValue} />
               <Legend />
-              <Line type="monotone" dataKey="value" stroke="#ba4547" />
+              <Line type="monotone" dataKey="percentage" stroke="#0E79B2" />
             </LineChart>
           </ResponsiveContainer>
         </Col>

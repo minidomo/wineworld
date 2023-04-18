@@ -67,7 +67,7 @@ const VineyardChart = () => (
             <YAxis />
             <Tooltip labelStyle={{ color: '#000' }} />
             <Legend />
-            <Bar dataKey="count" fill="#ba4547" />
+            <Bar dataKey="count" fill="#0E79B2" />
           </BarChart>
         </ResponsiveContainer>
       </Col>

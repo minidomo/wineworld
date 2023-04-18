@@ -107,9 +107,11 @@ const VineyardModel = () => {
               <Row className="g-1">
                 <Col>
                   <Dropdown>
-                    <Dropdown.Toggle variant="secondary" size="sm">
-                      Country
-                    </Dropdown.Toggle>
+                    <div class="d-grid">
+                      <Dropdown.Toggle variant="secondary" size="sm">
+                        Country
+                      </Dropdown.Toggle>
+                    </div>
                     <Dropdown.Menu variant="dark" className="custom">
                       {countryConstraints.map(e => (
                         <FilterCheckboxDropdownItem value={e} filters={country} setFilters={setCountry} />

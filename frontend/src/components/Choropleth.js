@@ -103,7 +103,7 @@ const Choropleth = () => {
     <Container>
       <Row style={{ height: '100%' }}>
         <h4 className="text-center">Number of Airports per State</h4>
-        <div id="choropleth-wrapper" style={{ height: '800px' }}></div>
+        <div id="choropleth-wrapper" style={{ height: '400px' }}></div>
       </Row>
     </Container>
   );
