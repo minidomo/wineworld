@@ -7,7 +7,7 @@ const ToolCard = props => {
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} />
+      <Card.Img variant="top" src={image} style={{ height: '55%', width: '100%', objectFit: 'contain' }} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>{text}</Card.Text>
