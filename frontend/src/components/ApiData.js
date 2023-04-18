@@ -1,7 +1,7 @@
 import GitLabImage from '../assets/logos/gitlab.png';
 import TripImage from '../assets/logos/tripadvisor.png';
-import WineImage from '../assets/logos/wine.jpg';
-import YelpImage from '../assets/logos/yelp.jpg';
+import WineImage from '../assets/logos/wine.png';
+import YelpImage from '../assets/logos/yelp.png';
 
 const ApiData = [
   {
