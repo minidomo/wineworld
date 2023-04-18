@@ -23,7 +23,12 @@ const Scatterplot = () => {
     wineworld
       .get('/regions')
       .then(res => {
-        setRegions(res.data.list);
+        const arr = res.data.list.map(e => ({
+          name: e.name,
+          rating: e.rating,
+          reviews: e.reviews,
+        }));
+        setRegions(arr);
       })
       .catch(console.error);
   }, []);
