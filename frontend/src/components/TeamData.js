@@ -11,7 +11,7 @@ const teamData = [
     gitlab_id: 'jrayyin',
     role: 'Front-end',
     bio:
-      "I'm a junior studying Computer Science at UT Austin. In my free time I enjoy playing volleyball and " +
+      "I'm a junior studying CS at UT Austin. In my free time I enjoy playing volleyball and " +
       'trying new restaurants.',
     commits: 0,
     issues: 0,
@@ -51,8 +51,8 @@ const teamData = [
     gitlab_id: 'saniyashaju',
     role: 'Front-end',
     bio:
-      "I'm a sophomore computer science major at UT Austin. My hobbies include crocheting, reading fiction " +
-      'novels, and writing short stories and poetry.',
+      "I'm a sophomore CS major at UT Austin. I enjoy reading " +
+      'novels, crocheting, and writing short stories and poetry.',
     commits: 0,
     issues: 0,
     unit_tests: 10,
@@ -64,7 +64,7 @@ const teamData = [
     gitlab_id: 'acbarret',
     role: 'Front-end',
     bio:
-      "I'm a sophomore computer science major at UT Austin. My hobbies include cooking, windsurfing, and " +
+      "I'm a sophomore CS major at UT Austin. My hobbies include cooking, windsurfing, and " +
       'reading books.',
     commits: 0,
     issues: 0,
