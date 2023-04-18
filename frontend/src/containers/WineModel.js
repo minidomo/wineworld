@@ -91,7 +91,7 @@ const WineModel = () => {
         <Col>
           <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Filter" className="mt-2">
             <Container>
-              <Row className="g-1">
+              <Row className="g-1" style={{ flexWrap: 'nowrap' }}>
                 <Col>
                   <Dropdown>
                     <div class="d-grid">
