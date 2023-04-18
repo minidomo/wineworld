@@ -79,19 +79,6 @@ class RegionAllTests(FlaskTestCase):
         self.assertEqual(res_2["length"], PAGE_SIZE)
         self.assertGreaterEqual(res_2["totalInstances"], PAGE_SIZE)
 
-    # TODO remove this
-    def test_name(self):
-        """Written by JB"""
-        name_query = "os"
-        res = self.client.get(create_url(RegionAllTests.endpoint, {"name": name_query})).get_json()
-
-        regions: list[JsonObject] = res["list"]
-        self.assertGreater(len(regions), 0)
-
-        for region in regions:
-            name: str = region["name"].lower()
-            self.assertTrue(name_query in name)
-
     def test_search(self):
         """Written by JB"""
         search_query = "ta"

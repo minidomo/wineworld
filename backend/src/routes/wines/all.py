@@ -104,12 +104,6 @@ arguments: dict[str, QueryArgument] = {
             location="values",
         ),
         QueryArgument(
-            "name",  # TODO deprecated
-            lambda query, value: query.filter(Wine.name.contains(value)),
-            type=str,
-            location="values",
-        ),
-        QueryArgument(
             "country",
             lambda query, value: query.filter(or_(Wine.country == e for e in value)),
             type=str,

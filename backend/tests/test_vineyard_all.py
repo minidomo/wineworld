@@ -79,19 +79,6 @@ class VineyardAllTests(FlaskTestCase):
         self.assertEqual(res_2["length"], PAGE_SIZE)
         self.assertGreaterEqual(res_2["totalInstances"], PAGE_SIZE)
 
-    # TODO remove this
-    def test_name(self):
-        """Written by Ryan"""
-        name_query = "os"
-        res = self.client.get(create_url(VineyardAllTests.endpoint, {"name": name_query})).get_json()
-
-        vineyards: list[JsonObject] = res["list"]
-        self.assertGreater(len(vineyards), 0)
-
-        for vineyard in vineyards:
-            name: str = vineyard["name"].lower()
-            self.assertTrue(name_query in name)
-
     def test_search(self):
         """Written by JB"""
         search_query = "st"

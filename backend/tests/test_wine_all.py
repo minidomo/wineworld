@@ -78,19 +78,6 @@ class WineAllTests(FlaskTestCase):
         self.assertEqual(res_2["length"], PAGE_SIZE)
         self.assertGreaterEqual(res_2["totalInstances"], PAGE_SIZE)
 
-    # TODO remove this
-    def test_name(self):
-        """Written by Ryan"""
-        name_query = "os"
-        res = self.client.get(create_url(WineAllTests.endpoint, {"name": name_query})).get_json()
-
-        wines: list[JsonObject] = res["list"]
-        self.assertGreater(len(wines), 0)
-
-        for wine in wines:
-            name: str = wine["name"].lower()
-            self.assertTrue(name_query in name)
-
     def test_search(self):
         """Written by JB"""
         search_query = "or"
