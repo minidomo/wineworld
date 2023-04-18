@@ -16,7 +16,7 @@ import SQLAlchemyImage from '../assets/logos/sqlalchemy.png';
 import TeamsImage from '../assets/logos/teams.png';
 import VSCodeImage from '../assets/logos/vscode.png';
 
-const toolData = [
+export const toolData = [
   {
     name: 'React',
     image: ReactImage,
@@ -120,5 +120,3 @@ const toolData = [
     url: 'https://www.docker.com/',
   },
 ].sort((a, b) => (a.name < b.name ? -1 : 1));
-
-export { toolData };

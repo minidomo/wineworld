@@ -10,9 +10,9 @@ import { gitlab } from '../api';
 import ApiCard from '../components/ApiCard';
 import { ApiData } from '../components/ApiData.js';
 import DeveloperCard from '../components/DeveloperCard';
-import { teamData } from '../components/TeamData.js';
 import ToolCard from '../components/ToolCard';
-import { toolData } from '../components/ToolData.js';
+import { teamData } from '../data/teamData.js';
+import { toolData } from '../data/toolData.js';
 import { loading } from '../util/loadingAnimation';
 
 const fetchGitLabData = async () => {
@@ -76,18 +76,16 @@ const About = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (teamList === undefined || teamList.length === 0) {
-        const gitLabData = await fetchGitLabData();
-        setTotalCommits(gitLabData.totalCommits);
-        setTotalIssues(gitLabData.totalIssues);
-        setTeamList(gitLabData.teamData);
-        setTotalTests(gitLabData.totalUnitTests);
+    fetchGitLabData()
+      .then(res => {
+        setTotalCommits(res.totalCommits);
+        setTotalIssues(res.totalIssues);
+        setTeamList(res.teamData);
+        setTotalTests(res.totalUnitTests);
         setLoaded(true);
-      }
-    };
-    fetchData();
-  }, [teamList]);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <Stack>

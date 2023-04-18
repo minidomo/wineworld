@@ -4,7 +4,7 @@ import RayImage from '../assets/devs/ray.jpg';
 import RyanImage from '../assets/devs/ryan.jpg';
 import SaniyaImage from '../assets/devs/saniya.jpg';
 
-const teamData = [
+export const teamData = [
   {
     name: 'Ray Yin',
     alt_names: new Set(['jrayyin']),
@@ -72,5 +72,3 @@ const teamData = [
     image: AustinImage,
   },
 ].sort((a, b) => (a.name < b.name ? -1 : 1));
-
-export { teamData };
