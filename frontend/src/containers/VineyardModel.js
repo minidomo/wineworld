@@ -179,7 +179,8 @@ const VineyardModel = () => {
           </Dropdown>
         </Col>
         <Col>
-          <SearchBar placeholder="Search vineyards" setValue={setSearchQuery} valueIfEmpty={undefined} />
+          <SearchBar placeholder="Search vineyards" setValue={setSearchQuery}
+            valueIfEmpty={undefined} />
         </Col>
       </Row>
       <br />

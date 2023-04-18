@@ -18,7 +18,7 @@ export function SearchBar(props) {
 
   return (
     <Form onSubmit={submit} className="d-flex mt-2">
-      <Form.Control type="search" placeholder={placeholder} size="sm" />
+      <Form.Control className="custom" type="search" placeholder={placeholder} size="sm" />
     </Form>
   );
 }
