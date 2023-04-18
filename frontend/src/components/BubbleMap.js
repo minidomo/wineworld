@@ -26,14 +26,12 @@ const BubbleMap = () => {
 
   return (
     <Container fluid="md">
-      {
-        cityData.forEach(cityInfo => {
-          population.push(cityInfo.population / scale);
-          cityLat.push(cityInfo.latitude);
-          cityLon.push(cityInfo.longitude);
-          hoverText.push(`${cityInfo.city}, ${cityInfo.state} population: ${cityInfo.population}`);
-        })
-      }
+      {cityData.forEach(cityInfo => {
+        population.push(cityInfo.population / scale);
+        cityLat.push(cityInfo.latitude);
+        cityLon.push(cityInfo.longitude);
+        hoverText.push(`${cityInfo.city}, ${cityInfo.state} population: ${cityInfo.population}`);
+      })}
       <h3 className="p-5 text-center">City Population Map</h3>
       <Row>
         <Col>
@@ -71,8 +69,8 @@ const BubbleMap = () => {
               },
             }}
             config={{
-                 scrollZoom: false,
-             }}
+              scrollZoom: false,
+            }}
           />
         </Col>
       </Row>

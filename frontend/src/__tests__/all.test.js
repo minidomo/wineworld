@@ -2,9 +2,9 @@ import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
 import App from '../App.js';
+import RayImage from '../assets/devs/ray.jpg';
 import GitLabImage from '../assets/logos/gitlab.png';
 import ReactImage from '../assets/logos/react.png';
-import RayImage from '../assets/devs/ray.jpg';
 import WineImage from '../assets/placeholder/wine.jpg';
 import ApiCard from '../components/ApiCard';
 import DeveloperCard from '../components/DeveloperCard';
@@ -213,7 +213,7 @@ it('Init Api', () => {
     url: 'https://docs.gitlab.com/ee/api/',
   };
   const component = renderer.create(
-    <BrowserRouter>  
+    <BrowserRouter>
       <ApiCard api={Api} />
     </BrowserRouter>,
   );
@@ -230,9 +230,9 @@ it('Init Tool', () => {
     url: 'https://reactjs.org/',
   };
   const component = renderer.create(
-  <BrowserRouter>
-    <ToolCard tool={Tool} />
-  </BrowserRouter>,
+    <BrowserRouter>
+      <ToolCard tool={Tool} />
+    </BrowserRouter>,
   );
 
   let tree = component.toJSON();
@@ -259,9 +259,9 @@ it('Init App', () => {
 
 it('Init About', () => {
   const component = renderer.create(
-  <BrowserRouter>
-  <About />
-  </BrowserRouter>,
+    <BrowserRouter>
+      <About />
+    </BrowserRouter>,
   );
 
   let tree = component.toJSON();
