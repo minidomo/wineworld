@@ -1,37 +1,35 @@
-import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import React from 'react';
 
-const Map = ({ lat, lng }) => {
-  const mapStyles = {
-    height: '80vh',
-    width: '80%',
-    padding: '10px',
-    top: '5vh',
-    left: '5%',
-    border: '10vh',
-  };
+import { loading } from '../util/loadingAnimation';
 
-  // Const defaultCenter = {
-  // lat: -3.745, lng: -38.523, zoom: 12
-  // }
+const mapStyles = {
+  height: '80vh',
+  width: '80%',
+  padding: '10px',
+  top: '5vh',
+  left: '5%',
+  border: '10vh',
+};
+
+const Map = ({ lat, lng }) => {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyCsaB0ULoGPak8Jov3prGhtpnlCvRugJig',
+  });
 
   const myPos = {
     lat: lat,
     lng: lng,
   };
 
-  console.log(myPos);
-  console.log(window.google === undefined);
-  return window.google === undefined ? (
-    <LoadScript googleMapsApiKey="AIzaSyCsaB0ULoGPak8Jov3prGhtpnlCvRugJig">
+  return loading({
+    loaded: isLoaded,
+    element: (
       <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={myPos}>
         <MarkerF position={myPos} />
       </GoogleMap>
-    </LoadScript>
-  ) : (
-    <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={myPos}>
-      <MarkerF position={myPos} />
-    </GoogleMap>
-  );
+    ),
+  });
 };
 export default Map;
