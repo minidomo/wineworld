@@ -1,5 +1,4 @@
 import './Cards.css';
-import './ModelPagination.css';
 
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';

@@ -15,10 +15,19 @@
 .dark .pagination .page-link {
   color: #121212;
   background-color: #e4e3e3;
+  border-color: #c9c9c9;
 }
 
 .dark .pagination .page-item.active .page-link {
   color: white;
   background-color: rgb(111, 160, 146);
   border-color: rgb(111, 160, 146);
+}
+
+.dark .pagination .page-item.disabled .page-link {
+  background-color: #d1d1d1;
+}
+
+.dark .pagination .page-item :hover {
+  background-color: #dddddd;
 }

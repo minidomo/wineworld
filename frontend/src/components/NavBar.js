@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,13 +7,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import DarkMode from './DarkMode';
 
 const NavBar = () => {
-  const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = event => {
     event.preventDefault();
-    navigate(`/search/${query}`);
+    const input = event.target.querySelector('input');
+    navigate(`/search/${input.value}`);
   };
+
   return (
     <Navbar variant={`navbar bg-${DarkMode()}`} expand="lg" data-bs-theme={DarkMode()}>
       <Navbar variant="custom fixed-top bg-body-tertiary" expand="lg">
@@ -57,12 +58,7 @@ const NavBar = () => {
               <Nav.Item>{DarkMode('toggle')}</Nav.Item>
             </Nav>
             <Form onSubmit={handleSubmit} className="d-flex">
-              <Form.Control
-                className="custom"
-                type="search"
-                placeholder="Search"
-                onChange={event => setQuery(event.target.value)}
-              />
+              <Form.Control className="custom" type="search" placeholder="Search" />
             </Form>
           </Navbar.Collapse>
         </div>

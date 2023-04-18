@@ -1,3 +1,5 @@
+import './CustomPagination.css';
+
 import Pagination from 'react-bootstrap/Pagination';
 
 import { clamp } from '../../../util/clamp';
