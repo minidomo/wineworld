@@ -89,7 +89,7 @@ const VineyardModel = () => {
         <Col>
           <DropdownButton variant="secondary" size="sm" menuVariant="dark" title="Filter" className="mt-2">
             <div class="container">
-              <Row className="g-1">
+              <Row className="g-1" style={{ flexWrap: 'nowrap' }}>
                 <Col>
                   <Dropdown>
                     <div class="d-grid">
@@ -108,7 +108,7 @@ const VineyardModel = () => {
                   <Dropdown>
                     <div class="d-grid">
                       <Dropdown.Toggle variant="secondary" size="sm">
-                        Reviews
+                        Price Level
                       </Dropdown.Toggle>
                     </div>
                     <Dropdown.Menu variant="dark">

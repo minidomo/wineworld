@@ -71,8 +71,8 @@ const BubbleMap = () => {
               },
             }}
             config={{
-                scrollZoom: false,
-            }}
+                 scrollZoom: false,
+             }}
           />
         </Col>
       </Row>
