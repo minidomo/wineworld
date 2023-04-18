@@ -27,11 +27,11 @@ const WineCard = props => {
           </Card.Title>
           <Card.Subtitle> {type} Wine </Card.Subtitle>
           <Card.Text>
-            Country: {country}
+            Country: {highlightText(country, searchQuery)}
             <br />
-            Region: {region}
+            Region: {highlightText(region, searchQuery)}
             <br />
-            Winery: {winery}
+            Winery: {highlightText(winery, searchQuery)}
             <br />
             Rating: {rating}
             <br />

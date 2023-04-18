@@ -13,11 +13,11 @@ const ticks = (() => {
 
   for (let hour = 0; hour <= 23; hour += 3) {
     ret.push(date.clone().set('hour', hour).set('minute', 0)
-      .unix());
+.unix());
   }
 
   ret.push(date.clone().set('hour', 23).set('minute', 59)
-    .unix());
+.unix());
 
   return ret;
 })();
@@ -33,7 +33,7 @@ function formatUnix(value) {
 function createLineData(data) {
   return data.map(e => ({
     time: date.clone().set('hour', e.time.hour).set('minute', e.time.minute)
-      .unix(),
+.unix(),
     value: e.percent * 100,
   }));
 }

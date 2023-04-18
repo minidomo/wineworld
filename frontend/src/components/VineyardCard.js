@@ -21,7 +21,7 @@ const VineyardCard = props => {
         />
         <Card.Body>
           <Card.Title> {highlightText(name, searchQuery)} </Card.Title>
-          <Card.Subtitle> {country} </Card.Subtitle>
+          <Card.Subtitle> {highlightText(country, searchQuery)} </Card.Subtitle>
           <Card.Text>
             Price Level: {price}
             <br />

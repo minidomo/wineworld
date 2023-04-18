@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
 
+import Scatterplot from '../components/Scatterplot';
 import VineyardChart from '../components/VineyardChart';
 import WineChart from '../components/WineChart';
 
@@ -9,10 +10,13 @@ const Visualizations = () => (
     <h1> Visualizations </h1>
 
     <h4> Pie Chart </h4>
-    <WineChart></WineChart>
+    <WineChart />
+
     <h4> Bar Chart </h4>
-    <VineyardChart></VineyardChart>
+    <VineyardChart />
+
     <h4> Scatterplot </h4>
+    <Scatterplot />
   </Container>
 );
 
