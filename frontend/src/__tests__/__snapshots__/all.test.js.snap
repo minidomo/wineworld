@@ -5,66 +5,86 @@ exports[`Init About 1`] = `
   className="vstack"
 >
   <div
-    className="p-4 container"
-  />
-  <div
-    className="p-4 container"
-    style={
-      Object {
-        "backgroundColor": "#BBB",
-      }
-    }
+    className="d-flex justify-content-center p-4 container"
   >
-    <h1
-      className="d-flex justify-content-center p-4 "
-    >
-      Welcome to WineWorld!
-    </h1>
-    <p
-      className="mx-auto"
-    >
-      WineWorld is an innovative platform that provides a comprehensive guide to the world of wine, vineyards, and wine regions. Our goal is to empower wine enthusiasts, from beginners to experts, to explore and deepen their understanding of this fascinating industry.
-    </p>
-    <h1
-      className="d-flex justify-content-center p-3 "
-    >
-      Repository Statistics
-    </h1>
     <div
-      className="p-4 row"
+      className="row"
     >
       <div
-        className="d-flex justify-content-center col"
+        className="col"
       >
-        <h2>
-          Total Commits: 
-          0
-        </h2>
-      </div>
-      <div
-        className="d-flex justify-content-center col"
-      >
-        <h2>
-          Total Issues: 
-          0
-        </h2>
-      </div>
-      <div
-        className="d-flex justify-content-center col"
-      >
-        <h2>
-          Total Tests: 
-          0
-        </h2>
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "70rem",
+            }
+          }
+        >
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              <h1>
+                Welcome to WineWorld!
+              </h1>
+            </div>
+            <p
+              className="card-text"
+            >
+              <p
+                className="mx-auto"
+              >
+                WineWorld is an innovative platform that provides a comprehensive guide to the world of wine, vineyards, and wine regions. Our goal is to empower wine enthusiasts, from beginners to experts, to explore and deepen their understanding of this fascinating industry.
+              </p>
+              <h1
+                className="d-flex justify-content-center p-3 "
+              >
+                Repository Statistics
+              </h1>
+              <div
+                className="p-4 row"
+              >
+                <div
+                  className="d-flex justify-content-center col"
+                >
+                  <h2>
+                    Total Commits: 
+                    0
+                  </h2>
+                </div>
+                <div
+                  className="d-flex justify-content-center col"
+                >
+                  <h2>
+                    Total Issues: 
+                    0
+                  </h2>
+                </div>
+                <div
+                  className="d-flex justify-content-center col"
+                >
+                  <h2>
+                    Total Tests: 
+                    0
+                  </h2>
+                </div>
+              </div>
+              <a
+                class="btn custom1 stretched-link"
+                href="https://documenter.getpostman.com/view/21507814/2s93CEvGRv"
+              >
+                <h2>
+                  API Documentation
+                </h2>
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <a
-      href="https://documenter.getpostman.com/view/21507814/2s93CEvGRv"
-    >
-      <h2>
-        API Documentation
-      </h2>
-    </a>
   </div>
   <div
     className="p-4 container"
@@ -75,16 +95,9 @@ exports[`Init About 1`] = `
       Meet the WineWorld Team!
     </h1>
     <div
-      className="row"
-    >
-      <div
-        className="d-flex justify-content-center col"
-      >
-        <div
-          className="spinner-grow"
-        />
-      </div>
-    </div>
+      className="spinner-border"
+      role="status"
+    />
   </div>
   <div
     className="p-4 container"
@@ -110,7 +123,14 @@ exports[`Init About 1`] = `
         >
           <img
             className="card-img-top"
-            src="logo512.png"
+            src="amplify.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
           />
           <div
             className="card-body"
@@ -118,24 +138,143 @@ exports[`Init About 1`] = `
             <div
               className="card-title h5"
             >
-              React
+              AWS Amplify
             </div>
             <p
               className="card-text"
             >
-              A Javascript library for front-end development
+              Hosting platform for WineWorld
             </p>
             <a
-              href="https://reactjs.org/"
+              class="btn stretched-link"
+              href="https://aws.amazon.com/amplify/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="digitalocean.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
             >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+              Digital Ocean
+            </div>
+            <p
+              className="card-text"
+            >
+              Hosting for Database and Backend Server
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://www.digitalocean.com/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="docker.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Docker
+            </div>
+            <p
+              className="card-text"
+            >
+              Tool for standardizing development environment
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://www.docker.com/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="flask.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Flask
+            </div>
+            <p
+              className="card-text"
+            >
+              Micro web development framework
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://flask.palletsprojects.com/en/2.2.x/"
+            />
           </div>
         </div>
       </div>
@@ -153,6 +292,13 @@ exports[`Init About 1`] = `
           <img
             className="card-img-top"
             src="gitlab.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
           />
           <div
             className="card-body"
@@ -168,16 +314,9 @@ exports[`Init About 1`] = `
               Collaborative software development platform
             </p>
             <a
+              class="btn stretched-link"
               href="https://about.gitlab.com/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+            />
           </div>
         </div>
       </div>
@@ -194,7 +333,56 @@ exports[`Init About 1`] = `
         >
           <img
             className="card-img-top"
-            src="mteams.png"
+            src="jest.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Jest
+            </div>
+            <p
+              className="card-text"
+            >
+              JavaScript testing framework
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://jestjs.io/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="teams.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
           />
           <div
             className="card-body"
@@ -210,16 +398,9 @@ exports[`Init About 1`] = `
               Designated communication platform
             </p>
             <a
+              class="btn stretched-link"
               href="https://www.microsoft.com/en-us/microsoft-teams/group-chat-software"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+            />
           </div>
         </div>
       </div>
@@ -236,49 +417,14 @@ exports[`Init About 1`] = `
         >
           <img
             className="card-img-top"
-            src="bootstrap.png"
-          />
-          <div
-            className="card-body"
-          >
-            <div
-              className="card-title h5"
-            >
-              React Bootstrap
-            </div>
-            <p
-              className="card-text"
-            >
-              Bootstrap framework for React
-            </p>
-            <a
-              href="https://react-bootstrap.github.io/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        className="d-flex align-self-stretch col"
-      >
-        <div
-          className="card"
-          style={
-            Object {
-              "width": "18rem",
+            src="mysql.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
             }
-          }
-        >
-          <img
-            className="card-img-top"
-            src="postman.png"
           />
           <div
             className="card-body"
@@ -286,150 +432,17 @@ exports[`Init About 1`] = `
             <div
               className="card-title h5"
             >
-              Postman
+              MySQL
             </div>
             <p
               className="card-text"
             >
-              Platform for API development and testing
+              Underlying Database Management System
             </p>
             <a
-              href="https://www.postman.com/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        className="d-flex align-self-stretch col"
-      >
-        <div
-          className="card"
-          style={
-            Object {
-              "width": "18rem",
-            }
-          }
-        >
-          <img
-            className="card-img-top"
-            src="aws.png"
-          />
-          <div
-            className="card-body"
-          >
-            <div
-              className="card-title h5"
-            >
-              AWS Amplify
-            </div>
-            <p
-              className="card-text"
-            >
-              Hosting platform for WineWorld
-            </p>
-            <a
-              href="https://aws.amazon.com/amplify/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        className="d-flex align-self-stretch col"
-      >
-        <div
-          className="card"
-          style={
-            Object {
-              "width": "18rem",
-            }
-          }
-        >
-          <img
-            className="card-img-top"
-            src="namecheap.png"
-          />
-          <div
-            className="card-body"
-          >
-            <div
-              className="card-title h5"
-            >
-              Namecheap
-            </div>
-            <p
-              className="card-text"
-            >
-              Domain name registration for site
-            </p>
-            <a
-              href=""
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        className="d-flex align-self-stretch col"
-      >
-        <div
-          className="card"
-          style={
-            Object {
-              "width": "18rem",
-            }
-          }
-        >
-          <img
-            className="card-img-top"
-            src="vscode.png"
-          />
-          <div
-            className="card-body"
-          >
-            <div
-              className="card-title h5"
-            >
-              Visual Studio Code
-            </div>
-            <p
-              className="card-text"
-            >
-              Popular code editing software
-            </p>
-            <a
-              href="https://code.visualstudio.com/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+              class="btn stretched-link"
+              href="https://www.mysql.com/"
+            />
           </div>
         </div>
       </div>
@@ -447,6 +460,13 @@ exports[`Init About 1`] = `
           <img
             className="card-img-top"
             src="npm.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
           />
           <div
             className="card-body"
@@ -462,16 +482,177 @@ exports[`Init About 1`] = `
               Javascript package manager
             </p>
             <a
+              class="btn stretched-link"
               href="https://www.npmjs.com/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="namecheap.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
             >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+              Namecheap
+            </div>
+            <p
+              className="card-text"
+            >
+              Domain name registration for site
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://www.namecheap.com/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="postman.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Postman
+            </div>
+            <p
+              className="card-text"
+            >
+              Platform for API development and testing
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://www.postman.com/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="react.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              React
+            </div>
+            <p
+              className="card-text"
+            >
+              A Javascript library for front-end development
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://reactjs.org/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="bootstrap.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              React Bootstrap
+            </div>
+            <p
+              className="card-text"
+            >
+              Bootstrap framework for React
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://react-bootstrap.github.io/"
+            />
           </div>
         </div>
       </div>
@@ -489,6 +670,13 @@ exports[`Init About 1`] = `
           <img
             className="card-img-top"
             src="route53.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
           />
           <div
             className="card-body"
@@ -504,16 +692,135 @@ exports[`Init About 1`] = `
               Routing from amplify to domain
             </p>
             <a
+              class="btn stretched-link"
               href="https://aws.amazon.com/route53/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="sqlalchemy.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
             >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+              SQLAlchemy
+            </div>
+            <p
+              className="card-text"
+            >
+              Object relational mapper used to manipualte database
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://www.sqlalchemy.org/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="selenium.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Selenium
+            </div>
+            <p
+              className="card-text"
+            >
+              GUI Testing Tool
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://www.selenium.dev/"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="vscode.png"
+            style={
+              Object {
+                "height": "55%",
+                "objectFit": "contain",
+                "width": "100%",
+              }
+            }
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Visual Studio Code
+            </div>
+            <p
+              className="card-text"
+            >
+              Popular code editing software
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://code.visualstudio.com/"
+            />
           </div>
         </div>
       </div>
@@ -559,16 +866,9 @@ exports[`Init About 1`] = `
               A Javascript library for front-end development
             </p>
             <a
+              class="btn stretched-link"
               href="https://docs.gitlab.com/ee/api/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+            />
           </div>
         </div>
       </div>
@@ -585,7 +885,7 @@ exports[`Init About 1`] = `
         >
           <img
             className="card-img-top"
-            src="wine.jpg"
+            src="reddit.png"
           />
           <div
             className="card-body"
@@ -593,66 +893,17 @@ exports[`Init About 1`] = `
             <div
               className="card-title h5"
             >
-              Wines API
+              Reddit API
             </div>
             <p
               className="card-text"
             >
-              A Javascript library for front-end development
+              Source of reddit posts for wines
             </p>
             <a
-              href="https://sampleapis.com/api-list/wines"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        className="d-flex align-self-stretch col"
-      >
-        <div
-          className="card"
-          style={
-            Object {
-              "width": "18rem",
-            }
-          }
-        >
-          <img
-            className="card-img-top"
-            src="yelp.jpg"
-          />
-          <div
-            className="card-body"
-          >
-            <div
-              className="card-title h5"
-            >
-              Yelp Fusion API
-            </div>
-            <p
-              className="card-text"
-            >
-              Collaborative software development platform
-            </p>
-            <a
-              href="https://fusion.yelp.com/"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+              class="btn stretched-link"
+              href="https://www.reddit.com/dev/api/"
+            />
           </div>
         </div>
       </div>
@@ -685,16 +936,79 @@ exports[`Init About 1`] = `
               Designated communication platform
             </p>
             <a
+              class="btn stretched-link"
               href="https://www.tripadvisor.com/developers"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="wine.png"
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
             >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                type="button"
-              >
-                Learn More
-              </button>
-            </a>
+              Wines API
+            </div>
+            <p
+              className="card-text"
+            >
+              A Javascript library for front-end development
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://sampleapis.com/api-list/wines"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="d-flex align-self-stretch col"
+      >
+        <div
+          className="card"
+          style={
+            Object {
+              "width": "18rem",
+            }
+          }
+        >
+          <img
+            className="card-img-top"
+            src="yelp.png"
+          />
+          <div
+            className="card-body"
+          >
+            <div
+              className="card-title h5"
+            >
+              Yelp Fusion API
+            </div>
+            <p
+              className="card-text"
+            >
+              Collaborative software development platform
+            </p>
+            <a
+              class="btn stretched-link"
+              href="https://fusion.yelp.com/"
+            />
           </div>
         </div>
       </div>
@@ -730,16 +1044,9 @@ exports[`Init Api 1`] = `
       A Javascript library for front-end development
     </p>
     <a
+      class="btn stretched-link"
       href="https://docs.gitlab.com/ee/api/"
-    >
-      <button
-        className="btn btn-primary"
-        disabled={false}
-        type="button"
-      >
-        Learn More
-      </button>
-    </a>
+    />
   </div>
 </div>
 `;
@@ -749,7 +1056,7 @@ exports[`Init App 1`] = `
   className="App"
 >
   <nav
-    class="navbar bg-[object Object]"
+    className="navbar navbar-expand-lg navbar-navbar bg-[object Object]"
     data-bs-theme={
       Object {
         "ColorTheme": [Function],
@@ -757,7 +1064,7 @@ exports[`Init App 1`] = `
     }
   >
     <nav
-      class="navbar fixed-top navbar-expand-lg bg-body-tertiary"
+      className="navbar navbar-expand-lg navbar-custom fixed-top bg-body-tertiary"
     >
       <div
         class="container-fluid"
@@ -770,27 +1077,26 @@ exports[`Init App 1`] = `
           WineWorld
         </a>
         <button
-          aria-controls="navbarText"
-          aria-expanded="false"
+          aria-controls="basic-navbar-nav"
           aria-label="Toggle navigation"
-          class="navbar-toggler"
-          data-bs-target="#navbarText"
-          data-bs-toggle="collapse"
+          className="navbar-toggler collapsed"
+          onClick={[Function]}
           type="button"
         >
           <span
-            class="navbar-toggler-icon"
+            className="navbar-toggler-icon"
           />
         </button>
         <div
-          class="collapse navbar-collapse"
-          id="navbarText"
+          aria-expanded={null}
+          className="navbar-collapse collapse"
         >
-          <ul
-            class="navbar-nav me-auto mb-2 mb-lg-0"
+          <div
+            className="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav"
+            onKeyDown={[Function]}
           >
-            <li
-              class="nav-item"
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -799,9 +1105,9 @@ exports[`Init App 1`] = `
               >
                 About
               </a>
-            </li>
-            <li
-              class="nav-item"
+            </div>
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -810,9 +1116,9 @@ exports[`Init App 1`] = `
               >
                 Wines
               </a>
-            </li>
-            <li
-              class="nav-item"
+            </div>
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -821,9 +1127,9 @@ exports[`Init App 1`] = `
               >
                 Vineyards
               </a>
-            </li>
-            <li
-              class="nav-item"
+            </div>
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -832,9 +1138,9 @@ exports[`Init App 1`] = `
               >
                 Regions
               </a>
-            </li>
-            <li
-              class="nav-item"
+            </div>
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -843,9 +1149,9 @@ exports[`Init App 1`] = `
               >
                 Visualizations
               </a>
-            </li>
-            <li
-              class="nav-item"
+            </div>
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -854,9 +1160,9 @@ exports[`Init App 1`] = `
               >
                 Provider Visualizations
               </a>
-            </li>
-            <li
-              class="nav-item"
+            </div>
+            <div
+              className="nav-item"
             >
               <a
                 class="nav-link"
@@ -865,20 +1171,19 @@ exports[`Init App 1`] = `
               >
                 Light/Dark
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <form
+            className="d-flex"
+            onSubmit={[Function]}
+          >
+            <input
+              className="custom form-control"
+              placeholder="Search"
+              type="search"
+            />
+          </form>
         </div>
-        <form
-          className="d-flex"
-          onSubmit={[Function]}
-        >
-          <input
-            className="form-control"
-            onChange={[Function]}
-            placeholder="search"
-            type="search"
-          />
-        </form>
       </div>
     </nav>
   </nav>
@@ -889,7 +1194,7 @@ exports[`Init App 1`] = `
       <img
         alt="..."
         class="img-fluid w-100"
-        src="home_logo.jpg"
+        src="main-logo.jpg"
       />
       <p />
       <div
@@ -907,7 +1212,7 @@ exports[`Init App 1`] = `
               <img
                 alt=""
                 class="card-img-top"
-                src="w_home.jpg"
+                src="wine.jpg"
               />
               <div
                 class="card-body"
@@ -941,7 +1246,7 @@ exports[`Init App 1`] = `
               <img
                 alt=""
                 class="card-img-top"
-                src="v_home.jpg"
+                src="vineyard.jpg"
               />
               <div
                 class="card-body"
@@ -975,7 +1280,7 @@ exports[`Init App 1`] = `
               <img
                 alt=""
                 class="card-img-top"
-                src="r_home.jpg"
+                src="region.jpg"
               />
               <div
                 class="card-body"
@@ -1020,7 +1325,7 @@ exports[`Init Developer 1`] = `
 >
   <img
     className="card-img-top"
-    src="rayPic.jpg"
+    src="ray.jpg"
   />
   <div
     className="card-body"
@@ -1105,7 +1410,7 @@ exports[`Init HomeCard 1`] = `
 
 exports[`Init NavBar 1`] = `
 <nav
-  class="navbar bg-[object Object]"
+  className="navbar navbar-expand-lg navbar-navbar bg-[object Object]"
   data-bs-theme={
     Object {
       "ColorTheme": [Function],
@@ -1113,7 +1418,7 @@ exports[`Init NavBar 1`] = `
   }
 >
   <nav
-    class="navbar fixed-top navbar-expand-lg bg-body-tertiary"
+    className="navbar navbar-expand-lg navbar-custom fixed-top bg-body-tertiary"
   >
     <div
       class="container-fluid"
@@ -1126,27 +1431,26 @@ exports[`Init NavBar 1`] = `
         WineWorld
       </a>
       <button
-        aria-controls="navbarText"
-        aria-expanded="false"
+        aria-controls="basic-navbar-nav"
         aria-label="Toggle navigation"
-        class="navbar-toggler"
-        data-bs-target="#navbarText"
-        data-bs-toggle="collapse"
+        className="navbar-toggler collapsed"
+        onClick={[Function]}
         type="button"
       >
         <span
-          class="navbar-toggler-icon"
+          className="navbar-toggler-icon"
         />
       </button>
       <div
-        class="collapse navbar-collapse"
-        id="navbarText"
+        aria-expanded={null}
+        className="navbar-collapse collapse"
       >
-        <ul
-          class="navbar-nav me-auto mb-2 mb-lg-0"
+        <div
+          className="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav"
+          onKeyDown={[Function]}
         >
-          <li
-            class="nav-item"
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1155,9 +1459,9 @@ exports[`Init NavBar 1`] = `
             >
               About
             </a>
-          </li>
-          <li
-            class="nav-item"
+          </div>
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1166,9 +1470,9 @@ exports[`Init NavBar 1`] = `
             >
               Wines
             </a>
-          </li>
-          <li
-            class="nav-item"
+          </div>
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1177,9 +1481,9 @@ exports[`Init NavBar 1`] = `
             >
               Vineyards
             </a>
-          </li>
-          <li
-            class="nav-item"
+          </div>
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1188,9 +1492,9 @@ exports[`Init NavBar 1`] = `
             >
               Regions
             </a>
-          </li>
-          <li
-            class="nav-item"
+          </div>
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1199,9 +1503,9 @@ exports[`Init NavBar 1`] = `
             >
               Visualizations
             </a>
-          </li>
-          <li
-            class="nav-item"
+          </div>
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1210,9 +1514,9 @@ exports[`Init NavBar 1`] = `
             >
               Provider Visualizations
             </a>
-          </li>
-          <li
-            class="nav-item"
+          </div>
+          <div
+            className="nav-item"
           >
             <a
               class="nav-link"
@@ -1221,20 +1525,19 @@ exports[`Init NavBar 1`] = `
             >
               Light/Dark
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
+        <form
+          className="d-flex"
+          onSubmit={[Function]}
+        >
+          <input
+            className="custom form-control"
+            placeholder="Search"
+            type="search"
+          />
+        </form>
       </div>
-      <form
-        className="d-flex"
-        onSubmit={[Function]}
-      >
-        <input
-          className="form-control"
-          onChange={[Function]}
-          placeholder="search"
-          type="search"
-        />
-      </form>
     </div>
   </nav>
 </nav>
@@ -1322,7 +1625,14 @@ exports[`Init Tool 1`] = `
 >
   <img
     className="card-img-top"
-    src="logo512.png"
+    src="react.png"
+    style={
+      Object {
+        "height": "55%",
+        "objectFit": "contain",
+        "width": "100%",
+      }
+    }
   />
   <div
     className="card-body"
@@ -1338,16 +1648,9 @@ exports[`Init Tool 1`] = `
       A Javascript library for front-end development
     </p>
     <a
+      class="btn stretched-link"
       href="https://reactjs.org/"
-    >
-      <button
-        className="btn btn-primary"
-        disabled={false}
-        type="button"
-      >
-        Learn More
-      </button>
-    </a>
+    />
   </div>
 </div>
 `;
