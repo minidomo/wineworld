@@ -82,9 +82,6 @@ const RegionModel = () => {
           tags: tags,
           sort: sort,
         },
-        paramsSerializer: {
-          indexes: null,
-        },
       })
       .then(res => {
         setRegions(res.data.list);

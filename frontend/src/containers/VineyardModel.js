@@ -80,9 +80,6 @@ const VineyardModel = () => {
           endRating: endRating,
           sort: sort,
         },
-        paramsSerializer: {
-          indexes: null,
-        },
       })
       .then(res => {
         setVineyards(res.data.list);

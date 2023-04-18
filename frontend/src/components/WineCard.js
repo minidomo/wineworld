@@ -25,7 +25,7 @@ const WineCard = props => {
             {' '}
             <small> {highlightText(name, searchQuery)} </small>{' '}
           </Card.Title>
-          <Card.Subtitle> {type} Wine </Card.Subtitle>
+          <Card.Subtitle> {highlightText(type, searchQuery)} Wine </Card.Subtitle>
           <Card.Text>
             Country: {highlightText(country, searchQuery)}
             <br />
