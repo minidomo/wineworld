@@ -9,15 +9,15 @@ import Home from './containers/Home';
 import ProviderVisualizations from './containers/Provider';
 import RegionInstance from './containers/RegionInstance';
 import Regions from './containers/RegionModel';
-import RegionSearch from './containers/RegionSearch';
 import Search from './containers/Search';
 import VineyardInstance from './containers/VineyardInstance';
 import Vineyards from './containers/VineyardModel';
-import VineyardSearch from './containers/VineyardSearch';
 import Visualizations from './containers/Visualizations';
 import WineInstance from './containers/WineInstance';
 import Wines from './containers/WineModel';
-import WineSearch from './containers/WineSearch';
+// import RegionSearch from './containers/RegionSearch';
+// import VineyardSearch from './containers/VineyardSearch';
+// import WineSearch from './containers/WineSearch';
 
 const App = () => (
   <Router>
@@ -25,21 +25,21 @@ const App = () => (
       <Navbar />
       <div className="Content">
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/wines" element={<Wines />}></Route>
-          <Route path="/wines/:id" element={<WineInstance />}></Route>
-          <Route path="/vineyards" element={<Vineyards />}></Route>
-          <Route path="/vineyards/:id" element={<VineyardInstance />}></Route>
-          <Route path="/regions" element={<Regions />}></Route>
-          <Route path="/regions/:id" element={<RegionInstance />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/visualizations" element={<Visualizations />}></Route>
-          <Route path="/provider" element={<ProviderVisualizations />}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/wines" element={<Wines />} />
+          <Route path="/wines/:id" element={<WineInstance />} />
+          <Route path="/vineyards" element={<Vineyards />} />
+          <Route path="/vineyards/:id" element={<VineyardInstance />} />
+          <Route path="/regions" element={<Regions />} />
+          <Route path="/regions/:id" element={<RegionInstance />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/visualizations" element={<Visualizations />} />
+          <Route path="/provider" element={<ProviderVisualizations />} />
 
-          <Route path="/search/:query" element={<Search />}></Route>
-          <Route path="/wines/search/:query" element={<WineSearch />}></Route>
-          <Route path="/vineyards/search/:query" element={<VineyardSearch />}></Route>
-          <Route path="/regions/search/:query" element={<RegionSearch />}></Route>
+          <Route path="/search/:query" element={<Search />} />
+          {/* <Route path="/wines/search/:query" element={<WineSearch />}/>
+          <Route path="/vineyards/search/:query" element={<VineyardSearch />}/>
+          <Route path="/regions/search/:query" element={<RegionSearch />}/> */}
         </Routes>
       </div>
     </div>

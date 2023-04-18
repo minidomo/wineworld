@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { wineworld } from '../api';
 import RegionCard from '../components/RegionCard';
@@ -14,21 +14,21 @@ import WineCard from '../components/WineCard';
 
 const Search = () => {
   const [wines, setWines] = useState([]);
-  const [vineyards, setVineyards] = useState([]);
-  const [regions, setRegions] = useState([]);
   const [wineLoaded, setWineLoaded] = useState(false);
+
+  const [vineyards, setVineyards] = useState([]);
   const [vineyardLoaded, setVineyardLoaded] = useState(false);
+
+  const [regions, setRegions] = useState([]);
   const [regionLoaded, setRegionLoaded] = useState(false);
 
-  const location = useLocation();
-  const query = location.pathname.split('/search/').at(-1);
-  const searchQuery = decodeURI(query);
+  const { query } = useParams();
 
   useEffect(() => {
     wineworld
       .get('/wines', {
         params: {
-          search: searchQuery,
+          search: query,
         },
       })
       .then(res => {
@@ -40,7 +40,7 @@ const Search = () => {
     wineworld
       .get('/vineyards', {
         params: {
-          search: searchQuery,
+          search: query,
         },
       })
       .then(res => {
@@ -52,7 +52,7 @@ const Search = () => {
     wineworld
       .get('/regions', {
         params: {
-          search: searchQuery,
+          search: query,
         },
       })
       .then(res => {
@@ -60,7 +60,7 @@ const Search = () => {
         setRegionLoaded(true);
       })
       .catch(console.error);
-  }, [searchQuery]);
+  }, [query]);
 
   return (
     <Container>
@@ -75,7 +75,7 @@ const Search = () => {
             {wineLoaded ? (
               wines.map(wine => (
                 <Col>
-                  <WineCard wine={wine} searchQuery={searchQuery} />
+                  <WineCard wine={wine} searchQuery={query} />
                 </Col>
               ))
             ) : (
@@ -92,7 +92,7 @@ const Search = () => {
             {vineyardLoaded ? (
               vineyards.map(vineyard => (
                 <Col>
-                  <VineyardCard vineyard={vineyard} searchQuery={searchQuery} />
+                  <VineyardCard vineyard={vineyard} searchQuery={query} />
                 </Col>
               ))
             ) : (
@@ -109,7 +109,7 @@ const Search = () => {
             {regionLoaded ? (
               regions.map(region => (
                 <Col>
-                  <RegionCard region={region} searchQuery={searchQuery} />
+                  <RegionCard region={region} searchQuery={query} />
                 </Col>
               ))
             ) : (
