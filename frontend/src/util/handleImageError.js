@@ -1,6 +1,6 @@
-import defaultRegionImage from '../assets/r2.jpg';
-import defaultVineyardImage from '../assets/v2.jfif';
-import defaultWineImage from '../assets/w2.jpg';
+import defaultRegionImage from '../assets/placeholder/region.jpg';
+import defaultVineyardImage from '../assets/placeholder/vineyard.jpg';
+import defaultWineImage from '../assets/placeholder/wine.jpg';
 
 export function handleWineImageError(ev) {
   ev.target.src = defaultWineImage;

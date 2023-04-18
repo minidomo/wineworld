@@ -1,7 +1,7 @@
-import homeimage from '../assets/home_logo.jpg';
-import regionsimage from '../assets/r_home.jpg';
-import vineyardsimage from '../assets/v_home.jpg';
-import wineimage from '../assets/w_home.jpg';
+import homeimage from '../assets/home/main-logo.jpg';
+import regionsimage from '../assets/home/region.jpg';
+import vineyardsimage from '../assets/home/vineyard.jpg';
+import wineimage from '../assets/home/wine.jpg';
 import HomeCard from '../components/HomeCard';
 
 const Home = () => (
