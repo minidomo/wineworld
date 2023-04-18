@@ -14,7 +14,7 @@ const Visualizations = () => (
     <VineyardChart />
     <div class="border-top my-3"></div>
     <Scatterplot />
-    <br/>
+    <br />
   </Container>
 );
 

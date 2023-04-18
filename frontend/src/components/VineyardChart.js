@@ -58,7 +58,7 @@ const data = [
 const VineyardChart = () => (
   <Container fluid="md">
     <Row style={{ height: 500 }}>
-    <h3 className="p-5 text-center">Number of Vineyards per Country</h3>
+      <h3 className="p-5 text-center">Number of Vineyards per Country</h3>
       <Col>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart width={600} height={200} data={data}>
