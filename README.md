@@ -26,7 +26,7 @@
 |   1   | JB Ladera      |
 |   2   | Saniya Shaju   |
 |   3   | Austin Barret  |
-|   4   |                |
+|   4   | Joshua Yin     |
 
 ## Links
 - [GitLab pipelines](https://gitlab.com/rparappuram/cs373-idb-12/-/pipelines)
@@ -68,9 +68,9 @@
 
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
-| Austin Barret   |                            |                            |
+| Austin Barret   |             20             |             35             |
 | JB Ladera       |                            |                            |
-| Ryan Parappuram |                            |                            |
+| Ryan Parappuram |             15             |             25             |
 | Saniya Shaju    |                            |                            |
 | Joshua Yin      |                            |                            |
 
