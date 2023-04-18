@@ -1,4 +1,4 @@
-import AwsImage from '../assets/logos/aws.png';
+import AmplifyImage from '../assets/logos/amplify.png';
 import BootstrapImage from '../assets/logos/bootstrap.png';
 import DigitalOceanImage from '../assets/logos/digitalocean.png';
 import DockerImage from '../assets/logos/docker.png';
@@ -49,7 +49,7 @@ const toolData = [
   },
   {
     name: 'AWS Amplify',
-    image: AwsImage,
+    image: AmplifyImage,
     text: 'Hosting platform for WineWorld',
     url: 'https://aws.amazon.com/amplify/',
   },
@@ -57,7 +57,7 @@ const toolData = [
     name: 'Namecheap',
     image: NamecheapImage,
     text: 'Domain name registration for site',
-    url: '',
+    url: 'https://www.namecheap.com/',
   },
   {
     name: 'Visual Studio Code',
@@ -119,6 +119,6 @@ const toolData = [
     text: 'Tool for standardizing development environment',
     url: 'https://www.docker.com/',
   },
-];
+].sort((a, b) => (a.name < b.name ? -1 : 1));
 
 export { toolData };

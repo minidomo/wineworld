@@ -1,4 +1,5 @@
 import GitLabImage from '../assets/logos/gitlab.png';
+import RedditImage from '../assets/logos/reddit.png';
 import TripImage from '../assets/logos/tripadvisor.png';
 import WineImage from '../assets/logos/wine.png';
 import YelpImage from '../assets/logos/yelp.png';
@@ -28,6 +29,12 @@ const ApiData = [
     text: 'Designated communication platform',
     url: 'https://www.tripadvisor.com/developers',
   },
-];
+  {
+    name: 'Reddit API',
+    image: RedditImage,
+    text: 'Source of reddit posts for wines',
+    url: 'https://www.reddit.com/dev/api/',
+  },
+].sort((a, b) => (a.name < b.name ? -1 : 1));
 
 export { ApiData };
