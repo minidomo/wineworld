@@ -92,6 +92,11 @@ const WineInstance = () => {
               </Row>
             </Container>
             <br />
+            <div id="learn-more-section" className="p-4 g-4">
+              <h5>Learn more about {type} wine</h5>
+              <br />
+              <RedditCarousel redditUrls={reddit} />
+            </div>
             <Row>
               <h5 align="left">Related Vineyards</h5>
             </Row>
@@ -114,12 +119,6 @@ const WineInstance = () => {
                 ))}
               </Col>
             </Row>
-
-            <div id="learn-more-section" className="p-4 g-4">
-              <h5>Learn more about {type} wine</h5>
-              <br />
-              <RedditCarousel redditUrls={reddit} />
-            </div>
           </div>
         ),
       })}

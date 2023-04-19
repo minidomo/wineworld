@@ -28,8 +28,8 @@ export const teamData = [
       'and drive cars!',
     commits: 0,
     issues: 0,
-    // 35 backend, 54 postman
-    unit_tests: 89,
+    // 33 backend, 54 postman
+    unit_tests: 87,
     image: RyanImage,
   },
   {
@@ -42,7 +42,7 @@ export const teamData = [
       'my spare time.',
     commits: 0,
     issues: 0,
-    unit_tests: 33,
+    unit_tests: 32,
     image: JBImage,
   },
   {
