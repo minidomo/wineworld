@@ -1,4 +1,4 @@
-import './WineInstance.css';
+import './Instance.css';
 
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
@@ -92,9 +92,8 @@ const WineInstance = () => {
               </Row>
             </Container>
             <br />
-            <div id="learn-more-section" className="p-4 g-4">
+            <div className="p-4 g-4 custom-section">
               <h5>Learn more about {type} wine</h5>
-              <br />
               <RedditCarousel redditUrls={reddit} />
             </div>
             <Row>

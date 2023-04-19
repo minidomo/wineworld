@@ -1,3 +1,5 @@
+import './Instance.css';
+
 import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
@@ -93,12 +95,10 @@ const RegionInstance = () => {
               </Row>
             </Container>
             <br />
-            <Row>
-              <h5 align="left">Location</h5>
+            <div className="p-4 g-4 custom-section">
+              <h5>Location</h5>
               <Map lat={latitude} lng={longitude} />
-            </Row>
-            <br />
-            <br />
+            </div>
             <Row>
               <h5 align="left">Related Wines</h5>
             </Row>

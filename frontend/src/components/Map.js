@@ -7,8 +7,6 @@ const mapStyles = {
   height: '80vh',
   width: '80%',
   padding: '10px',
-  top: '5vh',
-  left: '5%',
   border: '10vh',
 };
 
