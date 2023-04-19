@@ -1,6 +1,6 @@
 import './Cards.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -34,7 +34,6 @@ const WineModel = () => {
   const [reviewConstraints, setReviewConstraints] = useState({});
 
   // params
-  const [page, setPage] = useState(1);
   const [type, setType] = useState([]);
   const [country, setCountry] = useState([]);
   const [winery, setWinery] = useState([]);
@@ -45,21 +44,15 @@ const WineModel = () => {
   const [sort, setSort] = useState('name_asc');
   const [searchQuery, setSearchQuery] = useState();
 
-  useEffect(() => {
-    wineworld
-      .get('/wines/constraints')
-      .then(res => {
-        setTypeConstraints(res.data.types);
-        setCountryConstraints(res.data.countries);
-        setWineryConstraints(res.data.wineries);
-        setSortConstraints(res.data.sorts);
-        setRatingConstraints(res.data.rating);
-        setReviewConstraints(res.data.reviews);
-      })
-      .catch(console.error);
-  }, []);
+  const pageRef = useRef(1);
+  const [pageTrigger, setPageTrigger] = useState(false);
 
-  useEffect(() => {
+  function setPageAndTrigger(page) {
+    pageRef.current = page;
+    setPageTrigger(!pageTrigger);
+  }
+
+  function mainApi(page) {
     wineworld
       .get('/wines', {
         params: {
@@ -82,7 +75,32 @@ const WineModel = () => {
         setLoaded(true);
       })
       .catch(console.error);
-  }, [page, type, country, winery, startReviews, endReviews, startRating, endRating, sort, searchQuery]);
+  }
+
+  useEffect(() => {
+    wineworld
+      .get('/wines/constraints')
+      .then(res => {
+        setTypeConstraints(res.data.types);
+        setCountryConstraints(res.data.countries);
+        setWineryConstraints(res.data.wineries);
+        setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    mainApi(pageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageTrigger]);
+
+  useEffect(() => {
+    pageRef.current = 1;
+    mainApi(pageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, country, winery, startReviews, endReviews, startRating, endRating, sort, searchQuery]);
 
   return (
     <Container>
@@ -200,8 +218,8 @@ const WineModel = () => {
             <CustomPagination
               firstPage={1}
               lastPage={totalPages}
-              setPage={setPage}
-              getCurrentPage={() => page}
+              setPage={setPageAndTrigger}
+              getCurrentPage={() => pageRef.current}
               maxVisiblePages={5}
             />
             <Row>

@@ -1,6 +1,6 @@
 import './Cards.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -33,7 +33,6 @@ const VineyardModel = () => {
   const [priceConstraints, setPriceConstraints] = useState({});
 
   // params
-  const [page, setPage] = useState(1);
   const [country, setCountry] = useState([]);
   const [startPrice, setStartPrice] = useState();
   const [endPrice, setEndPrice] = useState();
@@ -44,20 +43,15 @@ const VineyardModel = () => {
   const [sort, setSort] = useState('name_asc');
   const [searchQuery, setSearchQuery] = useState();
 
-  useEffect(() => {
-    wineworld
-      .get('/vineyards/constraints')
-      .then(res => {
-        setCountryConstraints(res.data.countries);
-        setSortConstraints(res.data.sorts);
-        setRatingConstraints(res.data.rating);
-        setReviewConstraints(res.data.reviews);
-        setPriceConstraints(res.data.price);
-      })
-      .catch(console.error);
-  }, []);
+  const pageRef = useRef(1);
+  const [pageTrigger, setPageTrigger] = useState(false);
 
-  useEffect(() => {
+  function setPageAndTrigger(page) {
+    pageRef.current = page;
+    setPageTrigger(!pageTrigger);
+  }
+
+  function mainApi(page) {
     wineworld
       .get('/vineyards', {
         params: {
@@ -80,7 +74,31 @@ const VineyardModel = () => {
         setLoaded(true);
       })
       .catch(console.error);
-  }, [page, country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort, searchQuery]);
+  }
+
+  useEffect(() => {
+    wineworld
+      .get('/vineyards/constraints')
+      .then(res => {
+        setCountryConstraints(res.data.countries);
+        setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
+        setPriceConstraints(res.data.price);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    mainApi(pageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageTrigger]);
+
+  useEffect(() => {
+    pageRef.current = 1;
+    mainApi(pageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [country, startPrice, endPrice, startReviews, endReviews, startRating, endRating, sort, searchQuery]);
 
   return (
     <Container>
@@ -189,8 +207,8 @@ const VineyardModel = () => {
             <CustomPagination
               firstPage={1}
               lastPage={totalPages}
-              setPage={setPage}
-              getCurrentPage={() => page}
+              setPage={setPageAndTrigger}
+              getCurrentPage={() => pageRef.current}
               maxVisiblePages={5}
             />
             <Row>
