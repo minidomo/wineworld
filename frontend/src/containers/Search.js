@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -12,30 +12,40 @@ import RegionCard from '../components/RegionCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
 import { loading } from '../util/loadingAnimation';
+import { createTriggerFunction } from '../util/trigger';
 
 const Search = () => {
   const [wines, setWines] = useState([]);
   const [wineTotalPages, setWineTotalPages] = useState(1);
-  const [winePage, setWinePage] = useState(1);
   const [wineLoaded, setWineLoaded] = useState(false);
+
+  const winePageRef = useRef(1);
+  const [winePageTrigger, setWinePageTrigger] = useState(false);
+  const setWinePageAndTrigger = createTriggerFunction(winePageRef, winePageTrigger, setWinePageTrigger);
 
   const [vineyards, setVineyards] = useState([]);
   const [vineyardTotalPages, setVineyardTotalPages] = useState(1);
-  const [vineyardPage, setVineyardPage] = useState(1);
   const [vineyardLoaded, setVineyardLoaded] = useState(false);
+
+  const vineyardPageRef = useRef(1);
+  const [vineyardPageTrigger, setVineyardPageTrigger] = useState(false);
+  const setVineyardPageAndTrigger = createTriggerFunction(vineyardPageRef, vineyardPageTrigger, setVineyardPageTrigger);
 
   const [regions, setRegions] = useState([]);
   const [regionTotalPages, setRegionTotalPages] = useState(1);
-  const [regionPage, setRegionPage] = useState(1);
   const [regionLoaded, setRegionLoaded] = useState(false);
+
+  const regionPageRef = useRef(1);
+  const [regionPageTrigger, setRegionPageTrigger] = useState(false);
+  const setRegionPageAndTrigger = createTriggerFunction(regionPageRef, regionPageTrigger, setRegionPageTrigger);
 
   const { query } = useParams();
 
-  useEffect(() => {
+  function wineEndpoint(page) {
     wineworld
       .get('/wines', {
         params: {
-          page: winePage,
+          page: page,
           search: query,
         },
       })
@@ -45,13 +55,13 @@ const Search = () => {
         setWineLoaded(true);
       })
       .catch(console.error);
-  }, [query, winePage]);
+  }
 
-  useEffect(() => {
+  function vineyardEndpoint(page) {
     wineworld
       .get('/vineyards', {
         params: {
-          page: vineyardPage,
+          page: page,
           search: query,
         },
       })
@@ -61,13 +71,13 @@ const Search = () => {
         setVineyardLoaded(true);
       })
       .catch(console.error);
-  }, [query, vineyardPage]);
+  }
 
-  useEffect(() => {
+  function regionEndpoint(page) {
     wineworld
       .get('/regions', {
         params: {
-          page: regionPage,
+          page: page,
           search: query,
         },
       })
@@ -77,7 +87,34 @@ const Search = () => {
         setRegionLoaded(true);
       })
       .catch(console.error);
-  }, [query, regionPage]);
+  }
+
+  useEffect(() => {
+    winePageRef.current = 1;
+    wineEndpoint(winePageRef.current);
+
+    vineyardPageRef.current = 1;
+    vineyardEndpoint(vineyardPageRef.current);
+
+    regionPageRef.current = 1;
+    regionEndpoint(regionPageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
+  useEffect(() => {
+    wineEndpoint(winePageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [winePageTrigger]);
+
+  useEffect(() => {
+    vineyardEndpoint(vineyardPageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vineyardPageTrigger]);
+
+  useEffect(() => {
+    regionEndpoint(regionPageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [regionPageTrigger]);
 
   return (
     <Container>
@@ -92,8 +129,8 @@ const Search = () => {
                 <CustomPagination
                   firstPage={1}
                   lastPage={wineTotalPages}
-                  setPage={setWinePage}
-                  getCurrentPage={() => winePage}
+                  setPage={setWinePageAndTrigger}
+                  getCurrentPage={() => winePageRef.current}
                   maxVisiblePages={5}
                 />
                 <p style={{ opacity: 0.65 }} hidden={wines.length > 0}>
@@ -119,8 +156,8 @@ const Search = () => {
                 <CustomPagination
                   firstPage={1}
                   lastPage={vineyardTotalPages}
-                  setPage={setVineyardPage}
-                  getCurrentPage={() => vineyardPage}
+                  setPage={setVineyardPageAndTrigger}
+                  getCurrentPage={() => vineyardPageRef.current}
                   maxVisiblePages={5}
                 />
                 <p style={{ opacity: 0.65 }} hidden={vineyards.length > 0}>
@@ -146,8 +183,8 @@ const Search = () => {
                 <CustomPagination
                   firstPage={1}
                   lastPage={regionTotalPages}
-                  setPage={setRegionPage}
-                  getCurrentPage={() => regionPage}
+                  setPage={setRegionPageAndTrigger}
+                  getCurrentPage={() => regionPageRef.current}
                   maxVisiblePages={5}
                 />
                 <p style={{ opacity: 0.65 }} hidden={regions.length > 0}>

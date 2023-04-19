@@ -15,6 +15,7 @@ import { SearchBar } from '../components/models/SearchBar';
 import { SortDropdownItem } from '../components/models/SortDropdownItem';
 import RegionCard from '../components/RegionCard';
 import { loading } from '../util/loadingAnimation';
+import { createTriggerFunction } from '../util/trigger';
 
 const RegionModel = () => {
   const [sortName, setSortName] = useState('Sort By: Name (A-Z)');
@@ -46,13 +47,9 @@ const RegionModel = () => {
 
   const pageRef = useRef(1);
   const [pageTrigger, setPageTrigger] = useState(false);
+  const setPageAndTrigger = createTriggerFunction(pageRef, pageTrigger, setPageTrigger);
 
-  function setPageAndTrigger(page) {
-    pageRef.current = page;
-    setPageTrigger(!pageTrigger);
-  }
-
-  function mainApi(page) {
+  function mainEndpoint(page) {
     wineworld
       .get('/regions', {
         params: {
@@ -92,13 +89,13 @@ const RegionModel = () => {
   }, []);
 
   useEffect(() => {
-    mainApi(pageRef.current);
+    mainEndpoint(pageRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageTrigger]);
 
   useEffect(() => {
     pageRef.current = 1;
-    mainApi(pageRef.current);
+    mainEndpoint(pageRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort, searchQuery]);
 
