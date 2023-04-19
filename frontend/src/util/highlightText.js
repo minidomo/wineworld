@@ -13,6 +13,7 @@ export function highlightText(text, query) {
         searchWords={words}
         sanitize={latinize}
         textToHighlight={text}
+        autoEscape={true}
       />
     );
   }

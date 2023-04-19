@@ -2,10 +2,10 @@ import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
 import App from '../App.js';
-import GitLabImage from '../assets/gitlab.png';
-import ReactImage from '../assets/logo512.png';
-import RayImage from '../assets/rayPic.jpg';
-import WineImage from '../assets/wine.jpg';
+import RayImage from '../assets/devs/ray.jpg';
+import GitLabImage from '../assets/logos/gitlab.png';
+import ReactImage from '../assets/logos/react.png';
+import WineImage from '../assets/placeholder/wine.jpg';
 import ApiCard from '../components/ApiCard';
 import DeveloperCard from '../components/DeveloperCard';
 import HomeCard from '../components/HomeCard';
@@ -15,6 +15,8 @@ import ToolCard from '../components/ToolCard';
 import VineyardCard from '../components/VineyardCard';
 import WineCard from '../components/WineCard';
 import About from '../containers/About.js';
+
+HTMLCanvasElement.prototype.getContext = jest.fn();
 
 it('Init Wine', () => {
   const wine = {
@@ -210,7 +212,11 @@ it('Init Api', () => {
     text: 'A Javascript library for front-end development',
     url: 'https://docs.gitlab.com/ee/api/',
   };
-  const component = renderer.create(<ApiCard api={Api} />);
+  const component = renderer.create(
+    <BrowserRouter>
+      <ApiCard api={Api} />
+    </BrowserRouter>,
+  );
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -223,7 +229,11 @@ it('Init Tool', () => {
     text: 'A Javascript library for front-end development',
     url: 'https://reactjs.org/',
   };
-  const component = renderer.create(<ToolCard tool={Tool} />);
+  const component = renderer.create(
+    <BrowserRouter>
+      <ToolCard tool={Tool} />
+    </BrowserRouter>,
+  );
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -248,7 +258,11 @@ it('Init App', () => {
 });
 
 it('Init About', () => {
-  const component = renderer.create(<About />);
+  const component = renderer.create(
+    <BrowserRouter>
+      <About />
+    </BrowserRouter>,
+  );
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
