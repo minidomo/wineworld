@@ -12,7 +12,7 @@ ValueType = int
 
 
 def get_response() -> JsonObject:
-    return requests.get("https://api4.parkscape.me/parks").json()
+    return requests.get("https://api.parkscape.me/parks").json()
 
 
 def time_to_minutes(time: pendulum.Time) -> int:

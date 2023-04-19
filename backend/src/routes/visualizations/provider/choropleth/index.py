@@ -7,7 +7,7 @@ from src.util.general import JsonObject, state_names
 
 
 def get_response() -> JsonObject:
-    return requests.get("https://api4.parkscape.me/airports").json()
+    return requests.get("https://api.parkscape.me/airports").json()
 
 
 def count_airports(response: JsonObject) -> list[JsonObject]:

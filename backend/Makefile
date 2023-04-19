@@ -58,9 +58,10 @@ scrape-all:
 	make scrape name=region_location_details mode=modify
 	make scrape name=region_info mode=raw
 	make scrape name=region_photos mode=raw
-	make scrape name=regions mode=final
+	make scrape name=regions mode=modify
 	make scrape name=vineyards mode=final
 	make scrape name=wines mode=final
+	make scrape name=regions mode=final
 
 test-api:
 	coverage run -m unittest discover tests

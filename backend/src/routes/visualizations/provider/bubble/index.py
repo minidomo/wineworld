@@ -8,7 +8,7 @@ from src.util.general import JsonObject, state_names
 
 
 def get_response() -> JsonObject:
-    return requests.get("https://api4.parkscape.me/cities").json()
+    return requests.get("https://api.parkscape.me/cities").json()
 
 
 def count_population(response: JsonObject) -> list[JsonObject]:

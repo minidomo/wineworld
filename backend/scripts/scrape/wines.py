@@ -94,7 +94,7 @@ class WineScript(AbstractScrapeScript):
         data = self.read_json_file(self.root_dir / "data/modify" / self.filename)
         wines: list[JsonObject] = data["data"]
 
-        regions = self.get_final_regions()
+        regions = self.get_region_candidates()
         ret: list[JsonObject] = []
 
         for wine in wines:

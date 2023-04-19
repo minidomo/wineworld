@@ -2,7 +2,12 @@ import sys
 
 from dotenv import load_dotenv
 
-from .abstract_scrape_script import AbstractScrapeScript, JsonObject, ScriptMode
+from .abstract_scrape_script import (
+    AbstractScrapeScript,
+    JsonObject,
+    ScriptMode,
+    SimpleRegion,
+)
 
 load_dotenv()
 
@@ -15,21 +20,6 @@ class RegionScript(AbstractScrapeScript):
         return {}
 
     def apply_changes(self) -> JsonObject:
-        return {}
-
-    def get_region_info(self) -> JsonObject:
-        data = self.read_json_file(self.root_dir / "data/raw/region_info.json")
-        return data["location_details"]
-
-    def get_region_photos(self) -> list[JsonObject]:
-        data = self.read_json_file(self.root_dir / "data/misc/reviewed_photos.json")
-        return data["data"]
-
-    def get_locations(self) -> list[JsonObject]:
-        data = self.read_json_file(self.root_dir / "data/modify/region_location_details.json")
-        return data["data"]
-
-    def final_changes(self) -> JsonObject:
         locations = self.get_locations()
         region_photos = self.get_region_photos()
         region_info = self.get_region_info()
@@ -68,6 +58,45 @@ class RegionScript(AbstractScrapeScript):
         print(f"error count: {error_count}")
 
         return {"data": regions}
+
+    def get_region_info(self) -> JsonObject:
+        data = self.read_json_file(self.root_dir / "data/raw/region_info.json")
+        return data["location_details"]
+
+    def get_region_photos(self) -> list[JsonObject]:
+        data = self.read_json_file(self.root_dir / "data/misc/reviewed_photos.json")
+        return data["data"]
+
+    def get_locations(self) -> list[JsonObject]:
+        data = self.read_json_file(self.root_dir / "data/modify/region_location_details.json")
+        return data["data"]
+
+    def get_regions_from_wines(self) -> set[SimpleRegion]:
+        ret: set[SimpleRegion] = set()
+
+        data = self.read_json_file(self.root_dir / "data/final/wines.json")
+        wines: list[JsonObject] = data["data"]
+
+        for wine in wines:
+            ret.add(SimpleRegion(wine["region"], wine["country"]))
+
+        return ret
+
+    def final_changes(self) -> JsonObject:
+        region_data = self.read_json_file(self.root_dir / "data/modify" / self.filename)
+        regions: list[JsonObject] = region_data["data"]
+
+        wine_regions = self.get_regions_from_wines()
+        ret: list[JsonObject] = []
+
+        for region in regions:
+            if SimpleRegion(region["name"], region["country"]) in wine_regions:
+                ret.append(region)
+
+        print(f"final wine count: {len(ret)}")
+        print(f"remove count: {len(regions)- len(ret)}")
+
+        return {"data": ret}
 
     def get_first_image(self, photo_submissions: list[JsonObject], id: str) -> JsonObject:
         for photo_submission in photo_submissions:

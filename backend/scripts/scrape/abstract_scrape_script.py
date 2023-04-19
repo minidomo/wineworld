@@ -62,10 +62,10 @@ class AbstractScrapeScript(ABC):
 
         return data
 
-    def get_final_regions(self) -> set[SimpleRegion]:
+    def get_region_candidates(self) -> set[SimpleRegion]:
         ret: set[SimpleRegion] = set()
 
-        data = self.read_json_file(self.root_dir / "data/final/regions.json")
+        data = self.read_json_file(self.root_dir / "data/modify/regions.json")
         regions: list[JsonObject] = data["data"]
 
         for region in regions:
