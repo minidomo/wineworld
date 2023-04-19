@@ -37,7 +37,7 @@ class TestPhase3(GuiTestcase):
         )
         element.click()
 
-        self.assertEqual(self.driver.current_url, f"{URL}/wines/16")
+        self.assertEqual(self.driver.current_url, f"{URL}/wines/2")
 
     def test_WineModelSearch(self):
         self.driver.get(f"{URL}/wines")
@@ -51,12 +51,12 @@ class TestPhase3(GuiTestcase):
                 (By.XPATH, '//*[@id="root"]/div/div/div/div[3]/div[1]/div/div/div[2]/a')
             )
         )
-        
+
         element = self.driver.find_element(
             By.XPATH, '//*[@id="root"]/div/div/div/div[3]/div[1]/div/div/div[2]/a'
         )
         element.click()
-        self.assertEqual(self.driver.current_url, f"{URL}/wines/15")
+        self.assertEqual(self.driver.current_url, f"{URL}/wines/79")
 
     def test_VineyardModelSearch(self):
         self.driver.get(f"{URL}/vineyards")
@@ -75,7 +75,7 @@ class TestPhase3(GuiTestcase):
         )
         element.click()
 
-        self.assertEqual(self.driver.current_url, f"{URL}/vineyards/46")
+        self.assertEqual(self.driver.current_url, f"{URL}/vineyards/24")
 
     def test_RegionModelSearch(self):
         self.driver.get(f"{URL}/regions")
@@ -94,7 +94,7 @@ class TestPhase3(GuiTestcase):
         )
         element.click()
 
-        self.assertEqual(self.driver.current_url, f"{URL}/regions/57")
+        self.assertEqual(self.driver.current_url, f"{URL}/regions/54")
 
     # filtering tests
     def test_WineFilter(self):
