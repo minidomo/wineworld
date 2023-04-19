@@ -72,7 +72,7 @@
 | JB Ladera       |             20             |             33             |
 | Ryan Parappuram |             15             |             25             |
 | Saniya Shaju    |             17             |             21             |
-| Joshua Yin      |                            |                            |
+| Joshua Yin      |             15             |             20             |
 
 ## Comments
 
