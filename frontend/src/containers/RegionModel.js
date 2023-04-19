@@ -1,6 +1,6 @@
 import './Cards.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -34,7 +34,6 @@ const RegionModel = () => {
   const [reviewConstraints, setReviewConstraints] = useState({});
 
   // params
-  const [page, setPage] = useState(1);
   const [startReviews, setStartReviews] = useState();
   const [endReviews, setEndReviews] = useState();
   const [startRating, setStartRating] = useState();
@@ -45,21 +44,15 @@ const RegionModel = () => {
   const [sort, setSort] = useState('name_asc');
   const [searchQuery, setSearchQuery] = useState();
 
-  useEffect(() => {
-    wineworld
-      .get('/regions/constraints')
-      .then(res => {
-        setCountryConstraints(res.data.countries);
-        setTagConstraints(res.data.tags);
-        setTripTypeConstraints(res.data.tripTypes);
-        setSortConstraints(res.data.sorts);
-        setRatingConstraints(res.data.rating);
-        setReviewConstraints(res.data.reviews);
-      })
-      .catch(console.error);
-  }, []);
+  const pageRef = useRef(1);
+  const [pageTrigger, setPageTrigger] = useState(false);
 
-  useEffect(() => {
+  function setPageAndTrigger(page) {
+    pageRef.current = page;
+    setPageTrigger(!pageTrigger);
+  }
+
+  function mainApi(page) {
     wineworld
       .get('/regions', {
         params: {
@@ -82,7 +75,32 @@ const RegionModel = () => {
         setLoaded(true);
       })
       .catch(console.error);
-  }, [page, country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort, searchQuery]);
+  }
+
+  useEffect(() => {
+    wineworld
+      .get('/regions/constraints')
+      .then(res => {
+        setCountryConstraints(res.data.countries);
+        setTagConstraints(res.data.tags);
+        setTripTypeConstraints(res.data.tripTypes);
+        setSortConstraints(res.data.sorts);
+        setRatingConstraints(res.data.rating);
+        setReviewConstraints(res.data.reviews);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    mainApi(pageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageTrigger]);
+
+  useEffect(() => {
+    pageRef.current = 1;
+    mainApi(pageRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [country, startReviews, endReviews, startRating, endRating, tripTypes, tags, sort, searchQuery]);
 
   return (
     <Container>
@@ -200,8 +218,8 @@ const RegionModel = () => {
             <CustomPagination
               firstPage={1}
               lastPage={totalPages}
-              setPage={setPage}
-              getCurrentPage={() => page}
+              setPage={setPageAndTrigger}
+              getCurrentPage={() => pageRef.current}
               maxVisiblePages={5}
             />
             <Row>
