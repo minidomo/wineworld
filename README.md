@@ -69,7 +69,7 @@
 | Name            | Est. Completion Time (hrs) | Real Completion Time (hrs) |
 | --------------- | :------------------------: | :------------------------: |
 | Austin Barret   |             20             |             35             |
-| JB Ladera       |                            |                            |
+| JB Ladera       |             20             |             33             |
 | Ryan Parappuram |             15             |             25             |
 | Saniya Shaju    |             17             |             21             |
 | Joshua Yin      |                            |                            |
