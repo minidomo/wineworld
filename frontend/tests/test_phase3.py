@@ -19,7 +19,7 @@ class TestPhase3(GuiTestcase):
         element.click()
 
         searchInput = self.driver.find_element(
-            By.XPATH, '//*[@id="root"]/div/nav/nav/div/form/input'
+            By.XPATH, '//*[@id="root"]/div/nav/nav/div/div/form/input'
         )
         searchInput.send_keys("red" + Keys.ENTER)
 
@@ -37,31 +37,29 @@ class TestPhase3(GuiTestcase):
         )
         element.click()
 
-        self.assertEqual(self.driver.current_url, f"{URL}/wines/266")
+        self.assertEqual(self.driver.current_url, f"{URL}/wines/16")
 
     def test_WineModelSearch(self):
         self.driver.get(f"{URL}/wines")
-
         searchInput = self.driver.find_element(
             By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input'
         )
-        searchInput.send_keys("red" + Keys.ENTER)
+        searchInput.send_keys("ros" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
-                (By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
+                (By.XPATH, '//*[@id="root"]/div/div/div/div[3]/div[1]/div/div/div[2]/a')
             )
         )
+        
         element = self.driver.find_element(
-            By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'
+            By.XPATH, '//*[@id="root"]/div/div/div/div[3]/div[1]/div/div/div[2]/a'
         )
         element.click()
-
-        self.assertEqual(self.driver.current_url, f"{URL}/wines/266")
+        self.assertEqual(self.driver.current_url, f"{URL}/wines/15")
 
     def test_VineyardModelSearch(self):
         self.driver.get(f"{URL}/vineyards")
-
         searchInput = self.driver.find_element(
             By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input'
         )
@@ -77,32 +75,30 @@ class TestPhase3(GuiTestcase):
         )
         element.click()
 
-        self.assertEqual(self.driver.current_url, f"{URL}/vineyards/2")
+        self.assertEqual(self.driver.current_url, f"{URL}/vineyards/46")
 
     def test_RegionModelSearch(self):
         self.driver.get(f"{URL}/regions")
-
         searchInput = self.driver.find_element(
             By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[3]/form/input'
         )
-        searchInput.send_keys("mon" + Keys.ENTER)
+        searchInput.send_keys("Hill" + Keys.ENTER)
 
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(
-                (By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a')
+                (By.XPATH, '//*[@id="root"]/div/div/div/div[3]/div[1]/div/div/div[2]/a')
             )
         )
         element = self.driver.find_element(
-            By.XPATH, '//*[@id="root"]/div/div/div/div/div[1]/div/div/div[2]/a'
+            By.XPATH, '//*[@id="root"]/div/div/div/div[3]/div[1]/div/div/div[2]/a'
         )
         element.click()
 
-        self.assertEqual(self.driver.current_url, f"{URL}/regions/4")
+        self.assertEqual(self.driver.current_url, f"{URL}/regions/57")
 
     # filtering tests
     def test_WineFilter(self):
         self.driver.get(f"{URL}/wines")
-
         filterText = self.driver.find_element(
             By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div[1]/div/button'
         ).text
@@ -131,7 +127,7 @@ class TestPhase3(GuiTestcase):
         sortText = self.driver.find_element(
             By.XPATH, '//*[@id="dropdown-basic-button"]'
         ).text
-        self.assertEqual(sortText, "Sort By")
+        self.assertEqual(sortText, "Sort By: Name (A-Z)")
 
     def test_VineyardSort(self):
         self.driver.get(f"{URL}/vineyards")
@@ -139,7 +135,7 @@ class TestPhase3(GuiTestcase):
         sortText = self.driver.find_element(
             By.XPATH, '//*[@id="dropdown-basic-button"]'
         ).text
-        self.assertEqual(sortText, "Sort By")
+        self.assertEqual(sortText, "Sort By: Name (A-Z)")
 
     def test_regionSort(self):
         self.driver.get(f"{URL}/regions")
@@ -147,7 +143,7 @@ class TestPhase3(GuiTestcase):
         sortText = self.driver.find_element(
             By.XPATH, '//*[@id="dropdown-basic-button"]'
         ).text
-        self.assertEqual(sortText, "Sort By")
+        self.assertEqual(sortText, "Sort By: Name (A-Z)")
 
 
 if __name__ == "__main__":

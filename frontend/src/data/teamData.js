@@ -55,7 +55,7 @@ export const teamData = [
       'novels, crocheting, and writing short stories and poetry.',
     commits: 0,
     issues: 0,
-    unit_tests: 10,
+    unit_tests: 21,
     image: SaniyaImage,
   },
   {
