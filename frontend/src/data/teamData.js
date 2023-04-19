@@ -62,7 +62,7 @@ export const teamData = [
     name: 'Austin Barret',
     alt_names: new Set(['austin25coding']),
     gitlab_id: 'acbarret',
-    role: 'Front-end',
+    role: 'Frontend',
     bio:
       "I'm a sophomore frontend developer at UT Austin. " +
       'I love to go windsurfing, play the piano, and write my own music.',
