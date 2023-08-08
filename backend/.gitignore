@@ -1,8 +1,7 @@
-*.cert
-*.key
 data/final
 data/modify
 data/raw
 data/misc
-node_modules/
-.temp/
+node_modules
+build
+.temp
