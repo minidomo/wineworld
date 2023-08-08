@@ -5,3 +5,4 @@ data/misc
 node_modules
 build
 .temp
+scripts/scrape/index.ts
