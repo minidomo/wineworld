@@ -26,8 +26,8 @@ export interface WineApiDataModified {
     type: WineType,
 }
 
-export const endpoints = ["reds", "whites", "sparkling", "rose", "dessert", "port"];
-export const baseUrl = 'https://api.sampleapis.com/wines';
+const endpoints = ["reds", "whites", "sparkling", "rose", "dessert", "port"];
+const baseUrl = 'https://api.sampleapis.com/wines';
 
 const endpointMapping: Record<string, WineType> = {
     "reds": "Red",
@@ -38,7 +38,7 @@ const endpointMapping: Record<string, WineType> = {
     'port': 'Port',
 };
 
-export const saveDir = 'data/temp';
+export const saveDir = 'data/temp/wines';
 export const saveFile = 'wines.json';
 
 export async function winesApi(endpoint: string) {
@@ -108,6 +108,8 @@ export function writeData(data: WineApiDataModified[]) {
 
 export function readData(): WineApiDataModified[] {
     const fullPath = `${saveDir}/${saveFile}`;
+    if (!existsSync(fullPath)) return [];
+
     const jsonString = readFileSync(fullPath, { encoding: 'utf-8' });
     const jsonData = JSON.parse(jsonString);
     return jsonData['data'] as WineApiDataModified[];

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "scrape": "ts-node scripts/scrape/index.ts",
+    "scrape": "ts-node -r dotenv/config scripts/scrape/index.ts",
     "build": "tsc --build",
     "start": "npm run build && node build/index.js"
   },
