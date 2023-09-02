@@ -1,14 +1,19 @@
 import re
 from typing import Any
-
-import requests
+import json
+from pathlib import Path
 from flask_restful import Resource
 
 from src.util.general import JsonObject, state_names
 
 
 def get_response() -> JsonObject:
-    return requests.get("https://api.parkscape.me/cities").json()
+    # return requests.get("https://api.parkscape.me/cities").json()
+    root_dir = (Path(__file__).resolve().parent / "../../../../..").resolve()
+    file_path = root_dir / "data/provider/cities.json"
+    json_data = file_path.read_text(encoding="utf-8")
+    data: JsonObject = json.loads(json_data)
+    return data
 
 
 def count_population(response: JsonObject) -> list[JsonObject]:

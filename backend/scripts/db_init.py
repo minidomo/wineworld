@@ -1,4 +1,6 @@
 import json
+from sqlalchemy_utils import database_exists, create_database
+import os
 
 import __init__  # type: ignore
 from src.app import app
@@ -183,6 +185,8 @@ def create_regions() -> list[Region]:
 
 if __name__ == "__main__":
     with app.app_context():
+        if not database_exists(os.environ["SQLALCHEMY_DATABASE_URI"]):
+            create_database(os.environ["SQLALCHEMY_DATABASE_URI"])
         lists = create_instances()
         db.drop_all()
         db.create_all()
