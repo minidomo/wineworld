@@ -7,6 +7,7 @@ RUN apt-get install -y python3-pip python3-dev build-essential vim
 RUN apt-get install -y libmysqlclient-dev
 
 WORKDIR /usr/backend
+COPY data/provider ./data/provider
 COPY src ./src
 COPY requirements.txt ./
 COPY .env ./
