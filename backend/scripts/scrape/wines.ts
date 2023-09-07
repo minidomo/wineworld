@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 export interface WineApiDataRaw {
     winery: string,
