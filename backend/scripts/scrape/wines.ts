@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
-export interface WineApiDataRaw {
+export interface WineApiAttributes {
     winery: string,
     wine: string,
     rating: {
@@ -15,7 +15,7 @@ export interface WineApiDataRaw {
 
 export type WineType = 'Red' | 'White' | 'Sparkling' | 'Rose' | 'Dessert' | 'Port';
 
-export interface WineApiDataModified {
+export interface ProjectWineAttributes {
     winery: string,
     image: string,
     rating: number,
@@ -43,10 +43,10 @@ export const saveFile = 'wines.json';
 
 export async function winesApi(endpoint: string) {
     const response = await fetch(`${baseUrl}/${endpoint}`);
-    return (await response.json()) as WineApiDataRaw[];
+    return (await response.json()) as WineApiAttributes[];
 }
 
-function modifyWineData(data: WineApiDataRaw, type: WineType): WineApiDataModified | null {
+function modifyWineData(data: WineApiAttributes, type: WineType): ProjectWineAttributes | null {
     try {
         const match = data.rating.reviews.match(/\d+/) as RegExpMatchArray;
         const reviews = parseInt(match[0]);
@@ -75,13 +75,13 @@ export async function queryAllData() {
             const endpoint = endpoints[i];
             return wines
                 .map(wd => modifyWineData(wd, endpointMapping[endpoint]))
-                .filter(wd => wd !== null) as WineApiDataModified[];
+                .filter(wd => wd !== null) as ProjectWineAttributes[];
         })
         .reduce((prev, cur) => prev.concat(cur), []);
     return modifiedData;
 }
 
-function validateWineData(data: WineApiDataModified) {
+function validateWineData(data: ProjectWineAttributes) {
     const stringValues = (Object.values(data)
         .filter(v => typeof v === 'string') as string[])
         .map(v => v.trim());
@@ -94,7 +94,7 @@ function validateWineData(data: WineApiDataModified) {
     return true;
 }
 
-export function writeData(data: WineApiDataModified[]) {
+export function writeData(data: ProjectWineAttributes[]) {
     const jsonData = { data: data.filter(validateWineData) };
     const jsonString = JSON.stringify(jsonData, null, 4);
 
@@ -106,11 +106,11 @@ export function writeData(data: WineApiDataModified[]) {
     writeFileSync(fullPath, jsonString, { encoding: 'utf-8' })
 }
 
-export function readData(): WineApiDataModified[] {
+export function readData(): ProjectWineAttributes[] {
     const fullPath = `${saveDir}/${saveFile}`;
     if (!existsSync(fullPath)) return [];
 
     const jsonString = readFileSync(fullPath, { encoding: 'utf-8' });
     const jsonData = JSON.parse(jsonString);
-    return jsonData['data'] as WineApiDataModified[];
+    return jsonData['data'] as ProjectWineAttributes[];
 }

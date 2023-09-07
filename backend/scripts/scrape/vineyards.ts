@@ -53,7 +53,7 @@ export interface YelpBusinessObject {
     attributes?: Record<string, any>,
 }
 
-export interface YelpApiDataRaw {
+export interface YelpApiSuccessResponse {
     total: number,
     region: {
         center: {
@@ -64,7 +64,7 @@ export interface YelpApiDataRaw {
     businesses: YelpBusinessObject[],
 }
 
-export interface YelpApiError {
+export interface YelpApiErrorResponse {
     error: {
         code: string,
         description: string,
@@ -76,14 +76,14 @@ export interface Region {
     country: string,
 }
 
-export interface YelpApiRegion {
+export interface ProjectRegion {
     name: string,
     country: string,
     longitude: number,
     latitude: number,
 }
 
-export interface YelpApiDataModified {
+export interface ProjectVineyardAttributes {
     name: string,
     price: number,
     rating: number,
@@ -93,10 +93,10 @@ export interface YelpApiDataModified {
     url: string,
     longitude: number,
     latitude: number,
-    regions: YelpApiRegion[],
+    regions: ProjectRegion[],
 }
 
-interface YelpQuery<E extends YelpApiDataRaw | YelpApiError> {
+interface YelpQuery<E extends YelpApiSuccessResponse | YelpApiErrorResponse> {
     region: Region,
     response: E,
 }
@@ -125,7 +125,7 @@ export async function yelpApi(params: Record<string, string | readonly string[]>
             'Authorization': `Bearer ${process.env.YELP_API_KEY}`,
         }
     });
-    return (await response.json()) as YelpApiDataRaw | YelpApiError;
+    return (await response.json()) as YelpApiSuccessResponse | YelpApiErrorResponse;
 }
 
 export async function queryAllData(regions: Region[]) {
@@ -141,14 +141,14 @@ export async function queryAllData(regions: Region[]) {
             ...generalYelpApiParams,
         });
 
-        const ret: YelpQuery<YelpApiDataRaw | YelpApiError> = { region, response, };
+        const ret: YelpQuery<YelpApiSuccessResponse | YelpApiErrorResponse> = { region, response, };
         return ret;
     }));
 
-    const validResponses = rawData.filter(data => !('error' in data.response)) as YelpQuery<YelpApiDataRaw>[];
+    const validResponses = rawData.filter(data => !('error' in data.response)) as YelpQuery<YelpApiSuccessResponse>[];
 
     const businesses: Map<string, YelpBusinessObject> = new Map();
-    const businessRegions: Map<string, YelpApiRegion[]> = new Map();
+    const businessRegions: Map<string, ProjectRegion[]> = new Map();
 
     validResponses.forEach(query => {
         query.response.businesses.forEach(business => {
@@ -168,13 +168,13 @@ export async function queryAllData(regions: Region[]) {
     });
 
     const modifiedData = [...businesses.values()]
-        .map(business => modifyBusinessData(business, businessRegions.get(business.id) as YelpApiRegion[]))
-        .filter(business => business !== null) as YelpApiDataModified[];
+        .map(business => modifyBusinessData(business, businessRegions.get(business.id) as ProjectRegion[]))
+        .filter(business => business !== null) as ProjectVineyardAttributes[];
 
     return modifiedData;
 }
 
-function validateBusinessData(data: YelpApiDataModified) {
+function validateBusinessData(data: ProjectVineyardAttributes) {
     const stringValues = (Object.values(data)
         .filter(v => typeof v === 'string') as string[])
         .map(v => v.trim());
@@ -188,11 +188,11 @@ function validateBusinessData(data: YelpApiDataModified) {
     return true;
 }
 
-function modifyBusinessData(data: YelpBusinessObject, regions: YelpApiRegion[]): YelpApiDataModified | null {
+function modifyBusinessData(data: YelpBusinessObject, regions: ProjectRegion[]): ProjectVineyardAttributes | null {
     try {
         const url = new URL(data.url);
 
-        const ret: YelpApiDataModified = {
+        const ret: ProjectVineyardAttributes = {
             name: data.name,
             price: data.price!.length,
             rating: data.rating,
@@ -210,7 +210,7 @@ function modifyBusinessData(data: YelpBusinessObject, regions: YelpApiRegion[]):
     }
 }
 
-export function writeData(data: YelpApiDataModified[]) {
+export function writeData(data: ProjectVineyardAttributes[]) {
     const jsonData = { data: data.filter(validateBusinessData) };
     const jsonString = JSON.stringify(jsonData, null, 4);
 
@@ -222,11 +222,11 @@ export function writeData(data: YelpApiDataModified[]) {
     writeFileSync(fullPath, jsonString, { encoding: 'utf-8' })
 }
 
-export function readData(): YelpApiDataModified[] {
+export function readData(): ProjectVineyardAttributes[] {
     const fullPath = `${saveDir}/${saveFile}`;
     if (!existsSync(fullPath)) return [];
 
     const jsonString = readFileSync(fullPath, { encoding: 'utf-8' });
     const jsonData = JSON.parse(jsonString);
-    return jsonData['data'] as YelpApiDataModified[];
+    return jsonData['data'] as ProjectVineyardAttributes[];
 }
