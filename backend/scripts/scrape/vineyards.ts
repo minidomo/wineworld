@@ -1,3 +1,4 @@
+import { byIso } from "country-code-lookup";
 import fetch from "node-fetch";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { URL, URLSearchParams } from "node:url";
@@ -135,17 +136,26 @@ export async function queryAllData(regions: Region[]) {
         limit: '20',
     };
 
-    const rawData = await Promise.all(regions.map(async region => {
+    const rawData: YelpQuery<YelpApiSuccessResponse | YelpApiErrorResponse>[] = [];
+
+    // do normal for loop with inner await to prevent rate limiting
+    for (const region of regions) {
         const response = await yelpApi({
             location: `${region.name}, ${region.country}`,
             ...generalYelpApiParams,
         });
 
-        const ret: YelpQuery<YelpApiSuccessResponse | YelpApiErrorResponse> = { region, response, };
-        return ret;
-    }));
+        rawData.push({ region, response });
+    }
 
-    const validResponses = rawData.filter(data => !('error' in data.response)) as YelpQuery<YelpApiSuccessResponse>[];
+    const validResponses = rawData.filter(data => {
+        if ('error' in data.response) {
+            console.log(data.response.error.code);
+            return false;
+        }
+
+        return true;
+    }) as YelpQuery<YelpApiSuccessResponse>[];
 
     const businesses: Map<string, YelpBusinessObject> = new Map();
     const businessRegions: Map<string, ProjectRegion[]> = new Map();
@@ -156,10 +166,13 @@ export async function queryAllData(regions: Region[]) {
                 businessRegions.set(business.id, []);
             }
 
-            businessRegions.get(business.id)?.push({
-                ...query.region,
-                ...query.response.region.center,
-            });
+            const country = byIso(business.location.country)?.country;
+            if (country === query.region.country) {
+                businessRegions.get(business.id)?.push({
+                    ...query.region,
+                    ...query.response.region.center,
+                });
+            }
 
             if (!businesses.has(business.id)) {
                 businesses.set(business.id, business);
@@ -191,6 +204,7 @@ function validateBusinessData(data: ProjectVineyardAttributes) {
 function modifyBusinessData(data: YelpBusinessObject, regions: ProjectRegion[]): ProjectVineyardAttributes | null {
     try {
         const url = new URL(data.url);
+        const country = byIso(data.location.country)!.country;
 
         const ret: ProjectVineyardAttributes = {
             name: data.name,
@@ -198,7 +212,7 @@ function modifyBusinessData(data: YelpBusinessObject, regions: ProjectRegion[]):
             rating: data.rating,
             reviews: data.review_count,
             image: data.image_url,
-            country: regions[0].country,
+            country,
             url: `${url.origin}${url.pathname}`,
             ...data.coordinates,
             regions,

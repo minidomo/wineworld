@@ -16,6 +16,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "country-code-lookup": "^0.1.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "node-fetch": "^2.6.7"
