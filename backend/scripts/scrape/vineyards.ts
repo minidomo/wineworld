@@ -1,79 +1,8 @@
 import { byIso } from "country-code-lookup";
-import fetch from "node-fetch";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { URL, URLSearchParams } from "node:url";
+import { URL } from "node:url";
 import { ProjectWineRegion } from "./wines";
-
-export interface YelpCategoryObject {
-    alias: string,
-    title: string,
-}
-
-export interface YelpOpenObject {
-    day: string,
-    start: string,
-    end: string,
-    is_overnight: boolean,
-}
-
-export interface YelpHourObject {
-    hour_type: string,
-    open: YelpOpenObject[],
-    is_open_now: boolean,
-}
-
-export interface YelpBusinessObject {
-    id: string,
-    alias: string,
-    name: string,
-    image_url: string,
-    is_closed: boolean,
-    url: string,
-    review_count: number,
-    categories: YelpCategoryObject[],
-    rating: number,
-    coordinates: {
-        latitude: number,
-        longitude: number,
-    },
-    transactions: string[],
-    price?: string,
-    location: {
-        address1: string,
-        address2: string,
-        address3: string,
-        city: string,
-        zip_code: string,
-        country: string,
-        state: string,
-        display_address: string[],
-    },
-    phone: string,
-    display_phone: string,
-    distance?: string,
-    hours?: YelpHourObject[],
-    attributes?: Record<string, any>,
-}
-
-export interface YelpApiSuccessResponse {
-    total: number,
-    region: {
-        center: {
-            longitude: number,
-            latitude: number,
-        },
-    },
-    businesses: YelpBusinessObject[],
-}
-
-export interface YelpApiErrorResponse {
-    error: {
-        code: string,
-        description: string,
-    },
-}
-
-
+import * as Yelp from "./api/yelp";
 
 export interface ProjectVineyardWineRegion {
     name: string,
@@ -95,12 +24,10 @@ export interface ProjectVineyardAttributes {
     regions: ProjectVineyardWineRegion[],
 }
 
-interface YelpQuery<E extends YelpApiSuccessResponse | YelpApiErrorResponse> {
+interface Query<E extends Yelp.BusinessSearchResponse | Yelp.ErrorResponse> {
     region: ProjectWineRegion,
     response: E,
 }
-
-const baseUrl = 'https://api.yelp.com/v3/businesses/search';
 
 // https://docs.developer.yelp.com/docs/resources-categories
 const categories = [
@@ -115,18 +42,6 @@ const categories = [
 export const saveDir = 'data/temp/vineyards';
 export const saveFile = 'vineyards.json';
 
-export async function yelpApi(params: Record<string, string | readonly string[]>) {
-    const url = `${baseUrl}?` + new URLSearchParams(params);
-    const response = await fetch(url, {
-        method: 'get',
-        headers: {
-            'accept': 'application/json',
-            'Authorization': `Bearer ${process.env.YELP_API_KEY}`,
-        }
-    });
-    return (await response.json()) as YelpApiSuccessResponse | YelpApiErrorResponse;
-}
-
 export async function queryAllData(regions: ProjectWineRegion[]) {
     const generalYelpApiParams = {
         term: 'winery',
@@ -134,11 +49,11 @@ export async function queryAllData(regions: ProjectWineRegion[]) {
         limit: '20',
     };
 
-    const rawData: YelpQuery<YelpApiSuccessResponse | YelpApiErrorResponse>[] = [];
+    const rawData: Query<Yelp.BusinessSearchResponse | Yelp.ErrorResponse>[] = [];
 
     // do normal for loop with inner await to prevent rate limiting
     for (const region of regions) {
-        const response = await yelpApi({
+        const response = await Yelp.businessSearch(process.env.YELP_API_KEY!, {
             location: `${region.name}, ${region.country}`,
             ...generalYelpApiParams,
         });
@@ -153,9 +68,9 @@ export async function queryAllData(regions: ProjectWineRegion[]) {
         }
 
         return true;
-    }) as YelpQuery<YelpApiSuccessResponse>[];
+    }) as Query<Yelp.BusinessSearchResponse>[];
 
-    const businesses: Map<string, YelpBusinessObject> = new Map();
+    const businesses: Map<string, Yelp.BusinessObject> = new Map();
     const businessWineRegions: Map<string, ProjectVineyardWineRegion[]> = new Map();
 
     validResponses.forEach(query => {
@@ -199,7 +114,7 @@ function validateBusinessData(data: ProjectVineyardAttributes) {
     return true;
 }
 
-function modifyBusinessData(data: YelpBusinessObject, regions: ProjectVineyardWineRegion[]): ProjectVineyardAttributes | null {
+function modifyBusinessData(data: Yelp.BusinessObject, regions: ProjectVineyardWineRegion[]): ProjectVineyardAttributes | null {
     try {
         const url = new URL(data.url);
         const country = byIso(data.location.country)!.country;

@@ -1,19 +1,7 @@
-import fetch from "node-fetch";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import * as SampleApi from "./api/sampleApis";
 
-export interface WineApiAttributes {
-    winery: string,
-    wine: string,
-    rating: {
-        average: string,
-        reviews: string,
-    },
-    location: string,
-    image: string,
-    id: number,
-}
-
-export type WineType = 'Red' | 'White' | 'Sparkling' | 'Rose' | 'Dessert' | 'Port';
+export type InternalWineType = 'Red' | 'White' | 'Sparkling' | 'Rose' | 'Dessert' | 'Port';
 
 export interface ProjectWineAttributes {
     winery: string,
@@ -23,7 +11,7 @@ export interface ProjectWineAttributes {
     country: string,
     region: string,
     name: string,
-    type: WineType,
+    type: InternalWineType,
 }
 
 export interface ProjectWineRegion {
@@ -31,10 +19,9 @@ export interface ProjectWineRegion {
     country: string,
 }
 
-const endpoints = ["reds", "whites", "sparkling", "rose", "dessert", "port"];
-const baseUrl = 'https://api.sampleapis.com/wines';
+const endpoints: SampleApi.WineType[] = ["reds", "whites", "sparkling", "rose", "dessert", "port"];
 
-const endpointMapping: Record<string, WineType> = {
+const endpointMapping: Record<string, InternalWineType> = {
     "reds": "Red",
     "whites": "White",
     'sparkling': 'Sparkling',
@@ -46,12 +33,7 @@ const endpointMapping: Record<string, WineType> = {
 export const saveDir = 'data/temp/wines';
 export const saveFile = 'wines.json';
 
-export async function winesApi(endpoint: string) {
-    const response = await fetch(`${baseUrl}/${endpoint}`);
-    return (await response.json()) as WineApiAttributes[];
-}
-
-function modifyWineData(data: WineApiAttributes, type: WineType): ProjectWineAttributes | null {
+function modifyWineData(data: SampleApi.WineAttributes, type: InternalWineType): ProjectWineAttributes | null {
     try {
         const match = data.rating.reviews.match(/\d+/) as RegExpMatchArray;
         const reviews = parseInt(match[0]);
@@ -74,7 +56,8 @@ function modifyWineData(data: WineApiAttributes, type: WineType): ProjectWineAtt
 }
 
 export async function queryAllData() {
-    const rawData = await Promise.all(endpoints.map(endpoint => winesApi(endpoint)));
+    // few calls so no need to worry about rate limiting
+    const rawData = await Promise.all(endpoints.map(endpoint => SampleApi.wines(endpoint)));
     const modifiedData = rawData
         .map((wines, i) => {
             const endpoint = endpoints[i];
