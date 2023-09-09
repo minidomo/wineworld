@@ -2,6 +2,7 @@ import { byIso } from "country-code-lookup";
 import fetch from "node-fetch";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { URL, URLSearchParams } from "node:url";
+import { ProjectWineRegion } from "./wines";
 
 export interface YelpCategoryObject {
     alias: string,
@@ -72,12 +73,9 @@ export interface YelpApiErrorResponse {
     },
 }
 
-export interface Region {
-    name: string,
-    country: string,
-}
 
-export interface ProjectRegion {
+
+export interface ProjectVineyardWineRegion {
     name: string,
     country: string,
     longitude: number,
@@ -94,11 +92,11 @@ export interface ProjectVineyardAttributes {
     url: string,
     longitude: number,
     latitude: number,
-    regions: ProjectRegion[],
+    regions: ProjectVineyardWineRegion[],
 }
 
 interface YelpQuery<E extends YelpApiSuccessResponse | YelpApiErrorResponse> {
-    region: Region,
+    region: ProjectWineRegion,
     response: E,
 }
 
@@ -129,7 +127,7 @@ export async function yelpApi(params: Record<string, string | readonly string[]>
     return (await response.json()) as YelpApiSuccessResponse | YelpApiErrorResponse;
 }
 
-export async function queryAllData(regions: Region[]) {
+export async function queryAllData(regions: ProjectWineRegion[]) {
     const generalYelpApiParams = {
         term: 'winery',
         categories: [categories],
@@ -158,17 +156,17 @@ export async function queryAllData(regions: Region[]) {
     }) as YelpQuery<YelpApiSuccessResponse>[];
 
     const businesses: Map<string, YelpBusinessObject> = new Map();
-    const businessRegions: Map<string, ProjectRegion[]> = new Map();
+    const businessWineRegions: Map<string, ProjectVineyardWineRegion[]> = new Map();
 
     validResponses.forEach(query => {
         query.response.businesses.forEach(business => {
-            if (!businessRegions.has(business.id)) {
-                businessRegions.set(business.id, []);
+            if (!businessWineRegions.has(business.id)) {
+                businessWineRegions.set(business.id, []);
             }
 
             const country = byIso(business.location.country)?.country;
             if (country === query.region.country) {
-                businessRegions.get(business.id)?.push({
+                businessWineRegions.get(business.id)?.push({
                     ...query.region,
                     ...query.response.region.center,
                 });
@@ -181,7 +179,7 @@ export async function queryAllData(regions: Region[]) {
     });
 
     const modifiedData = [...businesses.values()]
-        .map(business => modifyBusinessData(business, businessRegions.get(business.id) as ProjectRegion[]))
+        .map(business => modifyBusinessData(business, businessWineRegions.get(business.id) as ProjectVineyardWineRegion[]))
         .filter(business => business !== null) as ProjectVineyardAttributes[];
 
     return modifiedData;
@@ -201,7 +199,7 @@ function validateBusinessData(data: ProjectVineyardAttributes) {
     return true;
 }
 
-function modifyBusinessData(data: YelpBusinessObject, regions: ProjectRegion[]): ProjectVineyardAttributes | null {
+function modifyBusinessData(data: YelpBusinessObject, regions: ProjectVineyardWineRegion[]): ProjectVineyardAttributes | null {
     try {
         const url = new URL(data.url);
         const country = byIso(data.location.country)!.country;

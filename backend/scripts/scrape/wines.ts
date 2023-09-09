@@ -26,6 +26,11 @@ export interface ProjectWineAttributes {
     type: WineType,
 }
 
+export interface ProjectWineRegion {
+    name: string,
+    country: string,
+}
+
 const endpoints = ["reds", "whites", "sparkling", "rose", "dessert", "port"];
 const baseUrl = 'https://api.sampleapis.com/wines';
 
